@@ -20,7 +20,8 @@ public class IndexAccessNode extends ExprStaNode {
     }
 
     public void setIndex(ExprStaNode index) {
-        index.setParent(this);
+        if(index!= null)
+            index.setParent(this);
         this.index = index;
     }
 

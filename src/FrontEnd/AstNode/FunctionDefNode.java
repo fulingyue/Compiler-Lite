@@ -11,6 +11,16 @@ public class FunctionDefNode extends AstNode {
     private List<VarDefNode> formalParameterList;
     private BlockNode block;
 
+    public boolean hasReturnSta() {
+        return ReturnSta;
+    }
+
+    public void setReturnSta(boolean returnSta) {
+        ReturnSta = returnSta;
+    }
+
+    private boolean ReturnSta;
+
     public void addParameter(VarDefNode node) {
         node.setParent(this);
         formalParameterList.add(node);

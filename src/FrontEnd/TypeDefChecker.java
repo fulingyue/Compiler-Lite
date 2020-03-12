@@ -77,6 +77,10 @@ public class TypeDefChecker extends AstVisitor {
                 if (item.getVarType().equalPrimitive(PrimitiveTypeNode.PrimitiveTypeKeyword.VOID))
                     throw new SemanticException(item.getLocation(), "parameter cannot be of void type");
             }
+            if(!node.getReturnType().equalPrimitive(VOID) && !node.hasReturnSta()
+                    && !node.getMethodName().equals("main"))
+                throw new SemanticException(node.getLocation(),
+                        "function " + node.getMethodName() + " does not return???");
 
         }
     }
@@ -381,10 +385,12 @@ public class TypeDefChecker extends AstVisitor {
         if(node.getReturnVal() == null) {
             if(!((FunctionDefNode) parent).getReturnType().equalPrimitive(VOID))
                 throw new SemanticException(node.getLocation(),"return val shouldn't be null");
+            ((FunctionDefNode) parent).setReturnSta(true);
         } else {
             if (!node.getReturnVal().getExprType().equalTo(((FunctionDefNode) parent).getReturnType())) {
                 throw new SemanticException(node.getLocation(), "return type is not fit to function def");
             }
+            ((FunctionDefNode) parent).setReturnSta(true);
         }
     }
 

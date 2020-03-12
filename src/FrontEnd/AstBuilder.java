@@ -54,7 +54,10 @@ public class AstBuilder extends MxBaseVisitor<AstNode> {
     public AstNode visitClassDefinition(MxParser.ClassDefinitionContext ctx) {
         ClassDefNode ret = new ClassDefNode();
         ret.setLocation(new Location(ctx));
-        ret.setClassName(ctx.Identifier().getText());
+        if(ctx.Identifier() == null)
+            Error.add(new Pair<>(new Location(ctx),"error class definition"));
+        else
+            ret.setClassName(ctx.Identifier().getText());
 
         for (MxParser.MemberVariableContext item: ctx.memberVariable()){
             VarDefListNode node = (VarDefListNode) visit(item);

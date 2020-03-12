@@ -18,7 +18,7 @@ import util.Location;
 public class main  {
 
     public static void main(String[] args)throws Exception {
-        String path = "code/basic-27.mx";
+        String path = "code/basic-38.mx";
         InputStream inputStream = new FileInputStream(path);
         try {
             compile(inputStream);
