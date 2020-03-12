@@ -1,0 +1,105 @@
+#Procedure
+First, a lexer.
+Divide string to tokens.
+Then, a parser deal with these tokens.
+Give parse rules and get parseTree.
+Program integration code.
+Use walker to visit the tree.
+
+
+#Classes after exe
+Parser.java:
+It is a parser class, save the rule of scanning.
+Lexer.java:
+Translate strings to tokens and symbols.
+.tokens:
+Save the token pairs <Type, valueType>.
+Listener.java:
+BaseListener.java:
+
+Visitor.java:
+Every branch has a method in the Class.
+
+BaseVisitor.java:
+It is the base class of visitors.
+
+
+
+# Recursive-descent Process
+ANTLR generate a recursive-descent parser.
+i.e: A set of recursion method. Each method is described by a rule.
+
+The parse procedure is like some functions:
+eg,
+    assign : ID '=' expr ';' ;
+is like the function assign as follows:
+    void assign() {
+        match(ID);//check next token as ID
+        match('=');
+        expr();//check expr
+        match(';');
+    }
+
+The function call reflect the path from ancestors to leave.
+Every function is just used to check grammar and the order of composition.
+When the rule has '|', then the function is constructed as a switch sentence.
+
+When ambiguity occurs, ANTLR will choose the first case to apperar in the rule.
+
+
+#Parser Tree Builder
+Now let's see the data stucture in the parser tree.
+The node in this tree includes rule node and terminal rule, which inherit the parserTreeNode.
+And the rule node can be inherited by different nodes to describe different case in our rule.
+
+
+#Traverse the tree——Listener and Visitor
+The listener traverse is automatic.
+Every .g4 grammar file will have a ParseTreeListener class.
+Every rule has its specific enter method and exit method.
+Enter method is called when dfs pointer first arrive the node,
+and exit method is called when all the descendants are visited.
+
+When we want to call the traverse explicitly, we need to use the visitor mode.
+Add -visitor in shell can generate visitor interface.
+Every rule has its specific visit method in the interface.
+We can have that tree in our code, and visit it in order.
+eg,
+    ParseTree tree = Mx;
+    MyVisitor visitor = new MyVisitor();
+    v.visit(tree);
+
+#Grammar
+1. The parser rule begins with a lowercase letter.
+2. The lexer rule begins  with a capital letter.
+3. Give every branch a label, can have a specific method in tree traverse.
+eg,
+    stat:   xxxx # label1
+            xxxx # label2
+    ;
+4. Define lexer symbols.
+eg,
+    MUL : '*' ;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

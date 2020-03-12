@@ -1,0 +1,5 @@
+int main()
+{
+int[][] array = new int[3][3];
+println(toString(array[0].size()));
+}

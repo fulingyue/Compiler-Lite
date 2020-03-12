@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="a67270fb-4b02-4acf-8cdd-5c9e4a76755c" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeStyleSettingsInfer">
+    <option name="done" value="true" />
+  </component>
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="1" />
+  </component>
+  <component name="ProjectId" id="1YqN6aaHpzDDB25DTvjtG0ApXtI" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="restartRequiresConfirmation" value="false" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\lenovo\IdeaProjects\Compiler-Lite" />
+      <recent name="C:\Users\lenovo\IdeaProjects\Compiler-Lite\src" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.main">
+    <configuration name="main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="main" />
+      <module name="Compiler-Lite" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="test" type="CompoundRunConfigurationType">
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Application.main" />
+      <item itemvalue="Compound.test" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.main" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="a67270fb-4b02-4acf-8cdd-5c9e4a76755c" name="Default Changelist" comment="" />
+      <created>1583665989709</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1583665989709</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="624" y="199" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1583667007511">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="624" y="199" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1583667007511" />
+    <state x="692" y="322" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1583933187683">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="692" y="322" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1583933187683" />
+    <state x="765" y="229" key="#com.intellij.ide.util.MemberChooser" timestamp="1583983463693">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="765" y="229" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1583983463693" />
+    <state x="919" y="302" key="FileChooserDialogImpl" timestamp="1584005970277">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="919" y="302" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1584005970277" />
+    <state width="1877" height="339" key="GridCell.Tab.0.bottom" timestamp="1584005972980">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="339" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1584005972980" />
+    <state width="1877" height="339" key="GridCell.Tab.0.center" timestamp="1584005972980">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="339" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1584005972980" />
+    <state width="1877" height="339" key="GridCell.Tab.0.left" timestamp="1584005972980">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="339" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1584005972980" />
+    <state width="1877" height="339" key="GridCell.Tab.0.right" timestamp="1584005972980">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="339" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1584005972980" />
+    <state width="1877" height="369" key="GridCell.Tab.1.bottom" timestamp="1584005972975">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="369" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1584005972975" />
+    <state width="1877" height="369" key="GridCell.Tab.1.center" timestamp="1584005972975">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="369" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1584005972975" />
+    <state width="1877" height="369" key="GridCell.Tab.1.left" timestamp="1584005972975">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="369" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1584005972975" />
+    <state width="1877" height="369" key="GridCell.Tab.1.right" timestamp="1584005972975">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="369" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1584005972975" />
+    <state x="725" y="136" key="SettingsEditor" timestamp="1583670334149">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="725" y="136" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1583670334149" />
+    <state x="640" y="344" key="com.intellij.ide.util.TipDialog" timestamp="1583898626983">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="640" y="344" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1583898626983" />
+    <state x="616" y="240" width="672" height="677" key="run.anything.popup" timestamp="1583924385984">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="616" y="240" width="672" height="677" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1583924385984" />
+    <state x="616" y="173" width="672" height="676" key="search.everywhere.popup" timestamp="1583934300354">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="616" y="173" width="672" height="676" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1583934300354" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/FrontEnd/AstBuilder.java</url>
+          <line>251</line>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/FrontEnd/AstBuilder.java</url>
+          <line>252</line>
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main.java</url>
+          <line>45</line>
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/FrontEnd/TypeDefChecker.java</url>
+          <line>96</line>
+          <option name="timeStamp" value="32" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/FrontEnd/TypeDefChecker.java</url>
+          <line>258</line>
+          <option name="timeStamp" value="58" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>

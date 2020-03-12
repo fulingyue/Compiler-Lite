@@ -1,0 +1,13 @@
+//basic
+void AA() {}
+
+class B {};
+
+int main() {
+	int A;
+	B C = new B;
+	AA();
+	A = 10;
+	int bbc;
+	return true;
+}
