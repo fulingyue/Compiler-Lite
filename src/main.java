@@ -11,14 +11,14 @@ import org.antlr.v4.runtime.tree.ParseTree;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.LinkedList;
-
 import FrontEnd.Antlr.*;
+import util.ErrorHandler;
 import util.Location;
 
 public class main  {
 
     public static void main(String[] args)throws Exception {
-        String path = "code/basic-38.mx";
+        String path = "code/basic-62.mx";
         InputStream inputStream = new FileInputStream(path);
         try {
             compile(inputStream);
@@ -34,16 +34,25 @@ public class main  {
 
         ANTLRInputStream antlrInputStream =  new ANTLRInputStream(input);
         MxLexer lexer = new MxLexer(antlrInputStream);
+        ErrorHandler errorHandler = new ErrorHandler();
         CommonTokenStream tokens = new CommonTokenStream(lexer);
         MxParser parser = new MxParser(tokens);
         TypeDefChecker typeDefChecker = new TypeDefChecker();
-
+        //////init/////
+        lexer.removeErrorListeners();
+        lexer.addErrorListener(new MxErrorListener(errorHandler));
+        parser.removeErrorListeners();
+        parser.addErrorListener(new MxErrorListener(errorHandler));
+        if(errorHandler.getError_cnt() > 0){
+            throw new RuntimeException();
+        }
+        ////run/////////
         ParseTree tree = parser.program();
         AstBuilder astBuilder = new AstBuilder();
         astBuilder.visit(tree);
-        LinkedList<Pair<Location,String>> error = astBuilder.getError();
-        if(error.size() != 0)
-            throw new SemanticException(error.get(0).getKey(),error.get(0).getValue());
+        if(astBuilder.getError().getError_cnt() > 0){
+            throw new Exception();
+        }
         ProgramNode program = astBuilder.getProgram();
 
         program.getInfo(0);//for debugging

@@ -1,37 +1,34 @@
 package FrontEnd;
 
 
-import FrontEnd.Antlr.MxBaseVisitor;
-import FrontEnd.Antlr.MxLexer;
-import FrontEnd.Antlr.MxParser;
 import FrontEnd.AstNode.*;
-import javafx.util.Pair;
 import org.antlr.v4.runtime.tree.*;
+import FrontEnd.Antlr.*;
+import FrontEnd.Antlr.MxParser;
+import FrontEnd.Antlr.MxLexer;
 
 import java.lang.*;
-import java.util.LinkedList;
 
+import util.ErrorHandler;
 import util.Location;
 
 
 public class AstBuilder extends MxBaseVisitor<AstNode> {
-
-
-    LinkedList<Pair<Location,String>> Error;
+    private ErrorHandler Error;
     private ProgramNode program;
 
     public AstBuilder() {
         this.program = new ProgramNode();
-        this.Error = new LinkedList<>();
+        this.Error = new ErrorHandler();
     }
     public ProgramNode getProgram(){
         return program;
     }
 
-
-    public LinkedList<Pair<Location,String>> getError() {
+    public ErrorHandler getError() {
         return Error;
     }
+
 
     @Override
     public AstNode visitProgram(MxParser.ProgramContext ctx){
@@ -55,7 +52,7 @@ public class AstBuilder extends MxBaseVisitor<AstNode> {
         ClassDefNode ret = new ClassDefNode();
         ret.setLocation(new Location(ctx));
         if(ctx.Identifier() == null)
-            Error.add(new Pair<>(new Location(ctx),"error class definition"));
+            Error.error(new Location(ctx),"error class definition");
         else
             ret.setClassName(ctx.Identifier().getText());
 
@@ -252,7 +249,7 @@ public class AstBuilder extends MxBaseVisitor<AstNode> {
     }
 
     @Override public AstNode visitErrorCreator(MxParser.ErrorCreatorContext ctx){
-        Error.add(new Pair<>(new Location(ctx),"error array creatror"));
+        Error.error(new Location(ctx),"error array creatror");
         return new EmptyStaNode();
     }
 
@@ -349,7 +346,7 @@ public class AstBuilder extends MxBaseVisitor<AstNode> {
         IndexAccessNode ret = new IndexAccessNode();
         ret.setLocation(new Location(ctx));
         if (ctx.caller instanceof MxParser.NewExprContext)
-            Error.add(new Pair<>(new Location(ctx),"invalid dim of array"));
+            Error.error(new Location(ctx),"invalid dim of array");
         ret.setCaller((ExprStaNode) visit(ctx.caller));
         ret.setIndex((ExprStaNode) visit(ctx.index));
         return ret;
@@ -359,7 +356,7 @@ public class AstBuilder extends MxBaseVisitor<AstNode> {
     public AstNode visitFunctionCallExpr(MxParser.FunctionCallExprContext ctx) {
         FunctionCallNode ret = new FunctionCallNode();
         ret.setLocation(new Location(ctx));
-        ret.setCaller((ReferenceNode) visit(ctx.caller));
+         ret.setCaller((ReferenceNode) visit(ctx.caller));
         if (ctx.actualParameterList() != null) {
             for (MxParser.ExpressionContext item: ctx.actualParameterList().expression())
                 ret.addParameter((ExprStaNode)visit(item));

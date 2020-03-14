@@ -1,4 +1,4 @@
-// Generated from /Users/fulingyue/IdeaProjects/Java_test/src/FrontEnd/Antlr/Mx.g4 by ANTLR 4.8
+// Generated from C:/Users/lenovo/IdeaProjects/Compiler-Lite/src/FrontEnd/Antlr\Mx.g4 by ANTLR 4.8
 package FrontEnd.Antlr;
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
@@ -1742,30 +1742,20 @@ public class MxParser extends Parser {
 			setState(200);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
-			case INC:
-			case DEC:
+			case NEW:
 				{
-				_localctx = new UnaryExprContext(_localctx);
+				_localctx = new NewExprContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
 
 				setState(182);
-				((UnaryExprContext)_localctx).prefix = _input.LT(1);
-				_la = _input.LA(1);
-				if ( !(_la==INC || _la==DEC) ) {
-					((UnaryExprContext)_localctx).prefix = (Token)_errHandler.recoverInline(this);
-				}
-				else {
-					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
-					_errHandler.reportMatch(this);
-					consume();
-				}
+				match(NEW);
 				setState(183);
-				expression(22);
+				creator();
 				}
 				break;
-			case ADD:
-			case SUB:
+			case INC:
+			case DEC:
 				{
 				_localctx = new UnaryExprContext(_localctx);
 				_ctx = _localctx;
@@ -1773,7 +1763,7 @@ public class MxParser extends Parser {
 				setState(184);
 				((UnaryExprContext)_localctx).prefix = _input.LT(1);
 				_la = _input.LA(1);
-				if ( !(_la==ADD || _la==SUB) ) {
+				if ( !(_la==INC || _la==DEC) ) {
 					((UnaryExprContext)_localctx).prefix = (Token)_errHandler.recoverInline(this);
 				}
 				else {
@@ -1785,8 +1775,8 @@ public class MxParser extends Parser {
 				expression(21);
 				}
 				break;
-			case LNOT:
-			case NOT:
+			case ADD:
+			case SUB:
 				{
 				_localctx = new UnaryExprContext(_localctx);
 				_ctx = _localctx;
@@ -1794,7 +1784,7 @@ public class MxParser extends Parser {
 				setState(186);
 				((UnaryExprContext)_localctx).prefix = _input.LT(1);
 				_la = _input.LA(1);
-				if ( !(_la==LNOT || _la==NOT) ) {
+				if ( !(_la==ADD || _la==SUB) ) {
 					((UnaryExprContext)_localctx).prefix = (Token)_errHandler.recoverInline(this);
 				}
 				else {
@@ -1806,15 +1796,25 @@ public class MxParser extends Parser {
 				expression(20);
 				}
 				break;
-			case NEW:
+			case LNOT:
+			case NOT:
 				{
-				_localctx = new NewExprContext(_localctx);
+				_localctx = new UnaryExprContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
 				setState(188);
-				match(NEW);
+				((UnaryExprContext)_localctx).prefix = _input.LT(1);
+				_la = _input.LA(1);
+				if ( !(_la==LNOT || _la==NOT) ) {
+					((UnaryExprContext)_localctx).prefix = (Token)_errHandler.recoverInline(this);
+				}
+				else {
+					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+					_errHandler.reportMatch(this);
+					consume();
+				}
 				setState(189);
-				creator();
+				expression(19);
 				}
 				break;
 			case Identifier:
@@ -1891,7 +1891,7 @@ public class MxParser extends Parser {
 			setState(253);
 			_errHandler.sync(this);
 			_alt = getInterpreter().adaptivePredict(_input,22,_ctx);
-			while ( _alt!=2 && _alt!= ATN.INVALID_ALT_NUMBER ) {
+			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 				if ( _alt==1 ) {
 					if ( _parseListeners!=null ) triggerExitRuleEvent();
 					_prevctx = _localctx;
@@ -1905,11 +1905,11 @@ public class MxParser extends Parser {
 						((MemberAccessExprContext)_localctx).caller = _prevctx;
 						pushNewRecursionContext(_localctx, _startState, RULE_expression);
 						setState(202);
-						if (!(precpred(_ctx, 25))) throw new FailedPredicateException(this, "precpred(_ctx, 25)");
+						if (!(precpred(_ctx, 24))) throw new FailedPredicateException(this, "precpred(_ctx, 24)");
 						setState(203);
 						((MemberAccessExprContext)_localctx).op = match(DOT);
 						setState(204);
-						((MemberAccessExprContext)_localctx).member = expression(26);
+						((MemberAccessExprContext)_localctx).member = expression(25);
 						}
 						break;
 					case 2:
@@ -2106,7 +2106,7 @@ public class MxParser extends Parser {
 						((FunctionCallExprContext)_localctx).caller = _prevctx;
 						pushNewRecursionContext(_localctx, _startState, RULE_expression);
 						setState(238);
-						if (!(precpred(_ctx, 26))) throw new FailedPredicateException(this, "precpred(_ctx, 26)");
+						if (!(precpred(_ctx, 25))) throw new FailedPredicateException(this, "precpred(_ctx, 25)");
 						setState(239);
 						match(LPAREN);
 						setState(241);
@@ -2129,7 +2129,7 @@ public class MxParser extends Parser {
 						((IndexAccessExprContext)_localctx).caller = _prevctx;
 						pushNewRecursionContext(_localctx, _startState, RULE_expression);
 						setState(244);
-						if (!(precpred(_ctx, 24))) throw new FailedPredicateException(this, "precpred(_ctx, 24)");
+						if (!(precpred(_ctx, 23))) throw new FailedPredicateException(this, "precpred(_ctx, 23)");
 						setState(245);
 						match(LBRACK);
 						setState(246);
@@ -2143,7 +2143,7 @@ public class MxParser extends Parser {
 						_localctx = new UnaryExprContext(new ExpressionContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_expression);
 						setState(249);
-						if (!(precpred(_ctx, 23))) throw new FailedPredicateException(this, "precpred(_ctx, 23)");
+						if (!(precpred(_ctx, 22))) throw new FailedPredicateException(this, "precpred(_ctx, 22)");
 						setState(250);
 						((UnaryExprContext)_localctx).postfix = _input.LT(1);
 						_la = _input.LA(1);
@@ -2294,7 +2294,7 @@ public class MxParser extends Parser {
 					setState(263); 
 					_errHandler.sync(this);
 					_alt = getInterpreter().adaptivePredict(_input,23,_ctx);
-				} while ( _alt!=2 && _alt!= ATN.INVALID_ALT_NUMBER );
+				} while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER );
 				setState(267); 
 				_errHandler.sync(this);
 				_alt = 1;
@@ -2316,7 +2316,7 @@ public class MxParser extends Parser {
 					setState(269); 
 					_errHandler.sync(this);
 					_alt = getInterpreter().adaptivePredict(_input,24,_ctx);
-				} while ( _alt!=2 && _alt!= ATN.INVALID_ALT_NUMBER );
+				} while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER );
 				setState(275); 
 				_errHandler.sync(this);
 				_alt = 1;
@@ -2340,7 +2340,7 @@ public class MxParser extends Parser {
 					setState(277); 
 					_errHandler.sync(this);
 					_alt = getInterpreter().adaptivePredict(_input,25,_ctx);
-				} while ( _alt!=2 && _alt!= ATN.INVALID_ALT_NUMBER );
+				} while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER );
 				}
 				break;
 			case 2:
@@ -2357,7 +2357,7 @@ public class MxParser extends Parser {
 					setState(286);
 					_errHandler.sync(this);
 					_alt = getInterpreter().adaptivePredict(_input,26,_ctx);
-					while ( _alt!=2 && _alt!= ATN.INVALID_ALT_NUMBER ) {
+					while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 						if ( _alt==1 ) {
 							{
 							{
@@ -2377,7 +2377,7 @@ public class MxParser extends Parser {
 					setState(293);
 					_errHandler.sync(this);
 					_alt = getInterpreter().adaptivePredict(_input,27,_ctx);
-					while ( _alt!=2 && _alt!= ATN.INVALID_ALT_NUMBER ) {
+					while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 						if ( _alt==1 ) {
 							{
 							{
@@ -2594,7 +2594,7 @@ public class MxParser extends Parser {
 	private boolean expression_sempred(ExpressionContext _localctx, int predIndex) {
 		switch (predIndex) {
 		case 0:
-			return precpred(_ctx, 25);
+			return precpred(_ctx, 24);
 		case 1:
 			return precpred(_ctx, 18);
 		case 2:
@@ -2618,11 +2618,11 @@ public class MxParser extends Parser {
 		case 11:
 			return precpred(_ctx, 8);
 		case 12:
-			return precpred(_ctx, 26);
+			return precpred(_ctx, 25);
 		case 13:
-			return precpred(_ctx, 24);
-		case 14:
 			return precpred(_ctx, 23);
+		case 14:
+			return precpred(_ctx, 22);
 		}
 		return true;
 	}
@@ -2694,16 +2694,16 @@ public class MxParser extends Parser {
 		"\u00b6\5\20\t\2\u00b5\u0088\3\2\2\2\u00b5\u008b\3\2\2\2\u00b5\u0094\3"+
 		"\2\2\2\u00b5\u00a3\3\2\2\2\u00b5\u00a9\3\2\2\2\u00b5\u00ae\3\2\2\2\u00b5"+
 		"\u00b0\3\2\2\2\u00b5\u00b2\3\2\2\2\u00b5\u00b3\3\2\2\2\u00b5\u00b4\3\2"+
-		"\2\2\u00b6\37\3\2\2\2\u00b7\u00b8\b\21\1\2\u00b8\u00b9\t\2\2\2\u00b9\u00cb"+
-		"\5 \21\30\u00ba\u00bb\t\3\2\2\u00bb\u00cb\5 \21\27\u00bc\u00bd\t\4\2\2"+
-		"\u00bd\u00cb\5 \21\26\u00be\u00bf\7+\2\2\u00bf\u00cb\5\"\22\2\u00c0\u00cb"+
+		"\2\2\u00b6\37\3\2\2\2\u00b7\u00b8\b\21\1\2\u00b8\u00b9\7+\2\2\u00b9\u00cb"+
+		"\5\"\22\2\u00ba\u00bb\t\2\2\2\u00bb\u00cb\5 \21\27\u00bc\u00bd\t\3\2\2"+
+		"\u00bd\u00cb\5 \21\26\u00be\u00bf\t\4\2\2\u00bf\u00cb\5 \21\25\u00c0\u00cb"+
 		"\7\64\2\2\u00c1\u00cb\7\60\2\2\u00c2\u00cb\7\61\2\2\u00c3\u00cb\7\62\2"+
 		"\2\u00c4\u00cb\7\63\2\2\u00c5\u00cb\7,\2\2\u00c6\u00c7\7\3\2\2\u00c7\u00c8"+
 		"\5 \21\2\u00c8\u00c9\7\4\2\2\u00c9\u00cb\3\2\2\2\u00ca\u00b7\3\2\2\2\u00ca"+
 		"\u00ba\3\2\2\2\u00ca\u00bc\3\2\2\2\u00ca\u00be\3\2\2\2\u00ca\u00c0\3\2"+
 		"\2\2\u00ca\u00c1\3\2\2\2\u00ca\u00c2\3\2\2\2\u00ca\u00c3\3\2\2\2\u00ca"+
 		"\u00c4\3\2\2\2\u00ca\u00c5\3\2\2\2\u00ca\u00c6\3\2\2\2\u00cb\u00ff\3\2"+
-		"\2\2\u00cc\u00cd\f\33\2\2\u00cd\u00ce\7\13\2\2\u00ce\u00fe\5 \21\34\u00cf"+
+		"\2\2\u00cc\u00cd\f\32\2\2\u00cd\u00ce\7\13\2\2\u00ce\u00fe\5 \21\33\u00cf"+
 		"\u00d0\f\24\2\2\u00d0\u00d1\t\5\2\2\u00d1\u00fe\5 \21\25\u00d2\u00d3\f"+
 		"\23\2\2\u00d3\u00d4\t\3\2\2\u00d4\u00fe\5 \21\24\u00d5\u00d6\f\22\2\2"+
 		"\u00d6\u00d7\t\6\2\2\u00d7\u00fe\5 \21\23\u00d8\u00d9\f\21\2\2\u00d9\u00da"+
@@ -2713,11 +2713,11 @@ public class MxParser extends Parser {
 		"\5 \21\17\u00e4\u00e5\f\r\2\2\u00e5\u00e6\7\32\2\2\u00e6\u00fe\5 \21\16"+
 		"\u00e7\u00e8\f\f\2\2\u00e8\u00e9\7\24\2\2\u00e9\u00fe\5 \21\r\u00ea\u00eb"+
 		"\f\13\2\2\u00eb\u00ec\7\25\2\2\u00ec\u00fe\5 \21\f\u00ed\u00ee\f\n\2\2"+
-		"\u00ee\u00ef\7\f\2\2\u00ef\u00fe\5 \21\13\u00f0\u00f1\f\34\2\2\u00f1\u00f3"+
+		"\u00ee\u00ef\7\f\2\2\u00ef\u00fe\5 \21\13\u00f0\u00f1\f\33\2\2\u00f1\u00f3"+
 		"\7\3\2\2\u00f2\u00f4\5$\23\2\u00f3\u00f2\3\2\2\2\u00f3\u00f4\3\2\2\2\u00f4"+
-		"\u00f5\3\2\2\2\u00f5\u00fe\7\4\2\2\u00f6\u00f7\f\32\2\2\u00f7\u00f8\7"+
+		"\u00f5\3\2\2\2\u00f5\u00fe\7\4\2\2\u00f6\u00f7\f\31\2\2\u00f7\u00f8\7"+
 		"\7\2\2\u00f8\u00f9\5 \21\2\u00f9\u00fa\7\b\2\2\u00fa\u00fe\3\2\2\2\u00fb"+
-		"\u00fc\f\31\2\2\u00fc\u00fe\t\2\2\2\u00fd\u00cc\3\2\2\2\u00fd\u00cf\3"+
+		"\u00fc\f\30\2\2\u00fc\u00fe\t\2\2\2\u00fd\u00cc\3\2\2\2\u00fd\u00cf\3"+
 		"\2\2\2\u00fd\u00d2\3\2\2\2\u00fd\u00d5\3\2\2\2\u00fd\u00d8\3\2\2\2\u00fd"+
 		"\u00db\3\2\2\2\u00fd\u00de\3\2\2\2\u00fd\u00e1\3\2\2\2\u00fd\u00e4\3\2"+
 		"\2\2\u00fd\u00e7\3\2\2\2\u00fd\u00ea\3\2\2\2\u00fd\u00ed\3\2\2\2\u00fd"+

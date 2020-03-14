@@ -31,12 +31,12 @@ public class ScopeBuilder extends AstVisitor{
         scopeStack.addLast(toplevelScope);
 
         ////////for check the namespace/////////
-//        for  (ClassDefNode item: node.getClassDefList()){
-//            registerClass(item);
-//        }
-//        for (FunctionDefNode item: node.getFunctionDefList()){
-//            registerFunction(item);
-//        }
+        for  (ClassDefNode item: node.getClassDefList()){
+            registerClass(item);
+        }
+        for (FunctionDefNode item: node.getFunctionDefList()){
+            registerFunction(item);
+        }
         //forward references are not supported
 //        for (AstNode item:node.getChildenList()) {
 //            if(item instanceof ClassDefNode)
@@ -59,19 +59,19 @@ public class ScopeBuilder extends AstVisitor{
 
     @Override
      public void visit(ClassDefNode node) throws Exception{
-        registerClass(node);
+//        registerClass(node);
         ////init a new scope //////
         Scope scope = new Scope();
         scope.setDefNode(node);
         node.setScope(scope);
         //////enter the scope and check names///////
         pushScope(scope);
-        for (FunctionDefNode item: node.getFunctionDefList()) {
-            registerFunction(item);
-        }
-        for (FunctionDefNode item: node.getConstructionDefList()) {
-            registerFunction(item);
-        }
+//        for (FunctionDefNode item: node.getFunctionDefList()) {
+//            registerFunction(item);
+//        }
+//        for (FunctionDefNode item: node.getConstructionDefList()) {
+//            registerFunction(item);
+//        }
         /////traverse the scope sons///////
         super.visit(node);
 
@@ -81,7 +81,7 @@ public class ScopeBuilder extends AstVisitor{
 
     @Override
      public void visit(FunctionDefNode node) throws Exception {
-        registerFunction(node);
+//        registerFunction(node);
         ///////init a new scope/////////
         Scope scope = new Scope();
         scope.setDefNode(node);

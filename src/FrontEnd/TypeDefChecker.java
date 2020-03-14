@@ -30,7 +30,7 @@ public class TypeDefChecker extends AstVisitor {
         if(!(topLevelScope instanceof GlobalScope))
             throw new SemanticException(node.getLocation(), "scope must be the global scope");
         visit(node);
-        check();
+//        check();
     }
 
     @Override
@@ -53,6 +53,7 @@ public class TypeDefChecker extends AstVisitor {
 
     @Override
     public void visit(ClassDefNode node) throws Exception {
+        super.visit(node);
         for (VarDefListNode item: node.getMemberList()) {
             VariableTypeNode varType = item.getType();
             while (varType instanceof ArrayTypeNode){
@@ -83,15 +84,6 @@ public class TypeDefChecker extends AstVisitor {
                         "function " + node.getMethodName() + " does not return???");
 
         }
-    }
-
-    @Override
-    public void visit(BlockNode node) throws Exception {
-        super.visit(node);
-    }
-
-    @Override
-    public void visit(VarDefListNode node) throws Exception {
         super.visit(node);
     }
 
@@ -137,8 +129,11 @@ public class TypeDefChecker extends AstVisitor {
     @Override
     public void visit(ThisExprNode node) {
         AstNode tmp = node;
-        while (!(tmp instanceof ClassDefNode))
+        while (!(tmp instanceof ClassDefNode)){
+            if(tmp.getParent() == null)
+                throw new SemanticException(node.getLocation(),"this reference is wrong");
             tmp = tmp.getParent();
+        }
         node.setExprType(new ClassTypeNode(((ClassDefNode) tmp).getClassName()));
 
     }
@@ -319,7 +314,8 @@ public class TypeDefChecker extends AstVisitor {
                     }
                 } else {
                     FunctionDefNode functionDef = null;
-                    String name = defNode.getClassName() + "_" + method.getReferenceName();
+//                    String name = defNode.getClassName() + "_" + method.getReferenceName();
+                    String name = method.getReferenceName();
                     for (FunctionDefNode item: defNode.getFunctionDefList()) {
                         if (item.getMethodName().equals(name))
                             functionDef = item;

@@ -22,7 +22,8 @@ public class ForStaNode extends StatementNode {
     }
 
     public void setCondition(ExprStaNode condition) {
-        condition.setParent(this);
+        if(condition!=null)
+            condition.setParent(this);
         this.condition = condition;
     }
 
@@ -31,7 +32,8 @@ public class ForStaNode extends StatementNode {
     }
 
     public void setRecursionCond(ExprStaNode recursionCond) {
-        recursionCond.setParent(this);
+        if (recursionCond!= null)
+            recursionCond.setParent(this);
         this.recursionCond = recursionCond;
     }
 
@@ -40,7 +42,8 @@ public class ForStaNode extends StatementNode {
     }
 
     public void setBlock(StatementNode block) {
-        block.setParent(this);
+        if(block!= null)
+            block.setParent(this);
         this.block = block;
     }
 

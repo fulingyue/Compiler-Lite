@@ -99,7 +99,8 @@ statement:
 
 
 expression:
-    caller=expression LPAREN actualParameterList? RPAREN # functionCallExpr
+    NEW creator # newExpr
+    | caller=expression LPAREN actualParameterList? RPAREN # functionCallExpr
     | caller=expression op=DOT member=expression # memberAccessExpr
     | caller=expression LBRACK index=expression RBRACK # indexAccessExpr
 
@@ -108,7 +109,7 @@ expression:
     | prefix=(ADD | SUB) expression # unaryExpr
     | prefix=(NOT | LNOT) expression # unaryExpr
 
-    | NEW creator # newExpr
+
 
     | lhs=expression op=(MUL | DIV | MOD) rhs=expression # binaryExpr
     | lhs=expression op=(ADD | SUB) rhs=expression # binaryExpr

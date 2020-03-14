@@ -2,14 +2,35 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a67270fb-4b02-4acf-8cdd-5c9e4a76755c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/FrontEnd/Antlr/MxErrorListener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/util/ErrorHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/Mx.g4" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/Mx.g4" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/Mx.interp" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/Mx.interp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/Mx.tokens" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/Mx.tokens" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxLexer.tokens" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxLexer.tokens" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxParser.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxParser.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/AstBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/AstBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/AstNode/ForStaNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/AstNode/ForStaNode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/ScopeBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/ScopeBuilder.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/TypeDefChecker$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/TypeDefChecker$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/TypeDefChecker.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/TypeDefChecker.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FrontEnd/Antlr/Mx.g4" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/Antlr/Mx.g4" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FrontEnd/Antlr/Mx.interp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FrontEnd/Antlr/Mx.tokens" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FrontEnd/Antlr/MxBaseListener.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FrontEnd/Antlr/MxBaseVisitor.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FrontEnd/Antlr/MxLexer.interp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FrontEnd/Antlr/MxLexer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FrontEnd/Antlr/MxLexer.tokens" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FrontEnd/Antlr/MxListener.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FrontEnd/Antlr/MxParser.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FrontEnd/Antlr/MxVisitor.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/FrontEnd/AstBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/AstBuilder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/FrontEnd/AstNode/FunctionDefNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/AstNode/FunctionDefNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/FrontEnd/AstNode/IndexAccessNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/AstNode/IndexAccessNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FrontEnd/AstNode/ForStaNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/AstNode/ForStaNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FrontEnd/ScopeBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/ScopeBuilder.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/FrontEnd/TypeDefChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/TypeDefChecker.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.java" afterDir="false" />
     </list>
@@ -20,6 +41,13 @@
   </component>
   <component name="CodeStyleSettingsInfer">
     <option name="done" value="true" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -37,7 +65,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/FrontEnd" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
@@ -93,100 +121,118 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="692" y="322" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1583933187683" />
-    <state x="765" y="229" key="#com.intellij.ide.util.MemberChooser" timestamp="1584009708293">
+    <state x="765" y="229" key="#com.intellij.ide.util.MemberChooser" timestamp="1584109493700">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="765" y="229" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1584009708293" />
-    <state x="919" y="302" key="FileChooserDialogImpl" timestamp="1584005970277">
+    <state x="765" y="229" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1584109493700" />
+    <state x="690" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1584161478565">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="919" y="302" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1584005970277" />
-    <state width="1877" height="369" key="GridCell.Tab.0.bottom" timestamp="1584027000901">
+    <state x="690" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1584161478565" />
+    <state x="919" y="302" key="FileChooserDialogImpl" timestamp="1584161269279">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="369" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1584027000901" />
-    <state width="1877" height="369" key="GridCell.Tab.0.center" timestamp="1584027000901">
+    <state x="919" y="302" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1584161269279" />
+    <state width="1877" height="255" key="GridCell.Tab.0.bottom" timestamp="1584161587520">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="369" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1584027000901" />
-    <state width="1877" height="369" key="GridCell.Tab.0.left" timestamp="1584027000901">
+    <state width="1877" height="255" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1584161587520" />
+    <state width="1877" height="255" key="GridCell.Tab.0.center" timestamp="1584161587519">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="369" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1584027000901" />
-    <state width="1877" height="369" key="GridCell.Tab.0.right" timestamp="1584027000901">
+    <state width="1877" height="255" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1584161587519" />
+    <state width="1877" height="255" key="GridCell.Tab.0.left" timestamp="1584161587519">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="369" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1584027000901" />
-    <state width="1877" height="369" key="GridCell.Tab.1.bottom" timestamp="1584027000901">
+    <state width="1877" height="255" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1584161587519" />
+    <state width="1877" height="255" key="GridCell.Tab.0.right" timestamp="1584161587520">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="369" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1584027000901" />
-    <state width="1877" height="369" key="GridCell.Tab.1.center" timestamp="1584027000901">
+    <state width="1877" height="255" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1584161587520" />
+    <state width="1877" height="255" key="GridCell.Tab.1.bottom" timestamp="1584161587520">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="369" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1584027000901" />
-    <state width="1877" height="369" key="GridCell.Tab.1.left" timestamp="1584027000901">
+    <state width="1877" height="255" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1584161587520" />
+    <state width="1877" height="255" key="GridCell.Tab.1.center" timestamp="1584161587520">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="369" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1584027000901" />
-    <state width="1877" height="369" key="GridCell.Tab.1.right" timestamp="1584027000901">
+    <state width="1877" height="255" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1584161587520" />
+    <state width="1877" height="255" key="GridCell.Tab.1.left" timestamp="1584161587520">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="369" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1584027000901" />
+    <state width="1877" height="255" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1584161587520" />
+    <state width="1877" height="255" key="GridCell.Tab.1.right" timestamp="1584161587520">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="255" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1584161587520" />
     <state x="725" y="136" key="SettingsEditor" timestamp="1583670334149">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="725" y="136" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1583670334149" />
-    <state x="640" y="344" key="com.intellij.ide.util.TipDialog" timestamp="1583898626983">
+    <state width="380" height="446" key="SwitcherDM" timestamp="1584161099069">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="640" y="344" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1583898626983" />
+    <state width="380" height="446" key="SwitcherDM/0.0.1920.1040@0.0.1920.1040" timestamp="1584161099069" />
+    <state x="640" y="344" key="com.intellij.ide.util.TipDialog" timestamp="1584157408736">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="640" y="344" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1584157408736" />
     <state x="616" y="240" width="672" height="677" key="run.anything.popup" timestamp="1583924385984">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="616" y="240" width="672" height="677" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1583924385984" />
-    <state x="616" y="173" width="672" height="676" key="search.everywhere.popup" timestamp="1583934300354">
+    <state x="616" y="173" width="672" height="676" key="search.everywhere.popup" timestamp="1584109905327">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="616" y="173" width="672" height="676" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1583934300354" />
+    <state x="616" y="173" width="672" height="676" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1584109905327" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/FrontEnd/AstBuilder.java</url>
-          <line>254</line>
-          <option name="timeStamp" value="8" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/FrontEnd/AstBuilder.java</url>
-          <line>255</line>
-          <option name="timeStamp" value="11" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main.java</url>
-          <line>45</line>
-          <option name="timeStamp" value="12" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/FrontEnd/TypeDefChecker.java</url>
-          <line>262</line>
+          <line>257</line>
           <option name="timeStamp" value="58" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/FrontEnd/TypeDefChecker.java</url>
-          <line>209</line>
+          <line>204</line>
           <option name="timeStamp" value="59" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/FrontEnd/TypeDefChecker.java</url>
-          <line>171</line>
-          <option name="timeStamp" value="60" />
+          <line>183</line>
+          <option name="timeStamp" value="67" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/FrontEnd/TypeDefChecker.java</url>
+          <line>167</line>
+          <option name="timeStamp" value="73" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/FrontEnd/TypeDefChecker.java</url>
+          <line>299</line>
+          <option name="timeStamp" value="78" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/FrontEnd/TypeDefChecker.java</url>
+          <line>322</line>
+          <option name="timeStamp" value="79" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/FrontEnd/Antlr/MxErrorListener.java</url>
+          <line>20</line>
+          <option name="timeStamp" value="83" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/FrontEnd/AstBuilder.java</url>
-          <line>59</line>
-          <option name="timeStamp" value="61" />
+          <line>358</line>
+          <option name="timeStamp" value="85" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/FrontEnd/AstBuilder.java</url>
+          <line>212</line>
+          <option name="timeStamp" value="86" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
