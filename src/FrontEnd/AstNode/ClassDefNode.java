@@ -13,16 +13,16 @@ public class ClassDefNode extends AstNode {
     private List<FunctionDefNode> constructionDefList;
 
     public void addMember(VarDefListNode node) {
-        node.setParent(this);
+//        node.setParent(this);
         memberList.add(node);
     }
 
     public void addFunction(FunctionDefNode node) {
-        node.setParent(this);
+//        node.setParent(this);
         functionDefList.add(node);
     }
     public void addConstructor(FunctionDefNode node) {
-        node.setParent(this);
+//        node.setParent(this);
         constructionDefList.add(node);
     }
     public String getClassName() {

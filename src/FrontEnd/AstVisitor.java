@@ -92,7 +92,7 @@ public abstract class AstVisitor {
 
     public void  visit(BreakStaNode node) throws Exception {}
     public void  visit(ContinueStaNode node) throws Exception{}
-    public void  visit(EmptyStaNode node) {}
+    public void  visit(EmptyStaNode node) throws Exception {}
     public void  visit(ReturnStaNode node) throws Exception{
         if (node.getReturnVal() != null) visit(node.getReturnVal());
     }

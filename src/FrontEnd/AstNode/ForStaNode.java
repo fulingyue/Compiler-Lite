@@ -13,7 +13,8 @@ public class ForStaNode extends StatementNode {
     }
 
     public void setInit(ExprStaNode init) {
-        init.setParent(this);
+//        if(init != null)
+//            init.setParent(this);
         this.init = init;
     }
 
@@ -22,8 +23,8 @@ public class ForStaNode extends StatementNode {
     }
 
     public void setCondition(ExprStaNode condition) {
-        if(condition!=null)
-            condition.setParent(this);
+//        if(condition!=null)
+//            condition.setParent(this);
         this.condition = condition;
     }
 
@@ -32,8 +33,8 @@ public class ForStaNode extends StatementNode {
     }
 
     public void setRecursionCond(ExprStaNode recursionCond) {
-        if (recursionCond!= null)
-            recursionCond.setParent(this);
+//        if (recursionCond!= null)
+//            recursionCond.setParent(this);
         this.recursionCond = recursionCond;
     }
 
@@ -42,8 +43,8 @@ public class ForStaNode extends StatementNode {
     }
 
     public void setBlock(StatementNode block) {
-        if(block!= null)
-            block.setParent(this);
+//        if(block!= null)
+//            block.setParent(this);
         this.block = block;
     }
 

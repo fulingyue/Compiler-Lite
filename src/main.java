@@ -6,6 +6,8 @@ import FrontEnd.ErrorChecker.SemanticException;
 import FrontEnd.Scope.Scope;
 import javafx.util.Pair;
 import org.antlr.v4.runtime.ANTLRInputStream;
+import org.antlr.v4.runtime.CharStream;
+import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 import java.io.FileInputStream;
@@ -18,10 +20,11 @@ import util.Location;
 public class main  {
 
     public static void main(String[] args)throws Exception {
-        String path = "code/basic-62.mx";
+        String path = "code/Compiler-2020-testcases/sema/condition.mx";
         InputStream inputStream = new FileInputStream(path);
         try {
             compile(inputStream);
+
         }
         catch (Error error){
             System.err.println(error.getMessage());
@@ -31,36 +34,47 @@ public class main  {
 
 
     private static void compile(InputStream input) throws Exception {
-
-        ANTLRInputStream antlrInputStream =  new ANTLRInputStream(input);
-        MxLexer lexer = new MxLexer(antlrInputStream);
         ErrorHandler errorHandler = new ErrorHandler();
-        CommonTokenStream tokens = new CommonTokenStream(lexer);
-        MxParser parser = new MxParser(tokens);
+        CharStream antlrInputStream =  CharStreams.fromStream(input);
+
         TypeDefChecker typeDefChecker = new TypeDefChecker();
         //////init/////
+        MxLexer lexer = new MxLexer(antlrInputStream);
         lexer.removeErrorListeners();
         lexer.addErrorListener(new MxErrorListener(errorHandler));
+        CommonTokenStream tokens = new CommonTokenStream(lexer);
+
+
+        MxParser parser = new MxParser(tokens);
         parser.removeErrorListeners();
         parser.addErrorListener(new MxErrorListener(errorHandler));
-        if(errorHandler.getError_cnt() > 0){
-            throw new RuntimeException();
-        }
-        ////run/////////
+
         ParseTree tree = parser.program();
+        if(errorHandler.getError_cnt() > 0){
+            System.exit(errorHandler.getError_cnt());
+//            throw new RuntimeException();
+        }
+
+
+        /////////semantic/////////
         AstBuilder astBuilder = new AstBuilder();
         astBuilder.visit(tree);
         if(astBuilder.getError().getError_cnt() > 0){
-            throw new Exception();
+//            throw new Exception();
+            System.exit(astBuilder.getError().getError_cnt());
         }
         ProgramNode program = astBuilder.getProgram();
+        ParentLinker parentLinker  = new ParentLinker();
+        parentLinker.linkParent(program);
+
+
 
         program.getInfo(0);//for debugging
 //
         ScopeBuilder scopeBuilder = new ScopeBuilder();
         Scope topLevelScope = scopeBuilder.BuildScopeTree(program);
-        ScopePrinter scopePrinter = new ScopePrinter();
-        scopePrinter.printScopeTree(topLevelScope);
+//        ScopePrinter scopePrinter = new ScopePrinter();
+//        scopePrinter.printScopeTree(topLevelScope);
         typeDefChecker.checkTypeDef(program);
 
     }

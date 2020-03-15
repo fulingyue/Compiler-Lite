@@ -179,9 +179,24 @@ public class AstBuilder extends MxBaseVisitor<AstNode> {
         IfStaNode ret = new IfStaNode();
         ret.setLocation(new Location(ctx));
         ret.setCondition((ExprStaNode) visit(ctx.expression()));
-        ret.setIfBlock((StatementNode)visit(ctx.statement(0)));
+        if(!(ctx.statement(0) instanceof MxParser.BlockStatContext)){
+            AstNode statement = visit(ctx.statement(0));
+            ret.setIfBlock(new BlockNode(statement));
+        }
+        else {
+            ret.setIfBlock((BlockNode) visit(ctx.statement(0)));
+        }
+
         if(ctx.ELSE() == null) ret.setElseBlock(null);
-        else ret.setElseBlock((StatementNode) visit(ctx.statement(1)));
+        else {
+            AstNode statement = visit(ctx.statement(1));
+            if(!(statement instanceof BlockNode)){
+                ret.setElseBlock(new BlockNode(statement));
+            }
+            else
+                ret.setElseBlock((BlockNode) statement);
+        }
+
         return ret;
     }
 
@@ -276,6 +291,14 @@ public class AstBuilder extends MxBaseVisitor<AstNode> {
         return ret;
     }
 
+    @Override
+    public AstNode visitCommonCreator(MxParser.CommonCreatorContext ctx) {
+        NewExprNode ret = new NewExprNode();
+        ret.setLocation(new Location(ctx));
+        VariableTypeNode node = (VariableTypeNode)visit(ctx.baseType());
+        ret.setVariableType(node);
+        return ret;
+    }
 
     @Override
     public AstNode visitThisExpr(MxParser.ThisExprContext ctx) {//exactly it is same as primaryExpr
@@ -356,7 +379,8 @@ public class AstBuilder extends MxBaseVisitor<AstNode> {
     public AstNode visitFunctionCallExpr(MxParser.FunctionCallExprContext ctx) {
         FunctionCallNode ret = new FunctionCallNode();
         ret.setLocation(new Location(ctx));
-         ret.setCaller((ReferenceNode) visit(ctx.caller));
+        MxParser.ExpressionContext expression = ctx.expression();
+        ret.setCaller((ReferenceNode) visit(ctx.expression()));
         if (ctx.actualParameterList() != null) {
             for (MxParser.ExpressionContext item: ctx.actualParameterList().expression())
                 ret.addParameter((ExprStaNode)visit(item));

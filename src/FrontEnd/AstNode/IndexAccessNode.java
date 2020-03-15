@@ -11,7 +11,7 @@ public class IndexAccessNode extends ExprStaNode {
     }
 
     public void setCaller(ExprStaNode caller) {
-        caller.setParent(this);
+//        caller.setParent(this);
         this.caller = caller;
     }
 

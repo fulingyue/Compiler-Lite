@@ -66,12 +66,12 @@ public class ScopeBuilder extends AstVisitor{
         node.setScope(scope);
         //////enter the scope and check names///////
         pushScope(scope);
-//        for (FunctionDefNode item: node.getFunctionDefList()) {
-//            registerFunction(item);
-//        }
-//        for (FunctionDefNode item: node.getConstructionDefList()) {
-//            registerFunction(item);
-//        }
+        for (FunctionDefNode item: node.getFunctionDefList()) {
+            registerFunction(item);
+        }
+        for (FunctionDefNode item: node.getConstructionDefList()) {
+            registerFunction(item);
+        }
         /////traverse the scope sons///////
         super.visit(node);
 
@@ -134,22 +134,22 @@ public class ScopeBuilder extends AstVisitor{
 
     @Override
      public void visit(WhileStaNode node) throws Exception {
-//        Scope scope = new Scope();
-//        scope.setDefNode(node);
-//        pushScope(scope);
+        Scope scope = new Scope();
+        scope.setDefNode(node);
+        pushScope(scope);
         node.setScope(curScope());
         super.visit(node);
-//        popScope();
+        popScope();
     }
 
     @Override
      public void visit(IfStaNode node) throws Exception {
-//        Scope scope = new Scope();
-//        scope.setDefNode(node);
-//        pushScope(scope);
+        Scope scope = new Scope();
+        scope.setDefNode(node);
+        pushScope(scope);
         node.setScope(curScope());
         super.visit(node);
-//        popScope();
+        popScope();
     }
 ///////////variable register//////////////
     @Override
@@ -347,7 +347,7 @@ public class ScopeBuilder extends AstVisitor{
 
 
     private void registerFunction(FunctionDefNode node) throws SemanticException{
-        if (curScope().contains(node.getMethodName())) {
+        if (curScope().getNameset().contains(node.getMethodName())) {//in order to avoid construction function
             throw new SemanticException(node.getLocation(),"Duplicated FunctionDeclaration");
         }
         else {
@@ -357,7 +357,8 @@ public class ScopeBuilder extends AstVisitor{
 
             }
             else if (curScope().getDefNode() instanceof ClassDefNode){
-                node.setMethodName( ((ClassDefNode)curScope().getDefNode()).getClassName() + '_' + node.getMethodName());
+//                node.setMethodName( ((ClassDefNode)curScope().getDefNode()).getClassName() + '_' + node.getMethodName());
+                node.setMethodName(node.getMethodName());
             }
             else
             {

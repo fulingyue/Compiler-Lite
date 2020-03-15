@@ -13,7 +13,8 @@ public class FunctionCallNode extends ExprStaNode {
     }
 
     public void setCaller(ReferenceNode caller) {
-        caller.setParent(this);
+//        if( caller != null)
+//            caller.setParent(this);
         this.caller = caller;
     }
 
@@ -22,7 +23,7 @@ public class FunctionCallNode extends ExprStaNode {
     }
 
     public void addParameter(ExprStaNode node) {
-        node.setParent(this);
+//        node.setParent(this);
         actualParameterList.add(node);
     }
 

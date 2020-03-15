@@ -1,4 +1,4 @@
-// Generated from C:/Users/lenovo/IdeaProjects/Compiler-Lite/src/FrontEnd/Antlr\Mx.g4 by ANTLR 4.8
+// Generated from /Users/fulingyue/Desktop/Compiler-Lite/src/FrontEnd/Antlr/Mx.g4 by ANTLR 4.8
 package FrontEnd.Antlr;
 import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.CharStream;

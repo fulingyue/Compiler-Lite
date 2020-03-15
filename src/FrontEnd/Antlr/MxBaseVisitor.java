@@ -1,4 +1,4 @@
-// Generated from C:/Users/lenovo/IdeaProjects/Compiler-Lite/src/FrontEnd/Antlr\Mx.g4 by ANTLR 4.8
+// Generated from /Users/fulingyue/Desktop/Compiler-Lite/src/FrontEnd/Antlr/Mx.g4 by ANTLR 4.8
 package FrontEnd.Antlr;
 import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
 
@@ -249,6 +249,13 @@ public class MxBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements MxV
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
 	@Override public T visitIdentifierExpr(MxParser.IdentifierExprContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitCommonCreator(MxParser.CommonCreatorContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *

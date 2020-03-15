@@ -22,7 +22,7 @@ public class FunctionDefNode extends AstNode {
     private boolean ReturnSta;
 
     public void addParameter(VarDefNode node) {
-        node.setParent(this);
+//        node.setParent(this);
         formalParameterList.add(node);
     }
     public VariableTypeNode getReturnType() {
@@ -30,7 +30,7 @@ public class FunctionDefNode extends AstNode {
     }
 
     public void setReturnType(VariableTypeNode returnType) {
-        returnType.setParent(this);
+//        returnType.setParent(this);
         this.returnType = returnType;
     }
 
@@ -55,7 +55,7 @@ public class FunctionDefNode extends AstNode {
     }
 
     public void setBlock(BlockNode block) {
-        block.setParent(this);
+//        block.setParent(this);
         this.block = block;
     }
 

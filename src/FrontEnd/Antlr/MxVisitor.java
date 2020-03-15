@@ -1,4 +1,4 @@
-// Generated from C:/Users/lenovo/IdeaProjects/Compiler-Lite/src/FrontEnd/Antlr\Mx.g4 by ANTLR 4.8
+// Generated from /Users/fulingyue/Desktop/Compiler-Lite/src/FrontEnd/Antlr/Mx.g4 by ANTLR 4.8
 package FrontEnd.Antlr;
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
@@ -234,6 +234,13 @@ public interface MxVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitIdentifierExpr(MxParser.IdentifierExprContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code commonCreator}
+	 * labeled alternative in {@link MxParser#creator}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCommonCreator(MxParser.CommonCreatorContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code errorCreator}
 	 * labeled alternative in {@link MxParser#creator}.

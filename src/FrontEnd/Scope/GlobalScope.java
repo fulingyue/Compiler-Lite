@@ -41,13 +41,20 @@ public class GlobalScope extends Scope {
 
     private void initStrClass() {
         ClassDefNode stringClass = new ClassDefNode();
-        stringClass.setScope(this);
+        Scope newScope = new Scope();
         stringClass.setClassName("string");
         stringClass.addFunction(stringLengthFun());
+        newScope.addFunction("length",stringLengthFun());
         stringClass.addFunction(stringOrdFun());
+        newScope.addFunction("ord",stringOrdFun());
         stringClass.addFunction(stringParseIntFun());
+        newScope.addFunction("parseInt",stringParseIntFun());
         stringClass.addFunction(stringSubstringFun());
+        newScope.addFunction("substring",stringSubstringFun());
         this.addClass("string", stringClass);
+        stringClass.setScope(newScope);
+        newScope.setParent(this);
+        newScope.setDefNode(stringClass);
     }
 
 
@@ -80,8 +87,15 @@ public class GlobalScope extends Scope {
 //    }
 
     private void initArrayBuildinFunction(){
-        addFunction("array_size",arraySizeFun());
-        nameset.add("array_size");
+        ClassDefNode arrayClass = new ClassDefNode();
+        arrayClass.setClassName("_array");
+        Scope newScope = new Scope();
+        arrayClass.setScope(newScope);
+        newScope.setParent(this);
+        newScope.addFunction("_array_size",arraySizeFun());
+        arrayClass.addFunction(arraySizeFun());
+        this.addClass("_array",arrayClass);
+        newScope.setDefNode(arrayClass);
     }
 
     private FunctionDefNode globalPrintFun() {
@@ -155,7 +169,7 @@ public class GlobalScope extends Scope {
 
     private FunctionDefNode stringLengthFun(){
         FunctionDefNode fun = new FunctionDefNode();
-        fun.setMethodName("string_length");
+        fun.setMethodName("length");
         fun.setReturnType(new PrimitiveTypeNode("int"));
         LinkedList<VarDefNode> paras= new LinkedList<>();
         fun.setFormalParameterList(paras);
@@ -163,7 +177,7 @@ public class GlobalScope extends Scope {
     }
     private FunctionDefNode stringSubstringFun() {
         FunctionDefNode fun = new FunctionDefNode();
-        fun.setMethodName("string_substring");
+        fun.setMethodName("substring");
         fun.setReturnType(new ClassTypeNode("string"));
         LinkedList<VarDefNode> paras= new LinkedList<>();
         paras.add(new VarDefNode(new PrimitiveTypeNode("int"),"left"));
@@ -174,7 +188,7 @@ public class GlobalScope extends Scope {
 
     private FunctionDefNode stringParseIntFun(){
         FunctionDefNode fun = new FunctionDefNode();
-        fun.setMethodName("string_parseInt");
+        fun.setMethodName("parseInt");
         fun.setReturnType(new PrimitiveTypeNode("int"));
         LinkedList<VarDefNode> paras= new LinkedList<>();
         fun.setFormalParameterList(paras);
@@ -183,7 +197,7 @@ public class GlobalScope extends Scope {
 
     private FunctionDefNode stringOrdFun() {
         FunctionDefNode fun = new FunctionDefNode();
-        fun.setMethodName("string_ord");
+        fun.setMethodName("ord");
         fun.setReturnType(new PrimitiveTypeNode("int"));
         LinkedList<VarDefNode> paras= new LinkedList<>();
         paras.add(new VarDefNode(new PrimitiveTypeNode("int"), "pos"));
@@ -194,7 +208,7 @@ public class GlobalScope extends Scope {
 
     private FunctionDefNode arraySizeFun() {
         FunctionDefNode fun = new FunctionDefNode();
-        fun.setMethodName("array_size");
+        fun.setMethodName("_array_size");
         fun.setReturnType(new PrimitiveTypeNode("int"));
         LinkedList<VarDefNode> paras= new LinkedList<>();
         fun.setFormalParameterList(paras);

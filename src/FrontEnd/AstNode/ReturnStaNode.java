@@ -10,8 +10,8 @@ public class ReturnStaNode extends StatementNode {
     }
 
     public void setReturnVal(ExprStaNode returnVal) {
-        if(returnVal != null)
-            returnVal.setParent(this);
+//        if(returnVal != null)
+//            returnVal.setParent(this);
         this.returnVal = returnVal;
     }
 

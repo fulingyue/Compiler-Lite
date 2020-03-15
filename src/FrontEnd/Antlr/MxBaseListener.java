@@ -1,4 +1,4 @@
-// Generated from C:/Users/lenovo/IdeaProjects/Compiler-Lite/src/FrontEnd/Antlr\Mx.g4 by ANTLR 4.8
+// Generated from /Users/fulingyue/Desktop/Compiler-Lite/src/FrontEnd/Antlr/Mx.g4 by ANTLR 4.8
 package FrontEnd.Antlr;
 
 import org.antlr.v4.runtime.ParserRuleContext;
@@ -419,6 +419,18 @@ public class MxBaseListener implements MxListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitIdentifierExpr(MxParser.IdentifierExprContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterCommonCreator(MxParser.CommonCreatorContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCommonCreator(MxParser.CommonCreatorContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

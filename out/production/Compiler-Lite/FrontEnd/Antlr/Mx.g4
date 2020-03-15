@@ -99,18 +99,18 @@ statement:
 
 
 expression:
-    NEW creator # newExpr
-    | caller=expression LPAREN actualParameterList? RPAREN # functionCallExpr
+    caller=expression LPAREN actualParameterList? RPAREN # functionCallExpr
     | caller=expression op=DOT member=expression # memberAccessExpr
     | caller=expression LBRACK index=expression RBRACK # indexAccessExpr
 
+    | NEW creator # newExpr
     | expression postfix=(INC | DEC) # unaryExpr
     | prefix=(INC | DEC) expression # unaryExpr
     | prefix=(ADD | SUB) expression # unaryExpr
     | prefix=(NOT | LNOT) expression # unaryExpr
 
 
-
+//By priority
     | lhs=expression op=(MUL | DIV | MOD) rhs=expression # binaryExpr
     | lhs=expression op=(ADD | SUB) rhs=expression # binaryExpr
     | lhs=expression op=(LSHIFT | RSHIFT) rhs=expression # binaryExpr
@@ -135,8 +135,9 @@ expression:
 
 
     creator:
-        baseType (LBRACK expression RBRACK)+ (LBRACK RBRACK)+ (LBRACK expression RBRACK)+     #errorCreator
-            | baseType ((LBRACK expression RBRACK)* (LBRACK RBRACK)* | (LPAREN RPAREN))         #correctCreator
+        baseType LPAREN RPAREN #commonCreator
+        | baseType (LBRACK expression RBRACK)+ (LBRACK RBRACK)+ (LBRACK expression RBRACK)+     #errorCreator
+        | baseType ((LBRACK expression RBRACK)* (LBRACK RBRACK)*)         #correctCreator
     ;
     //creator don't have a parameter
 

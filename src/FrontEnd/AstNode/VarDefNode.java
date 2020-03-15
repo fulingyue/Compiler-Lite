@@ -13,7 +13,7 @@ public class VarDefNode extends StatementNode {
     }
 
     public void setVarType(VariableTypeNode varType) {
-        varType.setParent(this);
+//        varType.setParent(this);
         this.varType = varType;
     }
 
@@ -30,8 +30,8 @@ public class VarDefNode extends StatementNode {
     }
 
     public void setInitVal(ExprStaNode initVal) {
-        if(initVal != null)
-            initVal.setParent(this);
+//        if(initVal != null)
+//            initVal.setParent(this);
         this.initVal = initVal;
     }
 

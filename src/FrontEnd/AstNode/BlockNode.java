@@ -1,5 +1,6 @@
 package FrontEnd.AstNode;
 
+import FrontEnd.Antlr.MxParser;
 import FrontEnd.AstVisitor;
 
 import java.util.LinkedList;
@@ -17,11 +18,14 @@ public class BlockNode extends StatementNode{
     private List<AstNode> childList;
 
     public void addChild(AstNode node) {
-        node.setParent(this);
         childList.add(node);
     }
     public BlockNode() {
         childList = new LinkedList<AstNode>();
+    }
+    public BlockNode(AstNode node) {
+        childList = new LinkedList<>();
+        childList.add(node);
     }
     @Override
     public void getInfo(int tab) {

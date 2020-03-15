@@ -44,7 +44,8 @@ public class Scope {
 
 
     public void addVariables(String name, VarDefNode variableDef) throws SemanticException{
-        if(nameset.contains(name)) throw new SemanticException("duplicated variable name");
+        if(nameset.contains(name))
+            throw new SemanticException("duplicated variable name");
         else {
             variables.put(name, variableDef);
             if (name != "this") {

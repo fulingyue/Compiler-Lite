@@ -29,7 +29,7 @@ public class BinaryOpNode extends ExprStaNode {
     }
 
     public void setLhs(ExprStaNode lhs) {
-        lhs.setParent(this);
+//        lhs.setParent(this);
         this.lhs = lhs;
     }
 
@@ -38,7 +38,7 @@ public class BinaryOpNode extends ExprStaNode {
     }
 
     public void setRhs(ExprStaNode rhs) {
-        rhs.setParent(this);
+//        rhs.setParent(this);
         this.rhs = rhs;
     }
 

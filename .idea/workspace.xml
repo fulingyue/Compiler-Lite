@@ -2,38 +2,240 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a67270fb-4b02-4acf-8cdd-5c9e4a76755c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/FrontEnd/Antlr/MxErrorListener.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/util/ErrorHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/antlr-4.8-complete.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/FrontEnd/ParentLinker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/antlr_4_8_complete.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/antlr_4_8_complete.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.sh" beforeDir="false" afterPath="$PROJECT_DIR$/build.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/Compiler-2020-testcases/sema/class-package/class-4.mx" beforeDir="false" afterPath="$PROJECT_DIR$/code/Compiler-2020-testcases/sema/class-package/class-4.mx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/array-1.mx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/array-10.mx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/array-11.mx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/array-2.mx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/array-3.mx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/array-4.mx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/array-5.mx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/array-6.mx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/array-7.mx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/array-8.mx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/array-9.mx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/basic-.mx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/basic-1.mx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/basic-10.mx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/basic-11.mx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/basic-12.mx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/basic-13.mx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/basic-14.mx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/basic-15.mx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/basic-16.mx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/basic-17.mx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/basic-18.mx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/basic-19.mx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/basic-2.mx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/basic-20.mx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/basic-21.mx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/basic-22.mx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/basic-23.mx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/basic-24.mx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/basic-25.mx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/basic-26.mx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/basic-27.mx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/basic-28.mx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/basic-29.mx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/basic-3.mx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/basic-30.mx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/basic-31.mx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/basic-32.mx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/basic-33.mx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/basic-34.mx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/basic-35.mx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/basic-36.mx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/basic-37.mx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/basic-38.mx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/basic-39.mx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/basic-4.mx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/basic-40.mx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/basic-41.mx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/basic-42.mx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/basic-43.mx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/basic-44.mx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/basic-45.mx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/basic-46.mx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/basic-47.mx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/basic-48.mx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/basic-49.mx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/basic-5.mx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/basic-50.mx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/basic-51.mx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/basic-52.mx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/basic-53.mx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/basic-54.mx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/basic-55.mx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/basic-56.mx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/basic-57.mx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/basic-58.mx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/basic-59.mx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/basic-6.mx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/basic-60.mx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/basic-61.mx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/basic-62.mx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/basic-63.mx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/basic-64.mx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/basic-65.mx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/basic-66.mx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/basic-67.mx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/basic-68.mx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/basic-69.mx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/basic-7.mx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/basic-70.mx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/basic-71.mx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/basic-8.mx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/basic-9.mx" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/Mx.g4" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/Mx.g4" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/Mx.interp" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/Mx.interp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/Mx.tokens" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/Mx.tokens" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxLexer.tokens" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxLexer.tokens" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxBaseListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxBaseListener.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxBaseVisitor.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxBaseVisitor.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxErrorListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxErrorListener.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxLexer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxLexer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxListener.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxParser$ActualParameterListContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxParser$ActualParameterListContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxParser$BaseTypeContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxParser$BaseTypeContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxParser$BinaryExprContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxParser$BinaryExprContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxParser$BlockContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxParser$BlockContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxParser$BlockStatContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxParser$BlockStatContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxParser$BreakStatContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxParser$BreakStatContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxParser$ClassDefinitionContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxParser$ClassDefinitionContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxParser$ClassTypeContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxParser$ClassTypeContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxParser$ConstructionFunctionDefinitionContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxParser$ConstructionFunctionDefinitionContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxParser$ContinueStatContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxParser$ContinueStatContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxParser$CorrectCreatorContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxParser$CorrectCreatorContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxParser$CreatorContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxParser$CreatorContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxParser$DefinitionStatContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxParser$DefinitionStatContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxParser$EmptyStatContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxParser$EmptyStatContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxParser$ErrorCreatorContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxParser$ErrorCreatorContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxParser$ExpressionContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxParser$ExpressionContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxParser$ExpressionStatContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxParser$ExpressionStatContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxParser$ForStatContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxParser$ForStatContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxParser$FormalParameterContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxParser$FormalParameterContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxParser$FormalParameterListContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxParser$FormalParameterListContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxParser$FunctionCallExprContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxParser$FunctionCallExprContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxParser$FunctionDefinitionContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxParser$FunctionDefinitionContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxParser$IdentifierExprContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxParser$IdentifierExprContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxParser$IfStatContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxParser$IfStatContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxParser$IndexAccessExprContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxParser$IndexAccessExprContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxParser$MemberAccessExprContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxParser$MemberAccessExprContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxParser$MemberVariableContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxParser$MemberVariableContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxParser$NewExprContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxParser$NewExprContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxParser$ParensExprContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxParser$ParensExprContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxParser$PrimaryExprContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxParser$PrimaryExprContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxParser$PrimitiveTypeContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxParser$PrimitiveTypeContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxParser$ProgramContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxParser$ProgramContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxParser$ReturnStatContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxParser$ReturnStatContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxParser$StatementContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxParser$StatementContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxParser$StatementListContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxParser$StatementListContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxParser$ThisExprContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxParser$ThisExprContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxParser$UnaryExprContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxParser$UnaryExprContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxParser$VariableDeclarExprContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxParser$VariableDeclarExprContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxParser$VariableDeclarExprsContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxParser$VariableDeclarExprsContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxParser$VariableDefinitionContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxParser$VariableDefinitionContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxParser$VariableTypeContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxParser$VariableTypeContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxParser$WhileStatContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxParser$WhileStatContext.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxParser.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxParser.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxVisitor.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Antlr/MxVisitor.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/AstBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/AstBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/AstNode/ArrayTypeNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/AstNode/ArrayTypeNode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/AstNode/AstNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/AstNode/AstNode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/AstNode/BinaryOpNode$BinaryOp.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/AstNode/BinaryOpNode$BinaryOp.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/AstNode/BinaryOpNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/AstNode/BinaryOpNode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/AstNode/BlockNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/AstNode/BlockNode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/AstNode/BoolNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/AstNode/BoolNode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/AstNode/BreakStaNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/AstNode/BreakStaNode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/AstNode/ClassDefNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/AstNode/ClassDefNode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/AstNode/ClassTypeNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/AstNode/ClassTypeNode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/AstNode/ContinueStaNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/AstNode/ContinueStaNode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/AstNode/EmptyStaNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/AstNode/EmptyStaNode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/AstNode/ExprStaNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/AstNode/ExprStaNode.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/AstNode/ForStaNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/AstNode/ForStaNode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/AstNode/FunctionCallNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/AstNode/FunctionCallNode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/AstNode/FunctionDefNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/AstNode/FunctionDefNode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/AstNode/IfStaNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/AstNode/IfStaNode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/AstNode/IndexAccessNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/AstNode/IndexAccessNode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/AstNode/IntNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/AstNode/IntNode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/AstNode/MemberAccessNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/AstNode/MemberAccessNode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/AstNode/NewExprNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/AstNode/NewExprNode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/AstNode/NullNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/AstNode/NullNode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/AstNode/PrimaryExprNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/AstNode/PrimaryExprNode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/AstNode/PrimitiveTypeNode$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/AstNode/PrimitiveTypeNode$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/AstNode/PrimitiveTypeNode$PrimitiveTypeKeyword.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/AstNode/PrimitiveTypeNode$PrimitiveTypeKeyword.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/AstNode/PrimitiveTypeNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/AstNode/PrimitiveTypeNode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/AstNode/ProgramNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/AstNode/ProgramNode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/AstNode/ReferenceNode$ReferenceType.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/AstNode/ReferenceNode$ReferenceType.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/AstNode/ReferenceNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/AstNode/ReferenceNode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/AstNode/ReturnStaNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/AstNode/ReturnStaNode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/AstNode/StatementNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/AstNode/StatementNode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/AstNode/StringNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/AstNode/StringNode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/AstNode/ThisExprNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/AstNode/ThisExprNode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/AstNode/UnaryOpNode$UnaryOp.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/AstNode/UnaryOpNode$UnaryOp.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/AstNode/UnaryOpNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/AstNode/UnaryOpNode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/AstNode/VarDefListNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/AstNode/VarDefListNode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/AstNode/VarDefNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/AstNode/VarDefNode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/AstNode/VariableTypeNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/AstNode/VariableTypeNode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/AstNode/WhileStaNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/AstNode/WhileStaNode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/AstVisitor.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/AstVisitor.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/ErrorChecker/SemanticException.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/ErrorChecker/SemanticException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/ErrorChecker/StaticTypeChecker.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/ErrorChecker/StaticTypeChecker.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Scope/GlobalScope.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Scope/GlobalScope.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Scope/Scope.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/Scope/Scope.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/ScopeBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/ScopeBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/ScopePrinter.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/ScopePrinter.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/TypeDefChecker$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/TypeDefChecker$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/TypeDefChecker.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/TypeDefChecker.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/util/Defines.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/util/Defines.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/util/ErrorHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/util/ErrorHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/util/Location.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/util/Location.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/util/Type$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/util/Type$types.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/util/Type.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/util/print_tool.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/util/print_tool.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/semantic.sh" beforeDir="false" afterPath="$PROJECT_DIR$/semantic.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/FrontEnd/Antlr/Mx.g4" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/Antlr/Mx.g4" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/FrontEnd/Antlr/Mx.interp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/FrontEnd/Antlr/Mx.tokens" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/FrontEnd/Antlr/MxBaseListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/FrontEnd/Antlr/MxBaseVisitor.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/FrontEnd/Antlr/MxLexer.interp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/FrontEnd/Antlr/MxLexer.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/FrontEnd/Antlr/MxLexer.tokens" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/FrontEnd/Antlr/MxListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/FrontEnd/Antlr/MxParser.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/FrontEnd/Antlr/MxVisitor.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FrontEnd/Antlr/Mx.interp" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/Antlr/Mx.interp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FrontEnd/Antlr/MxBaseListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/Antlr/MxBaseListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FrontEnd/Antlr/MxBaseVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/Antlr/MxBaseVisitor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FrontEnd/Antlr/MxLexer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/Antlr/MxLexer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FrontEnd/Antlr/MxListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/Antlr/MxListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FrontEnd/Antlr/MxParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/Antlr/MxParser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FrontEnd/Antlr/MxVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/Antlr/MxVisitor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/FrontEnd/AstBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/AstBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FrontEnd/AstNode/BinaryOpNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/AstNode/BinaryOpNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FrontEnd/AstNode/BlockNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/AstNode/BlockNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FrontEnd/AstNode/ClassDefNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/AstNode/ClassDefNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FrontEnd/AstNode/ExprStaNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/AstNode/ExprStaNode.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/FrontEnd/AstNode/ForStaNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/AstNode/ForStaNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FrontEnd/AstNode/FunctionCallNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/AstNode/FunctionCallNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FrontEnd/AstNode/FunctionDefNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/AstNode/FunctionDefNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FrontEnd/AstNode/IfStaNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/AstNode/IfStaNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FrontEnd/AstNode/IndexAccessNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/AstNode/IndexAccessNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FrontEnd/AstNode/MemberAccessNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/AstNode/MemberAccessNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FrontEnd/AstNode/NewExprNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/AstNode/NewExprNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FrontEnd/AstNode/ReturnStaNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/AstNode/ReturnStaNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FrontEnd/AstNode/UnaryOpNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/AstNode/UnaryOpNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FrontEnd/AstNode/VarDefListNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/AstNode/VarDefListNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FrontEnd/AstNode/VarDefNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/AstNode/VarDefNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FrontEnd/AstNode/WhileStaNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/AstNode/WhileStaNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FrontEnd/AstVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/AstVisitor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FrontEnd/Scope/GlobalScope.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/Scope/GlobalScope.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FrontEnd/Scope/Scope.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/Scope/Scope.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/FrontEnd/ScopeBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/ScopeBuilder.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/FrontEnd/TypeDefChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/TypeDefChecker.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/ErrorHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/ErrorHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/Type.java" beforeDir="false" />
     </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -56,27 +258,45 @@
     <option name="version" value="1" />
   </component>
   <component name="ProjectId" id="1YqN6aaHpzDDB25DTvjtG0ApXtI" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/FrontEnd" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src" />
     <property name="project.structure.last.edited" value="Libraries" />
-    <property name="project.structure.proportion" value="0.0" />
-    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
     <property name="restartRequiresConfirmation" value="false" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\lenovo\IdeaProjects\Compiler-Lite" />
       <recent name="C:\Users\lenovo\IdeaProjects\Compiler-Lite\src" />
     </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
   </component>
   <component name="RunManager" selected="Application.main">
     <configuration name="main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -109,8 +329,26 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1583665989709</updated>
+      <workItem from="1584181650116" duration="31658000" />
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
   <component name="WindowStateProjectService">
     <state x="624" y="199" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1583667007511">
@@ -191,48 +429,23 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/FrontEnd/TypeDefChecker.java</url>
-          <line>257</line>
-          <option name="timeStamp" value="58" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/FrontEnd/TypeDefChecker.java</url>
-          <line>204</line>
+          <line>216</line>
           <option name="timeStamp" value="59" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/FrontEnd/TypeDefChecker.java</url>
-          <line>183</line>
-          <option name="timeStamp" value="67" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/FrontEnd/TypeDefChecker.java</url>
-          <line>167</line>
-          <option name="timeStamp" value="73" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/FrontEnd/TypeDefChecker.java</url>
-          <line>299</line>
-          <option name="timeStamp" value="78" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/FrontEnd/TypeDefChecker.java</url>
-          <line>322</line>
-          <option name="timeStamp" value="79" />
+          <url>file://$PROJECT_DIR$/src/util/ErrorHandler.java</url>
+          <line>12</line>
+          <option name="timeStamp" value="90" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/FrontEnd/Antlr/MxErrorListener.java</url>
-          <line>20</line>
-          <option name="timeStamp" value="83" />
+          <line>25</line>
+          <option name="timeStamp" value="92" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/FrontEnd/AstBuilder.java</url>
-          <line>358</line>
-          <option name="timeStamp" value="85" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/FrontEnd/AstBuilder.java</url>
-          <line>212</line>
-          <option name="timeStamp" value="86" />
+          <url>file://$PROJECT_DIR$/src/FrontEnd/TypeDefChecker.java</url>
+          <line>65</line>
+          <option name="timeStamp" value="127" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

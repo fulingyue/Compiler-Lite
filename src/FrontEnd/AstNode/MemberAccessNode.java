@@ -5,14 +5,14 @@ import FrontEnd.AstVisitor;
 public class MemberAccessNode extends ExprStaNode {
     private ExprStaNode caller;
     private ExprStaNode member;
-    private ClassDefNode classDefNode;
+    private ClassDefNode classDefNode;//ClassDef or array_
 
     public ExprStaNode getCaller() {
         return caller;
     }
 
     public void setCaller(ExprStaNode caller) {
-        caller.setParent(this);
+//        caller.setParent(this);
         this.caller = caller;
     }
 
@@ -21,7 +21,7 @@ public class MemberAccessNode extends ExprStaNode {
     }
 
     public void setMember(ExprStaNode member) {
-        member.setParent(this);
+//        member.setParent(this);
         this.member = member;
     }
 

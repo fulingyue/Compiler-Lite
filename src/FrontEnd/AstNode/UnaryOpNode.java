@@ -22,7 +22,7 @@ public class UnaryOpNode extends ExprStaNode {
     }
 
     public void setInnerExpr(ExprStaNode innerExpr) {
-        innerExpr.setParent(this);
+//        innerExpr.setParent(this);
         this.innerExpr = innerExpr;
     }
 

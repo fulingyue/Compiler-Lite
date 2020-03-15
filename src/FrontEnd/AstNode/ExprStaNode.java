@@ -13,7 +13,8 @@ public abstract class ExprStaNode extends StatementNode {
     }
 
     public void setExprType(VariableTypeNode exprType) {
-        exprType.setParent(this);
+        if(exprType != null)
+            exprType.setParent(this);
         this.exprType = exprType;
     }
 

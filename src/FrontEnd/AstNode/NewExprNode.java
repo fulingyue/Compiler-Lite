@@ -13,7 +13,7 @@ public class NewExprNode extends ExprStaNode{
     }
 
     public void setVariableType(VariableTypeNode variableType) {
-        variableType.setParent(this);
+//        variableType.setParent(this);
         this.variableType = variableType;
     }
 

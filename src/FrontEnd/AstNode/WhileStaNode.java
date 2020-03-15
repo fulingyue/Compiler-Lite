@@ -11,7 +11,7 @@ public class WhileStaNode extends StatementNode {
     }
 
     public void setCondition(ExprStaNode condition) {
-        condition.setParent(this);
+//        condition.setParent(this);
         this.condition = condition;
     }
 
@@ -20,7 +20,7 @@ public class WhileStaNode extends StatementNode {
     }
 
     public void setBlock(StatementNode block) {
-        block.setParent(this);
+//        block.setParent(this);
         this.block = block;
     }
 

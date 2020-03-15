@@ -24,7 +24,7 @@ public class VarDefListNode extends StatementNode{
     }
 
     public void setType(VariableTypeNode type) {
-        type.setParent(this);
+//        type.setParent(this);
         this.type = type;
     }
 
@@ -33,7 +33,7 @@ public class VarDefListNode extends StatementNode{
         type = null;
     }
     public void add(VarDefNode node){
-        node.setParent(this);
+//        node.setParent(this);
         varDefNodeList.add(node);
     }
 

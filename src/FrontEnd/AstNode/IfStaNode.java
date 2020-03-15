@@ -5,15 +5,15 @@ import FrontEnd.AstVisitor;
 public class IfStaNode extends StatementNode {
 
     private ExprStaNode condition;
-    private StatementNode ifBlock;
-    private StatementNode elseBlock;
+    private BlockNode ifBlock;
+    private BlockNode elseBlock;
 
     public ExprStaNode getCondition() {
         return condition;
     }
 
     public void setCondition(ExprStaNode condition) {
-        condition.setParent(this);
+//        condition.setParent(this);
         this.condition = condition;
     }
 
@@ -21,8 +21,8 @@ public class IfStaNode extends StatementNode {
         return ifBlock;
     }
 
-    public void setIfBlock(StatementNode ifBlock) {
-        ifBlock.setParent(this);
+    public void setIfBlock(BlockNode ifBlock) {
+//        ifBlock.setParent(this);
         this.ifBlock = ifBlock;
     }
 
@@ -30,9 +30,9 @@ public class IfStaNode extends StatementNode {
         return elseBlock;
     }
 
-    public void setElseBlock(StatementNode elseBlock) {
-        if(elseBlock != null)
-            elseBlock.setParent(this);
+    public void setElseBlock(BlockNode elseBlock) {
+//        if(elseBlock != null)
+//            elseBlock.setParent(this);
         this.elseBlock = elseBlock;
     }
 
