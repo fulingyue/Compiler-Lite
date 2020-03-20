@@ -19,8 +19,9 @@ import util.Location;
 public class main  {
 
     public static void main(String[] args)throws Exception {
-        String path = "code/Compiler-2020-testcases/sema/basic-package/basic-11.mx";
-        InputStream inputStream = new FileInputStream(path);
+//        String path = "code/Compiler-2020-testcases/sema/basic-package/basic-11.mx";
+//        InputStream inputStream = new FileInputStream(path);
+        InputStream inputStream = System.in;
         try {
             compile(inputStream);
             System.exit(0);

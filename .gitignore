@@ -1,3 +1,9 @@
 # Created by .ignore support plugin (hsz.mobi)
 # IntelliJ project files
-
+.idea
+code
+gen
+out
+src/FrontEnd.IR.*
+Compiler-Lite.iml
+src/FrontEnd.IRVisitor

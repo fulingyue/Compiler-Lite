@@ -2,27 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a67270fb-4b02-4acf-8cdd-5c9e4a76755c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build.bash" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/FrontEnd/IR/BasicBlock.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/FrontEnd/IR/IRFunction.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/FrontEnd/IR/Inst/BinaryOp.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/FrontEnd/IR/Inst/Instruction.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/FrontEnd/IR/Inst/UnaryOp.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/FrontEnd/IR/Value/PhysicalReg.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/FrontEnd/IR/Value/RegVal.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/FrontEnd/IR/Value/Register.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/FrontEnd/IR/Value/VirtualReg.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/FrontEnd/IRVisitor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/Compiler-2020-testcases" beforeDir="false" afterPath="$PROJECT_DIR$/code/Compiler-2020-testcases" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/Compiler-2020-testcases/sema/class-package/class-4.mx" beforeDir="false" afterPath="$PROJECT_DIR$/code/Compiler-2020-testcases/sema/class-package/class-4.mx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/TypeDefChecker$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/TypeDefChecker$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/TypeDefChecker.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/TypeDefChecker.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/semantic.sh" beforeDir="false" afterPath="$PROJECT_DIR$/semantic.bash" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/FrontEnd/TypeDefChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/TypeDefChecker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/Compiler-2020-testcases" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/sourceCode1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/sourceCode2.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/sourceCode3.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -128,7 +113,7 @@
       <workItem from="1584531569111" duration="4410000" />
       <workItem from="1584623270213" duration="6280000" />
       <workItem from="1584669295934" duration="375000" />
-      <workItem from="1584678599188" duration="3261000" />
+      <workItem from="1584678599188" duration="4379000" />
     </task>
     <servers />
   </component>
