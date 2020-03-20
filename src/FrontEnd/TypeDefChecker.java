@@ -4,11 +4,6 @@ import FrontEnd.AstNode.*;
 import FrontEnd.ErrorChecker.SemanticException;
 import FrontEnd.Scope.GlobalScope;
 import FrontEnd.Scope.Scope;
-import com.sun.org.apache.xpath.internal.functions.FuncCeiling;
-import com.sun.org.apache.xpath.internal.functions.Function;
-
-import java.lang.reflect.Member;
-import java.rmi.registry.Registry;
 import java.util.*;
 
 import static FrontEnd.AstNode.PrimitiveTypeNode.PrimitiveTypeKeyword.*;

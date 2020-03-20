@@ -4,7 +4,6 @@ import FrontEnd.*;
 
 import FrontEnd.ErrorChecker.SemanticException;
 import FrontEnd.Scope.Scope;
-import javafx.util.Pair;
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
@@ -20,11 +19,11 @@ import util.Location;
 public class main  {
 
     public static void main(String[] args)throws Exception {
-        String path = "code/Compiler-2020-testcases/sema/condition.mx";
+        String path = "code/Compiler-2020-testcases/sema/basic-package/basic-11.mx";
         InputStream inputStream = new FileInputStream(path);
         try {
             compile(inputStream);
-
+            System.exit(0);
         }
         catch (Error error){
             System.err.println(error.getMessage());
@@ -69,7 +68,7 @@ public class main  {
 
 
 
-        program.getInfo(0);//for debugging
+//        program.getInfo(0);//for debugging
 //
         ScopeBuilder scopeBuilder = new ScopeBuilder();
         Scope topLevelScope = scopeBuilder.BuildScopeTree(program);
