@@ -69,7 +69,7 @@ public abstract class AstVisitor {
         else if (node instanceof FunctionCallNode) visit(((FunctionCallNode) node));
         else if (node instanceof NewExprNode) visit(((NewExprNode) node));
 //        node.accept(this);
-
+        else visit(node);
     }
     public void  visit(IfStaNode node) throws Exception {
         visit(node.getCondition());

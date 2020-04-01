@@ -1,0 +1,119 @@
+LLVM based on SSA.
+All memory objects in LLVM are accessed through pointers.
+LLVM use basic blocks to form the CFG(Control Flow Graph).
+Each basic block may optionally start with a label (giving the basic block a symbol table entry), contains a list of instructions, and ends with a terminator instruction (such as a branch or function return).
+
+Two type of identifiers:
+    Global identifiers (functions, global variables) begin with the '@' character.
+    Local identifiers (register names, types) begin with the '%' character.
+
+Three formats for identifiers:
+    Named values are represented as a string of characters with their prefix. Like "%a.1".
+    Unnamed values are represented as an unsigned numeric value with their prefix. Like  "%12".
+    Constants.
+
+Advantage of prefix:
+    Compilers don’t need to worry about name clashes with reserved words;
+    Unnamed identifiers allow a compiler to quickly come up with a temporary variable without having to avoid symbol table conflicts.
+
+Important lexical features of LLVM:
+    Comments are delimited with a ‘;’ and go until the end of line.
+    Unnamed temporaries are created when the result of a computation is not assigned to a named value.
+    Unnamed temporaries are numbered sequentially.
+
+LLVM programs are composed of Module’s, each of which is a translation unit of the input programs.
+In our compiler we need to generate on module, thus there is no need to save linker type.
+In general, a module is made up of a list of global values (where both functions and global variables are global values).
+Global values(functions, vars) are represented by a pointer to a memory location.
+
+
+#Global Variables: @G = external global i32
+	Global variables define regions of memory allocated at compilation time instead of run-time.
+	Global variable definitions must be initialized.
+
+#Functions:
+	define void @foo(i32 %arg1, i32 %arg2) {
+		entry:
+  		; ... instructions ...
+		bb:
+  		; ... instructions ...
+
+  		; At function scope.
+  		uselistorder i32 %arg1, { 1, 0, 2 }
+  		uselistorder label %bb, { 1, 0 }
+	}
+	
+	A function definition contains a list of basic blocks.
+	The first basic block in a function is special in two ways: 
+	1. It is immediately executed on entrance to the function, 
+	2. It is not allowed to have predecessor basic blocks (i.e. there can not be any branches 	to the entry block of a function). Because the block can have no predecessors, it also cannot have any PHI nodes as well.
+
+TYPE
+#Void type: void
+
+#Function type: <returntype> (<parameter list>)
+	The function type can be thought of as a function signature.
+
+First Class Types: Values of these types are the only ones which can be produced by instructions.
+Single Value Types: These are the types that are valid in registers from CodeGen’s perspective.
+
+#Integer type: iN
+	The number of bits the integer will occupy is specified by the N value.
+
+#Label type: label
+	The label type represents code labels.
+
+Aggregate Types: A subset of derived types that can contain multiple member types. Arrays and structs are aggregate types.
+
+#Array type: [4 x i8]
+	Array type arranges elements sequentially in memory.
+#Structure type: %T1 = type { <type list> }     ; Identified normal struct type
+	The structure type is used to represent a collection of data members together in memory. 
+	Structures in memory are accessed using ‘load’ and ‘store’ by getting a pointer to a field with the ‘getelementptr’ instruction. Structures in registers are accessed using the ‘extractvalue’ and ‘insertvalue’ instructions.
+
+Constants
+#Boolean constants
+	The two strings ‘true’ and ‘false’ are both valid constants of the i1 type. 
+#Integer constants
+	Standard integers (such as ‘4’) are constants of the integer type. 
+	Negative numbers may be used with integer types.
+#Null pointer constants
+The identifier ‘null’ is recognized as a null pointer constant and must be of pointer type.
+
+#Structure constants
+	Structure constants are represented with notation similar to structure type definitions (a comma separated list of elements, surrounded by braces ({})).
+
+
+#Addresses of Basic Blocks: blockaddress(@function, %block)
+	The ‘blockaddress’ constant computes the address of the specified basic block in the specified function, and always has an i8* type. 
+	Taking the address of the entry block is illegal.
+
+#Constant operations
+icmp COND (VAL1, VAL2)
+Perform the icmp operation on constants.
+fcmp COND (VAL1, VAL2)
+Perform the fcmp operation on constants.
+OPCODE (LHS, RHS)
+Perform the specified operation of the LHS and RHS constants. OPCODE may be any of the binary or bitwise binary operations. 
+
+
+#Calls: ((Callee)[, (Callee)]*)
+callee: ^1[, hotness: None]?[, relbf: 0]?
+
+
+Terminator Instructions¶
+#ret Instruction: 
+ret <type> <value>       ; Return a value from a non-void function
+ret void                 ; Return from void function
+
+#branch Instruction:
+br i1 <cond>, label <iftrue>, label <iffalse>
+br label <dest>          ; Unconditional branch
+Example:
+Test:
+  	%cond = icmp eq i32 %a, %b
+  	br i1 %cond, label %IfEqual, label %IfUnequal
+IfEqual:
+  	ret i32 1
+IfUnequal:
+  	ret i32 0

@@ -63,6 +63,7 @@ public class ClassDefNode extends AstNode {
         functionDefList = new LinkedList<FunctionDefNode>();
         constructionDefList = new LinkedList<FunctionDefNode>();
     }
+
     @Override
     public void getInfo(int tab) {
         super.getInfo(tab);
@@ -77,6 +78,7 @@ public class ClassDefNode extends AstNode {
             item.getInfo(tab + 1);
         }
     }
+
     @Override
     public void accept(AstVisitor vistor) throws Exception{
         vistor.visit(this);

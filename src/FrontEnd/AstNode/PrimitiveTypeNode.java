@@ -12,7 +12,9 @@ public class PrimitiveTypeNode extends VariableTypeNode { //it is the lowest lev
     public void setType(PrimitiveTypeKeyword type) {
         this.type = type;
     }
-
+    public PrimitiveTypeKeyword getKeyword() {
+        return this.type;
+    }
     @Override
     public void getInfo(int tab) {
         super.getInfo(tab);

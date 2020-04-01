@@ -19,9 +19,9 @@ import util.Location;
 public class main  {
 
     public static void main(String[] args)throws Exception {
-//        String path = "code/Compiler-2020-testcases/sema/basic-package/basic-11.mx";
-//        InputStream inputStream = new FileInputStream(path);
-        InputStream inputStream = System.in;
+        String path = "code/sourceCode1.txt";
+        InputStream inputStream = new FileInputStream(path);
+//        InputStream inputStream = System.in;
         try {
             compile(inputStream);
             System.exit(0);
@@ -66,9 +66,6 @@ public class main  {
         ProgramNode program = astBuilder.getProgram();
         ParentLinker parentLinker  = new ParentLinker();
         parentLinker.linkParent(program);
-
-
-
 //        program.getInfo(0);//for debugging
 //
         ScopeBuilder scopeBuilder = new ScopeBuilder();
@@ -77,6 +74,11 @@ public class main  {
 //        scopePrinter.printScopeTree(topLevelScope);
         typeDefChecker.checkTypeDef(program);
 
+        ///////IR////////
+        IRBuilder irBuilder =  new IRBuilder();
+        irBuilder.build(program);
+        IRPrinter irPrinter  = new IRPrinter();
+        irPrinter.visit(irBuilder.getProgram());
     }
 
 }

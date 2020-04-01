@@ -1,12 +1,16 @@
 package FrontEnd.AstNode;
 
 import FrontEnd.AstVisitor;
+import FrontEnd.IR.Operand.Operand;
 
 import static util.print_tool.*;
 
 public abstract class ExprStaNode extends StatementNode {
     protected VariableTypeNode exprType;
     private boolean left_val;
+//for IR
+    private Operand result;
+    private Operand addr;//save  the left value
 
     public VariableTypeNode getExprType() {
         return exprType;
@@ -41,4 +45,19 @@ public abstract class ExprStaNode extends StatementNode {
         vistor.visit(this);
     }
 
+    public Operand getResult() {
+        return result;
+    }
+
+    public Operand getAddr() {
+        return addr;
+    }
+
+    public void setAddr(Operand addr) {
+        this.addr = addr;
+    }
+
+    public void setResult(Operand result) {
+        this.result = result;
+    }
 }

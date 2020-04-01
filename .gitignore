@@ -4,6 +4,5 @@
 code
 gen
 out
-src/FrontEnd.IR.*
 Compiler-Lite.iml
-src/FrontEnd.IRVisitor
+
