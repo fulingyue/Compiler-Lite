@@ -24,6 +24,7 @@ public class Icmp extends Instruction {
         this.op = op;
         this.lhs = lhs;
         this.rhs = rhs;
+        type = lhs.getType();
     }
 
     @Override

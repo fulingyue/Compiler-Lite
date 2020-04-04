@@ -272,19 +272,25 @@ public class AstBuilder extends MxBaseVisitor<AstNode> {
     @Override
     public AstNode visitCorrectCreator(MxParser.CorrectCreatorContext ctx) {
         NewExprNode ret = new NewExprNode();
-        VariableTypeNode varType, tmp;
+        VariableTypeNode varType, tmp, baseType;
         int dim = ctx.LBRACK().size();
         int dimOfExpr = ctx.expression().size();
         varType = (VariableTypeNode)visit(ctx.baseType());
+        baseType = varType;
         for (int i = dim - 1;i >= 0; --i){
             tmp = new ArrayTypeNode(varType);
+            ((ArrayTypeNode)tmp).setBaseType(baseType);
+            ((ArrayTypeNode) tmp).setDim(i+1);
             if(i < dimOfExpr){
                 ExprStaNode size = (ExprStaNode)visit(ctx.expression(i));
                 ((ArrayTypeNode)tmp).setSize(size);
+            } else{
+                ((ArrayTypeNode) tmp).setSize(null);
             }
             varType.setParent(tmp);
             varType = tmp;
         }
+
         ret.setLocation(new Location(ctx));
         ret.setVariableType(varType);
         //ret.parameterList goes out of use

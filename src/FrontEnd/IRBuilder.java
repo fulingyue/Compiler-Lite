@@ -11,11 +11,11 @@ import FrontEnd.Scope.GlobalScope;
 import javafx.util.Pair;
 import sun.jvm.hotspot.types.PointerType;
 
+import java.sql.Ref;
 import java.util.*;
 import java.util.List;
 
-import static FrontEnd.AstNode.BinaryOpNode.BinaryOp.LAND;
-import static FrontEnd.AstNode.BinaryOpNode.BinaryOp.LOR;
+import static FrontEnd.AstNode.BinaryOpNode.BinaryOp.*;
 
 public class IRBuilder extends AstVisitor{
     private Module program;
@@ -857,15 +857,14 @@ public class IRBuilder extends AstVisitor{
 
         node.setResult(load);
         //leftValue
-//        currentFunction.getSymbolTable().put(arrayPtr,)
+        currentFunction.getSymbolTable().put(result.getName(),result);
+        currentFunction.getSymbolTable().put(load.getName(),load);
     }
 
     @Override
     public void  visit(MemberAccessNode node) throws Exception {
-        node.getCaller().accept(this);
-        Operand pointer = node.getCaller().getResult();
-
         VariableTypeNode  type = node.getCaller().getExprType();
+
         if(type instanceof ArrayTypeNode) {
 
 
@@ -876,11 +875,17 @@ public class IRBuilder extends AstVisitor{
             return;
         }
 
+        //pure class member access
         assert type instanceof ClassTypeNode ;
         IRType irType  =  program.getTypeTable().get(((ClassTypeNode) type).getReferenceClassName());
         assert irType instanceof ClassIRType;
+        Operand pointer = node.getCaller().getAddr();
 
         if(node.getMember() instanceof ReferenceNode) {
+
+            assert ((ReferenceNode) node.getCaller()).getReferenceType() == ReferenceNode.ReferenceType.CLASS;
+
+
             int byteIndex = ((ClassIRType) irType).getIndex(((ReferenceNode) node.getMember()).getReferenceName());
 
             ArrayList<Operand> index = new ArrayList<>();
@@ -907,8 +912,37 @@ public class IRBuilder extends AstVisitor{
 
         }
         else {//member  is functionnode
-            String funcName = ((FunctionCallNode)node.getMember()).getCaller().getReferenceName();
+            assert node.getMember() instanceof FunctionCallNode;
 
+            String funcName =
+                    ((ClassTypeNode) type).getReferenceClassName() + '_' +
+                            ((FunctionCallNode) node.getMember()).getCaller().getReferenceName();
+
+            IRFunction function = program.getFunction(funcName);
+            assert funcName != null;
+            ArrayList<Operand> parameters = new ArrayList<>();
+            IRType retType = function.getFunctionType().getReturnType();
+            Register retReg;
+            if(retType instanceof VoidType) {
+                retReg =  null;
+            } else {
+                retReg = new VirtualReg("call",retType);
+            }
+            parameters.add(pointer);
+            for (ExprStaNode parameter: ((FunctionCallNode) node.getMember()).getActualParameterList()) {
+                parameter.accept(this);
+                parameters.add(parameter.getResult());
+            }
+            Instruction call = new CallFunction("call" + funcName,currentBB,function
+                    ,parameters,retReg);
+
+            currentBB.addInst(call);
+            retReg.setParent(call);
+            if(retReg != null)
+                currentFunction.getSymbolTable().put(retReg.getName(),retReg);
+
+            node.setResult(retReg);
+            node.setAddr(null);
 
         }
 
@@ -958,6 +992,7 @@ public class IRBuilder extends AstVisitor{
            node.setAddr(null);
            currentFunction.getSymbolTable().put(res.getName(),res);
            currentFunction.getSymbolTable().put(bitcast.getName(),bitcast);
+           identifierTable.put(node,res);//Class type save the addr
 
 
         }
@@ -987,8 +1022,9 @@ public class IRBuilder extends AstVisitor{
     @Override
     public void  visit(ReferenceNode node) throws Exception {
         Operand allocaAddr = identifierTable.get(node.getDefinitionNode());
-        if(allocaAddr != null) {
+        if(allocaAddr != null) {//variables in scope
             IRType type;
+
             if(allocaAddr instanceof StaticVar) {
                 type = allocaAddr.getType();
             }
@@ -1000,20 +1036,14 @@ public class IRBuilder extends AstVisitor{
             if(!isleft)
                 currentBB.addInst(
                     new Load("loadVar",currentBB,type,allocaAddr,res)
-                );
+                );//may be res is useful also
 
             node.setResult(res);
             node.setAddr(allocaAddr);
             currentFunction.getSymbolTable().put(res.getName(),res);
-        } else {//class  type
-            Register thisAllocAddr = (Register)currentFunction.getSymbolTable().get("this$addr");
-            IRType tyoe = ((PtrType)thisAllocAddr.getType()).getPointerType();
-            Register res  = new VirtualReg("this", tyoe);
-            currentBB.addInst(
-                    new Load("loadClassPtr",currentBB,tyoe,thisAllocAddr,res)
-            );
-//TODO
-
+        }
+        else {//variables in the class
+            //TODO
         }
     }
 
@@ -1039,7 +1069,8 @@ public class IRBuilder extends AstVisitor{
 
 
     public void  visit(StringNode node) throws Exception {
-       //TODO
+//       StaticString string = new
+        //TODO
     }
     @Override
     public void  visit(ThisExprNode node) throws Exception{
@@ -1051,10 +1082,159 @@ public class IRBuilder extends AstVisitor{
         node.setResult(res);
         node.setAddr(null);
         currentFunction.getSymbolTable().put(res.getName(),res);
+
     }
 
-    private void newArrayMalloc(NewExprNode node) {
-//TODO
+    private void newArrayMalloc(NewExprNode node) throws Exception{
+        VariableTypeNode type = (ArrayTypeNode)node.getVariableType();
+
+        IRType irType = program.getTypeTable().transport(
+                ((ArrayTypeNode) node.getVariableType()).getBaseType()
+        );
+        int dim = ((ArrayTypeNode) node.getVariableType()).getDim();
+
+        ArrayList<Operand> sizeList = new ArrayList<>();//save backwards
+
+        VariableTypeNode arrayType = node.getVariableType();
+        //initialize
+        for(int i = 0;i < dim; i++) {
+            irType = new PtrType(irType);
+
+            if(((ArrayTypeNode)arrayType).getSize() != null) {
+                ((ArrayTypeNode) arrayType).getSize().accept(this);
+                sizeList.add(((ArrayTypeNode) arrayType).getSize().getResult());
+            }
+            type = ((ArrayTypeNode)type).getBaseType();
+        }
+
+        //recursive malloc
+
+        IRFunction malloc =  program.getFunction("malloc");
+        Operand mallocRes = recursiveMalloc(0 ,sizeList,irType,malloc);
+        node.setResult(mallocRes);
+        node.setAddr(null);
+
+    }
+    private Operand recursiveMalloc(int cnt, ArrayList<Operand> sizeList, IRType irType, IRFunction malloc) {
+        Operand size = sizeList.get(cnt);
+        ArrayList<Operand> parameters = new ArrayList<>();
+
+        int baseSize = irType.getByteWidth();
+
+
+        Register mulByte = new VirtualReg("mul",new IntIRType(IntIRType.intType.i32));
+        Register bytes = new VirtualReg("add",  new IntIRType(IntIRType.intType.i32));
+
+        currentFunction.getSymbolTable().put(mulByte.getName(),mulByte);
+        currentFunction.getSymbolTable().put(bytes.getName(),bytes);
+
+
+        Instruction mul = new BinaryOp(
+                currentBB,mulByte, BinaryOp.BinOp.MUL,size,new ConstInt(baseSize, IntIRType.intType.i32)
+        );
+
+        Instruction add = new BinaryOp(
+                currentBB,bytes, BinaryOp.BinOp.ADD,mulByte,new ConstInt(8, IntIRType.intType.i32)
+        );
+
+        mulByte.setParent(mul);
+        bytes.setParent(add);
+        currentBB.addInst(mul);
+        currentBB.addInst(add);
+        parameters.add(bytes);
+
+        Register mallocRes  = new VirtualReg(
+                "malloc", new PtrType(new IntIRType(IntIRType.intType.i8))
+        );
+        currentFunction.getSymbolTable().put(mallocRes.getName(),mallocRes);
+
+        Instruction mallocCall = new CallFunction("malloc",currentBB,malloc,parameters, mallocRes);
+        mallocRes.setParent(mallocCall);
+
+        Register malloc32 = new VirtualReg("mallocCast", new PtrType(new IntIRType(IntIRType.intType.i32)));
+        currentFunction.getSymbolTable().put(malloc32.getName(),malloc32);
+        Instruction bitCast = new BitCast("bitcast",currentBB,mallocRes,malloc32.getType(),malloc32);
+        malloc32.setParent(bitCast);
+        currentBB.addInst(bitCast);
+
+        Instruction store = new Store("storeMalloc",currentBB,size,malloc32);
+        currentBB.addInst(store);
+
+        ArrayList<Operand> gepIndex = new ArrayList<>();
+        gepIndex.add(new ConstInt(1, IntIRType.intType.i32));
+        Register arrayHead32 =  new VirtualReg("arrayHead32",new PtrType(new IntIRType(IntIRType.intType.i32)));
+        Instruction getHead = new GetPtr("getHeadPtr",currentBB,malloc32,gepIndex,arrayHead32);
+        currentFunction.getSymbolTable().put(arrayHead32.getName(),arrayHead32);
+        arrayHead32.setParent(getHead);
+        currentBB.addInst(getHead);
+
+        Register arrayHead = new VirtualReg("arrayHead",irType);
+        Instruction castHead = new BitCast("castArrayHead",currentBB,arrayHead32,irType,arrayHead);
+        currentFunction.getSymbolTable().put(castHead.getName(),castHead);
+        arrayHead.setParent(castHead);
+        currentBB.addInst(castHead);
+
+        if(cnt != sizeList.size() - 1) {
+            BasicBlock for_condBB = new BasicBlock("for.cond",currentFunction);
+            BasicBlock for_loopBB = new BasicBlock("for.loop",currentFunction);
+//            BasicBlock for_incBB = new BasicBlock("for.inc",currentFunction);
+            BasicBlock for_endBB = new BasicBlock("for.end",currentFunction);
+            currentFunction.getSymbolTable().put(for_condBB.getName(),for_condBB);
+            currentFunction.getSymbolTable().put(for_loopBB.getName(),for_loopBB);
+//            currentFunction.getSymbolTable().put(for_incBB.getName(),for_incBB);
+            currentFunction.getSymbolTable().put(for_endBB.getName(),for_endBB);
+            ////preparation//////
+            ArrayList<Operand> index = new ArrayList<>();
+            index.add(size);
+            Register arrayTail = new VirtualReg("arraytail",irType);
+            currentFunction.getSymbolTable().put(arrayTail.getName(),arrayTail);
+            Instruction getTail = new GetPtr("getTail",currentBB,arrayHead,index,arrayTail);
+            currentBB.addInst(getTail);
+            arrayTail.setParent(getTail);
+
+            Register arrayPtrAddr = new VirtualReg("arrayPtr",new PtrType(irType));
+            Instruction alloca =  new AllocateInst(currentBB,"allcaArrat",arrayPtrAddr,irType);
+            currentFunction.getEntranceBB().addFirstInst(alloca);
+
+            Instruction storePtr = new Store("storePtr",currentBB,arrayHead,arrayPtrAddr);
+            currentBB.addInst(storePtr);
+
+            currentBB.addInst(
+                    new BranchJump("jump_loop",currentBB,null,for_condBB,null)
+            );
+            //////cond////////
+            currentBB = for_condBB;
+            currentFunction.addBB(for_condBB);
+            Register loadPtr = new VirtualReg("load",irType);
+            currentBB.addInst(new Load("loadPtr",currentBB, irType, arrayPtrAddr, loadPtr));
+            Register cmp = new VirtualReg("cmp",new IntIRType(IntIRType.intType.i1));
+            currentBB.addInst(new Icmp(currentBB,cmp, Icmp.CompareOp.LESS,loadPtr,arrayTail));
+            currentFunction.getSymbolTable().put(loadPtr.getName(),loadPtr);
+            currentFunction.getSymbolTable().put(cmp.getName(),cmp);
+
+            currentBB.addInst(new BranchJump("br_end_loop",currentBB,cmp,for_loopBB,for_endBB));
+
+            currentBB = for_loopBB;
+            currentFunction.addBB(for_loopBB);
+            Operand nextArrayHead = recursiveMalloc(cnt+1,sizeList,((PtrType)irType).getPointerType(),malloc);
+            currentBB = for_loopBB;
+            currentBB.addInst(new Store("storePtr",currentBB,nextArrayHead,loadPtr));
+
+            Register nextArray = new VirtualReg("nextArrayPtr",irType);
+            currentFunction.getSymbolTable().put(nextArray.getName(),nextArray);
+            index =  new ArrayList<>();
+            index.add(new ConstInt(1, IntIRType.intType.i32));
+            Instruction getNextPtr = new GetPtr("getNextPtr",currentBB,loadPtr,index,nextArray);
+            currentBB.addInst(getNextPtr);
+
+            currentBB.addInst(new Store("storePtr",currentBB,nextArray,arrayPtrAddr));
+            currentBB.addInst(new BranchJump("jump_cond",currentBB,null,for_condBB,null));
+
+            currentBB = for_endBB;
+            currentFunction.addBB(currentBB);
+
+        }
+        return arrayHead;
     }
 
 

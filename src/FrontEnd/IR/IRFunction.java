@@ -18,8 +18,6 @@ import java.util.*;
 
 public class IRFunction extends IRNode {
 
-
-
     private FunctionDefNode functionEntity;
     private FunctionType functionType;
     private Module parent;

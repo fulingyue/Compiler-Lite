@@ -7,7 +7,8 @@ import static FrontEnd.AstNode.PrimitiveTypeNode.PrimitiveTypeKeyword.NULL;
 public class ArrayTypeNode extends VariableTypeNode{ //an array definition
     private VariableTypeNode innerTypeNode;
     private ExprStaNode size;
-
+    private VariableTypeNode baseType;
+    private int dim;
     public VariableTypeNode getInnerTypeNode() {
         return innerTypeNode;
     }
@@ -60,8 +61,24 @@ public class ArrayTypeNode extends VariableTypeNode{ //an array definition
         return innerTypeNode.equalTo(((ArrayTypeNode) node).innerTypeNode);
     }
 
+    public VariableTypeNode getBaseType() {
+        return baseType;
+    }
+
+    public void setBaseType(VariableTypeNode baseType) {
+        this.baseType = baseType;
+    }
+
     @Override
     public void accept(AstVisitor vistor) throws Exception{
         vistor.visit(this);
+    }
+
+    public int getDim() {
+        return dim;
+    }
+
+    public void setDim(int dim) {
+        this.dim = dim;
     }
 }
