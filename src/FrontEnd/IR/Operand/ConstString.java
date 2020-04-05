@@ -3,10 +3,10 @@ package FrontEnd.IR.Operand;
 import FrontEnd.IR.Type.IRType;
 import FrontEnd.IRVisitor;
 
-public class StaticString extends Constant{
+public class ConstString extends Constant{
     private String value;
 //    private int size;
-    public StaticString(String name, IRType type, String string) {
+    public ConstString(String name, IRType type, String string) {
         super(name,type);
         this.value = string;
     }

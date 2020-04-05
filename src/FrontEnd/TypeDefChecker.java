@@ -427,7 +427,7 @@ public class TypeDefChecker extends AstVisitor {
         ClassDefNode classDefNode;
         if(!(node.getCaller().getExprType() instanceof ClassTypeNode))
             if(node.getCaller().getExprType() instanceof ArrayTypeNode)
-                classDefNode = topLevelScope.getClass("_array");//TODO add array class
+                classDefNode = topLevelScope.getClass("_array");
             else throw new SemanticException(node.getCaller().getLocation(), "caller must be class type");
         else {
             classDefNode = topLevelScope.getClass(((ClassTypeNode) node.getCaller().getExprType()).getReferenceClassName());

@@ -9,9 +9,7 @@ import FrontEnd.IR.Operand.*;
 import FrontEnd.IR.Type.*;
 import FrontEnd.Scope.GlobalScope;
 import javafx.util.Pair;
-import sun.jvm.hotspot.types.PointerType;
 
-import java.sql.Ref;
 import java.util.*;
 import java.util.List;
 
@@ -41,9 +39,8 @@ public class IRBuilder extends AstVisitor{
         loopNextStepBB = new Stack<>();
 
         initialize = new IRFunction("__init__", program,
-                new ArrayList<Parameter>(), new VoidType());
+                new ArrayList<Parameter>(), new VoidType(),false);
         initialize.init();
-
 
     }
 
@@ -51,27 +48,20 @@ public class IRBuilder extends AstVisitor{
         program = new Module(node);//have generate IRTypeTable
         program.addFunction(initialize);
         topLevelScope = (GlobalScope)node.getScope();
-        initBuildin();
+
+        program.initBuildin();
 
         visit(node);
+        IRFunction main = program.getFunction("main");
+        main.getEntranceBB().addFirstInst(
+                new CallFunction("call_init",main.getEntranceBB(),initialize,new ArrayList<>(),null)
+        );
 
-//        IRFunction main = program.getFunction("main");
-//        initialize.getEntranceBB().addFirstInst(new CallFunction(
-//                "call_main", initialize.getEntranceBB(),
-//        ));
-//        main.getHeadBB().addPrev(new FunctionCall("initializer_func", ));//TODO
         return this.program;
     }
 
 
     /////////private util functions//////////
-    private void initBuildin() {
-        currentFunction = program.getFunction("_global_init");
-//TODO
-
-    }
-
-
 
 
     private void registerFunction(FunctionDefNode node)  {
@@ -89,7 +79,7 @@ public class IRBuilder extends AstVisitor{
             name = node.getMethodName();
         }
 
-        IRFunction function = new IRFunction(name ,program,parameters,returnType);
+        IRFunction function = new IRFunction(name ,program,parameters,returnType,false);
         if(parameters.size() >0)
             parameters.get(0).setFuncParent(function);
 
@@ -252,9 +242,10 @@ public class IRBuilder extends AstVisitor{
         }
         currentBB = endBB;
         currentFunction.addBB(endBB);
-
-//        currentFunction.getSymbolTable().put(thenBB.getName(),thenBB);
-
+        if(elseBB != null)
+            currentFunction.getSymbolTable().put(elseBB.getName(),elseBB);
+        currentFunction.getSymbolTable().put(thenBB.getName(),thenBB);
+        currentFunction.getSymbolTable().put(endBB.getName(),endBB);
 //        if(node.getElseBlock() != null)
 //            currentFunction.getSymbolTable().put(elseBB.getName(),elseBB);
 //
@@ -669,7 +660,6 @@ public class IRBuilder extends AstVisitor{
 
 
             } else {//string type
-                //TODO string == null???
                 IRFunction function;
                 String funcName;
                 switch (node.getOp()) {
@@ -690,6 +680,9 @@ public class IRBuilder extends AstVisitor{
                         break;
                     case NOTEQUAL:
                         funcName = "notequal";
+                        break;
+                    case ADD:
+                        funcName = "link";
                         break;
                     default:
                         throw new RuntimeException("string_binaryOp error");
@@ -803,6 +796,7 @@ public class IRBuilder extends AstVisitor{
         //alloca + store initial value
         IRType type = program.getTypeTable().transport(node.getVarType());
         String name  =  node.getVarName();
+
         if(currentClass == null && currentFunction == initialize) { // global
             StaticVar globalVar = new StaticVar(name,type,null);
             Operand init;
@@ -810,10 +804,11 @@ public class IRBuilder extends AstVisitor{
                 node.getInitVal().accept(this);
                 init = node.getInitVal().getResult();
                 if(!(init instanceof Constant)) {
-                    currentBB.addInst(new Store("store"+ name,currentBB,init,globalVar));
-                    init =  type.getDefaultValue();
+                    currentBB.addInst(new Store("store" + name, currentBB, init, globalVar));
+                    init = type.getDefaultValue();
                 }
-            } else
+            }
+            else
                 init = type.getDefaultValue();
             globalVar.setInit(init);
             program.addStaticVar(globalVar);
@@ -821,6 +816,7 @@ public class IRBuilder extends AstVisitor{
             currentFunction.getSymbolTable().put(globalVar.getName(),globalVar);
             identifierTable.put(node, globalVar);
         }
+
         else {
             Register addr  = new VirtualReg(name,new PtrType(type));
             BasicBlock entranceBlock = currentFunction.getEntranceBB();
@@ -864,14 +860,53 @@ public class IRBuilder extends AstVisitor{
     @Override
     public void  visit(MemberAccessNode node) throws Exception {
         VariableTypeNode  type = node.getCaller().getExprType();
+        node.getCaller().accept(this);
 
         if(type instanceof ArrayTypeNode) {
+            Register ptr;
 
+            Operand caller = node.getCaller().getResult();
+            if(caller instanceof Register &&
+                    caller.getType().equals(new PtrType(new IntIRType(IntIRType.intType.i32)))) {
+                ptr = (Register)caller;
+            } else {
+                ptr = new VirtualReg("cast",new IntIRType(IntIRType.intType.i32));
+                currentBB.addInst(new BitCast("castPtr",currentBB,caller,ptr.getType(),ptr));
+                currentFunction.getSymbolTable().put(ptr.getName(),ptr);
+            }
+
+            ArrayList<Operand> index = new ArrayList<>();
+            index.add(new ConstInt(-1, IntIRType.intType.i32));
+            Register res = new VirtualReg("size_ptr",ptr.getType());
+            Register size =  new VirtualReg("size",ptr.getType());
+            currentFunction.getSymbolTable().put(res.getName(),res);
+            currentFunction.getSymbolTable().put(size.getName(),size);
+            currentBB.addInst(new GetPtr("getArrayPtr",currentBB,ptr,index,res));
+            currentBB.addInst(new Load("loadSize",currentBB,new IntIRType(IntIRType.intType.i32),res,size));
+
+            node.setResult(size);
+            node.setAddr(null);
 
             return;
         }
         else if((type instanceof ClassTypeNode) && ((ClassTypeNode) type).getReferenceClassName().equals("string")){
-
+            assert node.getMember() instanceof FunctionCallNode;
+            IRFunction function = program.getExternalFuncMap().get("__string_" + ((FunctionCallNode) node.getMember()).getCaller().getReferenceName());
+            ArrayList<Operand> paras = new ArrayList<>();
+            IRType retType = function.getFunctionType().getReturnType();
+            paras.add(node.getCaller().getResult());
+            for (ExprStaNode item: ((FunctionCallNode) node.getMember()).getActualParameterList()) {
+                item.accept(this);
+                paras.add(item.getResult());
+            }
+            Register res  = retType instanceof VoidType? null: new VirtualReg("call",retType);
+            currentBB.addInst(new CallFunction(
+                    "call"+function.getName(),currentBB,function,paras,res
+            ));
+            if(res != null)
+                currentFunction.getSymbolTable().put(res.getName(),res);
+            node.setResult(res);
+            node.setAddr(null);
             return;
         }
 
@@ -950,10 +985,18 @@ public class IRBuilder extends AstVisitor{
 
 
     public void  visit(FunctionCallNode node) throws Exception {
-        visit(node.getCaller());
+        IRFunction function = program.getFunction(node.getCaller().getReferenceName());
+        ArrayList<Operand> parameter = new ArrayList<>();
         for(ExprStaNode item: node.getActualParameterList()) {
-            visit(item);
+            item.accept(this);
+            parameter.add(item.getResult());
         }
+        Register res = new VirtualReg("ret",function.getFunctionType().getReturnType());
+        currentFunction.getSymbolTable().put(res.getName(),res);
+        currentBB.addInst(new CallFunction("call"+function.getName(),currentBB,function
+        ,parameter,res));
+        node.setAddr(null);
+        node.setResult(res);
     }
 
     @Override
@@ -1043,6 +1086,7 @@ public class IRBuilder extends AstVisitor{
             currentFunction.getSymbolTable().put(res.getName(),res);
         }
         else {//variables in the class
+            throw new RuntimeException();
             //TODO
         }
     }
@@ -1069,8 +1113,15 @@ public class IRBuilder extends AstVisitor{
 
 
     public void  visit(StringNode node) throws Exception {
-//       StaticString string = new
-        //TODO
+        StaticVar var = program.addString(node.getVal());
+        ArrayList<Operand> index = new ArrayList<>();
+        index.add(new ConstInt(0, IntIRType.intType.i32));
+        index.add(new ConstInt(0, IntIRType.intType.i32));
+        Register res = new VirtualReg("stringPtr",new PtrType(new IntIRType(IntIRType.intType.i8)));
+        currentBB.addInst(new GetPtr("getStringPtr",currentBB,var,index,res));
+        currentFunction.getSymbolTable().put(res.getName(),res);
+        node.setResult(res);
+        node.setAddr(null);
     }
     @Override
     public void  visit(ThisExprNode node) throws Exception{
@@ -1134,7 +1185,7 @@ public class IRBuilder extends AstVisitor{
         );
 
         Instruction add = new BinaryOp(
-                currentBB,bytes, BinaryOp.BinOp.ADD,mulByte,new ConstInt(8, IntIRType.intType.i32)
+                currentBB,bytes, BinaryOp.BinOp.ADD,mulByte,new ConstInt(4, IntIRType.intType.i32)
         );
 
         mulByte.setParent(mul);

@@ -32,11 +32,11 @@ public class IRFunction extends IRNode {
     private Register returnVal = null;
 
 
-    private boolean returnLink;
+    private boolean external;
 
 
     public IRFunction(String name, Module parent,
-                      ArrayList<Parameter> paraList, IRType returnType) {
+                      ArrayList<Parameter> paraList, IRType returnType,boolean isExternal) {
         super(name);
         this.parent = parent;
         for (Parameter item : paraList) {
@@ -120,6 +120,8 @@ public class IRFunction extends IRNode {
     }
 
 
+
+
     //////getter and  setter///////
 
     public FunctionDefNode getFunctionEntity() {
@@ -174,12 +176,12 @@ public class IRFunction extends IRNode {
         this.returnVal = returnVal;
     }
 
-    public boolean isReturnLink() {
-        return returnLink;
+    public boolean isExternal() {
+        return external;
     }
 
-    public void setReturnLink(boolean returnLink) {
-        this.returnLink = returnLink;
+    public void setExternal(boolean external) {
+        this.external = external;
     }
 
     public BasicBlock getEntranceBB() {
