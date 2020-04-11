@@ -16,4 +16,11 @@ public abstract class IRType {
 
     public abstract String print();
     public abstract Operand getDefaultValue();
+
+    public boolean equals(Object object) {
+        if(!(object instanceof IRType))
+            return false;
+        else
+            return print().equals(((IRType) object).print());
+    }
 }

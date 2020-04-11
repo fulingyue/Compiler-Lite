@@ -199,6 +199,7 @@ public class ScopeBuilder extends AstVisitor{
         }
         else {
             AstNode defNode = curScope().get(node.getReferenceName());
+            assert defNode != null;
             node.setDefinitionNode(defNode);
             if (defNode instanceof ClassDefNode) {
                 node.setReferenceType(ReferenceNode.ReferenceType.CLASS);
@@ -253,7 +254,11 @@ public class ScopeBuilder extends AstVisitor{
     @Override
      public void visit(FunctionCallNode node) throws Exception {
         node.setScope(curScope());
-        super.visit(node);
+        for(ExprStaNode item: node.getActualParameterList()) {
+            visit(item);
+        };
+        visit(node.getCaller());
+
     }
 
     @Override

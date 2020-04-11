@@ -3,5 +3,7 @@
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/code/Compiler-2020-testcases" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/ravel" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/test/Compiler-2020-testcases" vcs="Git" />
   </component>
 </project>

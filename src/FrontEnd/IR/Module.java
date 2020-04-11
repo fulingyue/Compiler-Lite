@@ -56,25 +56,25 @@ public class Module {
 
         retType = new VoidType();
         parameters = new ArrayList<>();
-        parameters.add(new Parameter("string",new PtrType(new IntIRType(IntIRType.intType.i8))));
+        parameters.add(new Parameter("str",new PtrType(new IntIRType(IntIRType.intType.i8))));
         IRFunction print = new IRFunction("print",this,parameters,retType,true);
         addFunctionExternal(print);
 
         retType = new VoidType();
         parameters = new ArrayList<>();
-        parameters.add(new Parameter("string",new PtrType(new IntIRType(IntIRType.intType.i8))));
+        parameters.add(new Parameter("str",new PtrType(new IntIRType(IntIRType.intType.i8))));
         IRFunction println = new IRFunction("println",this,parameters,retType,true);
         addFunctionExternal(println);
 
         retType = new VoidType();
         parameters = new ArrayList<>();
-        parameters.add(new Parameter("int",new IntIRType(IntIRType.intType.i32)));
+        parameters.add(new Parameter("i",new IntIRType(IntIRType.intType.i32)));
         IRFunction printInt = new IRFunction("printInt",this,parameters,retType,true);
         addFunctionExternal(printInt);
 
         retType = new VoidType();
         parameters = new ArrayList<>();
-        parameters.add(new Parameter("int",new IntIRType(IntIRType.intType.i32)));
+        parameters.add(new Parameter("i",new IntIRType(IntIRType.intType.i32)));
         IRFunction printlnInt = new IRFunction("printlnInt",this,parameters,retType,true);
         addFunctionExternal(printlnInt);
 
@@ -249,9 +249,7 @@ public class Module {
     }
 
     public StaticVar addString(String string) {
-        string = string.replace("\\\\", "\\");
-        string = string.replace("\\n", "\n");
-        string = string.replace("\\\"", "\"");
+
         string = string + "\0";
         if(staticStrings.containsKey(string))
             return staticStrings.get(string);

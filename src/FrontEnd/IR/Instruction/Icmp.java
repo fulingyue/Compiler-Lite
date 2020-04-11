@@ -1,6 +1,7 @@
 package FrontEnd.IR.Instruction;
 
 import FrontEnd.IR.BasicBlock;
+import FrontEnd.IR.Operand.ConstNull;
 import FrontEnd.IR.Operand.Operand;
 import FrontEnd.IR.Operand.Register;
 import FrontEnd.IR.Type.IRType;
@@ -24,7 +25,14 @@ public class Icmp extends Instruction {
         this.op = op;
         this.lhs = lhs;
         this.rhs = rhs;
-        type = lhs.getType();
+        if(!(lhs instanceof ConstNull))
+            type = lhs.getType();
+        else if(!(rhs instanceof ConstNull)){
+            type = rhs.getType();
+        }
+        else {
+
+        }
     }
 
     @Override
@@ -35,7 +43,27 @@ public class Icmp extends Instruction {
     }
     @Override
     public String print() {
-        return dest.print() + " = icmp "+ op.name() + " " +
+        String opName;
+        switch (op) {
+            case EQUAL:
+                opName = "eq";
+                break;
+            case NOTEQUAL:
+                opName = "ne";
+                break;
+            case LEQ:
+                opName = "sle";
+                break;
+            case LESS:
+                opName =  "slt";
+                break;
+            case GEQ:
+                opName = "sge";
+                break;
+            default:
+                opName = "sgt";
+        }
+        return dest.print() + " = icmp "+ opName + " " +
                 type.print() + " " + lhs.print() + ", " + rhs.print();
     }
     @Override

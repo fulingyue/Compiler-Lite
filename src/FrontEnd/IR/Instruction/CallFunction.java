@@ -4,8 +4,8 @@ import FrontEnd.IR.BasicBlock;
 import FrontEnd.IR.IRFunction;
 import FrontEnd.IR.Operand.Operand;
 import FrontEnd.IR.Operand.Register;
+import FrontEnd.IR.Type.VoidType;
 import FrontEnd.IRVisitor;
-import javafx.scene.effect.InnerShadow;
 
 import java.util.ArrayList;
 
@@ -37,7 +37,7 @@ public class CallFunction extends Instruction{
     @Override
     public String print() {
         StringBuilder stringBuilder = new StringBuilder();
-        if(result != null) {
+        if(result!= null) {
             stringBuilder.append(result.print());
             stringBuilder.append(" = ");
         }
@@ -47,13 +47,15 @@ public class CallFunction extends Instruction{
         stringBuilder.append(" @");
         stringBuilder.append(function.getName());
         stringBuilder.append("(");
+        if(parameters.size() == 0)
+            stringBuilder.append(", ");
         for(Operand item: parameters) {
-            stringBuilder.append(item.getType());
+            stringBuilder.append(item.getType().print());
             stringBuilder.append(" ");
             stringBuilder.append(item.print());
             stringBuilder.append(", ");
         }
-        stringBuilder.deleteCharAt(stringBuilder.length()-1);
+        stringBuilder.delete(stringBuilder.length()-2,stringBuilder.length());
         stringBuilder.append(")");
         return stringBuilder.toString();
     }

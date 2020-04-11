@@ -6,35 +6,54 @@ import FrontEnd.IR.IRFunction;
 import FrontEnd.IR.Instruction.*;
 import FrontEnd.IR.Module;
 
-import java.io.FileOutputStream;
-import java.io.OutputStream;
-import java.io.PrintWriter;
+import java.io.*;
 
 public class IRPrinter implements IRVisitor {
     private String indent;
-    private OutputStream os;
-    private PrintWriter writer;
+    private PrintWriter printWriter;
+    private FileWriter fileWriter;
 
-    public IRPrinter() {
-        try {
-            os = new FileOutputStream("test.ll");
-            writer = new PrintWriter(os);
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new RuntimeException(e.getMessage());
-        }
-
+    public IRPrinter() throws Exception{
         indent = "    ";
+        File file = new File("test/test.ll");
+        if(!file.exists())
+            file.createNewFile();
+        fileWriter = new FileWriter("test/test.ll");
+        printWriter = new PrintWriter(fileWriter);
+
+    }
+    private void println(String str) {
+        printWriter.println(str);
+    }
+    public void print(Module root){
+        println("; ModuleID = 'test.txt'");
+        println("source_filename = \"test.txt\"");
+        println("target datalayout = \"e-m:e-i64:64-f80:128-n8:16:32:64-S128\"");
+//        println("target triple = \"x86_64-unknown-linux-gnu\"");
+        println("target triple = \"x86_64-apple-macosx10.15.0\"");
+        println("");
+        visit(root);
+        printWriter.flush();
     }
 
     @Override
     public void visit(Module root) {
-        // ------ HEAD ------
-        println("; ModuleID = 'sourceCode1.txt'");
-        println("source_filename = \"code.txt\"");
-        println("target datalayout = \"e-m:e-i64:64-f80:128-n8:16:32:64-S128\"");
-        println("target triple = \"x86_64-pc-linux-gnu\"");
+        //////Class//////
+        for(String name: root.getClassMap().keySet()) {
+            println(root.getClassMap().get(name).printType());
+        }
         println("");
+        for(String name: root.getStaticVariableMap().keySet()) {
+            println(root.getStaticVariableMap().get(name).printDef());
+        }
+        println("");
+        println("; Function Attrs:");
+
+        for(String name: root.getExternalFuncMap().keySet()) {
+            IRFunction function = root.getExternalFuncMap().get(name);
+            println(function.printDeclare());
+            println("");
+        }
 
         for (String name: root.getFunctionMap().keySet()) {
             root.getFunctionMap().get(name).accept(this);
@@ -45,7 +64,7 @@ public class IRPrinter implements IRVisitor {
 
     @Override
     public void visit(IRFunction function) {
-//        println(function.declareToString().replace("declare", "define") + " {");
+        println(function.printDef() + " {");
 
         BasicBlock ptr = function.getEntranceBB();
         while (ptr != null) {
@@ -138,21 +157,6 @@ public class IRPrinter implements IRVisitor {
 
 
 
-    public OutputStream getOs() {
-        return os;
-    }
-
-    public PrintWriter getWriter() {
-        return writer;
-    }
-
-    private void print(String string) {
-       System.out.print(string);
-    }
-
-    private void println(String string) {
-        System.out.println(string);
-    }
 
 }
 

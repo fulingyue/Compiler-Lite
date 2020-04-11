@@ -1,6 +1,8 @@
 package FrontEnd.IR.Operand;
 
 import FrontEnd.IR.Type.IRType;
+import FrontEnd.IR.Type.PtrType;
+import FrontEnd.IR.Type.VoidType;
 import FrontEnd.IRVisitor;
 
 public class ConstNull  extends Constant {
@@ -8,7 +10,7 @@ public class ConstNull  extends Constant {
         super(name,type);
     }
     public ConstNull(){
-        super("null",null);
+        super("null",new PtrType(new VoidType()));
     }
 
 

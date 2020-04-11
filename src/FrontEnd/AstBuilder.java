@@ -290,7 +290,8 @@ public class AstBuilder extends MxBaseVisitor<AstNode> {
             varType.setParent(tmp);
             varType = tmp;
         }
-
+        if(dim != 0)
+            ((ArrayTypeNode)varType).setDim(dim);
         ret.setLocation(new Location(ctx));
         ret.setVariableType(varType);
         //ret.parameterList goes out of use

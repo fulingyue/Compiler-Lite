@@ -19,30 +19,28 @@ public class IRTypeTable {
         typeTable.put("VOID", new VoidType());
         for(ClassDefNode item: programNode.getClassDefList()) {
             if(item.getClassName().equals("string")) continue;
-            ClassIRType irType = new ClassIRType(item.getClassName());
-
-            module.getClassMap().put(item.getClassName(), irType);
+            ClassIRType irType = new ClassIRType("struct."+item.getClassName());
+            typeTable.put(item.getClassName(),irType);
         }
 
         for(ClassDefNode node: programNode.getClassDefList()) {
             IRType irType;
             assert typeTable.get(node.getClassName()) != null;
-
             irType = typeTable.get(node.getClassName());
 
             assert irType instanceof ClassIRType;
 
-//            ArrayList<IRType> memberList =  new ArrayList<>();
-            ArrayList<VarDefNode> memberList = new ArrayList<>();
+            ArrayList<IRType> memberList =  new ArrayList<>();
+//            ArrayList<VarDefNode> memberList = new ArrayList<>();
             for(VarDefListNode item: node.getMemberList()){
                 VariableTypeNode type = item.getType();
                 IRType transport = transport(type);
                 for(VarDefNode member: item.getVarDefNodeList()) {
-//                    memberList.add(transport(member.getVarType()));
-
+                    memberList.add(transport(member.getVarType()));
                     ((ClassIRType) irType).addMember(member.getVarName(),transport);
                 }
             }
+            module.getClassMap().put(node.getClassName(), (ClassIRType)irType);
 
         }
     }
@@ -51,9 +49,25 @@ public class IRTypeTable {
     }
 
     public IRType transport(VariableTypeNode astType) {
-        if(typeTable.get(astType.getType()) != null)
+        IRType type = typeTable.get(astType.getType());
+        if(type != null){
+            if(type instanceof ClassIRType) return new PtrType(type);
             return typeTable.get(astType.getType());
+        }
 
+
+        if(astType instanceof ArrayTypeNode) {
+            VariableTypeNode baseType = ((ArrayTypeNode) astType).getBaseType();
+            assert !(baseType instanceof ArrayTypeNode);
+
+            IRType baseIRType = transport(baseType);
+            int dim = ((ArrayTypeNode) astType).getDim();
+            IRType ret = baseIRType;
+            for (int i = 0;i < dim;++i) {
+                ret = new PtrType(ret);
+            }
+            return ret;
+        }
         else return null;
 
     }

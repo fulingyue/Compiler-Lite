@@ -4,7 +4,7 @@ import FrontEnd.IR.BasicBlock;
 import FrontEnd.IR.Operand.Operand;
 import FrontEnd.IR.Operand.Register;
 import FrontEnd.IRVisitor;
-import javafx.util.Pair;
+import util.Pair;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -36,7 +36,7 @@ public class Phi extends Instruction {
     @Override
     public String print() {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(res.print()).append(" = phi").append(res.getType().print()).append(" ");
+        stringBuilder.append(res.print()).append(" = phi ").append(res.getType().print()).append(" ");
         for (Pair<Operand,BasicBlock> pair: branches) {
             stringBuilder.append("[ ").append(pair.getKey().print()).append(", ").append(pair.getValue().print()).append(" ]");
             stringBuilder.append(", ");

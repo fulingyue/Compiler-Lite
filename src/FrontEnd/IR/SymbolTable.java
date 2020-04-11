@@ -37,9 +37,14 @@ public class SymbolTable extends HashMap<String, ArrayList<Object>> {
                }
             }
             return null;
+
         }
         else{
-            throw new RuntimeException();
+            ArrayList<IRNode> list = symbolTable.get(name);
+            if(list == null) {
+                String nulli = null;
+            }
+            return list.get(0);
         }
     }
 

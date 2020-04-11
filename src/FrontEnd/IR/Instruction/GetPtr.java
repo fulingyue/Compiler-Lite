@@ -44,7 +44,8 @@ public class GetPtr extends Instruction {
         string.append(dest.print());
         string.append(" = ");
         string.append("getelementptr ").append(baseType.print()).append(", ");
-        string.append(pointerType).append(" ").append(pointer.print());
+        string.append(pointerType.print()).append(" ").append(pointer.print());
+
         for (Operand item : index){
             string.append(", ").append(item.getType().print());
             string.append(" ").append(item.print());

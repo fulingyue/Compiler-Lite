@@ -9,6 +9,7 @@ public class ArrayTypeNode extends VariableTypeNode{ //an array definition
     private ExprStaNode size;
     private VariableTypeNode baseType;
     private int dim;
+
     public VariableTypeNode getInnerTypeNode() {
         return innerTypeNode;
     }
@@ -33,7 +34,9 @@ public class ArrayTypeNode extends VariableTypeNode{ //an array definition
 
     public ArrayTypeNode(VariableTypeNode inner, int dim) {
         VariableTypeNode tmp;
+        baseType  =  inner;
         tmp = inner;
+        this.dim  = dim;
         for (int i = dim - 1; i >= 1; --i) {
             tmp = new ArrayTypeNode(tmp);
         }

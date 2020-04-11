@@ -16,6 +16,7 @@ public class ParentLinker extends AstVisitor {
         stack = new LinkedList<>();
     }
     public void linkParent(ProgramNode programNode)throws Exception  {
+
         visit(programNode);
     }
 
@@ -24,6 +25,7 @@ public class ParentLinker extends AstVisitor {
     public void visit(ProgramNode node) throws Exception{
         stack.addLast(node);
         super.visit(node);
+
         stack.removeLast();
     }
 

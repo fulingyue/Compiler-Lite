@@ -29,9 +29,12 @@ public class Store extends Instruction{
 
     @Override
     public String print() {
-        if(dest instanceof StaticVar) {
-            return "store " + dest.getType().print() + " " + value.print() +
-                    ", " + (new PtrType(dest.getType())).print() + " " + dest.print();
+//        if(dest instanceof StaticVar) {
+//            return "store " + dest.getType().print() + " " + value.print() +
+//                    ", " + (new PtrType(dest.getType())).print() + " " + dest.print();
+//        }
+        if(dest == null) {
+            System.out.print("fasfas");
         }
         return "store " + ((PtrType)(dest.getType())).getPointerType().print() + " " + value.print() +
                 ", " + dest.getType().print() + " " + dest.print();

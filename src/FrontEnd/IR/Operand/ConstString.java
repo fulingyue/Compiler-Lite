@@ -12,7 +12,13 @@ public class ConstString extends Constant{
     }
     @Override
     public String print() {
-        return value;
+        String str = value;
+        str = str.replace("\\", "\\5C");
+        str = str.replace("\n", "\\0A");
+        str = str.replace("\"", "\\22");
+        str = str.replace("\0", "\\00");
+
+        return "c\"" + str + "\"";
     }
 
 

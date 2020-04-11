@@ -2,17 +2,68 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a67270fb-4b02-4acf-8cdd-5c9e4a76755c" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/build.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/buildInit.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/codegen.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ravel" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/semantic.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/util/Pair.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test.out" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/antlr_4_8_complete.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/antlr_4_8_complete.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/Compiler-2020-testcases/sema/class-package/class-4.mx" beforeDir="false" afterPath="$PROJECT_DIR$/code/Compiler-2020-testcases/sema/class-package/class-4.mx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/antlr-4.8-complete.jar" beforeDir="false" afterPath="$PROJECT_DIR$/lib/antlr-4.8-complete.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/AstBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/AstBuilder.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/AstNode/ArrayTypeNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/AstNode/ArrayTypeNode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/AstVisitor.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/AstVisitor.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/IR/IRFunction.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/IR/IRFunction.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/ParentLinker.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/ParentLinker.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/ScopeBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/ScopeBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/util/print_tool.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/util/print_tool.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FrontEnd/AstBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/AstBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FrontEnd/AstNode/ArrayTypeNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/AstNode/ArrayTypeNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FrontEnd/AstVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/AstVisitor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/FrontEnd/IR/IRFunction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/IR/IRFunction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FrontEnd/IR/Instruction/BinaryOp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/IR/Instruction/BinaryOp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FrontEnd/IR/Instruction/CallFunction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/IR/Instruction/CallFunction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FrontEnd/IR/Instruction/GetPtr.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/IR/Instruction/GetPtr.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FrontEnd/IR/Instruction/Icmp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/IR/Instruction/Icmp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FrontEnd/IR/Instruction/Phi.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/IR/Instruction/Phi.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FrontEnd/IR/Instruction/Store.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/IR/Instruction/Store.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/FrontEnd/IR/Module.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/IR/Module.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/FrontEnd/IR/Operand/StaticString.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/IR/Operand/ConstString.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FrontEnd/IR/Operand/ConstNull.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/IR/Operand/ConstNull.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FrontEnd/IR/Operand/ConstString.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/IR/Operand/ConstString.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FrontEnd/IR/Operand/StaticVar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/IR/Operand/StaticVar.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FrontEnd/IR/SymbolTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/IR/SymbolTable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FrontEnd/IR/Type/ClassIRType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/IR/Type/ClassIRType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FrontEnd/IR/Type/FunctionType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/IR/Type/FunctionType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FrontEnd/IR/Type/IRType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/IR/Type/IRType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FrontEnd/IR/Type/IRTypeTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/IR/Type/IRTypeTable.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/FrontEnd/IRBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/IRBuilder.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/FrontEnd/IRPrinter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/IRPrinter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/FrontEnd/TypeDefChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/TypeDefChecker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FrontEnd/ParentLinker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/ParentLinker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FrontEnd/ScopeBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/ScopeBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/print_tool.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/print_tool.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test.ll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/Compiler-2020-testcases/codegen/e6.mx" beforeDir="false" afterPath="$PROJECT_DIR$/test/Compiler-2020-testcases/codegen/e6.mx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/Compiler-2020-testcases/codegen/t11.mx" beforeDir="false" afterPath="$PROJECT_DIR$/test/Compiler-2020-testcases/codegen/t11.mx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/Compiler-2020-testcases/codegen/t14.mx" beforeDir="false" afterPath="$PROJECT_DIR$/test/Compiler-2020-testcases/codegen/t14.mx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/Compiler-2020-testcases/codegen/t33.mx" beforeDir="false" afterPath="$PROJECT_DIR$/test/Compiler-2020-testcases/codegen/t33.mx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/Compiler-2020-testcases/codegen/t34.mx" beforeDir="false" afterPath="$PROJECT_DIR$/test/Compiler-2020-testcases/codegen/t34.mx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/Compiler-2020-testcases/codegen/t35.mx" beforeDir="false" afterPath="$PROJECT_DIR$/test/Compiler-2020-testcases/codegen/t35.mx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/Compiler-2020-testcases/codegen/t36.mx" beforeDir="false" afterPath="$PROJECT_DIR$/test/Compiler-2020-testcases/codegen/t36.mx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/Compiler-2020-testcases/codegen/t38.mx" beforeDir="false" afterPath="$PROJECT_DIR$/test/Compiler-2020-testcases/codegen/t38.mx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/Compiler-2020-testcases/codegen/t39.mx" beforeDir="false" afterPath="$PROJECT_DIR$/test/Compiler-2020-testcases/codegen/t39.mx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/Compiler-2020-testcases/codegen/t40.mx" beforeDir="false" afterPath="$PROJECT_DIR$/test/Compiler-2020-testcases/codegen/t40.mx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/Compiler-2020-testcases/codegen/t41.mx" beforeDir="false" afterPath="$PROJECT_DIR$/test/Compiler-2020-testcases/codegen/t41.mx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/Compiler-2020-testcases/codegen/t42.mx" beforeDir="false" afterPath="$PROJECT_DIR$/test/Compiler-2020-testcases/codegen/t42.mx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/Compiler-2020-testcases/codegen/t43.mx" beforeDir="false" afterPath="$PROJECT_DIR$/test/Compiler-2020-testcases/codegen/t43.mx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/Compiler-2020-testcases/codegen/t44.mx" beforeDir="false" afterPath="$PROJECT_DIR$/test/Compiler-2020-testcases/codegen/t44.mx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/Compiler-2020-testcases/codegen/t45.mx" beforeDir="false" afterPath="$PROJECT_DIR$/test/Compiler-2020-testcases/codegen/t45.mx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/Compiler-2020-testcases/sema/class-package/class-4.mx" beforeDir="false" afterPath="$PROJECT_DIR$/test/Compiler-2020-testcases/sema/class-package/class-4.mx" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -50,8 +101,9 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="add_unversioned_files" value="$PROJECT_DIR$/test/test.ll" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/lib/antlr-4.8-complete.jar!/" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -60,12 +112,14 @@
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/lib" />
+      <recent name="$PROJECT_DIR$/src/FrontEnd/IR" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/test" />
       <recent name="C:\Users\lenovo\IdeaProjects\Compiler-Lite" />
       <recent name="C:\Users\lenovo\IdeaProjects\Compiler-Lite\src" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/FrontEnd/IR" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -123,7 +177,9 @@
       <workItem from="1584858118049" duration="62237000" />
       <workItem from="1585302194676" duration="741000" />
       <workItem from="1585488151269" duration="74006000" />
-      <workItem from="1585973744661" duration="24283000" />
+      <workItem from="1585973744661" duration="24876000" />
+      <workItem from="1586140633797" duration="14692000" />
+      <workItem from="1586311992409" duration="67664000" />
     </task>
     <servers />
   </component>
@@ -239,26 +295,55 @@
           <option name="timeStamp" value="127" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/FrontEnd/IR/Instruction/Icmp.java</url>
-          <line>37</line>
-          <option name="timeStamp" value="149" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/FrontEnd/IRBuilder.java</url>
-          <line>1088</line>
-          <option name="timeStamp" value="150" />
+          <line>690</line>
+          <option name="timeStamp" value="186" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/FrontEnd/IR/Instruction/Store.java</url>
-          <line>32</line>
-          <option name="timeStamp" value="151" />
+          <line>36</line>
+          <option name="timeStamp" value="210" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/FrontEnd/AstVisitor.java</url>
+          <line>74</line>
+          <option name="timeStamp" value="255" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/FrontEnd/IRBuilder.java</url>
-          <line>555</line>
-          <option name="timeStamp" value="162" />
+          <line>958</line>
+          <option name="timeStamp" value="256" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/FrontEnd/IR/SymbolTable.java</url>
+          <line>44</line>
+          <option name="timeStamp" value="261" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/FrontEnd/IRBuilder.java</url>
+          <line>734</line>
+          <option name="timeStamp" value="272" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/FrontEnd/IRBuilder.java</url>
+          <line>764</line>
+          <option name="timeStamp" value="273" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/FrontEnd/IRBuilder.java</url>
+          <line>992</line>
+          <option name="timeStamp" value="274" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+    <watches-manager>
+      <configuration name="Application">
+        <watch expression="symbolTable" language="JAVA" />
+        <watch expression="init" language="JAVA" />
+      </configuration>
+    </watches-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/Compiler_Lite$main.ic" NAME="main Coverage Results" MODIFIED="1586440171778" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>

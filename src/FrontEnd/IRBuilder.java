@@ -8,7 +8,9 @@ import FrontEnd.IR.Module;
 import FrontEnd.IR.Operand.*;
 import FrontEnd.IR.Type.*;
 import FrontEnd.Scope.GlobalScope;
-import javafx.util.Pair;
+import com.sun.tools.internal.jxc.ap.Const;
+import com.sun.xml.internal.bind.api.ClassResolver;
+import util.Pair;
 
 import java.util.*;
 import java.util.List;
@@ -28,6 +30,7 @@ public class IRBuilder extends AstVisitor{
     private boolean isleft = false;
     private Stack<BasicBlock>  loopNextStepBB,  loopBreakBB;
     private HashMap<AstNode,Operand> identifierTable = new HashMap<>();
+    private Operand curArrayHead;
 
 
     public IRBuilder() {
@@ -95,6 +98,7 @@ public class IRBuilder extends AstVisitor{
         if(currentClass != null) {
             Parameter parameter = parameters.get(0);
             Register reg = new VirtualReg("this$addr",new PtrType(parameter.getType()));
+            function.getSymbolTable().put(reg.getName(),reg);
             AllocateInst alloc = new AllocateInst(currentBB,"alloca",reg, parameter.getType());
             currentBB.addInst(alloc);
             reg.setParent(alloc);
@@ -103,9 +107,11 @@ public class IRBuilder extends AstVisitor{
         }
         else
             offset = 0;
+
         for (int  i = 0;i < parameters.size(); ++i) {
             Parameter parameter = parameters.get(i + offset);
             Register dest = new VirtualReg(parameter.getName()  + "$addr",new PtrType(parameter.getType()));
+            function.getSymbolTable().put(dest.getName(),dest);
             AllocateInst alloc  = new AllocateInst(currentBB, "alloca",  dest, parameter.getType());
             currentBB.addInst(alloc);
             dest.setParent(alloc);
@@ -273,7 +279,7 @@ public class IRBuilder extends AstVisitor{
             node.getCondition().accept(this);//add condition to condition block
             Operand condition = node.getCondition().getResult();
             currentBB.addInst(new BranchJump("br_for.body||end",currentBB,condition,bodyBB,endBB));
-            currentFunction.addBB(currentBB);//condtionBB end
+            currentFunction.addBB(conditionBB);//condtionBB end
 
             currentBB = bodyBB;
             if(node.getRecursionCond() != null) {
@@ -293,14 +299,15 @@ public class IRBuilder extends AstVisitor{
                 );
             loopNextStepBB.pop();
             loopBreakBB.pop();
-            currentFunction.addBB(conditionBB);//body block end
+            currentFunction.addBB(bodyBB);//body block end
+
             if(recursionBB != null){
                 currentBB = recursionBB;
                 node.getRecursionCond().accept(this);
                 currentBB.addInst(
                         new BranchJump("jump_for.cond",currentBB,null,conditionBB,null)
                 );
-                currentFunction.addBB(currentBB);
+                currentFunction.addBB(recursionBB);
             }
 
         }
@@ -327,7 +334,7 @@ public class IRBuilder extends AstVisitor{
                 );
             loopNextStepBB.pop();
             loopBreakBB.pop();
-            currentFunction.addBB(currentBB);//body ended
+            currentFunction.addBB(bodyBB);//body ended
 
             if(recursionBB != null){
                 currentBB = recursionBB;
@@ -335,7 +342,7 @@ public class IRBuilder extends AstVisitor{
                 currentBB.addInst(
                         new BranchJump("jump_for.body",currentBB,null,bodyBB,null)
                 );
-                currentFunction.addBB(currentBB);
+                currentFunction.addBB(recursionBB);
             }
 
         }
@@ -360,7 +367,7 @@ public class IRBuilder extends AstVisitor{
             currentBB.addInst(
                     new BranchJump("br_while.body||end",currentBB,condition,bodyBB,endBB)
             );
-            currentFunction.addBB(currentBB);
+            currentFunction.addBB(conditionBB);
 
             currentBB = bodyBB;
             loopBreakBB.push(endBB);
@@ -371,7 +378,7 @@ public class IRBuilder extends AstVisitor{
             );
             loopNextStepBB.pop();
             loopBreakBB.pop();
-            currentFunction.addBB(currentBB);//bodyBB end
+            currentFunction.addBB(bodyBB);//bodyBB end
 
             currentBB = endBB;
             currentFunction.addBB(endBB);
@@ -424,8 +431,12 @@ public class IRBuilder extends AstVisitor{
 
     @Override
     public void  visit(UnaryOpNode node) throws Exception {
-        node.getInnerExpr().accept(this);// include  those  load insts
-        Operand inner  = node.getInnerExpr().getResult();
+        Operand inner;
+
+            node.getInnerExpr().accept(this);// include  those  load insts
+            inner  = node.getInnerExpr().getResult();
+
+
 
         switch (node.getOp()) {
             case LNOT: //!
@@ -484,9 +495,14 @@ public class IRBuilder extends AstVisitor{
                             currentBB,pinc_res, BinaryOp.BinOp.ADD,new ConstInt(1, IntIRType.intType.i32),inner
                     );
                     pinc_res.setParent(pinc_inst);
+
                     currentBB.addInst(pinc_inst);
+                    Operand addr = node.getInnerExpr().getAddr();
+                    currentBB.addInst(
+                            new Store("store++",currentBB,pinc_res,addr)
+                    );
                     node.setResult(pinc_res);
-                    node.setAddr(node.getInnerExpr().getAddr());
+                    node.setAddr(addr);
                     currentFunction.getSymbolTable().put(pinc_res.getName(),pinc_res);
                 }
                 break;
@@ -507,8 +523,13 @@ public class IRBuilder extends AstVisitor{
                     );
                     pdec_res.setParent(pdec_inst);
                     currentBB.addInst(pdec_inst);
+
+                    Operand addr = node.getInnerExpr().getAddr();
+                    currentBB.addInst(
+                            new Store("store++",currentBB,pdec_res,addr)
+                    );
                     node.setResult(pdec_res);
-                    node.setAddr(node.getInnerExpr().getAddr());
+                    node.setAddr(addr);
                     currentFunction.getSymbolTable().put(pdec_res.getName(),pdec_res);
                 }
                 break;
@@ -550,6 +571,7 @@ public class IRBuilder extends AstVisitor{
     @Override
     public void  visit(BinaryOpNode node) throws Exception {
         if(node.getOp() == BinaryOpNode.BinaryOp.ASSIGN) {
+
             isleft = true;
             node.getLhs().accept(this);
             isleft = false;
@@ -574,7 +596,24 @@ public class IRBuilder extends AstVisitor{
             BinaryOp.BinOp op1  = BinaryOp.BinOp.ADD;
             Icmp.CompareOp op2 = Icmp.CompareOp.LEQ;
 
-            if (lhs.getType() instanceof IntIRType) {
+            VariableTypeNode  lhsType = node.getLhs().getExprType();
+            VariableTypeNode rhsType = node.getRhs().getExprType();
+            boolean lhsIsString =false, rhsIsString = false;
+
+            if(lhsType instanceof ClassTypeNode &&
+            ((ClassTypeNode) lhsType).getReferenceClassName().equals("string"))
+                lhsIsString = true;
+
+            if(rhsType instanceof ClassTypeNode &&
+                    (((ClassTypeNode) rhsType).getReferenceClassName().equals("string")))
+                rhsIsString = true;
+
+            if(node.getLhs() instanceof StringNode)
+                lhsIsString = true;
+            if (node.getRhs() instanceof StringNode)
+                rhsIsString = true;
+
+            if (lhs.getType() instanceof IntIRType && rhs.getType() instanceof IntIRType) {
                 switch (node.getOp()) {
                     case ADD:
                         name = "add";
@@ -657,9 +696,14 @@ public class IRBuilder extends AstVisitor{
                     res = new VirtualReg(name, new IntIRType(IntIRType.intType.i32));
                     inst = new BinaryOp(currentBB, res, op1, lhs, rhs);
                 }
+                res.setParent(inst);
+                node.setResult(res);
+                node.setAddr(null);
+                currentBB.addInst(inst);
+                currentFunction.getSymbolTable().put(res.getName(), res);
 
 
-            } else {//string type
+            } else if (lhsIsString && rhsIsString){//TODO :string type?
                 IRFunction function;
                 String funcName;
                 switch (node.getOp()) {
@@ -697,12 +741,39 @@ public class IRBuilder extends AstVisitor{
                         funcName, new PtrType(new IntIRType(IntIRType.intType.i8))
                 );
                 inst = new CallFunction("call_string_"+funcName,currentBB,function,parameters,res);
+                res.setParent(inst);
+                node.setResult(res);
+                node.setAddr(null);
+                currentBB.addInst(inst);
+                currentFunction.getSymbolTable().put(res.getName(), res);
             }
-            res.setParent(inst);
-            node.setResult(res);
-            node.setAddr(null);
-            currentBB.addInst(inst);
-            currentFunction.getSymbolTable().put(res.getName(), res);
+            else if((lhs instanceof ConstNull) && (rhs instanceof ConstNull)){
+               node.setResult(new ConstBool(true));
+               node.setAddr(null);
+
+            }  else{
+                switch (node.getOp()){
+                    case EQUAL:
+                        op2 = Icmp.CompareOp.EQUAL;
+                        name = "eq";
+                        break;
+                    case NOTEQUAL:
+                        op2 = Icmp.CompareOp.NOTEQUAL;
+                        name  = "neq";
+                        break;
+                    default:
+                        throw new RuntimeException();
+                }
+                res = new VirtualReg(name, new IntIRType(IntIRType.intType.i1));
+                inst = new Icmp(currentBB, res, op2, lhs, rhs);
+
+                res.setParent(inst);
+                node.setResult(res);
+                node.setAddr(null);
+                currentBB.addInst(inst);
+                currentFunction.getSymbolTable().put(res.getName(), res);
+            }
+
         }
 
         else {
@@ -798,63 +869,99 @@ public class IRBuilder extends AstVisitor{
         String name  =  node.getVarName();
 
         if(currentClass == null && currentFunction == initialize) { // global
-            StaticVar globalVar = new StaticVar(name,type,null);
+            StaticVar globalVar = new StaticVar(name, type,null);
             Operand init;
             if(node.getInitVal() != null) {
+                isleft = true;
+                curArrayHead = globalVar;
                 node.getInitVal().accept(this);
+                curArrayHead = null;
+                isleft = false;
                 init = node.getInitVal().getResult();
-                if(!(init instanceof Constant)) {
-                    currentBB.addInst(new Store("store" + name, currentBB, init, globalVar));
-                    init = type.getDefaultValue();
+                if(type instanceof IntIRType) {
+                    if (init instanceof Constant) {
+                        globalVar.setInit(init);
+                    } else {
+                        globalVar.setInit(new ConstInt(0, ((IntIRType) type).getIntType()));
+                        currentBB.addInst(new Store("store" + name, currentBB, init, globalVar));
+                    }
                 }
+                else {
+                    globalVar.setInit(new ConstNull());
+                    currentBB.addInst(new Store("store" + name, currentBB, init, globalVar));
+                }
+
+
             }
-            else
-                init = type.getDefaultValue();
-            globalVar.setInit(init);
+            else {//no initial
+                globalVar.setInit(type.getDefaultValue());
+            }
+
             program.addStaticVar(globalVar);
 
             currentFunction.getSymbolTable().put(globalVar.getName(),globalVar);
             identifierTable.put(node, globalVar);
         }
 
-        else {
-            Register addr  = new VirtualReg(name,new PtrType(type));
-            BasicBlock entranceBlock = currentFunction.getEntranceBB();
-            entranceBlock.addFirstInst(new Store("store"+name,entranceBlock,type.getDefaultValue(),addr));
-            entranceBlock.addFirstInst(new AllocateInst(entranceBlock,"alloca"+name,addr,type));
+//        else if((node.getVarType() instanceof ClassTypeNode)){
+//            //local  class def node
+//            Register addr  = new VirtualReg(name,new PtrType(type));
+//            BasicBlock entranceBlock = currentFunction.getEntranceBB();
+//            entranceBlock.addFirstInst(new AllocateInst(entranceBlock,"alloca"+name,addr,type));
+//            currentFunction.getSymbolTable().put(addr.getName(),addr);
+//            identifierTable.put(node,addr);
+//        }
+        else{
+                Register addr  = new VirtualReg(name,new PtrType(type));
+                BasicBlock entranceBlock = currentFunction.getEntranceBB();
+                entranceBlock.addFirstInst(new AllocateInst(entranceBlock,"alloca"+name,addr,type));
 
-            if(node.getInitVal() != null) {
-                node.getInitVal().accept(this);
-                Operand init = node.getInitVal().getResult();
-                currentBB.addInst(new Store("store" + name,currentBB,init,addr));
-                addr.setParent(currentBB.getTail());
+                if(node.getInitVal() != null) {
+                    node.getInitVal().accept(this);
+                    Operand init = node.getInitVal().getResult();
+                    currentBB.addInst(new Store("store" + name,currentBB,init,addr));
+                    addr.setParent(currentBB.getTail());
 
-            }
+                }
 
-            currentFunction.getSymbolTable().put(addr.getName(),addr);
-            identifierTable.put(node,addr);
+                currentFunction.getSymbolTable().put(addr.getName(),addr);
+                identifierTable.put(node,addr);
+
         }
     }
 
 
     @Override
     public void  visit(IndexAccessNode node) throws Exception {
-        node.getCaller().accept(this);
-        node.getIndex().accept(this);
+        if(isleft) {
+            isleft = false;
+            node.getCaller().accept(this);
+            node.getIndex().accept(this);
+            isleft = true;
+        } else {
+            node.getCaller().accept(this);
+            node.getIndex().accept(this);
+        }
 
         Operand arrayPtr = node.getCaller().getResult();
         ArrayList<Operand> index = new ArrayList<>();
         index.add(node.getIndex().getResult());
         Register result = new VirtualReg(arrayPtr.getName(),arrayPtr.getType());
+        currentFunction.getSymbolTable().put(result.getName(),result);
         currentBB.addInst(new GetPtr("getptr",currentBB,arrayPtr,index,result));
+
 
         Register load = new VirtualReg("arrayLoad",((PtrType)arrayPtr.getType()).getPointerType());
         currentBB.addInst(new Load("load",currentBB,((PtrType)arrayPtr.getType()).getPointerType(),result,load));
 
-        node.setResult(load);
-        //leftValue
-        currentFunction.getSymbolTable().put(result.getName(),result);
+
         currentFunction.getSymbolTable().put(load.getName(),load);
+
+        node.setResult(load);
+        node.setAddr(result);
+
+        //leftValue
+
     }
 
     @Override
@@ -866,11 +973,12 @@ public class IRBuilder extends AstVisitor{
             Register ptr;
 
             Operand caller = node.getCaller().getResult();
-            if(caller instanceof Register &&
+            if(caller instanceof Register &&//TODO caller instance of global?
                     caller.getType().equals(new PtrType(new IntIRType(IntIRType.intType.i32)))) {
                 ptr = (Register)caller;
-            } else {
-                ptr = new VirtualReg("cast",new IntIRType(IntIRType.intType.i32));
+            }
+            else {
+                ptr = new VirtualReg("cast",new PtrType( new IntIRType(IntIRType.intType.i32)));
                 currentBB.addInst(new BitCast("castPtr",currentBB,caller,ptr.getType(),ptr));
                 currentFunction.getSymbolTable().put(ptr.getName(),ptr);
             }
@@ -878,7 +986,7 @@ public class IRBuilder extends AstVisitor{
             ArrayList<Operand> index = new ArrayList<>();
             index.add(new ConstInt(-1, IntIRType.intType.i32));
             Register res = new VirtualReg("size_ptr",ptr.getType());
-            Register size =  new VirtualReg("size",ptr.getType());
+            Register size =  new VirtualReg("size", new IntIRType(IntIRType.intType.i32));
             currentFunction.getSymbolTable().put(res.getName(),res);
             currentFunction.getSymbolTable().put(size.getName(),size);
             currentBB.addInst(new GetPtr("getArrayPtr",currentBB,ptr,index,res));
@@ -914,7 +1022,7 @@ public class IRBuilder extends AstVisitor{
         assert type instanceof ClassTypeNode ;
         IRType irType  =  program.getTypeTable().get(((ClassTypeNode) type).getReferenceClassName());
         assert irType instanceof ClassIRType;
-        Operand pointer = node.getCaller().getAddr();
+        Operand pointer = node.getCaller().getResult();
 
         if(node.getMember() instanceof ReferenceNode) {
 
@@ -939,7 +1047,7 @@ public class IRBuilder extends AstVisitor{
 
             Instruction loadI = new Load("load_member",currentBB,memberType,res,load);
             load.setParent(loadI);
-
+            currentBB.addInst(loadI);
             node.setResult(load);
             node.setAddr(res);
             currentFunction.getSymbolTable().put(load.getName(),load);
@@ -991,8 +1099,15 @@ public class IRBuilder extends AstVisitor{
             item.accept(this);
             parameter.add(item.getResult());
         }
-        Register res = new VirtualReg("ret",function.getFunctionType().getReturnType());
-        currentFunction.getSymbolTable().put(res.getName(),res);
+
+        Register res;
+        if(function.getFunctionType().getReturnType() instanceof VoidType)
+            res = null;
+        else {
+            res = new VirtualReg("ret", function.getFunctionType().getReturnType());
+            currentFunction.getSymbolTable().put(res.getName(),res);
+        }
+
         currentBB.addInst(new CallFunction("call"+function.getName(),currentBB,function
         ,parameter,res));
         node.setAddr(null);
@@ -1007,7 +1122,8 @@ public class IRBuilder extends AstVisitor{
             newArrayMalloc(node);
 
         } else if (astType instanceof ClassTypeNode) {
-           IRType type = program.getTypeTable().get(((ClassTypeNode) astType).getReferenceClassName());
+
+           IRType type = new PtrType(program.getTypeTable().get(((ClassTypeNode) astType).getReferenceClassName()));
            IRFunction  function  = program.getFunction("malloc");
            int size = type.getByteWidth();
            ArrayList<Operand> parameters = new ArrayList<>();
@@ -1021,7 +1137,7 @@ public class IRBuilder extends AstVisitor{
 
            currentBB.addInst(new BitCast("caseClass",currentBB,res,type,bitcast));
 
-           if((ClassTypeNode)((ClassTypeNode) astType).getReferenceClass().getConstructionDefList()  != null) {
+           if(((ClassTypeNode) astType).getReferenceClass().getConstructionDefList().size() > 0) {
                function = program.getFunction(((ClassTypeNode) astType).getReferenceClassName() + "_" + ((ClassTypeNode) astType).getReferenceClassName());
                parameters =  new ArrayList<>();
                parameters.add(bitcast);
@@ -1036,7 +1152,7 @@ public class IRBuilder extends AstVisitor{
            currentFunction.getSymbolTable().put(res.getName(),res);
            currentFunction.getSymbolTable().put(bitcast.getName(),bitcast);
            identifierTable.put(node,res);//Class type save the addr
-
+//end
 
         }
     }
@@ -1065,27 +1181,33 @@ public class IRBuilder extends AstVisitor{
     @Override
     public void  visit(ReferenceNode node) throws Exception {
         Operand allocaAddr = identifierTable.get(node.getDefinitionNode());
+        if(allocaAddr == null) {
+            allocaAddr = (Operand)currentFunction.getSymbolTable().get(node.getReferenceName() + "$addr");
+        }
         if(allocaAddr != null) {//variables in scope
             IRType type;
 
-            if(allocaAddr instanceof StaticVar) {
-                type = allocaAddr.getType();
-            }
-            else {
+//            if(allocaAddr instanceof StaticVar) {
+//                type = allocaAddr.getType();
+//            }
+//            else {
                 type =  ((PtrType)allocaAddr.getType()).getPointerType();
-            }
+//            }
 
             Register res = new VirtualReg("",type);
-            if(!isleft)
-                currentBB.addInst(
-                    new Load("loadVar",currentBB,type,allocaAddr,res)
-                );//may be res is useful also
 
-            node.setResult(res);
-            node.setAddr(allocaAddr);
+                currentBB.addInst(
+                        new Load("loadVar", currentBB, type, allocaAddr, res)
+                );//may be res is useful also
+                node.setResult(res);
+                node.setAddr(allocaAddr);
+
+
             currentFunction.getSymbolTable().put(res.getName(),res);
         }
-        else {//variables in the class
+        else {//variables in parameter
+            String string;
+            string = "sajasf";
             throw new RuntimeException();
             //TODO
         }
@@ -1137,7 +1259,7 @@ public class IRBuilder extends AstVisitor{
     }
 
     private void newArrayMalloc(NewExprNode node) throws Exception{
-        VariableTypeNode type = (ArrayTypeNode)node.getVariableType();
+//        VariableTypeNode type = (ArrayTypeNode)node.getVariableType();
 
         IRType irType = program.getTypeTable().transport(
                 ((ArrayTypeNode) node.getVariableType()).getBaseType()
@@ -1155,7 +1277,7 @@ public class IRBuilder extends AstVisitor{
                 ((ArrayTypeNode) arrayType).getSize().accept(this);
                 sizeList.add(((ArrayTypeNode) arrayType).getSize().getResult());
             }
-            type = ((ArrayTypeNode)type).getBaseType();
+//            type = ((ArrayTypeNode)type).getBaseType();
         }
 
         //recursive malloc
@@ -1201,9 +1323,11 @@ public class IRBuilder extends AstVisitor{
 
         Instruction mallocCall = new CallFunction("malloc",currentBB,malloc,parameters, mallocRes);
         mallocRes.setParent(mallocCall);
+        currentBB.addInst(mallocCall);
 
         Register malloc32 = new VirtualReg("mallocCast", new PtrType(new IntIRType(IntIRType.intType.i32)));
         currentFunction.getSymbolTable().put(malloc32.getName(),malloc32);
+
         Instruction bitCast = new BitCast("bitcast",currentBB,mallocRes,malloc32.getType(),malloc32);
         malloc32.setParent(bitCast);
         currentBB.addInst(bitCast);
@@ -1220,8 +1344,9 @@ public class IRBuilder extends AstVisitor{
         currentBB.addInst(getHead);
 
         Register arrayHead = new VirtualReg("arrayHead",irType);
+
         Instruction castHead = new BitCast("castArrayHead",currentBB,arrayHead32,irType,arrayHead);
-        currentFunction.getSymbolTable().put(castHead.getName(),castHead);
+        currentFunction.getSymbolTable().put(arrayHead.getName(),arrayHead);
         arrayHead.setParent(castHead);
         currentBB.addInst(castHead);
 

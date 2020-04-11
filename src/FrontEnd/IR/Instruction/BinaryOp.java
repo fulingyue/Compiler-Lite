@@ -46,7 +46,40 @@ public class BinaryOp extends Instruction {
 //    }
     @Override
     public String print() {
-        return dest.print() + " = " + op.name() + " " + dest.getType().print() + " " + lhs.print() + ", " + rhs.print();
+        String opName;
+        switch (op) {
+            case AND:
+                opName = "and";
+                break;
+            case MUL:
+                opName = "mul";
+                break;
+            case XOR:
+                opName = "xor";
+                break;
+            case OR:
+                opName = "or";
+                break;
+            case DIV:
+                opName = "sdiv";
+                break;
+            case SUB:
+                opName = "sub";
+                break;
+            case MOD:
+                opName = "srem";
+                break;
+            case ADD:
+                opName="add";
+                break;
+            case SAL:
+                opName = "shl";
+                break;
+            default:
+                opName  = "ashr";
+
+        }
+        return dest.print() + " = " + opName + " " + dest.getType().print() + " " + lhs.print() + ", " + rhs.print();
     }
     ////////private utils///////
 

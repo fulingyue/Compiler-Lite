@@ -64,6 +64,19 @@ public class ClassIRType extends IRType {
 
     }
 
+    public String printType() {
+        StringBuilder stringBuilder = new StringBuilder(this.print());
+        stringBuilder.append(" = type { ");
+        if(memberList.size() == 0)
+            stringBuilder.append(",  ");
+        for (int i= 0; i < memberList.size(); i++) {
+            stringBuilder.append(memberList.get(i).print()).append(", ");
+        }
+        stringBuilder.delete(stringBuilder.length()-2,stringBuilder.length());
+        stringBuilder.append(" }");
+        return stringBuilder.toString();
+    }
+
     @Override
     public Operand getDefaultValue() {
         throw new RuntimeException();

@@ -3,6 +3,8 @@ package FrontEnd;
 import FrontEnd.AstNode.*;
 import FrontEnd.ErrorChecker.*;
 
+import java.lang.reflect.AnnotatedArrayType;
+
 //3.2 check finished
 
 public abstract class AstVisitor {
@@ -69,7 +71,8 @@ public abstract class AstVisitor {
         else if (node instanceof FunctionCallNode) visit(((FunctionCallNode) node));
         else if (node instanceof NewExprNode) visit(((NewExprNode) node));
 //        node.accept(this);
-        else visit(node);
+        else if(node instanceof EmptyStaNode) visit((EmptyStaNode)node);
+        else throw new  Exception("no expr");
     }
     public void  visit(IfStaNode node) throws Exception {
         visit(node.getCondition());
@@ -142,6 +145,7 @@ public abstract class AstVisitor {
         for(ExprStaNode item: node.getActualParameterList()) {
            visit(item);
         }
+
     }
     public void  visit(NewExprNode node) throws Exception {
         visit(node.getVariableType());

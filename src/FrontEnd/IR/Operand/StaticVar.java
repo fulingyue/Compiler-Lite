@@ -2,14 +2,18 @@ package FrontEnd.IR.Operand;
 
 import FrontEnd.IR.Instruction.Instruction;
 import FrontEnd.IR.Type.IRType;
+import FrontEnd.IR.Type.PtrType;
 import FrontEnd.IRVisitor;
 
 public class StaticVar extends Operand{
     private  Operand init;
-
+    private IRType actualType;
     public StaticVar(String name, IRType  type, Operand init) {
-            super(name,type);
+            super(name,new PtrType(type));
             this.init = init;
+
+            actualType =type;
+
     }
 
 
@@ -18,6 +22,16 @@ public class StaticVar extends Operand{
         return "@" + name;
     }
 
+    public String printDef() {
+        StringBuilder stringBuilder = new StringBuilder(print() + " = ");
+        assert init instanceof Constant;
+        if(init instanceof ConstString){
+            stringBuilder.append("private unnamed_addr constant ").append(actualType.print()).append(" ").append(init.print());
+        } else {
+            stringBuilder.append("global ").append(actualType.print()).append(" ").append(init.print());
+        }
+        return stringBuilder.toString();
+    }
     /////getter and setter////////
 
     public String getName() {

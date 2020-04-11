@@ -22,7 +22,7 @@ public class IRFunction extends IRNode {
     private FunctionType functionType;
     private Module parent;
     private BasicBlock entranceBB = null, exitBB = null;
-    private ArrayList<IRType> paraList = new ArrayList<>();
+    private ArrayList<Parameter> paraList = new ArrayList<>();
     private HashSet<IRFunction> usedFunctions = new HashSet<>();
     //once  a register cannot be used any more(used as left value/ cannnot be left value), then integer = 1
     private SymbolTable symbolTable = new SymbolTable();
@@ -39,12 +39,10 @@ public class IRFunction extends IRNode {
                       ArrayList<Parameter> paraList, IRType returnType,boolean isExternal) {
         super(name);
         this.parent = parent;
-        for (Parameter item : paraList) {
-            this.paraList.add(item.getType());
-            item.setFuncParent(this);
-        }
+        this.paraList = paraList;
         //need  to create  a paralist  or not
         functionType = new FunctionType(returnType, this.paraList);
+
     }
 
     //    public usedVars(Func)
@@ -100,7 +98,6 @@ public class IRFunction extends IRNode {
             symbolTable.put(returnVal.getName(), returnVal);
             symbolTable.put(loadReg.getName(), loadReg);
 
-            ////how can I save the register information !!!!!
         }
 
     }
@@ -119,7 +116,35 @@ public class IRFunction extends IRNode {
         visitor.visit(this);
     }
 
+    public String printDef() {
+        StringBuilder stringBuilder = new StringBuilder("define ");
+        stringBuilder.append(functionType.getReturnType().print()).append(" @").append(name);
+        stringBuilder.append("(");
 
+        if(paraList.size() == 0)
+            stringBuilder.append(", ");
+        for(int i = 0;i < paraList.size();++i) {
+            Parameter para = paraList.get(i);
+            stringBuilder.append(para.getType().print()).append(" ");
+            stringBuilder.append(para.print()).append(", ");
+        }
+        stringBuilder.delete(stringBuilder.length()-2,stringBuilder.length());
+        stringBuilder.append(")");
+        return stringBuilder.toString();
+    }
+
+    public String printDeclare() {
+        StringBuilder stringBuilder = new StringBuilder("declare ");
+        stringBuilder.append(functionType.getReturnType().print()).append(" @").append(name).append("(");
+        for (int i =0;i < paraList.size();++i) {
+            Parameter parameter = paraList.get(i);
+            stringBuilder.append(parameter.getType().print()).append(" ").append(parameter.print());
+            if(i != paraList.size() -1)
+                stringBuilder.append(", ");
+        }
+        stringBuilder.append(")");
+        return stringBuilder.toString();
+    }
 
 
     //////getter and  setter///////
@@ -148,8 +173,12 @@ public class IRFunction extends IRNode {
         this.parent = parent;
     }
 
-    public void setParaList(ArrayList<IRType> paraList) {
+    public void setParaList(ArrayList<Parameter> paraList) {
         this.paraList = paraList;
+    }
+
+    public ArrayList<Parameter> getParaList() {
+        return paraList;
     }
 
     public SymbolTable getSymbolTable() {
@@ -198,10 +227,6 @@ public class IRFunction extends IRNode {
 
     public void setExitBB(BasicBlock exitBB) {
         this.exitBB = exitBB;
-    }
-
-    public ArrayList<IRType> getParaList() {
-        return paraList;
     }
 
     public String getName() {

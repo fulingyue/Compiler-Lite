@@ -1,16 +1,20 @@
 package FrontEnd.IR.Type;
 
 import FrontEnd.IR.Operand.Operand;
+import FrontEnd.IR.Operand.Parameter;
 
 import java.util.ArrayList;
 
 public class FunctionType extends IRType {
-    private ArrayList<IRType> paraType;
+    private ArrayList<IRType> paraType = new ArrayList<>();
     private IRType returnType;
 
-    public FunctionType(IRType returnType, ArrayList<IRType> paraType)
+    public FunctionType(IRType returnType, ArrayList<Parameter> para)
     {
-        this.paraType =  paraType;
+        for(int i = 0; i < para.size();++i)
+        {
+            paraType.add(para.get(i).getType());
+        }
         this.returnType = returnType;
         byteWidth  = 0;
     }
@@ -20,9 +24,15 @@ public class FunctionType extends IRType {
     }
     @Override
     public String print() {
-        StringBuilder builder = new StringBuilder();
-        //TODO
-        return builder.toString();
+        StringBuilder string = new StringBuilder();
+        string.append("FunctionType: ").append(returnType.print()).append(" (");
+        for (int i = 0; i < paraType.size(); i++) {
+            string.append(paraType.get(i).print());
+            if (i != paraType.size() - 1)
+                string.append(", ");
+        }
+        string.append(")\n");
+        return string.toString();
     }
 
     public ArrayList<IRType> getParaType() {

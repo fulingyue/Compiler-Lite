@@ -19,17 +19,18 @@ import util.Location;
 public class main  {
 
     public static void main(String[] args)throws Exception {
-        String path = "code/sourceCode1.txt";
+//        String path = "test/Compiler-2020-testcases/codegen/t14.mx";
+        String path ="test/Compiler-2020-testcases/codegen/t47.mx";
         InputStream inputStream = new FileInputStream(path);
 //        InputStream inputStream = System.in;
-        try {
+//        try {
             compile(inputStream);
             System.exit(0);
-        }
-        catch (Error error){
-            System.err.println(error.getMessage());
-            System.exit(1);
-        }
+//        }
+//        catch (Error error){
+//            System.err.println(error.getMessage());
+//            System.exit(1);
+//        }
     }
 
 
@@ -48,26 +49,29 @@ public class main  {
         MxParser parser = new MxParser(tokens);
         parser.removeErrorListeners();
         parser.addErrorListener(new MxErrorListener(errorHandler));
-
         ParseTree tree = parser.program();
+
         if(errorHandler.getError_cnt() > 0){
             System.exit(errorHandler.getError_cnt());
-//            throw new RuntimeException();
         }
 
 
         /////////semantic/////////
         AstBuilder astBuilder = new AstBuilder();
         astBuilder.visit(tree);
+
         if(astBuilder.getError().getError_cnt() > 0){
-//            throw new Exception();
+
             System.exit(astBuilder.getError().getError_cnt());
         }
+
         ProgramNode program = astBuilder.getProgram();
+
         ParentLinker parentLinker  = new ParentLinker();
+
         parentLinker.linkParent(program);
 //        program.getInfo(0);//for debugging
-//
+
         ScopeBuilder scopeBuilder = new ScopeBuilder();
         Scope topLevelScope = scopeBuilder.BuildScopeTree(program);
 //        ScopePrinter scopePrinter = new ScopePrinter();
@@ -78,7 +82,7 @@ public class main  {
         IRBuilder irBuilder =  new IRBuilder();
         irBuilder.build(program);
         IRPrinter irPrinter  = new IRPrinter();
-        irPrinter.visit(irBuilder.getProgram());
+        irPrinter.print(irBuilder.getProgram());
     }
 
 }
