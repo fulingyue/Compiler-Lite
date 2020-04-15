@@ -31,8 +31,11 @@ public class IRFunction extends IRNode {
     private BasicBlock returnBB = new BasicBlock("return", null);
     private Register returnVal = null;
 
-
     private boolean external;
+
+    //////////dfs///////
+    ArrayList<BasicBlock> dfsOrder = null;
+    HashSet<BasicBlock> visitedBB =  null;
 
 
     public IRFunction(String name, Module parent,
@@ -87,7 +90,6 @@ public class IRFunction extends IRNode {
             returnVal = new VirtualReg("retval", new PtrType(returnType));
             AllocateInst alloca = new AllocateInst(entranceBB, "retValAlloca", returnVal, returnType);
             entranceBB.addInst(alloca);
-            returnVal.setParent(alloca);
             entranceBB.addInst(new Store("storeRegturnVal", entranceBB, returnType.getDefaultValue(), returnVal));
 
             //quit
@@ -146,6 +148,43 @@ public class IRFunction extends IRNode {
         return stringBuilder.toString();
     }
 
+
+    public ArrayList<AllocateInst> getAllocaInst() {
+        ArrayList<AllocateInst> ret = new ArrayList<>();
+        Instruction nowInst = entranceBB.getHead();
+        while(nowInst !=  null) {
+            if(nowInst instanceof AllocateInst){
+                    ret.add((AllocateInst) nowInst);
+            }
+
+            nowInst = nowInst.getNxt();
+        }
+        return ret;
+    }
+
+    public ArrayList<BasicBlock> gettDfsOder() {
+        if(dfsOrder != null) return dfsOrder;
+        dfsOrder = new ArrayList<>();
+        visitedBB = new HashSet<>();
+
+        entranceBB.setDfsFather(null);
+        dfs(entranceBB);
+        return dfsOrder;
+    }
+
+    private void dfs(BasicBlock bb) {
+        visitedBB.add(bb);
+        bb.setDfsOrd(dfsOrder.size());
+        dfsOrder.add(bb);
+
+        for(BasicBlock item: bb.getSuccessors()) {
+            if(!visitedBB.contains(item)) {
+                item.setDfsFather(bb);
+                dfs(item);
+            }
+        }
+
+    }
 
     //////getter and  setter///////
 

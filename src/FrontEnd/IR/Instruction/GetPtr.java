@@ -1,11 +1,13 @@
 package FrontEnd.IR.Instruction;
 
 import FrontEnd.IR.BasicBlock;
+import FrontEnd.IR.IRNode;
 import FrontEnd.IR.Operand.Operand;
 import FrontEnd.IR.Operand.Register;
 import FrontEnd.IR.Type.IRType;
 import FrontEnd.IR.Type.PtrType;
 import FrontEnd.IRVisitor;
+import sun.jvm.hotspot.oops.Oop;
 
 import java.util.ArrayList;
 
@@ -23,10 +25,26 @@ public class GetPtr extends Instruction {
     }
     @Override
     public void add() {
-        Usages.add(pointer);
+        pointer.addUser(this);
+        dest.addDef(this);
         for (Operand item: index)
-            Usages.add(item);
+           item.addUser(this);
     }
+
+    @Override
+    public void removeUsers() {
+        pointer.removeUser(this);
+
+        for (Operand item: index)
+            item.removeUser(this);
+    }
+
+    @Override
+    public void removeDefs() {
+        dest.removeDef(this);
+    }
+
+
 
     @Override
     public String print() {
@@ -56,5 +74,23 @@ public class GetPtr extends Instruction {
     @Override
     public void accept(IRVisitor visitor) {
         visitor.visit(this);
+    }
+
+    @Override
+    public void replaceUse(IRNode oldUser, IRNode newUser) {
+        if(pointer == oldUser) {
+            assert newUser instanceof Operand;
+            pointer.removeUser(this);
+            pointer = (Operand)newUser;
+            pointer.addUser(this);
+        }
+        for(Operand item: index) {
+            if(item  ==  oldUser) {
+                assert newUser instanceof Operand;
+                item.removeUser(this);
+                item  = (Operand)newUser;
+                item.addUser(this);
+            }
+        }
     }
 }

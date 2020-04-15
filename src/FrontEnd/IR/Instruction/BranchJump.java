@@ -1,6 +1,7 @@
 package FrontEnd.IR.Instruction;
 
 import FrontEnd.IR.BasicBlock;
+import FrontEnd.IR.IRNode;
 import FrontEnd.IR.Operand.Operand;
 import FrontEnd.IRVisitor;
 
@@ -19,12 +20,31 @@ public class BranchJump extends Instruction {
 //if  no conditionn  then thenbb
     @Override
     public void add() {
+        thenBlock.addPredecessorBB(this.getBasicBlock());
+        this.getBasicBlock().addSuccessorBB(thenBlock);
+        thenBlock.addUser(this);
+
         if(condition != null) {
-            this.Usages.add(condition);
-            this.Usages.add(elseBlock);
+            condition.addUser(this);
+            elseBlock.addPredecessorBB(getBasicBlock());
+            this.getBasicBlock().addSuccessorBB(elseBlock);
+            elseBlock.addUser(this);
         }
-        this.Usages.add(elseBlock);
     }
+
+    @Override
+    public void removeUsers() {
+        thenBlock.removeUser(this);
+        if(condition!=null){
+            condition.removeUser(this);
+            elseBlock.removeUser(this);
+        }
+    }
+
+    @Override
+    public void removeDefs() { }
+
+
 
     @Override
     public String print() {
@@ -35,6 +55,29 @@ public class BranchJump extends Instruction {
     @Override
     public void accept(IRVisitor visitor) {
         visitor.visit(this);
+    }
+
+    @Override
+    public void replaceUse(IRNode oldUser, IRNode newUser) {
+        if(condition == oldUser){
+            condition.removeUser(this);
+            assert newUser instanceof Operand;
+            condition = (Operand)newUser;
+            condition.addUser(this);
+        }  else {
+            if (thenBlock == oldUser) {
+                thenBlock.removeUser(this);
+                assert newUser instanceof BasicBlock;
+                thenBlock = (BasicBlock) newUser;
+                thenBlock.addUser(this);
+            }
+            if (elseBlock == oldUser) {
+                elseBlock.removeUser(this);
+                assert newUser instanceof BasicBlock;
+                elseBlock = (BasicBlock) newUser;
+                elseBlock.addUser(this);
+            }
+        }
     }
 
     /////getter and setter////////

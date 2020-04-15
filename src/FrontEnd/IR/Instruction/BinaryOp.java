@@ -1,6 +1,7 @@
 package FrontEnd.IR.Instruction;
 
 import FrontEnd.IR.BasicBlock;
+import FrontEnd.IR.IRNode;
 import FrontEnd.IR.Operand.Operand;
 import FrontEnd.IR.Operand.Register;
 import FrontEnd.IR.Operand.VirtualReg;
@@ -31,16 +32,45 @@ public class BinaryOp extends Instruction {
         this.rhs = rhs;
     }
     public void add() {
-        this.Usages.add(lhs);
-        this.Usages.add(rhs);
+        lhs.addUser(this);
+        rhs.addUser(this);
+        dest.addDef(this);
     }
+
+    @Override
+    public void removeUsers() {
+        lhs.removeUser(this);
+        rhs.removeUser(this);
+    }
+
+    @Override
+    public void removeDefs() {
+        dest.removeDef(this);
+    }
+
 
     @Override
     public void accept(IRVisitor visitor){
         visitor.visit(this);
     }
 
-//    @Override
+    @Override
+    public void replaceUse(IRNode oldUser, IRNode newUser) {
+        if(lhs == oldUser){
+            assert newUser instanceof Operand;
+            lhs.removeUser(this);
+            lhs = (Operand)newUser;
+            lhs.addUser(this);
+        }
+        if(rhs == oldUser)  {
+            assert newUser instanceof Operand;
+            rhs.removeUser(this);
+            rhs = (Operand)newUser;
+            rhs.addUser(this);
+        }
+    }
+
+    //    @Override
 //    public void reloadUsed() {
 //
 //    }

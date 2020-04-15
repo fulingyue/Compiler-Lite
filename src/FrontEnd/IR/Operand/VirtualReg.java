@@ -12,10 +12,6 @@ public class VirtualReg extends Register{
 //    private PhysicalReg allocatedPR;
 
 
-    public VirtualReg (String name, IRType type, Instruction parent)  {
-        super(name,type,parent);
-        this.setParent(parent);
-    }
 
     public VirtualReg (String name, IRType type)  {
         super(name,type);

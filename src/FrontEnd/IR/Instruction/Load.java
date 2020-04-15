@@ -1,6 +1,7 @@
 package FrontEnd.IR.Instruction;
 
 import FrontEnd.IR.BasicBlock;
+import FrontEnd.IR.IRNode;
 import FrontEnd.IR.Operand.Operand;
 import FrontEnd.IR.Operand.Register;
 import FrontEnd.IR.Type.IRType;
@@ -18,11 +19,29 @@ public class Load extends Instruction {
         this.res = res;
     }
 
+    public Load(String name, BasicBlock bb, Operand dest, Register res) {
+        super(name, bb);
+        this.dest = dest;
+        this.res = res;
+        this.type = res.getType();
+    }
+
     @Override
     public void add() {
-        res.setParent(this);
-        Usages.add(dest);
+        res.addDef(this);
+        dest.addUser(this);
     }
+
+    @Override
+    public void removeUsers() {
+        dest.removeUser(this);
+    }
+
+    @Override
+    public void removeDefs() {
+        res.removeDef(this);
+    }
+
 
     @Override
     public String print() {
@@ -34,4 +53,37 @@ public class Load extends Instruction {
         visitor.visit(this);
     }
 
+    @Override
+    public void replaceUse(IRNode oldUser, IRNode newUser) {
+        if(dest == oldUser) {
+            assert newUser instanceof Operand;
+            dest.removeUser(this);
+            dest = (Operand)newUser;
+            dest.addUser(this);
+        }
+    }
+
+    public IRType getType() {
+        return type;
+    }
+
+    public void setType(IRType type) {
+        this.type = type;
+    }
+
+    public Operand getDest() {
+        return dest;
+    }
+
+    public void setDest(Operand dest) {
+        this.dest = dest;
+    }
+
+    public Register getRes() {
+        return res;
+    }
+
+    public void setRes(Register res) {
+        this.res = res;
+    }
 }

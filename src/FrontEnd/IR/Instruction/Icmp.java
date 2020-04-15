@@ -1,6 +1,7 @@
 package FrontEnd.IR.Instruction;
 
 import FrontEnd.IR.BasicBlock;
+import FrontEnd.IR.IRNode;
 import FrontEnd.IR.Operand.ConstNull;
 import FrontEnd.IR.Operand.Operand;
 import FrontEnd.IR.Operand.Register;
@@ -31,16 +32,30 @@ public class Icmp extends Instruction {
             type = rhs.getType();
         }
         else {
-
+            throw new RuntimeException("icmp cannot be null == null");
         }
     }
 
     @Override
     public void add() {
-        dest.setParent(this);
-        Usages.add(lhs);
-        Usages.add(rhs);
+        dest.addDef(this);
+        lhs.addUser(this);
+        rhs.addUser(this);
     }
+
+    @Override
+    public void removeUsers() {
+        lhs.removeUser(this);
+        rhs.removeUser(this);
+    }
+
+    @Override
+    public void removeDefs() {
+        dest.removeDef(this);
+    }
+
+
+
     @Override
     public String print() {
         String opName;
@@ -69,6 +84,22 @@ public class Icmp extends Instruction {
     @Override
     public void accept(IRVisitor visitor) {
         visitor.visit(this);
+    }
+
+    @Override
+    public void replaceUse(IRNode oldUser, IRNode newUser) {
+        if(lhs == oldUser) {
+            assert newUser instanceof Operand;
+            lhs.removeUser(this);
+            lhs = (Operand)newUser;
+            lhs.addUser(this);
+        }
+        if (rhs == oldUser) {
+            assert newUser instanceof Operand;
+            rhs.removeUser(this);
+            rhs = (Operand)newUser;
+            rhs.addUser(this);
+        }
     }
 
     /////getter and setter////////

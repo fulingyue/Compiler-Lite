@@ -22,7 +22,7 @@ public class IRBuilder extends AstVisitor{
     private GlobalScope topLevelScope;
 
     private BasicBlock currentBB;
-    private String currentClass;
+    private ClassDefNode currentClass;
     private IRFunction currentFunction;
 
     private IRFunction initialize;
@@ -73,11 +73,11 @@ public class IRBuilder extends AstVisitor{
         ArrayList<Parameter> parameters = new ArrayList<>();
 
         if(currentClass != null) {
-            ClassIRType classIRType = (ClassIRType)program.getTypeTable().get(currentClass);
+            ClassIRType classIRType = (ClassIRType)program.getTypeTable().get(currentClass.getClassName());
             parameters.add(new Parameter("this", classIRType.getPtrType()));
             //need to set parent
 
-            name = currentClass + "_" + node.getMethodName();
+            name = currentClass.getClassName() + "_" + node.getMethodName();
         } else {
             name = node.getMethodName();
         }
@@ -101,20 +101,20 @@ public class IRBuilder extends AstVisitor{
             function.getSymbolTable().put(reg.getName(),reg);
             AllocateInst alloc = new AllocateInst(currentBB,"alloca",reg, parameter.getType());
             currentBB.addInst(alloc);
-            reg.setParent(alloc);
+
             currentBB.addInst(new Store("store",currentBB,parameter,reg));//still need add value
             offset = 1;
         }
         else
             offset = 0;
 
-        for (int  i = 0;i < parameters.size(); ++i) {
+        for (int  i = 0;i < parameters.size() - offset; ++i) {
             Parameter parameter = parameters.get(i + offset);
             Register dest = new VirtualReg(parameter.getName()  + "$addr",new PtrType(parameter.getType()));
             function.getSymbolTable().put(dest.getName(),dest);
             AllocateInst alloc  = new AllocateInst(currentBB, "alloca",  dest, parameter.getType());
             currentBB.addInst(alloc);
-            dest.setParent(alloc);
+
             currentBB.addInst(new  Store("store", currentBB,parameter, dest));
         }
 
@@ -129,7 +129,7 @@ public class IRBuilder extends AstVisitor{
     public void visit(ProgramNode node) throws Exception{
         ////init class functions/////
         for (ClassDefNode item: node.getClassDefList()) {
-            currentClass = item.getClassName();
+            currentClass = item;
 
             List<FunctionDefNode> constructors = item.getConstructionDefList();
             if(constructors.size() > 0)  {
@@ -174,7 +174,7 @@ public class IRBuilder extends AstVisitor{
 
     @Override
     public void visit(ClassDefNode node)  throws Exception {
-        currentClass  =  node.getClassName();
+        currentClass  =  node;
         if(node.getConstructionDefList().size() > 0) {
             for (FunctionDefNode constructor:  node.getConstructionDefList())
                 constructor.accept(this);
@@ -192,7 +192,7 @@ public class IRBuilder extends AstVisitor{
         if(currentClass == null) {// not in class
             name = node.getMethodName();
         } else {
-            name = currentClass + "_" + node.getMethodName();
+            name = currentClass.getClassName() + "_" + node.getMethodName();
         }
 
         IRFunction irFunction = (IRFunction)program.getFunction(name);
@@ -442,7 +442,7 @@ public class IRBuilder extends AstVisitor{
             case LNOT: //!
                 Register lnot_result = new VirtualReg("not",new IntIRType(IntIRType.intType.i1));
                 BinaryOp inst = new BinaryOp(currentBB,lnot_result, BinaryOp.BinOp.XOR,new ConstBool(true),inner);
-                lnot_result.setParent(inst);
+
                 currentBB.addInst(inst);
                 node.setResult(lnot_result);
                 node.setAddr(null);
@@ -453,7 +453,7 @@ public class IRBuilder extends AstVisitor{
                 BinaryOp not_inst = new BinaryOp(
                         currentBB,not_res, BinaryOp.BinOp.XOR,new ConstInt(-1, IntIRType.intType.i32),inner
                 );
-                not_res.setParent(not_inst);
+
                 currentBB.addInst(not_inst);
                 node.setResult(not_res);
                 node.setAddr(null);
@@ -472,7 +472,7 @@ public class IRBuilder extends AstVisitor{
                     BinaryOp neg_inst = new BinaryOp(
                             currentBB,neg_res, BinaryOp.BinOp.SUB,new ConstInt(0, IntIRType.intType.i32),inner
                     );
-                    neg_res.setParent(neg_inst);
+
                     currentBB.addInst(neg_inst);
                     node.setResult(neg_res);
                     node.setAddr(null);
@@ -494,7 +494,6 @@ public class IRBuilder extends AstVisitor{
                     BinaryOp pinc_inst = new BinaryOp(
                             currentBB,pinc_res, BinaryOp.BinOp.ADD,new ConstInt(1, IntIRType.intType.i32),inner
                     );
-                    pinc_res.setParent(pinc_inst);
 
                     currentBB.addInst(pinc_inst);
                     Operand addr = node.getInnerExpr().getAddr();
@@ -521,7 +520,7 @@ public class IRBuilder extends AstVisitor{
                     BinaryOp pdec_inst = new BinaryOp(
                             currentBB,pdec_res, BinaryOp.BinOp.SUB,inner,new ConstInt(1, IntIRType.intType.i32)
                     );
-                    pdec_res.setParent(pdec_inst);
+
                     currentBB.addInst(pdec_inst);
 
                     Operand addr = node.getInnerExpr().getAddr();
@@ -696,7 +695,7 @@ public class IRBuilder extends AstVisitor{
                     res = new VirtualReg(name, new IntIRType(IntIRType.intType.i32));
                     inst = new BinaryOp(currentBB, res, op1, lhs, rhs);
                 }
-                res.setParent(inst);
+
                 node.setResult(res);
                 node.setAddr(null);
                 currentBB.addInst(inst);
@@ -741,7 +740,6 @@ public class IRBuilder extends AstVisitor{
                         funcName, new PtrType(new IntIRType(IntIRType.intType.i8))
                 );
                 inst = new CallFunction("call_string_"+funcName,currentBB,function,parameters,res);
-                res.setParent(inst);
                 node.setResult(res);
                 node.setAddr(null);
                 currentBB.addInst(inst);
@@ -767,7 +765,7 @@ public class IRBuilder extends AstVisitor{
                 res = new VirtualReg(name, new IntIRType(IntIRType.intType.i1));
                 inst = new Icmp(currentBB, res, op2, lhs, rhs);
 
-                res.setParent(inst);
+
                 node.setResult(res);
                 node.setAddr(null);
                 currentBB.addInst(inst);
@@ -920,7 +918,6 @@ public class IRBuilder extends AstVisitor{
                     node.getInitVal().accept(this);
                     Operand init = node.getInitVal().getResult();
                     currentBB.addInst(new Store("store" + name,currentBB,init,addr));
-                    addr.setParent(currentBB.getTail());
 
                 }
 
@@ -1041,17 +1038,18 @@ public class IRBuilder extends AstVisitor{
             Register load = new VirtualReg(
                     ((ClassIRType) irType).getName()+ "." + ((ReferenceNode) node.getMember()).getReferenceName(),
                     memberType);
+            currentFunction.getSymbolTable().put(load.getName(),load);
+            currentFunction.getSymbolTable().put(res.getName(),res);
+
             Instruction getPtr = new GetPtr("getptr",currentBB,pointer,index,res);
+
             currentBB.addInst(getPtr);
-            res.setParent(getPtr);
 
             Instruction loadI = new Load("load_member",currentBB,memberType,res,load);
-            load.setParent(loadI);
             currentBB.addInst(loadI);
             node.setResult(load);
             node.setAddr(res);
-            currentFunction.getSymbolTable().put(load.getName(),load);
-            currentFunction.getSymbolTable().put(res.getName(),res);
+
 
         }
         else {//member  is functionnode
@@ -1080,7 +1078,7 @@ public class IRBuilder extends AstVisitor{
                     ,parameters,retReg);
 
             currentBB.addInst(call);
-            retReg.setParent(call);
+
             if(retReg != null)
                 currentFunction.getSymbolTable().put(retReg.getName(),retReg);
 
@@ -1205,11 +1203,25 @@ public class IRBuilder extends AstVisitor{
 
             currentFunction.getSymbolTable().put(res.getName(),res);
         }
-        else {//variables in parameter
-            String string;
-            string = "sajasf";
-            throw new RuntimeException();
-            //TODO
+        else {//variables in class
+            Register thisAddr = (Register)currentFunction.getSymbolTable().get("this$addr");
+            assert thisAddr != null;
+
+
+            IRType classType = ((PtrType)thisAddr.getType()).getPointerType();
+            Register classVal = new VirtualReg("this",classType);
+            currentFunction.getSymbolTable().put(classVal.getName(),classVal);
+            currentBB.addInst(
+                    new Load("loadThis",currentBB, thisAddr, classVal)
+            );
+
+            assert currentClass != null;
+            int index = 0;
+//            while(currentClass.getMemberList().get(index).getVarDefNodeList()){
+
+//            }
+
+
         }
     }
 
@@ -1310,8 +1322,7 @@ public class IRBuilder extends AstVisitor{
                 currentBB,bytes, BinaryOp.BinOp.ADD,mulByte,new ConstInt(4, IntIRType.intType.i32)
         );
 
-        mulByte.setParent(mul);
-        bytes.setParent(add);
+
         currentBB.addInst(mul);
         currentBB.addInst(add);
         parameters.add(bytes);
@@ -1322,14 +1333,13 @@ public class IRBuilder extends AstVisitor{
         currentFunction.getSymbolTable().put(mallocRes.getName(),mallocRes);
 
         Instruction mallocCall = new CallFunction("malloc",currentBB,malloc,parameters, mallocRes);
-        mallocRes.setParent(mallocCall);
+
         currentBB.addInst(mallocCall);
 
         Register malloc32 = new VirtualReg("mallocCast", new PtrType(new IntIRType(IntIRType.intType.i32)));
         currentFunction.getSymbolTable().put(malloc32.getName(),malloc32);
 
         Instruction bitCast = new BitCast("bitcast",currentBB,mallocRes,malloc32.getType(),malloc32);
-        malloc32.setParent(bitCast);
         currentBB.addInst(bitCast);
 
         Instruction store = new Store("storeMalloc",currentBB,size,malloc32);
@@ -1340,14 +1350,14 @@ public class IRBuilder extends AstVisitor{
         Register arrayHead32 =  new VirtualReg("arrayHead32",new PtrType(new IntIRType(IntIRType.intType.i32)));
         Instruction getHead = new GetPtr("getHeadPtr",currentBB,malloc32,gepIndex,arrayHead32);
         currentFunction.getSymbolTable().put(arrayHead32.getName(),arrayHead32);
-        arrayHead32.setParent(getHead);
+
         currentBB.addInst(getHead);
 
         Register arrayHead = new VirtualReg("arrayHead",irType);
 
         Instruction castHead = new BitCast("castArrayHead",currentBB,arrayHead32,irType,arrayHead);
         currentFunction.getSymbolTable().put(arrayHead.getName(),arrayHead);
-        arrayHead.setParent(castHead);
+
         currentBB.addInst(castHead);
 
         if(cnt != sizeList.size() - 1) {
@@ -1366,7 +1376,7 @@ public class IRBuilder extends AstVisitor{
             currentFunction.getSymbolTable().put(arrayTail.getName(),arrayTail);
             Instruction getTail = new GetPtr("getTail",currentBB,arrayHead,index,arrayTail);
             currentBB.addInst(getTail);
-            arrayTail.setParent(getTail);
+
 
             Register arrayPtrAddr = new VirtualReg("arrayPtr",new PtrType(irType));
             Instruction alloca =  new AllocateInst(currentBB,"allcaArrat",arrayPtrAddr,irType);
@@ -1440,13 +1450,7 @@ public class IRBuilder extends AstVisitor{
         this.currentBB = currentBB;
     }
 
-    public String getCurrentClass() {
-        return currentClass;
-    }
 
-    public void setCurrentClass(String currentClass) {
-        this.currentClass = currentClass;
-    }
 
     public IRFunction getCurrentFunction() {
         return currentFunction;

@@ -1,6 +1,7 @@
 package FrontEnd.IR.Instruction;
 
 import FrontEnd.IR.BasicBlock;
+import FrontEnd.IR.IRNode;
 import FrontEnd.IR.Operand.Operand;
 import FrontEnd.IR.Operand.StaticVar;
 import FrontEnd.IR.Type.PtrType;
@@ -23,8 +24,8 @@ public class Store extends Instruction{
 
     @Override
     public void add() {
-        Usages.add(value);
-        Usages.add(dest);
+        value.addUser(this);
+        dest.addDef(this);
     }
 
     @Override
@@ -40,8 +41,52 @@ public class Store extends Instruction{
                 ", " + dest.getType().print() + " " + dest.print();
 
     }
+
+    @Override
+    public void removeUsers() {
+        value.removeUser(this);
+    }
+
+
+    @Override
+    public void removeDefs() {
+        dest.removeDef(this);
+    }
+
     @Override
     public void accept(IRVisitor vistor) {
         vistor.visit(this);
+    }
+
+    @Override
+    public void replaceUse(IRNode oldUser, IRNode newUser) {
+        if(value == oldUser) {
+            assert newUser  instanceof Operand;
+            value.removeUser(this);
+            value = (Operand)newUser;
+            value.addUser(this);
+        }
+        if(dest == oldUser) {
+            assert newUser instanceof Operand;
+            dest.removeUser(this);
+            dest  = (Operand)newUser;
+            dest.addUser(this);
+        }
+    }
+
+    public Operand getValue() {
+        return value;
+    }
+
+    public void setValue(Operand value) {
+        this.value = value;
+    }
+
+    public Operand getDest() {
+        return dest;
+    }
+
+    public void setDest(Operand dest) {
+        this.dest = dest;
     }
 }

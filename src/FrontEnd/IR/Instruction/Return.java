@@ -1,6 +1,7 @@
 package FrontEnd.IR.Instruction;
 
 import FrontEnd.IR.BasicBlock;
+import FrontEnd.IR.IRNode;
 import FrontEnd.IR.Type.IRType;
 import FrontEnd.IR.Operand.Operand;
 import FrontEnd.IR.Type.VoidType;
@@ -19,7 +20,7 @@ public class Return extends Instruction {
     @Override
     public void add()  {
         if(returnVal != null) {
-            Usages.add(returnVal);
+            returnVal.addUser(this);
         }
     }
 
@@ -36,6 +37,28 @@ public class Return extends Instruction {
     public void accept(IRVisitor visitor) {
         visitor.visit(this);
     }
+
+    @Override
+    public void replaceUse(IRNode oldUser, IRNode newUser) {
+        if(returnVal == oldUser && returnVal != null) {
+            assert newUser instanceof Operand;
+            returnVal.removeUser(this);
+            returnVal = (Operand)newUser;
+            returnVal.addUser(this);
+        }
+    }
+
+    @Override
+    public void removeDefs() {
+
+    }
+
+    @Override
+    public void removeUsers() {
+        if(returnVal != null)
+            returnVal.removeUser(this);
+    }
+
 
     /////getter and setter////////
 

@@ -42,7 +42,6 @@ public abstract class Instruction extends IRNode {
     }
 
     public void remove() {
-//        moved = true;
         if(prev == null) {
             basicBlock.setHead(nxt);
         } else  {
@@ -54,8 +53,13 @@ public abstract class Instruction extends IRNode {
         } else {
             nxt.prev = prev;
         }
+        removeDefs();
+        removeUsers();
     }
 
+    public boolean isUnused() {
+        return this.getUsers().size() == 0;
+    }
 
 
     public String print() {
@@ -64,7 +68,10 @@ public abstract class Instruction extends IRNode {
 
 
     public abstract void add();
+    public abstract void removeUsers();
+    public abstract void removeDefs();
     public abstract void accept(IRVisitor vistor);
+    public abstract void replaceUse(IRNode oldUser, IRNode newUser);
     //////getter and setter//////
 
     public BasicBlock getBasicBlock() {

@@ -1,14 +1,19 @@
 package FrontEnd.IR;
 
+import FrontEnd.AstNode.FunctionCallNode;
+import FrontEnd.IR.Instruction.Instruction;
 import FrontEnd.IR.Operand.Operand;
 import FrontEnd.IRPrinter;
 import FrontEnd.IRVisitor;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.LinkedList;
 
 public abstract class IRNode {
     protected String name;
-    protected LinkedList<IRNode> Usages = new LinkedList<>();
+    protected ArrayList<IRNode> Users = new ArrayList<>();
+    protected HashSet<IRNode> defs = new HashSet<>();
 
     public IRNode() {
         name = null;
@@ -26,13 +31,46 @@ public abstract class IRNode {
         this.name = name;
     }
 
-    public LinkedList<IRNode> getUsages() {
-        return Usages;
+    public ArrayList<IRNode> getUsers() {
+        return Users;
     }
 
-    public void setUsages(LinkedList<IRNode> usages) {
-        Usages = usages;
+    public void setUsers(ArrayList<IRNode> users) {
+        Users = users;
     }
 
-    public  void accept(IRVisitor irVisitor){};
+    public void addUser(IRNode user) {
+        Users.add(user);
+    }
+
+    public void accept(IRVisitor irVisitor){};
+
+    public void addDef(IRNode node) {
+        defs.add(node);
+    }
+
+    public void removeDef(IRNode node) {
+        defs.remove(node);
+    }
+    public void removeUser(IRNode node) {
+        Users.remove(node);
+    }
+
+    public void replaceUser(Operand newUser){
+        assert (this instanceof Operand) ||
+                (this instanceof BasicBlock) ||
+                (this instanceof IRFunction);
+        for(int i = 0;i < Users.size(); ++i){
+            IRNode node = Users.get(i);
+            assert node instanceof Instruction;
+            ((Instruction) node).replaceUse(this,newUser);
+        }
+    }
+    public HashSet<IRNode> getDefs() {
+        return defs;
+    }
+
+    public void setDefs(HashSet<IRNode> defs) {
+        this.defs = defs;
+    }
 }

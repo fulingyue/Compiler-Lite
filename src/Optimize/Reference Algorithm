@@ -1,0 +1,43 @@
+
+
+
+#The Engineered Algorithm of building DT
+for all nodes, b /* initialize the dominators array */ doms[b] ← Undefined
+    doms[start node] ← start node Changed ← true
+while (Changed)
+    Changed ← false
+    for all nodes, b, in reverse postorder (except start node)
+        new idom ← first (processed) predecessor of b /* (pick one) */
+        for all other predecessors, p, of b
+            if doms[p] ̸= Undefined /* i.e., if doms[p] already calculated */
+                new idom ← intersect(p, new idom)
+            if doms[b] ̸= new idom
+                doms[b] ← new idom
+                Changed ← true
+
+function intersect(b1, b2) returns node
+    finger1 ← b1
+    finger2 ← b2
+    while (finger1 ̸= finger2)
+    while (finger1 < finger2)
+        finger1 = doms[finger1]
+    while (finger2 < finger1)
+        finger2 = doms[finger2]
+    return finger1
+
+
+#DF Algorithm
+for all nodes, b
+    if the number of predecessors of b ≥ 2
+        for all predecessors, p, of b
+        runner ← p
+        while runner ̸= doms[b]
+            add b to runner’s dominance frontier set
+            runner = doms[runner]
+
+
+place-phi-function & renaming
+https://www.iith.ac.in/~ramakrishna/fc5264/ssa-intro-construct.pdf
+
+build DT://I use this
+https://www.cl.cam.ac.uk/~mr10/lengtarj.pdf

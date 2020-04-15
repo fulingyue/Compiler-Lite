@@ -9,7 +9,6 @@ import FrontEnd.IRVisitor;
 
 public abstract class Operand extends IRNode {
     IRType type;
-    Instruction instParent;
 
 
     public IRType getType() {
@@ -22,27 +21,23 @@ public abstract class Operand extends IRNode {
 
     public Operand(String name, IRType type, Instruction parent) {
         super(name);
-        this.type = type;
-        this.instParent = parent;
+        this.addDef(parent);
     }
+
 
     public Operand(String name, IRType type) {
         super(name);
         this.type = type;
-        this.instParent = null;
+
     }
     public Operand(){
         type = null;
-        instParent = null;
+
     }
 
-    public Instruction getParent() {
-        return instParent;
-    }
 
-    public void setParent(Instruction parent) {
-        this.instParent = parent;
-    }
+
+
 
     public abstract String print();
 }

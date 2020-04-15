@@ -2,6 +2,7 @@ package FrontEnd.IR.Instruction;
 
 import FrontEnd.IR.BasicBlock;
 import FrontEnd.IR.IRFunction;
+import FrontEnd.IR.IRNode;
 import FrontEnd.IR.Operand.Operand;
 import FrontEnd.IR.Operand.Register;
 import FrontEnd.IR.Type.VoidType;
@@ -26,11 +27,29 @@ public class CallFunction extends Instruction{
     @Override
     public void add() {
         if(result != null)
-            Usages.add(result);
+            result.addDef(this);
 
-        Usages.add(function);
+        function.addUser(this);
+
         for (Operand item: parameters)
-            Usages.add(item);
+            item.addUser(this);
+    }
+
+    @Override
+    public void removeUsers() {
+
+        function.removeUser(this);
+
+        for (Operand item: parameters)
+            item.removeUser(this);
+    }
+
+
+    @Override
+    public void removeDefs() {
+        if(result != null)
+            result.removeDef(this);
+
     }
 
 
@@ -64,6 +83,25 @@ public class CallFunction extends Instruction{
         visitor.visit(this);
     }
 
+    @Override
+    public void replaceUse(IRNode oldUser, IRNode newUser) {
+        if(function == oldUser) {
+            assert newUser instanceof IRFunction;
+            function.removeUser(this);
+            function = (IRFunction)newUser;
+            function.addUser(this);
+        }
+        else {
+            for(int i = 0;i < parameters.size();++i) {
+                if(parameters.get(i) == oldUser) {
+                    assert newUser instanceof Operand;
+                    parameters.get(i).removeUser(this);
+                    parameters.set(i,(Operand)newUser);
+                    parameters.get(i).addUser(this);
+                }
+            }
+        }
+    }
 
 
 }
