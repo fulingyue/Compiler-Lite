@@ -30,15 +30,12 @@ public class IRTypeTable {
 
             assert irType instanceof ClassIRType;
 
-            ArrayList<IRType> memberList =  new ArrayList<>();
-//            ArrayList<VarDefNode> memberList = new ArrayList<>();
-            for(VarDefListNode item: node.getMemberList()){
-                VariableTypeNode type = item.getType();
+
+            for(VarDefNode item: node.getMemberList()){
+                VariableTypeNode type = item.getVarType();
                 IRType transport = transport(type);
-                for(VarDefNode member: item.getVarDefNodeList()) {
-                    memberList.add(transport(member.getVarType()));
-                    ((ClassIRType) irType).addMember(member.getVarName(),transport);
-                }
+                ((ClassIRType) irType).addMember(item.getVarName(),transport);
+
             }
             module.getClassMap().put(node.getClassName(), (ClassIRType)irType);
 

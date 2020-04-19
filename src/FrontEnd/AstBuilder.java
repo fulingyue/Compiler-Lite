@@ -59,7 +59,12 @@ public class AstBuilder extends MxBaseVisitor<AstNode> {
         for (MxParser.MemberVariableContext item: ctx.memberVariable()){
             VarDefListNode node = (VarDefListNode) visit(item);
             node.setParent(ret);
-            ret.addMember(node);
+            VariableTypeNode type = node.getType();
+            for(VarDefNode vardef: node.getVarDefNodeList()){
+                vardef.setVarType(type);
+                ret.addMember(vardef);
+            }
+
         }
         for (MxParser.FunctionDefinitionContext item: ctx.functionDefinition()) {
             FunctionDefNode node = (FunctionDefNode) visit(item);

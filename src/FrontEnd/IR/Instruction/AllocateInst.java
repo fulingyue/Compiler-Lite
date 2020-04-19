@@ -23,6 +23,7 @@ public class AllocateInst extends Instruction{
         dest.addDef(this);
     }
 
+
     @Override
     public void removeUsers() {
 

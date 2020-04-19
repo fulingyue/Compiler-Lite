@@ -41,7 +41,7 @@ public abstract class AstVisitor {
     }
     public void  visit(ClassDefNode node) throws Exception {
 
-        for (VarDefListNode item: node.getMemberList()) visit(item);
+        for (VarDefNode item: node.getMemberList()) visit(item);
         for (FunctionDefNode item: node.getConstructionDefList()) visit(item);
         for (FunctionDefNode item: node.getFunctionDefList()) visit(item);
     }

@@ -51,8 +51,8 @@ public class TypeDefChecker extends AstVisitor {
     @Override
     public void visit(ClassDefNode node) throws Exception {
         super.visit(node);
-        for (VarDefListNode item : node.getMemberList()) {
-            VariableTypeNode varType = item.getType();
+        for (VarDefNode item : node.getMemberList()) {
+            VariableTypeNode varType = item.getVarType();
             while (varType instanceof ArrayTypeNode) {
                 varType = ((ArrayTypeNode) varType).getInnerTypeNode();
             }

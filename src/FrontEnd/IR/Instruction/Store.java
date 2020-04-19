@@ -37,6 +37,8 @@ public class Store extends Instruction{
         if(dest == null) {
             System.out.print("fasfas");
         }
+//        return name + " " + ((PtrType)(dest.getType())).getPointerType().print() + " " + value.print() +
+//                ", " + dest.getType().print() + " " + dest.print();
         return "store " + ((PtrType)(dest.getType())).getPointerType().print() + " " + value.print() +
                 ", " + dest.getType().print() + " " + dest.print();
 

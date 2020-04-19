@@ -34,10 +34,10 @@ public class SSAConstructor extends Pass{
     }
 
     private  void construct(IRFunction function) {
-        allocaList = function.getAllocaInst();
         versionStack = new HashMap<>();
         //add blocks
         removeUnusedInst(function);
+        allocaList = function.getAllocaInst();
         placingPhiNode(function);
 
         rename(function);
@@ -65,7 +65,7 @@ public class SSAConstructor extends Pass{
         }
 
         for(AllocateInst allocate: allocaList) {
-            //TODO: info.anlyzealloca:rewriteSigleStoreAlloca  and promoteSingleBlockAlloca
+            //TODO: info.anlyzealloca:rewriteSingleStoreAlloca  and promoteSingleBlockAlloca
             Register addr = allocate.getDest();
             IRType type = allocate.getType();
             String name = ((VirtualReg)addr).getOriName();

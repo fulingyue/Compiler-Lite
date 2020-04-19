@@ -3,6 +3,7 @@ package FrontEnd.IR.Type;
 
 import FrontEnd.AstNode.VarDefNode;
 import FrontEnd.IR.Operand.Operand;
+import util.Aligner;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -28,6 +29,18 @@ public class ClassIRType extends IRType {
         for(IRType item: memberList) {
             this.byteWidth += item.getByteWidth();
         }
+    }
+
+    @Override
+    public int getByteWidth() {
+        int max = 0;
+        for(IRType item: memberList) {
+            int size = item.getByteWidth();
+            this.byteWidth = Aligner.align(byteWidth,size) + size;
+            max = Math.max(max,size);
+        }
+        byteWidth  = Aligner.align(byteWidth,max);
+        return byteWidth;
     }
 
     public void addMember(String name, IRType type) {

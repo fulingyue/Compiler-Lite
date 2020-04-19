@@ -8,11 +8,11 @@ import java.util.*;
 
 public class ClassDefNode extends AstNode {
     private String className;
-    private List<VarDefListNode> memberList;
+    private List<VarDefNode> memberList;
     private List<FunctionDefNode> functionDefList;
     private List<FunctionDefNode> constructionDefList;
 
-    public void addMember(VarDefListNode node) {
+    public void addMember(VarDefNode node) {
 //        node.setParent(this);
         memberList.add(node);
     }
@@ -33,11 +33,11 @@ public class ClassDefNode extends AstNode {
         this.className = className;
     }
 
-    public List<VarDefListNode> getMemberList() {
+    public List<VarDefNode> getMemberList() {
         return memberList;
     }
 
-    public void setMemberList(List<VarDefListNode> memberList) {
+    public void setMemberList(List<VarDefNode> memberList) {
         this.memberList = memberList;
     }
 
@@ -59,7 +59,7 @@ public class ClassDefNode extends AstNode {
 
 
     public ClassDefNode() {
-        memberList = new LinkedList<VarDefListNode>();
+        memberList = new LinkedList<VarDefNode>();
         functionDefList = new LinkedList<FunctionDefNode>();
         constructionDefList = new LinkedList<FunctionDefNode>();
     }
@@ -68,7 +68,7 @@ public class ClassDefNode extends AstNode {
     public void getInfo(int tab) {
         super.getInfo(tab);
         printSpaceAndStr(tab, "name:" + className);
-        for (VarDefListNode item: memberList) {
+        for (VarDefNode item: memberList) {
             item.getInfo(tab + 1);
         }
         for (FunctionDefNode item: functionDefList) {

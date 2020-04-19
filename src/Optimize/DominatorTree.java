@@ -23,6 +23,7 @@ public class DominatorTree extends Pass{
     @Override
     public boolean run() {
         for(IRFunction function: module.getFunctionMap().values()) {
+//            printBBs(function);
             TarjanBuild(function);
             calcDominanceFrontier(function);
         }
@@ -102,14 +103,17 @@ public class DominatorTree extends Pass{
     public void print() {
         for(IRFunction function: module.getFunctionMap().values()) {
             BasicBlock bb = function.getEntranceBB();
-            while(bb != null) {
+            System.out.print(function.getName() + ":\n");
+            while(true) {
                 System.out.print(bb.getName());
                 System.out.print("----->");
                 for(BasicBlock domiance: bb.getDominance()) {
                     System.out.print(",\t" + domiance.getName());
                 }
-                bb = bb.getNextBB();
                 System.out.print("\n");
+                if(bb == function.getExitBB()) break;
+                bb = bb.getNextBB();
+                System.out.print("next:" +bb.getName()+"\n");
             }
         }
     }
@@ -129,6 +133,23 @@ public class DominatorTree extends Pass{
             parent.setValue(minSemiDfsNode);
         return parent;
 
+    }
+
+    ////////debug use////////
+    void printBBs(IRFunction function) {
+        StringBuilder stringBuilder = new StringBuilder(function.getName());
+        stringBuilder.append("\n");
+        BasicBlock bb = function.getEntranceBB();
+        while(true) {
+            stringBuilder.append("    ").append(bb.getName()).append("\t precessdors:");
+            for (BasicBlock item: bb.getPredecessorBB()){
+                stringBuilder.append("\t").append(item.getName());
+            }
+            stringBuilder.append("\n");
+            if(bb == function.getExitBB()) break;
+            bb=bb.getNextBB();
+        }
+        System.out.print(stringBuilder.toString());
     }
 
 

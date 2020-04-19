@@ -23,7 +23,7 @@ public class main  {
 
     public static void main(String[] args)throws Exception {
 //        String path = "test/Compiler-2020-testcases/codegen/t14.mx";
-        String path ="test/Compiler-2020-testcases/codegen/shortest_path/dijkstra.mx";
+        String path ="test/Compiler-2020-testcases/codegen/sorting/bubble_sort.mx";
         InputStream inputStream = new FileInputStream(path);
 //        InputStream inputStream = System.in;
 //        try {
@@ -85,11 +85,11 @@ public class main  {
         IRBuilder irBuilder =  new IRBuilder();
         irBuilder.build(program);
         Module module = irBuilder.getProgram();
-//        DominatorTree dominatorTree = new DominatorTree(module);
-//        dominatorTree.run();
-//        dominatorTree.print();
-//        SSAConstructor ssaConstructor = new SSAConstructor(module);
-//        ssaConstructor.run();
+        DominatorTree dominatorTree = new DominatorTree(module);
+        dominatorTree.run();
+        dominatorTree.print();
+        SSAConstructor ssaConstructor = new SSAConstructor(module);
+        ssaConstructor.run();
 
         IRPrinter irPrinter  = new IRPrinter();
         irPrinter.print(module);
