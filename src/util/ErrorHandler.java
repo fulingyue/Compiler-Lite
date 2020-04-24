@@ -11,7 +11,7 @@ public class ErrorHandler {
     }
     public void error(Location location, String message) {
         error_cnt++;
-        System.out.println(location+ "\t" + message);
+        System.out.println(location.getLine() + "\t" + message);
     }
 
     public void printError() {

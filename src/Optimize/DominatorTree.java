@@ -82,10 +82,10 @@ public class DominatorTree extends Pass{
         }
     }
 
-    void link(BasicBlock v, BasicBlock w) {
+    private void link(BasicBlock v, BasicBlock w) {
         unionFindSet.get(v).setKey(w);
     }
-    void calcDominanceFrontier(IRFunction function) {
+    private void calcDominanceFrontier(IRFunction function) {
         BasicBlock currentBB = function.getEntranceBB();
 
         while(currentBB != null) {

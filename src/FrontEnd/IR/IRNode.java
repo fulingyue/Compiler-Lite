@@ -65,6 +65,10 @@ public abstract class IRNode {
             assert node instanceof Instruction;
             ((Instruction) node).replaceUse(this,newUser);
         }
+        Users.clear();
+        for(IRNode item:defs){
+            ((Instruction)item).replaceUse(this,newUser);
+        }
     }
     public HashSet<IRNode> getDefs() {
         return defs;

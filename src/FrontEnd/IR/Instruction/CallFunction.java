@@ -87,7 +87,7 @@ public class CallFunction extends Instruction{
     public void replaceUse(IRNode oldUser, IRNode newUser) {
         if(function == oldUser) {
             assert newUser instanceof IRFunction;
-            function.removeUser(this);
+//            function.removeUser(this);
             function = (IRFunction)newUser;
             function.addUser(this);
         }
@@ -95,7 +95,7 @@ public class CallFunction extends Instruction{
             for(int i = 0;i < parameters.size();++i) {
                 if(parameters.get(i) == oldUser) {
                     assert newUser instanceof Operand;
-                    parameters.get(i).removeUser(this);
+//                    parameters.get(i).removeUser(this);
                     parameters.set(i,(Operand)newUser);
                     parameters.get(i).addUser(this);
                 }

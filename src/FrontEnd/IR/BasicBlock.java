@@ -86,11 +86,11 @@ public class BasicBlock extends IRNode{
         return "%" + name;
     }
 
-    public void deleteDeadInst() {
+    public void deleteDeadInst() {//TODO
         Instruction inst = this.getHead();
         while(true) {
             if(inst instanceof AllocateInst) {
-                if(inst.isUnused()){
+                if(((AllocateInst) inst).getDest().getDefs().isEmpty()){
                     inst.remove();
                 }
             }
@@ -98,10 +98,10 @@ public class BasicBlock extends IRNode{
                 if(((Load) inst).getRes().getUsers().isEmpty())
                     inst.remove();
             }
-            if(inst instanceof Store) {
-                if(((Store) inst).getDest().getUsers().isEmpty())
-                    inst.remove();
-            }
+//            if(inst instanceof Store) {
+//                    if(((Store) inst).getDest().getUsers().isEmpty())
+//                        inst.remove();
+//            }
             //TODO other types Instruction
 
             if(inst == this.getTail())
@@ -114,8 +114,8 @@ public class BasicBlock extends IRNode{
         bucket.add(bb);
     }
 
-    public void addPhi(Register addr, Phi phi) {
-        phiMap.put(addr,phi);
+    public void addPhi(Register bb, Phi phi) {
+        phiMap.put(bb,phi);
     }
 
     @Override

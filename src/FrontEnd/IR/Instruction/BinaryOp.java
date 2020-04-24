@@ -58,13 +58,13 @@ public class BinaryOp extends Instruction {
     public void replaceUse(IRNode oldUser, IRNode newUser) {
         if(lhs == oldUser){
             assert newUser instanceof Operand;
-            lhs.removeUser(this);
+//            lhs.removeUser(this);
             lhs = (Operand)newUser;
             lhs.addUser(this);
         }
         if(rhs == oldUser)  {
             assert newUser instanceof Operand;
-            rhs.removeUser(this);
+//            rhs.removeUser(this);
             rhs = (Operand)newUser;
             rhs.addUser(this);
         }

@@ -50,7 +50,7 @@ public class BitCast extends Instruction {
     @Override
     public void replaceUse(IRNode oldUser, IRNode newUser) {
         if(src == oldUser) {
-            src.removeUser(this);
+//            src.removeUser(this);
             assert newUser instanceof Operand;
             src = (Operand)newUser;
             src.addUser(this);

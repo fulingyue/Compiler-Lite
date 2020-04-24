@@ -60,19 +60,19 @@ public class BranchJump extends Instruction {
     @Override
     public void replaceUse(IRNode oldUser, IRNode newUser) {
         if(condition == oldUser){
-            condition.removeUser(this);
+//            condition.removeUser(this);
             assert newUser instanceof Operand;
             condition = (Operand)newUser;
             condition.addUser(this);
         }  else {
             if (thenBlock == oldUser) {
-                thenBlock.removeUser(this);
+//                thenBlock.removeUser(this);
                 assert newUser instanceof BasicBlock;
                 thenBlock = (BasicBlock) newUser;
                 thenBlock.addUser(this);
             }
             if (elseBlock == oldUser) {
-                elseBlock.removeUser(this);
+//                elseBlock.removeUser(this);
                 assert newUser instanceof BasicBlock;
                 elseBlock = (BasicBlock) newUser;
                 elseBlock.addUser(this);

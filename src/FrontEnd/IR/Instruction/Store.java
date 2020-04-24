@@ -17,10 +17,6 @@ public class Store extends Instruction{
         this.dest = dest;
     }
 
-//    public Store(String name, BasicBlock bb, Operand dest) {
-//        super(name, bb);
-//        this.dest = dest;
-//    }
 
     @Override
     public void add() {
@@ -64,13 +60,11 @@ public class Store extends Instruction{
     public void replaceUse(IRNode oldUser, IRNode newUser) {
         if(value == oldUser) {
             assert newUser  instanceof Operand;
-            value.removeUser(this);
             value = (Operand)newUser;
             value.addUser(this);
         }
         if(dest == oldUser) {
             assert newUser instanceof Operand;
-            dest.removeUser(this);
             dest  = (Operand)newUser;
             dest.addUser(this);
         }

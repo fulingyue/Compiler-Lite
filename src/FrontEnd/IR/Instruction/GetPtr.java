@@ -7,7 +7,7 @@ import FrontEnd.IR.Operand.Register;
 import FrontEnd.IR.Type.IRType;
 import FrontEnd.IR.Type.PtrType;
 import FrontEnd.IRVisitor;
-import sun.jvm.hotspot.oops.Oop;
+
 
 import java.util.ArrayList;
 
@@ -80,16 +80,16 @@ public class GetPtr extends Instruction {
     public void replaceUse(IRNode oldUser, IRNode newUser) {
         if(pointer == oldUser) {
             assert newUser instanceof Operand;
-            pointer.removeUser(this);
+//            pointer.removeUser(this);
             pointer = (Operand)newUser;
             pointer.addUser(this);
         }
-        for(Operand item: index) {
+        for(int i = 0; i < index.size();++i) {
+            Operand item = index.get(i);
             if(item  ==  oldUser) {
                 assert newUser instanceof Operand;
-                item.removeUser(this);
-                item  = (Operand)newUser;
                 item.addUser(this);
+                index.set(i,(Operand)newUser);
             }
         }
     }

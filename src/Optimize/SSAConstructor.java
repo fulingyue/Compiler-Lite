@@ -47,7 +47,23 @@ public class SSAConstructor extends Pass{
     private void removeUnusedInst(IRFunction function) {
         BasicBlock currentBB = function.getEntranceBB();
         while(true) {
-            currentBB.deleteDeadInst();
+            Instruction inst = currentBB.getHead();
+
+            while(true) {
+                if(inst instanceof AllocateInst) {
+                    if(((AllocateInst) inst).getDest().getDefs().isEmpty()){
+                        inst.remove();
+                    }
+                }
+                if(inst instanceof Load) {
+                    if(((Load) inst).getRes().getUsers().size() == 0)
+                        inst.remove();
+                }
+                if(inst == currentBB.getTail())
+                    break;
+                else inst = inst.getNxt();
+            }
+
             if(currentBB == function.getExitBB()) break;
             currentBB = currentBB.getNextBB();
         }
@@ -66,15 +82,15 @@ public class SSAConstructor extends Pass{
 
         for(AllocateInst allocate: allocaList) {
             //TODO: info.anlyzealloca:rewriteSingleStoreAlloca  and promoteSingleBlockAlloca
+
             Register addr = allocate.getDest();
             IRType type = allocate.getType();
             String name = ((VirtualReg)addr).getOriName();
-            ArrayList<IRNode> user = addr.getUsers();
 
             Set<BasicBlock> visited = new HashSet<>();
             LinkedList<BasicBlock> queue = new LinkedList<>();
 
-            HashMap<BasicBlock,HashMap<Register,Phi>> hasPhiInst = new HashMap<>();
+//            HashMap<BasicBlock,HashMap<Register,Phi>> hasPhiInst = new HashMap<>();
             ////////body////////
             for(IRNode def: addr.getDefs()) {
                 BasicBlock defBB = ((Instruction)def).getBasicBlock();
@@ -85,21 +101,23 @@ public class SSAConstructor extends Pass{
             }
 
             while(!queue.isEmpty()) {
-                BasicBlock bb = queue.pop();
-                HashSet<BasicBlock> DF = bb.getDomianceFrontier();
-                for(BasicBlock df : DF) {
-                    if(!hasPhiInst.containsKey(df)){
+                BasicBlock bb = queue.remove();
+
+                for(BasicBlock df : bb.getDomianceFrontier()) {
+                    if(!df.getPhiMap().containsKey(df)){
                         Register res = new VirtualReg(name,type);
                         function.getSymbolTable().put(res.getName(),res);
                         Phi  phi = new Phi("SSAphi",df,new LinkedHashSet<>(),res);
                         df.addPhi(addr,phi);
-                        if(!visited.contains(DF)) {
+                        if(!visited.contains(df)) {
                             queue.add(df);
                             visited.add(df);
                         }
                     }
                 }
             }
+
+
             if(!versionStack.containsKey(addr)){
                 versionStack.put(addr,new Stack<>());
                 versionStack.get(addr).push(type.getDefaultValue());
@@ -135,20 +153,21 @@ public class SSAConstructor extends Pass{
                 Operand dest = ((Store)inst).getDest();
                 Operand value = ((Store) inst).getValue();
 
-                if(versionStack.containsKey(dest)){
+                if(versionStack.get(dest) != null){
                     versionStack.get(dest).add(value);
-                    inst.remove();
                 }
 
             }
             else if(inst instanceof Load) {
-                Operand dest = ((Load) inst).getDest();
+                Operand dest = ((Load) inst).getDest();//address
+
                 Operand addr = ((Load) inst).getRes();
+
                 if(versionStack.containsKey(dest)){
                     Operand newOpe = getFront(dest);
                     addr.replaceUser(newOpe);
-                    inst.remove();
                 }
+
 
             }
             inst = inst.getNxt();
@@ -174,6 +193,28 @@ public class SSAConstructor extends Pass{
         for(Phi phi:bb.getPhiMap().values())  {
             bb.addFirstInst(phi);
         }
+
+        inst = bb.getHead();
+        while(inst!= null) {
+            if(inst instanceof Store) {
+                Operand dest = ((Store) inst).getDest();
+                if(versionStack.containsKey(dest)){
+                    versionStack.get(dest).pop();
+                    inst.remove();
+                }
+            }
+            else if(inst instanceof Load){
+                Operand dest = ((Load) inst).getDest();
+                if(versionStack.containsKey(dest))
+                    inst.remove();
+            }
+            inst=inst.getNxt();
+        }
+
+        for(Register reg: bb.getPhiMap().keySet()){
+            versionStack.get(reg).pop();
+        }
+
 
     }
 

@@ -8,11 +8,9 @@ import FrontEnd.IR.Module;
 import FrontEnd.IR.Operand.*;
 import FrontEnd.IR.Type.*;
 import FrontEnd.Scope.GlobalScope;
-import com.sun.tools.internal.jxc.ap.Const;
-import com.sun.xml.internal.bind.api.ClassResolver;
+
 import util.Pair;
 
-import java.awt.*;
 import java.util.*;
 import java.util.List;
 
@@ -1330,6 +1328,7 @@ public class IRBuilder extends AstVisitor{
                 ((ArrayTypeNode) arrayType).getSize().accept(this);
                 sizeList.add(((ArrayTypeNode) arrayType).getSize().getResult());
             }
+            arrayType = ((ArrayTypeNode) arrayType).getInnerTypeNode();
 //            type = ((ArrayTypeNode)type).getBaseType();
         }
 
@@ -1420,7 +1419,8 @@ public class IRBuilder extends AstVisitor{
 
 
             Register arrayPtrAddr = new VirtualReg("arrayPtr",new PtrType(irType));
-            Instruction alloca =  new AllocateInst(currentBB,"allcaArrat",arrayPtrAddr,irType);
+            currentFunction.getSymbolTable().put(arrayPtrAddr.getName(),arrayPtrAddr);
+            Instruction alloca =  new AllocateInst(currentBB,"allocaArray",arrayPtrAddr,irType);
             currentFunction.getEntranceBB().addFirstInst(alloca);
 
             Instruction storePtr = new Store("storePtr1",currentBB,arrayHead,arrayPtrAddr);
