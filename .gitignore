@@ -10,3 +10,4 @@ semantic.sh
 codegen.sh
 ravel
 src/Optimize/DeadCEElim.java
+Compiler-2020-local-judge

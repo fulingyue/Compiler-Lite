@@ -5,6 +5,9 @@ import FrontEnd.IR.IRNode;
 import FrontEnd.IR.Operand.Operand;
 import FrontEnd.IRVisitor;
 
+import java.util.HashSet;
+import java.util.LinkedList;
+
 public class BranchJump extends Instruction {
     private Operand condition;
     private BasicBlock  thenBlock, elseBlock;
@@ -31,6 +34,7 @@ public class BranchJump extends Instruction {
             elseBlock.addUser(this);
         }
     }
+
 
     @Override
     public void removeUsers() {
@@ -78,6 +82,12 @@ public class BranchJump extends Instruction {
                 elseBlock.addUser(this);
             }
         }
+    }
+
+    @Override
+    public void markLive(LinkedList<Instruction> workList, HashSet<Instruction> alive) {
+        if(condition != null)
+            condition.markLive(workList,alive);
     }
 
     public void changeToNoBranch(boolean bool){

@@ -7,6 +7,9 @@ import FrontEnd.IR.Operand.Register;
 import FrontEnd.IR.Operand.VirtualReg;
 import FrontEnd.IRVisitor;
 
+import java.util.HashSet;
+import java.util.LinkedList;
+
 public class AllocateInst extends Instruction{
     //Assign
     private  Register dest;
@@ -22,6 +25,9 @@ public class AllocateInst extends Instruction{
     public void add() {
         dest.addDef(this);
     }
+
+
+
 
 
     @Override
@@ -42,6 +48,11 @@ public class AllocateInst extends Instruction{
 
     @Override
     public void replaceUse(IRNode oldUser, IRNode newUser) { }
+
+    @Override
+    public void markLive(LinkedList<Instruction> workList, HashSet<Instruction> alive) {
+
+    }
 
     public Register getDest() {
         return dest;

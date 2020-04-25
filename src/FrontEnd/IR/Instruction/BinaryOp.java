@@ -7,6 +7,9 @@ import FrontEnd.IR.Operand.Register;
 import FrontEnd.IR.Operand.VirtualReg;
 import FrontEnd.IRVisitor;
 
+import java.util.HashSet;
+import java.util.LinkedList;
+
 public class BinaryOp extends Instruction {
     public enum BinOp {
         ADD,
@@ -35,7 +38,10 @@ public class BinaryOp extends Instruction {
         lhs.addUser(this);
         rhs.addUser(this);
         dest.addDef(this);
+        dest.setDefInst(this);
     }
+
+
 
     @Override
     public void removeUsers() {
@@ -68,6 +74,12 @@ public class BinaryOp extends Instruction {
             rhs = (Operand)newUser;
             rhs.addUser(this);
         }
+    }
+
+    @Override
+    public void markLive(LinkedList<Instruction> workList, HashSet<Instruction> alive) {
+        lhs.markLive(workList,alive);
+        rhs.markLive(workList,alive);
     }
 
     //    @Override

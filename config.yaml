@@ -6,6 +6,6 @@ path:
   dataset: /Users/fulingyue/Desktop/Compiler-Lite/test/Compiler-2020-testcases
   simulator: /Users/fulingyue/Desktop/Compiler-Lite/ravel
   simulator-executable: /Users/fulingyue/Desktop/Compiler-Lite/ravel/ravel
-  built-in: /Users/fulingyue/Desktop/Compiler-Lite/test/builtin.ll
-stage: codegen
+  built-in: /Users/fulingyue/Desktop/Compiler-Lite/test/builtin.s
+stage: semantic
 timelimit: 15

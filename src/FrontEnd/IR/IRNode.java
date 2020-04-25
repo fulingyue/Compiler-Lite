@@ -13,7 +13,7 @@ import java.util.LinkedList;
 public abstract class IRNode {
     protected String name;
     protected ArrayList<IRNode> Users = new ArrayList<>();
-    protected HashSet<IRNode> defs = new HashSet<>();
+    protected HashSet<Instruction> defs = new HashSet<>();
 
     public IRNode() {
         name = null;
@@ -45,7 +45,7 @@ public abstract class IRNode {
 
     public void accept(IRVisitor irVisitor){};
 
-    public void addDef(IRNode node) {
+    public void addDef(Instruction node) {
         defs.add(node);
     }
 
@@ -70,11 +70,12 @@ public abstract class IRNode {
             ((Instruction)item).replaceUse(this,newUser);
         }
     }
-    public HashSet<IRNode> getDefs() {
+
+    public HashSet<Instruction> getDefs() {
         return defs;
     }
 
-    public void setDefs(HashSet<IRNode> defs) {
+    public void setDefs(HashSet<Instruction> defs) {
         this.defs = defs;
     }
 }

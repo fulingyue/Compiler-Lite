@@ -3,9 +3,12 @@ package FrontEnd.IR.Instruction;
 import FrontEnd.IR.BasicBlock;
 import FrontEnd.IR.IRNode;
 import FrontEnd.IR.Operand.Operand;
-import FrontEnd.IR.Operand.StaticVar;
+
 import FrontEnd.IR.Type.PtrType;
 import FrontEnd.IRVisitor;
+
+import java.util.HashSet;
+import java.util.LinkedList;
 
 public class Store extends Instruction{
     private Operand value;
@@ -23,6 +26,8 @@ public class Store extends Instruction{
         value.addUser(this);
         dest.addDef(this);
     }
+
+
 
     @Override
     public String print() {
@@ -68,6 +73,12 @@ public class Store extends Instruction{
             dest  = (Operand)newUser;
             dest.addUser(this);
         }
+    }
+
+    @Override
+    public void markLive(LinkedList<Instruction> workList, HashSet<Instruction> alive) {
+        value.markLive(workList,alive);
+        dest.markLive(workList,alive);
     }
 
     public Operand getValue() {

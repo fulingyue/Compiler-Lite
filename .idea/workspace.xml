@@ -2,23 +2,66 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a67270fb-4b02-4acf-8cdd-5c9e4a76755c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Optimize/DeadCElim.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bin/Optimize/DeadCodeElim.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Optimize/DeadCodeElim.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Compiler-2020-local-judge" beforeDir="false" afterPath="$PROJECT_DIR$/Compiler-2020-local-judge" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Compiler-2020-local-judge/config.yaml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Compiler-2020-local-judge/judge.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Compiler-2020-local-judge/testcase" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/FrontEnd/IR/BasicBlock.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/FrontEnd/IR/BasicBlock.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/FrontEnd/IR/IRFunction.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/FrontEnd/IR/IRFunction.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/FrontEnd/IR/IRNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/FrontEnd/IR/IRNode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/FrontEnd/IR/Instruction/AllocateInst.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/FrontEnd/IR/Instruction/AllocateInst.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/FrontEnd/IR/Instruction/BinaryOp$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/FrontEnd/IR/Instruction/BinaryOp$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/FrontEnd/IR/Instruction/BinaryOp$BinOp.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/FrontEnd/IR/Instruction/BinaryOp$BinOp.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/FrontEnd/IR/Instruction/BinaryOp.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/FrontEnd/IR/Instruction/BinaryOp.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/FrontEnd/IR/Instruction/BitCast.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/FrontEnd/IR/Instruction/BitCast.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/FrontEnd/IR/Instruction/BranchJump.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/FrontEnd/IR/Instruction/BranchJump.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/FrontEnd/IR/Instruction/CallFunction.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/FrontEnd/IR/Instruction/CallFunction.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/FrontEnd/IR/Instruction/GetPtr.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/FrontEnd/IR/Instruction/GetPtr.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/FrontEnd/IR/Instruction/Icmp$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/FrontEnd/IR/Instruction/Icmp$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/FrontEnd/IR/Instruction/Icmp$CompareOp.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/FrontEnd/IR/Instruction/Icmp$CompareOp.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/FrontEnd/IR/Instruction/Icmp.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/FrontEnd/IR/Instruction/Icmp.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/FrontEnd/IR/Instruction/Instruction.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/FrontEnd/IR/Instruction/Instruction.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/FrontEnd/IR/Instruction/Load.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/FrontEnd/IR/Instruction/Load.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/FrontEnd/IR/Instruction/Phi.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/FrontEnd/IR/Instruction/Phi.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/FrontEnd/IR/Instruction/Return.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/FrontEnd/IR/Instruction/Return.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/FrontEnd/IR/Instruction/Store.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/FrontEnd/IR/Instruction/Store.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/FrontEnd/IR/Module.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/FrontEnd/IR/Module.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/FrontEnd/IR/Operand/Operand.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/FrontEnd/IR/Operand/Operand.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/FrontEnd/IR/Operand/Register.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/FrontEnd/IR/Operand/Register.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/FrontEnd/IR/Operand/VirtualReg.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/FrontEnd/IR/Operand/VirtualReg.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/FrontEnd/IRBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/FrontEnd/IRBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Optimize/CFGSimplifier.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Optimize/CFGSimplifier.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Optimize/DominatorTree.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Optimize/DominatorTree.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Optimize/SSAConstructor.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Optimize/SSAConstructor.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/main.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/IR/BasicBlock.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/IR/BasicBlock.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/IR/IRFunction.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/IR/IRFunction.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/main.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/FrontEnd/IR/BasicBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/IR/BasicBlock.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/FrontEnd/IR/IRFunction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/IR/IRFunction.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/FrontEnd/IR/IRNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/IR/IRNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FrontEnd/IR/Instruction/AllocateInst.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/IR/Instruction/AllocateInst.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FrontEnd/IR/Instruction/BinaryOp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/IR/Instruction/BinaryOp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FrontEnd/IR/Instruction/BitCast.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/IR/Instruction/BitCast.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/FrontEnd/IR/Instruction/BranchJump.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/IR/Instruction/BranchJump.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FrontEnd/IR/Instruction/CallFunction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/IR/Instruction/CallFunction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FrontEnd/IR/Instruction/GetPtr.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/IR/Instruction/GetPtr.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FrontEnd/IR/Instruction/Icmp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/IR/Instruction/Icmp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FrontEnd/IR/Instruction/Instruction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/IR/Instruction/Instruction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FrontEnd/IR/Instruction/Load.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/IR/Instruction/Load.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/FrontEnd/IR/Instruction/Phi.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/IR/Instruction/Phi.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Optimize/CFGSimplifier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Optimize/CFGSimplifier.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Optimize/DominatorTree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Optimize/DominatorTree.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FrontEnd/IR/Instruction/Return.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/IR/Instruction/Return.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FrontEnd/IR/Instruction/Store.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/IR/Instruction/Store.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FrontEnd/IR/Module.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/IR/Module.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FrontEnd/IR/Operand/Operand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/IR/Operand/Operand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FrontEnd/IR/Operand/Register.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/IR/Operand/Register.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FrontEnd/IR/Operand/VirtualReg.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/IR/Operand/VirtualReg.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Optimize/DeadCElim.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Optimize/SSAConstructor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Optimize/SSAConstructor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.java" afterDir="false" />
     </list>
@@ -143,7 +186,7 @@
       <workItem from="1586958503475" duration="16089000" />
       <workItem from="1587087958577" duration="6879000" />
       <workItem from="1587224087970" duration="19359000" />
-      <workItem from="1587610985906" duration="22140000" />
+      <workItem from="1587610985906" duration="37950000" />
     </task>
     <servers />
   </component>
@@ -265,7 +308,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/FrontEnd/IR/Instruction/Store.java</url>
-          <line>33</line>
+          <line>38</line>
           <option name="timeStamp" value="210" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -290,13 +333,18 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/FrontEnd/IR/Operand/VirtualReg.java</url>
-          <line>23</line>
+          <line>26</line>
           <option name="timeStamp" value="367" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/FrontEnd/IRPrinter.java</url>
           <line>68</line>
           <option name="timeStamp" value="398" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Optimize/DeadCodeElim.java</url>
+          <line>62</line>
+          <option name="timeStamp" value="402" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

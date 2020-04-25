@@ -9,6 +9,7 @@ import FrontEnd.IRVisitor;
 import util.Pair;
 
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.Set;
 
 public class Phi extends Instruction {
@@ -28,6 +29,7 @@ public class Phi extends Instruction {
             item.getValue().addUser(this);//addPhiUser
         }
         res.addDef(this);
+        res.setDefInst(this);
 
     }
 
@@ -93,6 +95,13 @@ public class Phi extends Instruction {
                 item.setValue((BasicBlock)newUser);
                 item.getValue().addUser(this);
             }
+        }
+    }
+
+    @Override
+    public void markLive(LinkedList<Instruction> workList, HashSet<Instruction> alive) {
+        for(Pair<Operand,BasicBlock> iteme:branches){
+            iteme.getKey().markLive(workList,alive);
         }
     }
     ////getter and setter/////

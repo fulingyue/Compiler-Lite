@@ -7,6 +7,9 @@ import FrontEnd.IR.Operand.Operand;
 import FrontEnd.IR.Type.VoidType;
 import FrontEnd.IRVisitor;
 
+import java.util.HashSet;
+import java.util.LinkedList;
+
 public class Return extends Instruction {
     private Operand returnVal;
     private IRType type;
@@ -46,6 +49,12 @@ public class Return extends Instruction {
             returnVal = (Operand)newUser;
             returnVal.addUser(this);
         }
+    }
+
+    @Override
+    public void markLive(LinkedList<Instruction> workList, HashSet<Instruction> alive) {
+        if(returnVal!=null)
+            returnVal.markLive(workList,alive);
     }
 
     @Override

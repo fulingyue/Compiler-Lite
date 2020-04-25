@@ -94,7 +94,7 @@ public class SSAConstructor extends Pass{
 
 //            HashMap<BasicBlock,HashMap<Register,Phi>> hasPhiInst = new HashMap<>();
             ////////body////////
-            for(IRNode def: addr.getDefs()) {
+            for(Instruction def: addr.getDefs()) {
                 BasicBlock defBB = ((Instruction)def).getBasicBlock();
                 if(!visited.contains(def)) {
                     queue.add(defBB);

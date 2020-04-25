@@ -5,6 +5,8 @@ import FrontEnd.IR.Instruction.Instruction;
 import FrontEnd.IR.Type.IRType;
 import FrontEnd.IRVisitor;
 
+import java.util.HashSet;
+import java.util.LinkedList;
 
 
 public abstract class Operand extends IRNode {
@@ -24,6 +26,7 @@ public abstract class Operand extends IRNode {
         this.addDef(parent);
     }
 
+    public void markLive(LinkedList<Instruction> workList,HashSet<Instruction>alive) {};
 
     public Operand(String name, IRType type) {
         super(name);

@@ -8,6 +8,8 @@ import FrontEnd.IR.Operand.Register;
 import FrontEnd.IR.Type.IRType;
 import FrontEnd.IRVisitor;
 
+import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.PropertyResourceBundle;
 
 public class Icmp extends Instruction {
@@ -39,6 +41,7 @@ public class Icmp extends Instruction {
     @Override
     public void add() {
         dest.addDef(this);
+        dest.setDefInst(this);
         lhs.addUser(this);
         rhs.addUser(this);
     }
@@ -101,6 +104,13 @@ public class Icmp extends Instruction {
             rhs.addUser(this);
         }
     }
+
+    @Override
+    public void markLive(LinkedList<Instruction> workList, HashSet<Instruction> alive) {
+        lhs.markLive(workList,alive);
+        rhs.markLive(workList,alive);
+    }
+
 
     /////getter and setter////////
 

@@ -32,6 +32,7 @@ public class IRFunction extends IRNode {
     private Register returnVal = null;
 
     private boolean external;
+    private boolean sideEffect;
 
     //////////dfs///////
     ArrayList<BasicBlock> dfsOrder = null;
@@ -45,7 +46,7 @@ public class IRFunction extends IRNode {
         this.paraList = paraList;
         //need  to create  a paralist  or not
         functionType = new FunctionType(returnType, this.paraList);
-
+        sideEffect = true;
     }
 
     //    public usedVars(Func)
@@ -184,7 +185,13 @@ public class IRFunction extends IRNode {
         }
 
     }
-
+    public void calcSideEffect(){
+        for(BasicBlock bb = entranceBB;bb != null; bb = bb.getNextBB()){
+            if(bb.getSideEffect())
+                sideEffect = true;
+        }
+        sideEffect = false;
+    }
     //////getter and  setter///////
 
     public FunctionDefNode getFunctionEntity() {
@@ -285,4 +292,27 @@ public class IRFunction extends IRNode {
     }
 
 
+    public boolean isSideEffect() {
+        return sideEffect;
+    }
+
+    public void setSideEffect(boolean sideEffect) {
+        this.sideEffect = sideEffect;
+    }
+
+    public ArrayList<BasicBlock> getDfsOrder() {
+        return dfsOrder;
+    }
+
+    public void setDfsOrder(ArrayList<BasicBlock> dfsOrder) {
+        this.dfsOrder = dfsOrder;
+    }
+
+    public HashSet<BasicBlock> getVisitedBB() {
+        return visitedBB;
+    }
+
+    public void setVisitedBB(HashSet<BasicBlock> visitedBB) {
+        this.visitedBB = visitedBB;
+    }
 }

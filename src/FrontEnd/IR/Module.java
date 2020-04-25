@@ -93,12 +93,14 @@ public class Module {
         parameters.add(new Parameter("i",new IntIRType(IntIRType.intType.i32)));
         IRFunction toString = new IRFunction("toString",this,parameters,retType,true);
         addFunctionExternal(toString);
+        toString.setSideEffect(false);
 
         retType = new PtrType(new IntIRType(IntIRType.intType.i8));
         parameters = new ArrayList<>();
         parameters.add(new Parameter("size",new IntIRType(IntIRType.intType.i32)));
         IRFunction malloc = new IRFunction("malloc",this,parameters,retType,true);
         addFunctionExternal(malloc);
+        malloc.setSideEffect(false);
 
         retType = new PtrType(new IntIRType(IntIRType.intType.i8));
         parameters = new ArrayList<>();
@@ -106,6 +108,7 @@ public class Module {
         parameters.add(new Parameter("str2",new PtrType(new IntIRType(IntIRType.intType.i8))));
         IRFunction stringAdd = new IRFunction("__string_link",this,parameters,retType,true);
         addFunctionExternal(stringAdd);
+        stringAdd.setSideEffect(false);
 
         retType = new IntIRType(IntIRType.intType.i1);
         parameters = new ArrayList<>();
@@ -113,6 +116,7 @@ public class Module {
         parameters.add(new Parameter("str2",new PtrType(new IntIRType(IntIRType.intType.i8))));
         IRFunction string_ge = new IRFunction("__string_ge",this,parameters,retType,true);
         addFunctionExternal(string_ge);
+        string_ge.setSideEffect(false);
 
         retType = new IntIRType(IntIRType.intType.i1);
         parameters = new ArrayList<>();
@@ -120,6 +124,7 @@ public class Module {
         parameters.add(new Parameter("str2",new PtrType(new IntIRType(IntIRType.intType.i8))));
         IRFunction string_eq = new IRFunction("__string_equal",this,parameters,retType,true);
         addFunctionExternal(string_eq);
+        string_eq.setSideEffect(false);
 
         retType = new IntIRType(IntIRType.intType.i1);
         parameters = new ArrayList<>();
@@ -127,6 +132,7 @@ public class Module {
         parameters.add(new Parameter("str2",new PtrType(new IntIRType(IntIRType.intType.i8))));
         IRFunction string_noteq = new IRFunction("__string_notequal",this,parameters,retType,true);
         addFunctionExternal(string_noteq);
+        string_noteq.setSideEffect(false);
 
         retType = new IntIRType(IntIRType.intType.i1);
         parameters = new ArrayList<>();
@@ -134,6 +140,7 @@ public class Module {
         parameters.add(new Parameter("str2",new PtrType(new IntIRType(IntIRType.intType.i8))));
         IRFunction string_le = new IRFunction("__string_le",this,parameters,retType,true);
         addFunctionExternal(string_le);
+        string_le.setSideEffect(false);
 
         retType = new IntIRType(IntIRType.intType.i1);
         parameters = new ArrayList<>();
@@ -141,6 +148,7 @@ public class Module {
         parameters.add(new Parameter("str2",new PtrType(new IntIRType(IntIRType.intType.i8))));
         IRFunction string_lt = new IRFunction("__string_lt",this,parameters,retType,true);
         addFunctionExternal(string_lt);
+        string_lt.setSideEffect(false);
 
         retType = new IntIRType(IntIRType.intType.i1);
         parameters = new ArrayList<>();
@@ -148,18 +156,21 @@ public class Module {
         parameters.add(new Parameter("str2",new PtrType(new IntIRType(IntIRType.intType.i8))));
         IRFunction string_gt = new IRFunction("__string_gt",this,parameters,retType,true);
         addFunctionExternal(string_gt);
+        string_gt.setSideEffect(false);
 
-        retType = retType = new IntIRType(IntIRType.intType.i32);
+        retType = new IntIRType(IntIRType.intType.i32);
         parameters = new ArrayList<>();
         parameters.add(new Parameter("str",new PtrType(new IntIRType(IntIRType.intType.i8))));
         IRFunction string_length = new IRFunction("__string_length",this,parameters,retType,true);
         addFunctionExternal(string_length);
+        string_length.setSideEffect(false);
 
-        retType = retType = new IntIRType(IntIRType.intType.i32);
+        retType = new IntIRType(IntIRType.intType.i32);
         parameters = new ArrayList<>();
         parameters.add(new Parameter("str",new PtrType(new IntIRType(IntIRType.intType.i8))));
         IRFunction string_parseInt = new IRFunction("__string_parseInt",this,parameters,retType,true);
         addFunctionExternal(string_parseInt);
+        string_parseInt.setSideEffect(false);
 
         retType = new PtrType(new IntIRType(IntIRType.intType.i8));
         parameters = new ArrayList<>();
@@ -168,6 +179,7 @@ public class Module {
         parameters.add(new Parameter("right", new IntIRType(IntIRType.intType.i32)));
         IRFunction string_substring = new IRFunction("__string_substring",this,parameters,retType,true);
         addFunctionExternal(string_substring);
+        string_substring.setSideEffect(false);
 
         retType = new IntIRType(IntIRType.intType.i32);
         parameters = new ArrayList<>();
@@ -175,8 +187,9 @@ public class Module {
         parameters.add(new Parameter("pos", new IntIRType(IntIRType.intType.i32)));
         IRFunction string_ord = new IRFunction("__string_ord",this,parameters,retType,true);
         addFunctionExternal(string_ord);
+        string_ord.setSideEffect(false);
 
-        //arraysize can be solved by instructio
+        //arraysize can be solved by instruction
     }
 
 

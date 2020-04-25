@@ -10,6 +10,8 @@ import FrontEnd.IRVisitor;
 
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.LinkedList;
 
 public class GetPtr extends Instruction {
     // this instruction just execute address calculation, does  not access mem
@@ -27,6 +29,7 @@ public class GetPtr extends Instruction {
     public void add() {
         pointer.addUser(this);
         dest.addDef(this);
+        dest.setDefInst(this);
         for (Operand item: index)
            item.addUser(this);
     }
@@ -91,6 +94,14 @@ public class GetPtr extends Instruction {
                 item.addUser(this);
                 index.set(i,(Operand)newUser);
             }
+        }
+    }
+
+    @Override
+    public void markLive(LinkedList<Instruction> workList, HashSet<Instruction> alive) {
+        pointer.markLive(workList,alive);
+        for(Operand op:index){
+            op.markLive(workList,alive);
         }
     }
 }

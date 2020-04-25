@@ -7,6 +7,9 @@ import FrontEnd.IR.Operand.Register;
 import FrontEnd.IR.Type.IRType;
 import FrontEnd.IRVisitor;
 
+import java.util.HashSet;
+import java.util.LinkedList;
+
 public class BitCast extends Instruction {
     // cast pointer type
     private Operand src;
@@ -24,6 +27,7 @@ public class BitCast extends Instruction {
     public void add() {
          res.addDef(this);
          src.addUser(this);
+         res.setDefInst(this);
     }
 
     @Override
@@ -35,6 +39,7 @@ public class BitCast extends Instruction {
     public void removeDefs() {
         res.removeDef(this);
     }
+
 
 
     @Override
@@ -55,5 +60,10 @@ public class BitCast extends Instruction {
             src = (Operand)newUser;
             src.addUser(this);
         }
+    }
+
+    @Override
+    public void markLive(LinkedList<Instruction> workList, HashSet<Instruction> alive) {
+        src.markLive(workList,alive);
     }
 }

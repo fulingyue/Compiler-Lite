@@ -7,6 +7,9 @@ import FrontEnd.IR.Operand.Register;
 import FrontEnd.IR.Type.IRType;
 import FrontEnd.IRVisitor;
 
+import java.util.HashSet;
+import java.util.LinkedList;
+
 public class Load extends Instruction {
     private IRType type;
     private Operand dest;
@@ -29,6 +32,7 @@ public class Load extends Instruction {
     @Override
     public void add() {
         res.addDef(this);
+        res.setDefInst(this);
         dest.addUser(this);
     }
 
@@ -61,6 +65,11 @@ public class Load extends Instruction {
             dest = (Operand)newUser;
             dest.addUser(this);
         }
+    }
+
+    @Override
+    public void markLive(LinkedList<Instruction> workList, HashSet<Instruction> alive) {
+        dest.markLive(workList,alive);
     }
 
     public IRType getType() {

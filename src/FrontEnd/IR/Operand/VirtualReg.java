@@ -5,6 +5,9 @@ import FrontEnd.IR.SymbolTable;
 import FrontEnd.IR.Type.IRType;
 import FrontEnd.IRVisitor;
 
+import java.util.HashSet;
+import java.util.LinkedList;
+
 
 public class VirtualReg extends Register{
 //    static private SymbolTable symbolTable =  new SymbolTable();
@@ -29,6 +32,7 @@ public class VirtualReg extends Register{
 //        return getOriName();
         return name;
     }
+
 
 //    @Override
 //    public RegVal copy() {

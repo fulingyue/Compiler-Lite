@@ -5,6 +5,7 @@ import FrontEnd.IR.IRNode;
 import FrontEnd.IR.Operand.Operand;
 import FrontEnd.IRVisitor;
 
+import java.util.HashSet;
 import java.util.LinkedList;
 
 public abstract class Instruction extends IRNode {
@@ -72,6 +73,7 @@ public abstract class Instruction extends IRNode {
     public abstract void removeDefs();
     public abstract void accept(IRVisitor vistor);
     public abstract void replaceUse(IRNode oldUser, IRNode newUser);
+    public abstract void markLive(LinkedList<Instruction> workList,HashSet<Instruction> alive);
     //////getter and setter//////
 
     public BasicBlock getBasicBlock() {

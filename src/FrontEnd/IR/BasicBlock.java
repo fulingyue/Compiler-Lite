@@ -147,6 +147,7 @@ public class BasicBlock extends IRNode{
         }
     }
 
+
     public boolean mergeToPreceBB(){
 
         assert predecessorBB.size() == 1;
@@ -195,9 +196,6 @@ public class BasicBlock extends IRNode{
         if(nextBB != null)
             nextBB.setPrevBB(this.prevBB);
         else {
-            if(getName().equals("for.end.1")){
-                throw new RuntimeException();
-            }
             functionParent.setExitBB(prevBB);
         }
 
@@ -206,9 +204,24 @@ public class BasicBlock extends IRNode{
         }
         return true;
     }
+
+
     @Override
     public void accept(IRVisitor visitor)  {
         visitor.visit(this);
+    }
+
+
+    public boolean getSideEffect(){
+        for(Instruction inst = head; inst != null; inst = inst.getNxt()){
+            if (inst instanceof  Store)
+                return true;
+            if(inst instanceof CallFunction){
+                if(((CallFunction) inst).getFunction().isSideEffect())
+                    return true;
+            }
+        }
+        return false;
     }
     ///////setters and getters///////
 

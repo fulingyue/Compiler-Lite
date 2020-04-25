@@ -6,6 +6,7 @@ import FrontEnd.ErrorChecker.SemanticException;
 import FrontEnd.IR.Module;
 import FrontEnd.Scope.Scope;
 import Optimize.CFGSimplifier;
+import Optimize.DeadCodeElim;
 import Optimize.DominatorTree;
 import Optimize.SSAConstructor;
 import org.antlr.v4.runtime.ANTLRInputStream;
@@ -23,7 +24,7 @@ import util.Location;
 public class main  {
 
     public static void main(String[] args)throws Exception {
-        String path ="test/Compiler-2020-testcases/codegen/shortest_path/spfa.mx";
+        String path ="test/sourceCode1.mx";
         InputStream inputStream = new FileInputStream(path);
 //        InputStream inputStream = System.in;
 //        try {
@@ -97,6 +98,8 @@ public class main  {
         dominatorTree.print();
         SSAConstructor ssaConstructor = new SSAConstructor(module);
         ssaConstructor.run();
+        DeadCodeElim DCE = new DeadCodeElim(module);
+        DCE.run();
 
         IRPrinter irPrinter  = new IRPrinter();
         irPrinter.print(module);

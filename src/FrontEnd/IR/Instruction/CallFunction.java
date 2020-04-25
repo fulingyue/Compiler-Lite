@@ -4,11 +4,14 @@ import FrontEnd.IR.BasicBlock;
 import FrontEnd.IR.IRFunction;
 import FrontEnd.IR.IRNode;
 import FrontEnd.IR.Operand.Operand;
+import FrontEnd.IR.Operand.Parameter;
 import FrontEnd.IR.Operand.Register;
 import FrontEnd.IR.Type.VoidType;
 import FrontEnd.IRVisitor;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.LinkedList;
 
 public class CallFunction extends Instruction{
     private IRFunction function;
@@ -24,11 +27,13 @@ public class CallFunction extends Instruction{
         assert parameters.size() == function.getParaList().size();
     }
 
+
     @Override
     public void add() {
-        if(result != null)
+        if(result != null) {
             result.addDef(this);
-
+            result.setDefInst(this);
+        }
         function.addUser(this);
 
         for (Operand item: parameters)
@@ -103,5 +108,34 @@ public class CallFunction extends Instruction{
         }
     }
 
+    @Override
+    public void markLive(LinkedList<Instruction> workList, HashSet<Instruction> alive) {
+        for(Operand para:parameters) {
+            para.markLive(workList,alive);
+        }
+    }
 
+    public IRFunction getFunction() {
+        return function;
+    }
+
+    public void setFunction(IRFunction function) {
+        this.function = function;
+    }
+
+    public ArrayList<Operand> getParameters() {
+        return parameters;
+    }
+
+    public void setParameters(ArrayList<Operand> parameters) {
+        this.parameters = parameters;
+    }
+
+    public Register getResult() {
+        return result;
+    }
+
+    public void setResult(Register result) {
+        this.result = result;
+    }
 }
