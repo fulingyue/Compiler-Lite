@@ -163,7 +163,6 @@ public class IRFunction extends IRNode {
     }
 
     public ArrayList<BasicBlock> gettDfsOder() {
-        if(dfsOrder != null) return dfsOrder;
         dfsOrder = new ArrayList<>();
         visitedBB = new HashSet<>();
 

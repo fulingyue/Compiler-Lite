@@ -74,6 +74,7 @@ public class DominatorTree extends Pass{
                 idom = w.getiDom().getiDom();
                 w.setiDom(idom);
             }
+
             idom.addDominance(w);
             while(idom!= null) {
                 w.getStrictDominators().add(idom);

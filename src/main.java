@@ -5,6 +5,7 @@ import FrontEnd.*;
 import FrontEnd.ErrorChecker.SemanticException;
 import FrontEnd.IR.Module;
 import FrontEnd.Scope.Scope;
+import Optimize.CFGSimplifier;
 import Optimize.DominatorTree;
 import Optimize.SSAConstructor;
 import org.antlr.v4.runtime.ANTLRInputStream;
@@ -22,8 +23,7 @@ import util.Location;
 public class main  {
 
     public static void main(String[] args)throws Exception {
-//        String path = "test/Compiler-2020-testcases/codegen/t14.mx";
-        String path ="test/Compiler-2020-testcases/codegen/shortest_path/dijkstra.mx";
+        String path ="test/Compiler-2020-testcases/codegen/shortest_path/spfa.mx";
         InputStream inputStream = new FileInputStream(path);
 //        InputStream inputStream = System.in;
 //        try {
@@ -90,6 +90,8 @@ public class main  {
 //        IRPrinter irPrinter  = new IRPrinter();
 //        irPrinter.print(module);
 
+        CFGSimplifier cfgSimplifier = new CFGSimplifier(module);
+        cfgSimplifier.run();
         DominatorTree dominatorTree = new DominatorTree(module);
         dominatorTree.run();
         dominatorTree.print();

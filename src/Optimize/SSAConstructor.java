@@ -49,7 +49,7 @@ public class SSAConstructor extends Pass{
         while(true) {
             Instruction inst = currentBB.getHead();
 
-            while(true) {
+            while(inst != null) {
                 if(inst instanceof AllocateInst) {
                     if(((AllocateInst) inst).getDest().getDefs().isEmpty()){
                         inst.remove();
@@ -59,9 +59,8 @@ public class SSAConstructor extends Pass{
                     if(((Load) inst).getRes().getUsers().size() == 0)
                         inst.remove();
                 }
-                if(inst == currentBB.getTail())
-                    break;
-                else inst = inst.getNxt();
+
+                inst = inst.getNxt();
             }
 
             if(currentBB == function.getExitBB()) break;
@@ -76,6 +75,9 @@ public class SSAConstructor extends Pass{
         BasicBlock currentbb = function.getEntranceBB();
         while(true) {
             currentbb.setPhiMap(new HashMap<Register, Phi>());
+//            if(currentbb.getName().equals("returnBlock.0")){
+//                throw new RuntimeException();
+//            }
             if(currentbb == function.getExitBB()) break;
             currentbb = currentbb.getNextBB();
         }

@@ -12,7 +12,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Phi extends Instruction {
-    private Set<Pair<Operand, BasicBlock>> branches = new HashSet<>();
+    private Set<Pair<Operand, BasicBlock>> branches;
     private Register res;
 
     public Phi(String name, BasicBlock bb, Set<Pair<Operand, BasicBlock>> branches, Register res) {
@@ -45,7 +45,13 @@ public class Phi extends Instruction {
     }
 
 
-
+    public void removeIncomeBB(BasicBlock bb){
+        for(Pair<Operand, BasicBlock> pair: branches){
+            if(pair.getValue() == bb){
+                branches.remove(pair);
+            }
+        }
+    }
     public void addBr(Operand operand, BasicBlock bb) {
         branches.add(new Pair<>(operand,bb));
         operand.addUser(this);

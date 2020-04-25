@@ -9,3 +9,4 @@ build.sh
 semantic.sh
 codegen.sh
 ravel
+src/Optimize/DeadCEElim.java

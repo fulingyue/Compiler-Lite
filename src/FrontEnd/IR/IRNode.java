@@ -56,7 +56,7 @@ public abstract class IRNode {
         Users.remove(node);
     }
 
-    public void replaceUser(Operand newUser){
+    public void replaceUser(IRNode newUser){
         assert (this instanceof Operand) ||
                 (this instanceof BasicBlock) ||
                 (this instanceof IRFunction);

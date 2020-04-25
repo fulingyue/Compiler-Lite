@@ -6,6 +6,7 @@ import FrontEnd.IRVisitor;
 import util.Pair;
 
 import java.util.*;
+import java.util.concurrent.BlockingQueue;
 
 public class BasicBlock extends IRNode{
     private IRFunction functionParent;
@@ -118,6 +119,93 @@ public class BasicBlock extends IRNode{
         phiMap.put(bb,phi);
     }
 
+    public void deleteItself() {
+        nextBB.prevBB = prevBB;
+        prevBB.nextBB = nextBB;
+        for(BasicBlock bb:predecessorBB){
+            bb.getSuccessors().remove(this);
+        }
+        for (BasicBlock bb:successors){
+            bb.getPredecessorBB().remove(this);
+        }
+        for(Instruction inst = this.head; inst != null;inst = inst.getNxt()){
+            inst.remove();
+        }
+    }
+
+
+    public Instruction getTerminator(){
+        assert tail.isTerminator();
+        return tail;
+    }
+
+    public void removePhiIncomeBB(BasicBlock bb){
+        Instruction inst = head;
+        while (inst instanceof Phi){
+            ((Phi) inst).removeIncomeBB(bb);
+            inst=inst.getNxt();
+        }
+    }
+
+    public boolean mergeToPreceBB(){
+
+        assert predecessorBB.size() == 1;
+        BasicBlock pre = predecessorBB.iterator().next();
+        Instruction br = pre.getTerminator();
+
+        assert br instanceof BranchJump;
+        assert ((BranchJump) br).getCondition() == null;
+        assert ((BranchJump) br).getThenBlock() == this;
+        br.remove();
+
+        Instruction instruction = this.getHead();
+        while(instruction != null) {
+            if(instruction instanceof Phi){
+                Instruction nxt = instruction.getNxt();
+                assert ((Phi) instruction).getBranches().size() == 1;
+                ((Phi) instruction).getRes().replaceUser(((Phi) instruction).getBranches().iterator().next().getKey());
+                instruction.remove();
+                instruction = nxt;
+            } else {
+                instruction.setBasicBlock(pre);
+                instruction.setPrev(pre.getTail());
+                if(pre.getHead() == null){
+                    pre.setHead(instruction);
+                }else {
+                    pre.setTail(instruction);
+                }
+                instruction = instruction.getNxt();
+            }
+
+        }
+
+        for(BasicBlock successor: successors){
+            pre.addSuccessorBB(successor);
+            successor.getPredecessorBB().remove(this);
+            successor.getPredecessorBB().add(pre);
+        }
+
+        pre.getSuccessors().remove(this);
+        head = null;
+        tail =null;
+        this.replaceUser(pre);
+
+        if(prevBB != null)
+            prevBB.setNextBB(this.nextBB);
+        if(nextBB != null)
+            nextBB.setPrevBB(this.prevBB);
+        else {
+            if(getName().equals("for.end.1")){
+                throw new RuntimeException();
+            }
+            functionParent.setExitBB(prevBB);
+        }
+
+        if(functionParent.getReturnBB() == this){
+            functionParent.setReturnBB(pre);
+        }
+        return true;
+    }
     @Override
     public void accept(IRVisitor visitor)  {
         visitor.visit(this);

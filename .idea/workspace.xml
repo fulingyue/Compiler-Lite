@@ -2,186 +2,25 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a67270fb-4b02-4acf-8cdd-5c9e4a76755c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Compiler-2020-local-judge" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/Antlr/MxBaseListener.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/Antlr/MxBaseVisitor.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/Antlr/MxErrorListener.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/Antlr/MxLexer.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/Antlr/MxListener.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/Antlr/MxParser$ActualParameterListContext.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/Antlr/MxParser$BaseTypeContext.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/Antlr/MxParser$BinaryExprContext.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/Antlr/MxParser$BlockContext.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/Antlr/MxParser$BlockStatContext.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/Antlr/MxParser$BreakStatContext.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/Antlr/MxParser$ClassDefinitionContext.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/Antlr/MxParser$ClassTypeContext.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/Antlr/MxParser$CommonCreatorContext.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/Antlr/MxParser$ConstructionFunctionDefinitionContext.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/Antlr/MxParser$ContinueStatContext.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/Antlr/MxParser$CorrectCreatorContext.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/Antlr/MxParser$CreatorContext.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/Antlr/MxParser$DefinitionStatContext.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/Antlr/MxParser$EmptyStatContext.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/Antlr/MxParser$ErrorCreatorContext.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/Antlr/MxParser$ExpressionContext.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/Antlr/MxParser$ExpressionStatContext.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/Antlr/MxParser$ForStatContext.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/Antlr/MxParser$FormalParameterContext.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/Antlr/MxParser$FormalParameterListContext.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/Antlr/MxParser$FunctionCallExprContext.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/Antlr/MxParser$FunctionDefinitionContext.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/Antlr/MxParser$IdentifierExprContext.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/Antlr/MxParser$IfStatContext.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/Antlr/MxParser$IndexAccessExprContext.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/Antlr/MxParser$MemberAccessExprContext.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/Antlr/MxParser$MemberVariableContext.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/Antlr/MxParser$NewExprContext.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/Antlr/MxParser$ParensExprContext.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/Antlr/MxParser$PrimaryExprContext.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/Antlr/MxParser$PrimitiveTypeContext.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/Antlr/MxParser$ProgramContext.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/Antlr/MxParser$ReturnStatContext.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/Antlr/MxParser$StatementContext.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/Antlr/MxParser$StatementListContext.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/Antlr/MxParser$ThisExprContext.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/Antlr/MxParser$UnaryExprContext.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/Antlr/MxParser$VariableDeclarExprContext.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/Antlr/MxParser$VariableDeclarExprsContext.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/Antlr/MxParser$VariableDefinitionContext.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/Antlr/MxParser$VariableTypeContext.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/Antlr/MxParser$WhileStatContext.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/Antlr/MxParser.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/Antlr/MxVisitor.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/AstBuilder.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/AstNode/ArrayTypeNode.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/AstNode/AstNode.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/AstNode/BinaryOpNode$BinaryOp.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/AstNode/BinaryOpNode.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/AstNode/BlockNode.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/AstNode/BoolNode.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/AstNode/BreakStaNode.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/AstNode/ClassDefNode.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/AstNode/ClassTypeNode.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/AstNode/ContinueStaNode.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/AstNode/EmptyStaNode.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/AstNode/ExprStaNode.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/AstNode/ForStaNode.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/AstNode/FunctionCallNode.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/AstNode/FunctionDefNode.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/AstNode/IfStaNode.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/AstNode/IndexAccessNode.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/AstNode/IntNode.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/AstNode/MemberAccessNode.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/AstNode/NewExprNode.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/AstNode/NullNode.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/AstNode/PrimaryExprNode.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/AstNode/PrimitiveTypeNode$1.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/AstNode/PrimitiveTypeNode$PrimitiveTypeKeyword.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/AstNode/PrimitiveTypeNode.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/AstNode/ProgramNode.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/AstNode/ReferenceNode$ReferenceType.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/AstNode/ReferenceNode.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/AstNode/ReturnStaNode.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/AstNode/StatementNode.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/AstNode/StringNode.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/AstNode/ThisExprNode.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/AstNode/UnaryOpNode$UnaryOp.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/AstNode/UnaryOpNode.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/AstNode/VarDefListNode.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/AstNode/VarDefNode.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/AstNode/VariableTypeNode.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/AstNode/WhileStaNode.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/AstVisitor.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/ErrorChecker/SemanticException.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/ErrorChecker/StaticTypeChecker.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/IR/BasicBlock.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/IR/IRFunction.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/IR/IRNode.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/IR/Instruction/AllocateInst.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/IR/Instruction/BinaryOp$1.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/IR/Instruction/BinaryOp$BinOp.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/IR/Instruction/BinaryOp.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/IR/Instruction/BitCast.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/IR/Instruction/BranchJump.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/IR/Instruction/CallFunction.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/IR/Instruction/GetPtr.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/IR/Instruction/Icmp$1.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/IR/Instruction/Icmp$CompareOp.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/IR/Instruction/Icmp.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/IR/Instruction/Instruction.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/IR/Instruction/Load.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/IR/Instruction/Phi.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/IR/Instruction/Return.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/IR/Instruction/Store.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/IR/Module.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/IR/Operand/ConstBool.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/IR/Operand/ConstInt.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/IR/Operand/ConstNull.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/IR/Operand/ConstString.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/IR/Operand/Constant.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/IR/Operand/Operand.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/IR/Operand/Parameter.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/IR/Operand/Register.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/IR/Operand/StaticVar.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/IR/Operand/VirtualReg.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/IR/SymbolTable.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/IR/Type/ArrayIRType.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/IR/Type/ClassIRType.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/IR/Type/FunctionType.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/IR/Type/IRType.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/IR/Type/IRTypeTable.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/IR/Type/IntIRType$1.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/IR/Type/IntIRType$intType.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/IR/Type/IntIRType.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/IR/Type/PtrType.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/IR/Type/VoidType.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/IRBuilder$1.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/IRBuilder.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/IRPrinter.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/IRVisitor.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/ParentLinker.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/Scope/GlobalScope.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/Scope/Scope.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/ScopeBuilder.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/ScopePrinter.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/TypeDefChecker$1.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/FrontEnd/TypeDefChecker.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/Optimize/CFGSimplifier.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/Optimize/DominatorTree.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/Optimize/Pass.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/Optimize/SSAConstructor.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/main.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/util/Aligner.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/util/Defines.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/util/ErrorHandler.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/util/Location.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/util/Pair.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/util/print_tool.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/codegen.bash" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Optimize/DeadCElim.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Compiler-2020-local-judge" beforeDir="false" afterPath="$PROJECT_DIR$/Compiler-2020-local-judge" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Compiler-2020-local-judge/config.yaml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Compiler-2020-local-judge/judge.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Compiler-2020-local-judge/testcase" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/IR/BasicBlock.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/IR/BasicBlock.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/IR/IRFunction.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/IR/IRFunction.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/util/ErrorHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/util/ErrorHandler.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/FrontEnd/IR/BasicBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/IR/BasicBlock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FrontEnd/IR/IRFunction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/IR/IRFunction.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/FrontEnd/IR/IRNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/IR/IRNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/FrontEnd/IR/Instruction/BinaryOp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/IR/Instruction/BinaryOp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/FrontEnd/IR/Instruction/BitCast.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/IR/Instruction/BitCast.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/FrontEnd/IR/Instruction/BranchJump.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/IR/Instruction/BranchJump.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/FrontEnd/IR/Instruction/CallFunction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/IR/Instruction/CallFunction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/FrontEnd/IR/Instruction/GetPtr.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/IR/Instruction/GetPtr.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/FrontEnd/IR/Instruction/Icmp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/IR/Instruction/Icmp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/FrontEnd/IR/Instruction/Load.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/IR/Instruction/Load.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/FrontEnd/IR/Instruction/Store.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/IR/Instruction/Store.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/FrontEnd/IRBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/IRBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FrontEnd/IR/Instruction/Phi.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/IR/Instruction/Phi.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Optimize/CFGSimplifier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Optimize/CFGSimplifier.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Optimize/DominatorTree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Optimize/DominatorTree.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Optimize/SSAConstructor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Optimize/SSAConstructor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/util/ErrorHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/ErrorHandler.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -304,7 +143,7 @@
       <workItem from="1586958503475" duration="16089000" />
       <workItem from="1587087958577" duration="6879000" />
       <workItem from="1587224087970" duration="19359000" />
-      <workItem from="1587610985906" duration="11761000" />
+      <workItem from="1587610985906" duration="22140000" />
     </task>
     <servers />
   </component>
@@ -455,19 +294,14 @@
           <option name="timeStamp" value="367" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/FrontEnd/IR/Instruction/Store.java</url>
-          <line>66</line>
-          <option name="timeStamp" value="379" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/FrontEnd/IR/Instruction/Store.java</url>
-          <line>60</line>
-          <option name="timeStamp" value="385" />
+          <url>file://$PROJECT_DIR$/src/FrontEnd/IRPrinter.java</url>
+          <line>68</line>
+          <option name="timeStamp" value="398" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/Compiler_Lite$main.ic" NAME="main Coverage Results" MODIFIED="1586942844801" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/Compiler_Lite$main.ic" NAME="main Coverage Results" MODIFIED="1587721580534" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>

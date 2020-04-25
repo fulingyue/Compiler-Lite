@@ -80,6 +80,23 @@ public class BranchJump extends Instruction {
         }
     }
 
+    public void changeToNoBranch(boolean bool){
+        BasicBlock dest = bool? thenBlock:elseBlock;
+        BasicBlock removeBB = bool? elseBlock:thenBlock;
+        if(removeBB != null){
+            removeBB.removeUser(this);
+        }
+        if(condition != null){
+            condition.removeUser(this);
+        }
+        BasicBlock bb = getBasicBlock();
+        bb.getSuccessors().remove(removeBB);
+        removeBB.getPredecessorBB().remove(bb);
+        removeBB.removePhiIncomeBB(bb);
+        condition = null;
+        this.elseBlock = null;
+        thenBlock = dest;
+    }
     /////getter and setter////////
 
     public Operand getCondition() {
