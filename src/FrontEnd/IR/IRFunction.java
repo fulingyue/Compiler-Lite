@@ -186,9 +186,12 @@ public class IRFunction extends IRNode {
 
     }
     public void calcSideEffect(){
+
         for(BasicBlock bb = entranceBB;bb != null; bb = bb.getNextBB()){
-            if(bb.getSideEffect())
+            if(bb.getSideEffect()) {
                 sideEffect = true;
+                return;
+            }
         }
         sideEffect = false;
     }

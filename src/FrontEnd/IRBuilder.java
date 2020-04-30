@@ -42,6 +42,7 @@ public class IRBuilder extends AstVisitor{
 
         initialize = new IRFunction("__init__", program,
                 new ArrayList<Parameter>(), new VoidType(),false);
+        initialize.setSideEffect(true);
         initialize.init();
 
     }

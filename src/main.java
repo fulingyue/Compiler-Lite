@@ -24,17 +24,12 @@ import util.Location;
 public class main  {
 
     public static void main(String[] args)throws Exception {
-        String path ="test/sourceCode1.mx";
+        String path ="test/Compiler-2020-testcases/codegen/std/queue.mt";
         InputStream inputStream = new FileInputStream(path);
 //        InputStream inputStream = System.in;
-//        try {
-            compile(inputStream);
-            System.exit(0);
-//        }
-//        catch (Error error){
-//            System.err.println(error.getMessage());
-//            System.exit(1);
-//        }
+        compile(inputStream);
+        System.exit(0);
+
     }
 
 
