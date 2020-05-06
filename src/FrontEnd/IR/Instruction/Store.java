@@ -6,6 +6,7 @@ import FrontEnd.IR.Operand.Operand;
 
 import FrontEnd.IR.Type.PtrType;
 import FrontEnd.IRVisitor;
+import Optimize.SCCP;
 
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -80,6 +81,12 @@ public class Store extends Instruction{
         value.markLive(workList,alive);
         dest.markLive(workList,alive);
     }
+
+    @Override
+    public boolean replaceConst(SCCP sccp) {
+        return false;
+    }
+
 
     public Operand getValue() {
         return value;

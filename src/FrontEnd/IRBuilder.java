@@ -702,7 +702,7 @@ public class IRBuilder extends AstVisitor{
                 currentFunction.getSymbolTable().put(res.getName(), res);
 
 
-            } else if (lhsIsString && rhsIsString){//TODO :string type?
+            } else if (lhsIsString && rhsIsString){
                 IRFunction function;
                 String funcName;
                 switch (node.getOp()) {

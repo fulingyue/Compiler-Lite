@@ -5,10 +5,7 @@ import FrontEnd.*;
 import FrontEnd.ErrorChecker.SemanticException;
 import FrontEnd.IR.Module;
 import FrontEnd.Scope.Scope;
-import Optimize.CFGSimplifier;
-import Optimize.DeadCodeElim;
-import Optimize.DominatorTree;
-import Optimize.SSAConstructor;
+import Optimize.*;
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
@@ -24,7 +21,7 @@ import util.Location;
 public class main  {
 
     public static void main(String[] args)throws Exception {
-        String path ="test/Compiler-2020-testcases/codegen/std/queue.mt";
+        String path ="test/Compiler-2020-testcases/codegen/shortest_path/dijkstra.mx";
         InputStream inputStream = new FileInputStream(path);
 //        InputStream inputStream = System.in;
         compile(inputStream);
@@ -86,8 +83,7 @@ public class main  {
 //        IRPrinter irPrinter  = new IRPrinter();
 //        irPrinter.print(module);
 
-        CFGSimplifier cfgSimplifier = new CFGSimplifier(module);
-        cfgSimplifier.run();
+
         DominatorTree dominatorTree = new DominatorTree(module);
         dominatorTree.run();
         dominatorTree.print();
@@ -95,6 +91,10 @@ public class main  {
         ssaConstructor.run();
         DeadCodeElim DCE = new DeadCodeElim(module);
         DCE.run();
+        SCCP sccp = new SCCP(module);
+        sccp.run();
+        CFGSimplifier cfgSimplifier = new CFGSimplifier(module);
+        cfgSimplifier.run();
 
         IRPrinter irPrinter  = new IRPrinter();
         irPrinter.print(module);

@@ -8,6 +8,7 @@ import FrontEnd.IR.Operand.Parameter;
 import FrontEnd.IR.Operand.Register;
 import FrontEnd.IR.Type.VoidType;
 import FrontEnd.IRVisitor;
+import Optimize.SCCP;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -114,6 +115,19 @@ public class CallFunction extends Instruction{
             para.markLive(workList,alive);
         }
     }
+
+    @Override
+    public boolean replaceConst(SCCP sccp) {
+        if(result == null)return false;
+        SCCP.LatticeVal latticeVal = sccp.getStatus(result);
+        if(latticeVal.getType() == SCCP.LatticeVal.LatticaValType.constant){
+            result.replaceUser(latticeVal.getOperand());
+            this.remove();
+            return true;
+        }
+        return false;
+    }
+
 
     public IRFunction getFunction() {
         return function;

@@ -4,6 +4,7 @@ import FrontEnd.IR.BasicBlock;
 import FrontEnd.IR.IRNode;
 import FrontEnd.IR.Operand.Operand;
 import FrontEnd.IRVisitor;
+import Optimize.SCCP;
 
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -89,6 +90,12 @@ public class BranchJump extends Instruction {
         if(condition != null)
             condition.markLive(workList,alive);
     }
+
+    @Override
+    public boolean replaceConst(SCCP sccp) {
+        return false;
+    }
+
 
     public void changeToNoBranch(boolean bool){
         BasicBlock dest = bool? thenBlock:elseBlock;

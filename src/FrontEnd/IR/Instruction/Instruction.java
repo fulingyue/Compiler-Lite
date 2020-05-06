@@ -4,6 +4,7 @@ import FrontEnd.IR.BasicBlock;
 import FrontEnd.IR.IRNode;
 import FrontEnd.IR.Operand.Operand;
 import FrontEnd.IRVisitor;
+import Optimize.SCCP;
 
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -74,6 +75,7 @@ public abstract class Instruction extends IRNode {
     public abstract void accept(IRVisitor vistor);
     public abstract void replaceUse(IRNode oldUser, IRNode newUser);
     public abstract void markLive(LinkedList<Instruction> workList,HashSet<Instruction> alive);
+    public abstract boolean replaceConst(SCCP sccp);
     //////getter and setter//////
 
     public BasicBlock getBasicBlock() {

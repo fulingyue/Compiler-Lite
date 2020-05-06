@@ -7,6 +7,7 @@ import FrontEnd.IR.Operand.Register;
 import FrontEnd.IR.Type.IRType;
 import FrontEnd.IR.Type.PtrType;
 import FrontEnd.IRVisitor;
+import Optimize.SCCP;
 
 
 import java.util.ArrayList;
@@ -103,5 +104,40 @@ public class GetPtr extends Instruction {
         for(Operand op:index){
             op.markLive(workList,alive);
         }
+    }
+
+    @Override
+    public boolean replaceConst(SCCP sccp) {
+        SCCP.LatticeVal latticeVal = sccp.getStatus(dest);
+        if(latticeVal.getType() == SCCP.LatticeVal.LatticaValType.constant){
+            dest.replaceUser(latticeVal.getOperand());
+            this.remove();
+            return true;
+        }
+        return false;
+    }
+
+    public Operand getPointer() {
+        return pointer;
+    }
+
+    public void setPointer(Operand pointer) {
+        this.pointer = pointer;
+    }
+
+    public ArrayList<Operand> getIndex() {
+        return index;
+    }
+
+    public void setIndex(ArrayList<Operand> index) {
+        this.index = index;
+    }
+
+    public Register getDest() {
+        return dest;
+    }
+
+    public void setDest(Register dest) {
+        this.dest = dest;
     }
 }

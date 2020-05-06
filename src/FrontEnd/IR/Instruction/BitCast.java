@@ -6,6 +6,7 @@ import FrontEnd.IR.Operand.Operand;
 import FrontEnd.IR.Operand.Register;
 import FrontEnd.IR.Type.IRType;
 import FrontEnd.IRVisitor;
+import Optimize.SCCP;
 
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -65,5 +66,40 @@ public class BitCast extends Instruction {
     @Override
     public void markLive(LinkedList<Instruction> workList, HashSet<Instruction> alive) {
         src.markLive(workList,alive);
+    }
+
+    @Override
+    public boolean replaceConst(SCCP sccp) {
+        SCCP.LatticeVal latticeVal = sccp.getStatus(res);
+        if(latticeVal.getType() == SCCP.LatticeVal.LatticaValType.constant){
+            res.replaceUser(latticeVal.getOperand());
+            this.remove();
+            return true;
+        }
+        return false;
+    }
+
+    public Operand getSrc() {
+        return src;
+    }
+
+    public void setSrc(Operand src) {
+        this.src = src;
+    }
+
+    public IRType getType() {
+        return type;
+    }
+
+    public void setType(IRType type) {
+        this.type = type;
+    }
+
+    public Register getRes() {
+        return res;
+    }
+
+    public void setRes(Register res) {
+        this.res = res;
     }
 }

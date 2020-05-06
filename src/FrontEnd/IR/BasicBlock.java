@@ -3,6 +3,7 @@ package FrontEnd.IR;
 import FrontEnd.IR.Instruction.*;
 import FrontEnd.IR.Operand.Register;
 import FrontEnd.IRVisitor;
+import Optimize.SCCP;
 import util.Pair;
 
 import java.util.*;
@@ -223,6 +224,8 @@ public class BasicBlock extends IRNode{
         }
         return false;
     }
+
+
     ///////setters and getters///////
 
 

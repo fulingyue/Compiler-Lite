@@ -6,6 +6,7 @@ import FrontEnd.IR.Operand.Operand;
 import FrontEnd.IR.Operand.Parameter;
 import FrontEnd.IR.Operand.Register;
 import FrontEnd.IRVisitor;
+import Optimize.SCCP;
 import util.Pair;
 
 import java.util.HashSet;
@@ -104,6 +105,19 @@ public class Phi extends Instruction {
             iteme.getKey().markLive(workList,alive);
         }
     }
+
+    @Override
+    public boolean replaceConst(SCCP sccp) {
+        SCCP.LatticeVal latticeVal = sccp.getStatus(res);
+        if(latticeVal.getType() == SCCP.LatticeVal.LatticaValType.constant){
+            res.replaceUser(latticeVal.getOperand());
+            this.remove();
+            return true;
+        }
+        return false;
+    }
+
+
     ////getter and setter/////
 
     public Set<Pair<Operand, BasicBlock>> getBranches() {

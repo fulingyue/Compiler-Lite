@@ -6,6 +6,7 @@ import FrontEnd.IR.Operand.Operand;
 import FrontEnd.IR.Operand.Register;
 import FrontEnd.IR.Operand.VirtualReg;
 import FrontEnd.IRVisitor;
+import Optimize.SCCP;
 
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -80,6 +81,17 @@ public class BinaryOp extends Instruction {
     public void markLive(LinkedList<Instruction> workList, HashSet<Instruction> alive) {
         lhs.markLive(workList,alive);
         rhs.markLive(workList,alive);
+    }
+
+    @Override
+    public boolean replaceConst(SCCP sccp) {
+        SCCP.LatticeVal latticeVal = sccp.getStatus(dest);
+        if(latticeVal.getType() == SCCP.LatticeVal.LatticaValType.constant){
+            dest.replaceUser(latticeVal.getOperand());
+            this.remove();
+            return true;
+        }
+        return false;
     }
 
     //    @Override

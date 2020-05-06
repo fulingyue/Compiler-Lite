@@ -28,4 +28,5 @@ public class ConstBool  extends Constant {
     public void setValue(boolean value) {
         this.value = value;
     }
+
 }

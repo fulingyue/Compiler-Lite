@@ -6,6 +6,7 @@ import FrontEnd.IR.Type.IRType;
 import FrontEnd.IR.Operand.Register;
 import FrontEnd.IR.Operand.VirtualReg;
 import FrontEnd.IRVisitor;
+import Optimize.SCCP;
 
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -25,8 +26,6 @@ public class AllocateInst extends Instruction{
     public void add() {
         dest.addDef(this);
     }
-
-
 
 
 
@@ -52,6 +51,17 @@ public class AllocateInst extends Instruction{
     @Override
     public void markLive(LinkedList<Instruction> workList, HashSet<Instruction> alive) {
 
+    }
+
+    @Override
+    public boolean replaceConst(SCCP sccp) {
+        SCCP.LatticeVal latticeVal = sccp.getStatus(dest);
+        if(latticeVal.getType() == SCCP.LatticeVal.LatticaValType.constant){
+            dest.replaceUser(latticeVal.getOperand());
+            this.remove();
+            return true;
+        }
+        return false;
     }
 
     public Register getDest() {

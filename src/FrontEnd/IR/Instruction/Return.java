@@ -6,6 +6,7 @@ import FrontEnd.IR.Type.IRType;
 import FrontEnd.IR.Operand.Operand;
 import FrontEnd.IR.Type.VoidType;
 import FrontEnd.IRVisitor;
+import Optimize.SCCP;
 
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -55,6 +56,11 @@ public class Return extends Instruction {
     public void markLive(LinkedList<Instruction> workList, HashSet<Instruction> alive) {
         if(returnVal!=null)
             returnVal.markLive(workList,alive);
+    }
+
+    @Override
+    public boolean replaceConst(SCCP sccp) {
+        return false;
     }
 
     @Override
