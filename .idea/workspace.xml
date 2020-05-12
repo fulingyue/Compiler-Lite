@@ -3,28 +3,66 @@
   <component name="ChangeListManager">
     <list default="true" id="a67270fb-4b02-4acf-8cdd-5c9e4a76755c" name="Default Changelist" comment="">
       <change afterPath="$PROJECT_DIR$/Compiler-2020-local-judge/codegen.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Optimize/SCCP.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/BackEnd/Codegen.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/BackEnd/Instruction/ArtheticOp.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/BackEnd/Instruction/Branch.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/BackEnd/Instruction/CallFunc.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/BackEnd/Instruction/ILoad.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/BackEnd/Instruction/ImmOperation.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/BackEnd/Instruction/Jal.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/BackEnd/Instruction/Jalr.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/BackEnd/Instruction/Li.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/BackEnd/Instruction/Lui.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/BackEnd/Instruction/Move.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/BackEnd/Instruction/RiscInstruction.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/BackEnd/Instruction/Stype.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/BackEnd/InstructionSchedule.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/BackEnd/InstructionSelection.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/BackEnd/Operand/Address.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/BackEnd/Operand/ConstStrings.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/BackEnd/Operand/GlobalVar.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/BackEnd/Operand/Immidiate.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/BackEnd/Operand/PhysicalReg.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/BackEnd/Operand/RiscOperand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/BackEnd/Operand/RiscRegister.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/BackEnd/Operand/VirtualReg.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/BackEnd/RegisterAlloca.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/BackEnd/RegisterTable.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/BackEnd/RiscBB.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/BackEnd/RiscFunction.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/BackEnd/RiscModule.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/BackEnd/RiscVPass.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/BackEnd/RiscVisitor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/BackEnd/StackSlot.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/FrontEnd/IR/Instruction/MoveInst.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/FrontEnd/IR/Operand/Address.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Optimize/SSADestructor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Compiler-2020-local-judge/build.sh" beforeDir="false" afterPath="$PROJECT_DIR$/Compiler-2020-local-judge/build.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Compiler-2020-local-judge/config.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/Compiler-2020-local-judge/config.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Compiler-2020-local-judge/semantic.sh" beforeDir="false" afterPath="$PROJECT_DIR$/Compiler-2020-local-judge/semantic.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/IR/BasicBlock.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/IR/BasicBlock.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/IR/IRFunction.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/IR/IRFunction.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/IRVisitor.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/IRVisitor.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/util/Defines.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/util/Defines.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/FrontEnd/IR/BasicBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/IR/BasicBlock.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/FrontEnd/IR/Instruction/AllocateInst.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/IR/Instruction/AllocateInst.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/FrontEnd/IR/Instruction/BinaryOp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/IR/Instruction/BinaryOp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/FrontEnd/IR/Instruction/BitCast.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/IR/Instruction/BitCast.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FrontEnd/IR/IRFunction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/IR/IRFunction.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/FrontEnd/IR/Instruction/BranchJump.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/IR/Instruction/BranchJump.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/FrontEnd/IR/Instruction/CallFunction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/IR/Instruction/CallFunction.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/FrontEnd/IR/Instruction/GetPtr.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/IR/Instruction/GetPtr.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/FrontEnd/IR/Instruction/Icmp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/IR/Instruction/Icmp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/FrontEnd/IR/Instruction/Instruction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/IR/Instruction/Instruction.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/FrontEnd/IR/Instruction/Load.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/IR/Instruction/Load.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/FrontEnd/IR/Instruction/Phi.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/IR/Instruction/Phi.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/FrontEnd/IR/Instruction/Return.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/IR/Instruction/Return.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/FrontEnd/IR/Instruction/Store.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/IR/Instruction/Store.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/FrontEnd/IR/Operand/ConstBool.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/IR/Operand/ConstBool.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/FrontEnd/IRBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/IRBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FrontEnd/IR/Module.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/IR/Module.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FrontEnd/IR/Operand/ConstString.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/IR/Operand/ConstString.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FrontEnd/IR/Operand/Register.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/IR/Operand/Register.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FrontEnd/IR/Operand/StaticVar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/IR/Operand/StaticVar.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FrontEnd/IR/Type/ClassIRType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/IR/Type/ClassIRType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FrontEnd/IRPrinter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/IRPrinter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FrontEnd/IRVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/IRVisitor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Optimize/SCCP.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Optimize/SCCP.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/Defines.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/Defines.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -76,15 +114,18 @@
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/lib" />
+      <recent name="$PROJECT_DIR$/src/FrontEnd/IR" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="BackEnd" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/Compiler-2020-local-judge" />
       <recent name="$PROJECT_DIR$/test" />
       <recent name="C:\Users\lenovo\IdeaProjects\Compiler-Lite" />
       <recent name="C:\Users\lenovo\IdeaProjects\Compiler-Lite\src" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/lib" />
-      <recent name="$PROJECT_DIR$/src/FrontEnd/IR" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -152,7 +193,8 @@
       <workItem from="1588044853420" duration="791000" />
       <workItem from="1588061897586" duration="4000" />
       <workItem from="1588169499108" duration="2423000" />
-      <workItem from="1588303764910" duration="20822000" />
+      <workItem from="1588303764910" duration="33004000" />
+      <workItem from="1588989065292" duration="45179000" />
     </task>
     <servers />
   </component>
@@ -274,7 +316,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/FrontEnd/IR/Instruction/Store.java</url>
-          <line>39</line>
+          <line>50</line>
           <option name="timeStamp" value="210" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">

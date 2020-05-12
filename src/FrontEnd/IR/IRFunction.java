@@ -1,5 +1,6 @@
 package FrontEnd.IR;
 
+import BackEnd.RiscFunction;
 import FrontEnd.AstNode.FunctionDefNode;
 import FrontEnd.IR.Instruction.*;
 
@@ -33,6 +34,16 @@ public class IRFunction extends IRNode {
 
     private boolean external;
     private boolean sideEffect;
+    //////backend/////
+    private RiscFunction riscFunction;
+
+    public RiscFunction getRiscFunction() {
+        return riscFunction;
+    }
+
+    public void setRiscFunction(RiscFunction riscFunction) {
+        this.riscFunction = riscFunction;
+    }
 
     //////////dfs///////
     ArrayList<BasicBlock> dfsOrder = null;

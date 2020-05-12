@@ -1,5 +1,6 @@
 package FrontEnd.IR.Operand;
 
+import BackEnd.Operand.GlobalVar;
 import FrontEnd.IR.Instruction.Instruction;
 import FrontEnd.IR.Type.IRType;
 import FrontEnd.IR.Type.PtrType;
@@ -8,6 +9,25 @@ import FrontEnd.IRVisitor;
 public class StaticVar extends Operand{
     private  Operand init;
     private IRType actualType;
+
+    private GlobalVar riscGV = null;
+
+    public GlobalVar getRiscGV() {
+        return riscGV;
+    }
+
+    public void setRiscGV(GlobalVar riscGV) {
+        this.riscGV = riscGV;
+    }
+
+    public IRType getActualType() {
+        return actualType;
+    }
+
+    public void setActualType(IRType actualType) {
+        this.actualType = actualType;
+    }
+
     public StaticVar(String name, IRType  type, Operand init) {
             super(name,new PtrType(type));
             this.init = init;

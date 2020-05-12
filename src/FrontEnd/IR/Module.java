@@ -276,4 +276,8 @@ public class Module {
             return var;
         }
     }
+
+    public Map<String, StaticVar> getStaticStrings() {
+        return staticStrings;
+    }
 }

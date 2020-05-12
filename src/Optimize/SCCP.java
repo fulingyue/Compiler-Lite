@@ -387,6 +387,10 @@ public class SCCP extends Pass implements IRVisitor {
         markMutiDefined(bitCast.getRes());
     }
 
+    @Override
+    public void visit(MoveInst move) {
+
+    }
 
 
     public Map<Operand, LatticeVal> getValueState() {
@@ -396,4 +400,6 @@ public class SCCP extends Pass implements IRVisitor {
     public void setValueState(Map<Operand, LatticeVal> valueState) {
         this.valueState = valueState;
     }
+
+
 }

@@ -2,8 +2,10 @@ package FrontEnd.IR.Instruction;
 
 import FrontEnd.IR.BasicBlock;
 import FrontEnd.IR.IRNode;
+import FrontEnd.IR.Operand.ConstInt;
 import FrontEnd.IR.Operand.Operand;
 import FrontEnd.IR.Operand.Register;
+import FrontEnd.IR.Type.ClassIRType;
 import FrontEnd.IR.Type.IRType;
 import FrontEnd.IR.Type.PtrType;
 import FrontEnd.IRVisitor;
@@ -47,6 +49,54 @@ public class GetPtr extends Instruction {
     public void removeDefs() {
         dest.removeDef(this);
     }
+
+    public boolean onlyUseForLoadStore(){
+        for(IRNode inst: dest.getUsers()){
+            assert  inst instanceof Instruction;
+            if(!((inst instanceof Load) || (inst instanceof Store))){
+                return false;
+            }
+        }
+        return true;
+    }
+
+//    public int getOffset(){//TODO check it !
+//        assert index.size() <= 2;
+//        assert pointer.getType() instanceof PtrType;
+//        IRType type = ((PtrType) pointer.getType()).getPointerType();
+//        if(index.size() == 1){//array
+//            Operand second = index.get(0);
+//            if(second instanceof ConstInt){
+//                return ((PtrType) pointer.getType()).getPointerType().getByteWidth() * ((ConstInt) second).getValue();
+//            }
+//            else return -1;
+//        }
+//        else {//class
+//            Operand ind = index.get(1);
+//            assert ind instanceof ConstInt;
+//            int indd = ((ConstInt) ind).getValue();
+//            assert type  instanceof PtrType;
+//            ClassIRType classType = (ClassIRType)((PtrType) type).getPointerType();
+//            int offset = 0;
+//            for(int i = 0; i < indd; ++i){
+//                int width = classType.getMemberList().get(i).getByteWidth();
+//                if(offset % 4 == 0){
+//                    offset += width;
+//                }
+//                else {
+//                    if(width == 1){
+//                        offset += 1;
+//                    }
+//                    else {
+//                        offset += 8 - (offset % 4);
+//                    }
+//                }
+//            }
+//            return offset;
+//        }
+//    }
+
+
 
 
 

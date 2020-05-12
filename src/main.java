@@ -21,7 +21,7 @@ import util.Location;
 public class main  {
 
     public static void main(String[] args)throws Exception {
-        String path ="test/Compiler-2020-testcases/codegen/shortest_path/dijkstra.mx";
+        String path ="test/sourceCode1.mx";
         InputStream inputStream = new FileInputStream(path);
 //        InputStream inputStream = System.in;
         compile(inputStream);
@@ -95,6 +95,9 @@ public class main  {
         sccp.run();
         CFGSimplifier cfgSimplifier = new CFGSimplifier(module);
         cfgSimplifier.run();
+
+        SSADestructor ssaDestructor = new SSADestructor(module);
+        ssaDestructor.run();
 
         IRPrinter irPrinter  = new IRPrinter();
         irPrinter.print(module);

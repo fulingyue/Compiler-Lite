@@ -1,5 +1,6 @@
 package FrontEnd.IR.Instruction;
 
+import BackEnd.Instruction.RiscInstruction;
 import FrontEnd.IR.BasicBlock;
 import FrontEnd.IR.IRNode;
 import FrontEnd.IR.Operand.Operand;
@@ -14,6 +15,16 @@ import java.util.LinkedList;
 public class Store extends Instruction{
     private Operand value;
     private Operand dest;
+
+    private RiscInstruction riscInst;
+
+    public RiscInstruction getRiscInst() {
+        return riscInst;
+    }
+
+    public void setRiscInst(RiscInstruction riscInst) {
+        this.riscInst = riscInst;
+    }
 
     public Store(String name, BasicBlock bb, Operand value, Operand dest) {
         super(name, bb);

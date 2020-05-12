@@ -141,6 +141,11 @@ public class IRPrinter implements IRVisitor {
     }
 
     @Override
+    public void visit(MoveInst move) {
+        println(indent + move.print());
+    }
+
+    @Override
     public void visit(Icmp inst) {
         println(indent + inst.print());
     }

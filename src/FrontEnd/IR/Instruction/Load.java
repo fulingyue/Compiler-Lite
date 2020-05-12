@@ -1,5 +1,6 @@
 package FrontEnd.IR.Instruction;
 
+import BackEnd.Instruction.RiscInstruction;
 import FrontEnd.IR.BasicBlock;
 import FrontEnd.IR.IRNode;
 import FrontEnd.IR.Operand.Operand;
@@ -15,6 +16,16 @@ public class Load extends Instruction {
     private IRType type;
     private Operand dest;
     private Register res;
+
+    private RiscInstruction riscInst;
+
+    public RiscInstruction getRiscInst() {
+        return riscInst;
+    }
+
+    public void setRiscInst(RiscInstruction riscInst) {
+        this.riscInst = riscInst;
+    }
 
     public Load(String name, BasicBlock bb, IRType type, Operand dest, Register res) {
         super(name, bb);

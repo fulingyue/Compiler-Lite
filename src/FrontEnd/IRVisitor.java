@@ -22,6 +22,7 @@ public interface IRVisitor {
     void visit(GetPtr getPtr);
     void visit(Phi phi);
     void visit (BitCast bitCast);
+    void visit(MoveInst move);
 
 //    void visit(VirtualReg  reg);
 //    void visit(ConstInt constInt);

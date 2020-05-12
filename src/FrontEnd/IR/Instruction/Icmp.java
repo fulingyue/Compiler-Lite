@@ -123,6 +123,16 @@ public class Icmp extends Instruction {
         return false;
     }
 
+    //////utils////////
+    public boolean onlyInBranch(){
+        for(IRNode irNode: dest.getUsers()){
+            assert irNode instanceof Instruction;
+            if(! (irNode instanceof BranchJump)){
+                return false;
+            }
+        }
+        return true;
+    }
 
     /////getter and setter////////
 

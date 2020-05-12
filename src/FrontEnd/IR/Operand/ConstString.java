@@ -1,14 +1,26 @@
 package FrontEnd.IR.Operand;
 
+import BackEnd.Operand.ConstStrings;
 import FrontEnd.IR.Type.IRType;
 import FrontEnd.IRVisitor;
 
 public class ConstString extends Constant{
     private String value;
-//    private int size;
+
+    private ConstStrings riscGS;
+
+    public ConstStrings getRiscGS() {
+        return riscGS;
+    }
+
+    public void setRiscGS(ConstStrings riscGS) {
+        this.riscGS = riscGS;
+    }
+
+    //    private int size;
     public ConstString(String name, IRType type, String string) {
         super(name,type);
-        this.value = string;
+        this.value = string;//array type
     }
     @Override
     public String print() {

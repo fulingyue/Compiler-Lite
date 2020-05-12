@@ -47,17 +47,17 @@ public class ClassIRType extends IRType {
         memberList.add(type);
         nameList.add(name);
     }
-
-    public int getByteIndex(String name)  {
-        int index=  0;
-        for(int i = 0;i < memberList.size(); ++i)  {
-            if(nameList.get(i).equals(name)){break;}
-            else {
-                index += memberList.get(i).getByteWidth();
-            }
-        }
-        return index;
-    }
+//
+//    public int getByteIndex(String name)  {
+//        int index=  0;
+//        for(int i = 0;i < memberList.size(); ++i)  {
+//            if(nameList.get(i).equals(name)){break;}
+//            else {
+//                index += memberList.get(i).getByteWidth();
+//            }
+//        }
+//        return index;
+//    }
 
     public int getIndex(String name) {
         int i = 0;
@@ -75,6 +75,17 @@ public class ClassIRType extends IRType {
     public String print() {
         return ("%" + name);
 
+    }
+
+    public int getOffset(int index){
+        assert index >= 0;
+        assert  index < memberList.size();
+        int offset = 0;
+        for(int i = 0; i <= index; ++i ){
+            int sz = memberList.get(i).getByteWidth();
+            offset = Aligner.align(offset,sz) + (i == index? 0 : sz);
+        }
+        return offset;
     }
 
     public String printType() {

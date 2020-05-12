@@ -1,5 +1,6 @@
 package FrontEnd.IR.Instruction;
 
+import BackEnd.Instruction.RiscInstruction;
 import FrontEnd.IR.BasicBlock;
 import FrontEnd.IR.IRNode;
 import FrontEnd.IR.Operand.Operand;
@@ -12,6 +13,17 @@ import java.util.LinkedList;
 public class BranchJump extends Instruction {
     private Operand condition;
     private BasicBlock  thenBlock, elseBlock;
+
+    private RiscInstruction riscInstruction;
+
+    public RiscInstruction getRiscInstruction() {
+        return riscInstruction;
+    }
+
+    public void setRiscInstruction(RiscInstruction riscInstruction) {
+        this.riscInstruction = riscInstruction;
+    }
+
 
     public BranchJump(String name, BasicBlock bb, Operand condition, BasicBlock thenBB, BasicBlock elseBB) {
         super(name,bb);

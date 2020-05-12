@@ -1,5 +1,6 @@
 package FrontEnd.IR.Operand;
 
+import BackEnd.Operand.RiscRegister;
 import FrontEnd.IR.Instruction.Instruction;
 import FrontEnd.IR.Type.IRType;
 import FrontEnd.IRVisitor;
@@ -9,6 +10,16 @@ import java.util.LinkedList;
 
 public abstract class Register extends Operand {
     private Instruction defInst;//strict prior definition
+
+    private RiscRegister riscRegister = null;
+
+    public RiscRegister getRiscRegister() {
+        return riscRegister;
+    }
+
+    public void setRiscRegister(RiscRegister riscRegister) {
+        this.riscRegister = riscRegister;
+    }
 
     public abstract String print();
 

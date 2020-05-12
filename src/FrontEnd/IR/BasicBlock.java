@@ -1,5 +1,7 @@
 package FrontEnd.IR;
 
+import BackEnd.Instruction.Move;
+import BackEnd.RiscBB;
 import FrontEnd.IR.Instruction.*;
 import FrontEnd.IR.Operand.Register;
 import FrontEnd.IRVisitor;
@@ -28,6 +30,21 @@ public class BasicBlock extends IRNode{
     private HashSet<BasicBlock> domianceFrontier = new HashSet<>();
     private Map<Register, Phi> phiMap;
     private ArrayList<BasicBlock> dominance = new ArrayList<>();
+
+
+    private ArrayList<MoveInst> moveList = new ArrayList<>();
+
+
+    ///////backend///////
+    private RiscBB riscBB;
+
+    public RiscBB getRiscBB() {
+        return riscBB;
+    }
+
+    public void setRiscBB(RiscBB riscBB) {
+        this.riscBB = riscBB;
+    }
 
 
     public BasicBlock(String name, IRFunction function) {
@@ -225,9 +242,63 @@ public class BasicBlock extends IRNode{
         return false;
     }
 
+    public ArrayList<Phi> getPhiList(){
+        ArrayList<Phi> phiList = new ArrayList<>();
+        Instruction inst = head;
+        while(inst instanceof Phi){
+            phiList.add((Phi)inst);
+            inst = inst.getNxt();
+        }
+        return phiList;
+    }
 
+    public MoveInst findValidMove(){
+        for(MoveInst lhs: moveList){
+            boolean flag = true;
+            for(MoveInst rhs:  moveList){
+                if (rhs.getSrc().equals(lhs.getRes())) {
+                    flag = false;
+                    break;
+                }
+            }
+            if(flag) return lhs;
+        }
+        return null;
+    }
+
+    public void mergeMove(MoveInst move){
+        if(moveList.contains(move)){
+            moveList.remove(move);
+        }
+
+        move.setBasicBlock(this);
+        move.add();
+        Instruction second = tail.getPrev();
+        if(second == null){
+            assert head == tail;
+            head = move;
+            move.setNxt(tail);
+            tail.setPrev(move);
+        }
+        else {
+            second.setNxt(move);
+            move.setPrev(second);
+            tail.setPrev(move);
+            move.setNxt(tail);
+        }
+    }
     ///////setters and getters///////
+    public ArrayList<MoveInst> getMoveList() {
+        return moveList;
+    }
 
+    public void setMoveList(ArrayList<MoveInst> moveList) {
+        this.moveList = moveList;
+    }
+
+    public void addMove(MoveInst move){
+        moveList.add(move);
+    }
 
     public Map<Register, Phi> getPhiMap() {
         return phiMap;
