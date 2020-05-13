@@ -1,8 +1,8 @@
 package FrontEnd.IR.Operand;
 
-import BackEnd.Operand.GlobalVar;
-import BackEnd.Operand.Immidiate;
-import BackEnd.Operand.PhysicalReg;
+import BackEnd.Operands.GlobalVar;
+import BackEnd.Operands.Immidiate;
+import BackEnd.Operands.PhysicalReg;
 
 public class Address extends Immidiate {
     private PhysicalReg  reg; // %hi or %lo

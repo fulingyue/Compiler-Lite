@@ -1,10 +1,8 @@
 package FrontEnd.IR.Operand;
 
-import BackEnd.Operand.GlobalVar;
-import FrontEnd.IR.Instruction.Instruction;
+import BackEnd.Operands.GlobalVar;
 import FrontEnd.IR.Type.IRType;
 import FrontEnd.IR.Type.PtrType;
-import FrontEnd.IRVisitor;
 
 public class StaticVar extends Operand{
     private  Operand init;

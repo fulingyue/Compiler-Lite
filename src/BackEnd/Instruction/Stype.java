@@ -1,12 +1,12 @@
 package BackEnd.Instruction;
 
-import BackEnd.Operand.Immidiate;
-import BackEnd.Operand.RiscOperand;
-import BackEnd.Operand.RiscRegister;
+import BackEnd.Operands.Immidiate;
+import BackEnd.Operands.RiscOperand;
+import BackEnd.Operands.RiscRegister;
 import BackEnd.RiscBB;
 
 public class Stype extends RiscInstruction {
-    private RiscRegister rd;
+    private RiscRegister rs;
     private RiscOperand dest;
     private Immidiate offset;
     private BSize op;
@@ -16,9 +16,9 @@ public class Stype extends RiscInstruction {
     }
 
 
-    public Stype(RiscBB parentBB, RiscRegister rd, RiscOperand dest, Immidiate offset, BSize op) {
+    public Stype(RiscBB parentBB, RiscRegister rs, RiscOperand dest, Immidiate offset, BSize op) {
         super(parentBB);
-        this.rd = rd;
+        this.rs = rs;
         this.dest = dest;
         this.offset = offset;
         this.op = op;
@@ -34,8 +34,8 @@ public class Stype extends RiscInstruction {
 
     @Override
     public void add(){
-        addUse(rd);
-        rd.addUse(this);
+        addUse(rs);
+        rs.addUse(this);
         if(dest instanceof RiscRegister){
             addUse((RiscRegister)dest);
             ((RiscRegister) dest).addUse(this);
@@ -43,11 +43,11 @@ public class Stype extends RiscInstruction {
     }
 
     public RiscRegister getRd() {
-        return rd;
+        return rs;
     }
 
     public void setRd(RiscRegister rd) {
-        this.rd = rd;
+        this.rs = rd;
     }
 
     public RiscOperand getDest() {

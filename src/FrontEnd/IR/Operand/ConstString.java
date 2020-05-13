@@ -1,8 +1,7 @@
 package FrontEnd.IR.Operand;
 
-import BackEnd.Operand.ConstStrings;
+import BackEnd.Operands.ConstStrings;
 import FrontEnd.IR.Type.IRType;
-import FrontEnd.IRVisitor;
 
 public class ConstString extends Constant{
     private String value;

@@ -1,7 +1,7 @@
 package BackEnd;
 
-import BackEnd.Operand.RiscRegister;
-import BackEnd.Operand.VirtualReg;
+import BackEnd.Operands.RiscRegister;
+import BackEnd.Operands.VirtualReg;
 import FrontEnd.IR.IRFunction;
 
 import java.util.ArrayList;
@@ -13,8 +13,7 @@ public class RiscFunction {
     private int paraNum;
     private ArrayList<RiscRegister> registerList;
     IRFunction function;
-    private ArrayList<StackSlot> callStackSlots;
-    int stackSize;
+    StackFrame stackFrame;
 
 
     public RiscFunction(String name, int paraNum, IRFunction function) {
@@ -23,8 +22,7 @@ public class RiscFunction {
         blocks = new ArrayList<>();
         registerList = new ArrayList<>();
         this.function = function;
-        callStackSlots = new ArrayList<>();
-        stackSize = 0;
+
     }
 
     public VirtualReg addRegister(String name){
@@ -36,9 +34,7 @@ public class RiscFunction {
     public void addBB(RiscBB bb) {
         blocks.add(bb);
     }
-    public void addStackSlot(StackSlot stackSlot){
-        callStackSlots.add(stackSlot);
-    }
+
 
 
     public IRFunction getFunction() {
@@ -49,20 +45,12 @@ public class RiscFunction {
         this.function = function;
     }
 
-    public ArrayList<StackSlot> getCallStackSlots() {
-        return callStackSlots;
+    public StackFrame getStackFrame() {
+        return stackFrame;
     }
 
-    public void setCallStackSlots(ArrayList<StackSlot> callStackSlots) {
-        this.callStackSlots = callStackSlots;
-    }
-
-    public int getStackSize() {
-        return stackSize;
-    }
-
-    public void setStackSize(int stackSize) {
-        this.stackSize = stackSize;
+    public void setStackFrame(StackFrame stackFrame) {
+        this.stackFrame = stackFrame;
     }
 
     public String getName() {

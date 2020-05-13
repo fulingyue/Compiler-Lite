@@ -19,7 +19,7 @@ public class print_tool {
         if(ch != '\"') throw  new RuntimeException();
         for (int i = 1; i <  str.length()-1; i++){
             ch = str.charAt(i);
-            if (ch == '\\') {//TODO
+            if (ch == '\\') {
                 switch (str.charAt(++i)) {
                     case '\\': stringBuilder.append('\\');break;
                     case  'n': stringBuilder.append('\n');break;

@@ -1,6 +1,6 @@
 package BackEnd.Instruction;
 
-import BackEnd.Operand.RiscRegister;
+import BackEnd.Operands.RiscRegister;
 import BackEnd.RiscBB;
 
 

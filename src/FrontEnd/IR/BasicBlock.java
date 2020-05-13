@@ -1,15 +1,14 @@
 package FrontEnd.IR;
 
-import BackEnd.Instruction.Move;
 import BackEnd.RiscBB;
 import FrontEnd.IR.Instruction.*;
 import FrontEnd.IR.Operand.Register;
 import FrontEnd.IRVisitor;
-import Optimize.SCCP;
-import util.Pair;
 
-import java.util.*;
-import java.util.concurrent.BlockingQueue;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 public class BasicBlock extends IRNode{
     private IRFunction functionParent;
@@ -105,7 +104,7 @@ public class BasicBlock extends IRNode{
         return "%" + name;
     }
 
-    public void deleteDeadInst() {//TODO
+    public void deleteDeadInst() {
         Instruction inst = this.getHead();
         while(true) {
             if(inst instanceof AllocateInst) {

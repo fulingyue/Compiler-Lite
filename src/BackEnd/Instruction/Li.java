@@ -1,7 +1,7 @@
 package BackEnd.Instruction;
 
-import BackEnd.Operand.Immidiate;
-import BackEnd.Operand.RiscRegister;
+import BackEnd.Operands.Immidiate;
+import BackEnd.Operands.RiscRegister;
 import BackEnd.RiscBB;
 
 public class Li extends RiscInstruction {

@@ -1,7 +1,7 @@
 package BackEnd;
 
-import BackEnd.Operand.ConstStrings;
-import BackEnd.Operand.GlobalVar;
+import BackEnd.Operands.ConstStrings;
+import BackEnd.Operands.GlobalVar;
 
 import java.util.ArrayList;
 import java.util.List;

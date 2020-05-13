@@ -1,6 +1,6 @@
 package BackEnd;
 
-import BackEnd.Operand.PhysicalReg;
+import BackEnd.Operands.PhysicalReg;
 
 import java.util.HashMap;
 

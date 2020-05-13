@@ -1,4 +1,4 @@
-package BackEnd.Operand;
+package BackEnd.Operands;
 
 public abstract class RiscOperand {
     public int getSize(){

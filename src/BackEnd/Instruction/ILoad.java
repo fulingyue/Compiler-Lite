@@ -1,8 +1,8 @@
 package BackEnd.Instruction;
 
-import BackEnd.Operand.Immidiate;
-import BackEnd.Operand.RiscOperand;
-import BackEnd.Operand.RiscRegister;
+import BackEnd.Operands.Immidiate;
+import BackEnd.Operands.RiscOperand;
+import BackEnd.Operands.RiscRegister;
 import BackEnd.RiscBB;
 
 public class ILoad extends RiscInstruction {
@@ -15,6 +15,13 @@ public class ILoad extends RiscInstruction {
         this.rd = rd;
         this.target = target;
         this.offset = offset;
+    }
+
+    public ILoad(RiscBB parentBB, RiscRegister rd, RiscOperand target) {
+        super(parentBB);
+        this.rd = rd;
+        this.target = target;
+        this.offset = new Immidiate(0);
     }
 
     @Override

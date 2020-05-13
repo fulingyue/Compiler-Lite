@@ -1,4 +1,4 @@
-package BackEnd.Operand;
+package BackEnd.Operands;
 
 public class ConstStrings extends GlobalVar{
     private String str;

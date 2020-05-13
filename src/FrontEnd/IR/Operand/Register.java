@@ -1,9 +1,8 @@
 package FrontEnd.IR.Operand;
 
-import BackEnd.Operand.RiscRegister;
+import BackEnd.Operands.RiscRegister;
 import FrontEnd.IR.Instruction.Instruction;
 import FrontEnd.IR.Type.IRType;
-import FrontEnd.IRVisitor;
 
 import java.util.HashSet;
 import java.util.LinkedList;

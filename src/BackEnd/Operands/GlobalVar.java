@@ -1,4 +1,4 @@
-package BackEnd.Operand;
+package BackEnd.Operands;
 
 public class GlobalVar extends RiscOperand {
     private RiscOperand val;
