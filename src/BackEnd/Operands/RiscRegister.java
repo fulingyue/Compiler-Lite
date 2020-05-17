@@ -43,16 +43,18 @@ public class RiscRegister extends RiscOperand {
 
     @Override
     public String print() {
-        return name;
+        if(color == null)
+            return name;
+        return color.getName();
     }
 
-    private LinkedHashSet<Move> moveList;
-    private LinkedHashSet<RiscRegister> adjList;
+    private LinkedHashSet<Move> moveList = new LinkedHashSet<>();
+    private LinkedHashSet<RiscRegister> adjList = new LinkedHashSet<>();
     private int degree;
-    private RiscRegister alias;
-    private  boolean colorFixed;
-    private PhysicalReg color;
-    private double spilledCost;
+    private RiscRegister alias = this;
+    private  boolean colorFixed = false;
+    private PhysicalReg color =  null;
+    private double spilledCost = 0;
 
 
     public void clearColor(){

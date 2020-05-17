@@ -8,6 +8,7 @@ import java.util.List;
 
 public class RiscModule {
     private List<RiscFunction> functionList = new ArrayList<>();
+    private List<RiscFunction> externalFunction = new ArrayList<>();
     private ArrayList<GlobalVar> globalVars = new ArrayList<>();
     private ArrayList<ConstStrings> constStrings = new ArrayList<>();
 
@@ -17,8 +18,13 @@ public class RiscModule {
         functionList.add(function);
     }
 
+    public void addExtern(RiscFunction function){
+        externalFunction.add(function);
+    }
+
     public void addGV(GlobalVar var){globalVars.add(var);}
     public void addString(ConstStrings str){constStrings.add(str);}
+
 
 
 

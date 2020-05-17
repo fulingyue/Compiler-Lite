@@ -3,47 +3,21 @@
   <component name="ChangeListManager">
     <list default="true" id="a67270fb-4b02-4acf-8cdd-5c9e4a76755c" name="Default Changelist" comment="">
       <change afterPath="$PROJECT_DIR$/Compiler-2020-local-judge/codegen.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/BackEnd/Instruction/BinaryBranch.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/BackEnd/Instruction/LA.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/BackEnd/Instruction/Return.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/BackEnd/Instruction/UnaryBranch.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/BackEnd/LivenessAnalysis.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/BackEnd/LoopAnalysis.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/BackEnd/RiscPass.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Compiler-2020-local-judge/build.sh" beforeDir="false" afterPath="$PROJECT_DIR$/Compiler-2020-local-judge/build.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Compiler-2020-local-judge/config.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/Compiler-2020-local-judge/config.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Compiler-2020-local-judge/semantic.sh" beforeDir="false" afterPath="$PROJECT_DIR$/Compiler-2020-local-judge/semantic.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/util/Defines.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/util/Defines.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/util/print_tool.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/util/print_tool.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/BackEnd/Codegen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BackEnd/Codegen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BackEnd/Instruction/ArtheticOp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BackEnd/Instruction/ArtheticOp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BackEnd/Instruction/Branch.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BackEnd/Instruction/CallFunc.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BackEnd/Instruction/CallFunc.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BackEnd/Instruction/ILoad.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BackEnd/Instruction/ILoad.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BackEnd/Instruction/ImmOperation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BackEnd/Instruction/ImmOperation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BackEnd/Instruction/Jal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BackEnd/Instruction/Jal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BackEnd/Instruction/Jalr.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BackEnd/Instruction/Jalr.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BackEnd/Instruction/Li.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BackEnd/Instruction/Li.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/BackEnd/Instruction/Lui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BackEnd/Instruction/Lui.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BackEnd/Instruction/Move.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BackEnd/Instruction/Move.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BackEnd/Instruction/RiscInstruction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BackEnd/Instruction/RiscInstruction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BackEnd/Instruction/Stype.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BackEnd/Instruction/Stype.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/BackEnd/InstructionSelection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BackEnd/InstructionSelection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BackEnd/Operands/GlobalVar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BackEnd/Operands/GlobalVar.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BackEnd/Operands/PhysicalReg.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BackEnd/Operands/PhysicalReg.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/BackEnd/Operands/RiscRegister.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BackEnd/Operands/RiscRegister.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BackEnd/RegisterAlloca.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BackEnd/RegisterAlloca.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BackEnd/RegisterTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BackEnd/RegisterTable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BackEnd/RiscBB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BackEnd/RiscBB.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/BackEnd/RiscFunction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BackEnd/RiscFunction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BackEnd/RiscVPass.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BackEnd/RiscVisitor.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BackEnd/StackFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BackEnd/StackFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/FrontEnd/IR/Instruction/Load.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/IR/Instruction/Load.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/FrontEnd/IR/Module.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/IR/Module.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/FrontEnd/IR/Operand/ConstString.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/IR/Operand/ConstString.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BackEnd/RiscModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BackEnd/RiscModule.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/util/Defines.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/Defines.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/print_tool.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/print_tool.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -89,7 +63,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="add_unversioned_files" value="$PROJECT_DIR$/test/test.ll&#10;/Users/fulingyue/Desktop/Compiler-Lite/test/test1.ll" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/Compiler-2020-local-judge" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Compiler/Mx-Compiler" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -185,7 +159,7 @@
       <workItem from="1589283720055" duration="3307000" />
       <workItem from="1589332933358" duration="31284000" />
       <workItem from="1589594742760" duration="26000" />
-      <workItem from="1589601313055" duration="20729000" />
+      <workItem from="1589601313055" duration="25206000" />
     </task>
     <servers />
   </component>
@@ -334,6 +308,11 @@
           <url>file://$PROJECT_DIR$/src/FrontEnd/IR/Operand/VirtualReg.java</url>
           <line>26</line>
           <option name="timeStamp" value="367" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/BackEnd/Instruction/Lui.java</url>
+          <line>24</line>
+          <option name="timeStamp" value="371" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

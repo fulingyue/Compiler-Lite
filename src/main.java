@@ -1,5 +1,6 @@
 import BackEnd.Codegen;
 import BackEnd.InstructionSelection;
+import BackEnd.RegisterAlloca;
 import BackEnd.RiscModule;
 import FrontEnd.Antlr.MxErrorListener;
 import FrontEnd.Antlr.MxLexer;
@@ -98,7 +99,7 @@ public class main  {
 
         SSADestructor ssaDestructor = new SSADestructor(module);
         ssaDestructor.run();
-
+//
         IRPrinter irPrinter  = new IRPrinter();
         irPrinter.print(module);
 
@@ -106,8 +107,9 @@ public class main  {
         InstructionSelection instructionSelector = new InstructionSelection(module);
         instructionSelector.run();
         RiscModule riscModule = instructionSelector.getModule();
-
-        Codegen codegen = new Codegen();
+        RegisterAlloca registerAlloca = new RegisterAlloca(riscModule);
+        registerAlloca.run();
+        Codegen codegen = new Codegen("test/out.s");
         codegen.run(riscModule);
 
     }

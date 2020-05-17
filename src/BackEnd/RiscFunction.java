@@ -34,7 +34,9 @@ public class RiscFunction {
     }
 
     public void addBB(RiscBB bb) {
+        if(blocks.size() == 0) entranceBB = bb;
         blocks.add(bb);
+        exitBB = blocks.get(blocks.size()  -1);
     }
 
     public ArrayList<RiscBB> getDfs(){

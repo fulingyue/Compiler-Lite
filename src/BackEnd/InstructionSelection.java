@@ -50,7 +50,7 @@ public class InstructionSelection implements IRVisitor {
         for(IRFunction function: root.getExternalFuncMap().values()){
             RiscFunction newFunc = new RiscFunction(function.getName(),function.getParaList().size(),null);
             function.setRiscFunction(newFunc);
-            module.addFunction(newFunc);
+            module.addExtern(newFunc);
         }
         for(IRFunction function: root.getFunctionMap().values()){
             RiscFunction newFunc = new RiscFunction(function.getName(), function.getParaList().size(),function);

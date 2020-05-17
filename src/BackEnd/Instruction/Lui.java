@@ -8,9 +8,10 @@ public class Lui extends RiscInstruction{
     private RiscRegister rd;
     private Immidiate imm;
 
-    public Lui(RiscBB parentBB, RiscRegister rd, Immidiate imm ) {
+    public Lui(RiscBB parentBB, RiscRegister rd, Immidiate imm) {
         super(parentBB);
         this.rd = rd;
+        this.imm = imm;
     }
     @Override
     public void add(){
