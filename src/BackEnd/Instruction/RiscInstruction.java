@@ -5,18 +5,27 @@ import BackEnd.RiscBB;
 
 import java.util.HashSet;
 
-public class RiscInstruction {
+public abstract class RiscInstruction {
     private RiscInstruction prev,next;
     protected RiscBB parentBB;
     private HashSet<RiscRegister> def, usages;
 
     public RiscInstruction(RiscBB parentBB) {
         this.parentBB = parentBB;
+        def = new HashSet<>();
+        usages = new HashSet<>();
     }
 
-    public void add(){}
-    public void addDef(RiscRegister reg){def.add(reg);}
-    public void addUse(RiscRegister reg){usages.add(reg);}
+    public abstract void add();
+    public void addDef(RiscRegister reg){
+        def.add(reg);
+        reg.setSpilledCost(reg.getSpilledCost() + 1);
+    }
+    public void addUse(RiscRegister reg){
+        usages.add(reg);
+        reg.setSpilledCost(reg.getSpilledCost() + 1);
+    }
+    public abstract String print();
 
     public void  deleteItself(){
         if(this.parentBB!= null){
@@ -32,6 +41,9 @@ public class RiscInstruction {
         }
 
     }
+
+    public abstract void replaceUse(RiscRegister old, RiscRegister newUse);
+    public abstract void replaceDef(RiscRegister old, RiscRegister newDef);
 
     public RiscInstruction getPrev() {
         return prev;

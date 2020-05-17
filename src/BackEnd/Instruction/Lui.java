@@ -18,6 +18,29 @@ public class Lui extends RiscInstruction{
         rd.addDef(this);
     }
 
+
+    @Override
+    public String print() {
+        return "\tlui\t" + rd.print() + ", " + imm.print();
+    }
+
+    @Override
+    public void replaceUse(RiscRegister old, RiscRegister newUse) {
+
+    }
+
+    @Override
+    public void replaceDef(RiscRegister old, RiscRegister newDef) {
+        if(old == rd){
+            old.getDef().remove(this);
+            getDef().remove(old);
+            rd = newDef;
+            newDef.addDef(this);
+            addDef(newDef);
+        }
+    }
+
+
     public RiscRegister getRd() {
         return rd;
     }

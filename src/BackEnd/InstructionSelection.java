@@ -1,23 +1,27 @@
 package BackEnd;
 
 import BackEnd.Instruction.*;
-import BackEnd.Operands.*;
 import BackEnd.Operands.VirtualReg;
+import BackEnd.Operands.*;
 import FrontEnd.IR.BasicBlock;
 import FrontEnd.IR.IRFunction;
 import FrontEnd.IR.IRNode;
+import FrontEnd.IR.Instruction.Return;
 import FrontEnd.IR.Instruction.*;
 import FrontEnd.IR.Module;
 import FrontEnd.IR.Operand.*;
-import FrontEnd.IR.Operand.Address;
 import FrontEnd.IR.Type.ClassIRType;
 import FrontEnd.IR.Type.IRType;
 import FrontEnd.IR.Type.IntIRType;
 import FrontEnd.IR.Type.PtrType;
 import FrontEnd.IRVisitor;
 import util.Defines;
+import util.Pair;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+
+import static BackEnd.Instruction.UnaryBranch.UnaryBrOp.beqz;
 
 public class InstructionSelection implements IRVisitor {
     public RiscModule module;
@@ -25,11 +29,15 @@ public class InstructionSelection implements IRVisitor {
     private RiscFunction currentFunction;
     private RiscBB currentBB;
     private VirtualReg[] calleeSaved;
+    private HashMap<String, ConstStrings> stringMap;
+    private HashMap<Operand, Pair<RiscRegister,Immidiate>> getPtrMap;
 
     public InstructionSelection(Module irModule) {
         IRModule = irModule;
         module = new RiscModule();
-
+        calleeSaved = new VirtualReg[13];
+        stringMap = new HashMap<>();
+        getPtrMap = new HashMap<>();
     }
 
     public void run(){
@@ -38,9 +46,9 @@ public class InstructionSelection implements IRVisitor {
 
     @Override
     public void visit(Module root) {
-
+///////////////register functions/////////////
         for(IRFunction function: root.getExternalFuncMap().values()){
-            RiscFunction newFunc = new RiscFunction(function.getName(),function.getParaList().size(),function);
+            RiscFunction newFunc = new RiscFunction(function.getName(),function.getParaList().size(),null);
             function.setRiscFunction(newFunc);
             module.addFunction(newFunc);
         }
@@ -50,17 +58,18 @@ public class InstructionSelection implements IRVisitor {
             module.addFunction(newFunc);
         }
 
+///////////////global variables//////////////////
         for(String str: root.getStaticStrings().keySet()){//register global strings
             StaticVar globalString = root.getStaticStrings().get(str);
             assert globalString.getInit() instanceof ConstString;
             ConstStrings riscString = new ConstStrings(globalString.getName(),str);
-            ((ConstString) globalString.getInit()).setRiscGS(riscString);
-            module.addString(riscString);
+            stringMap.put(str,riscString);
         }
 
         for(StaticVar global: root.getStaticVariableMap().values()){
             visit(global);
         }
+ /////////////////////////visit functions////////////////
 
         for(IRFunction function: root.getFunctionMap().values()){
             visit(function);
@@ -69,12 +78,10 @@ public class InstructionSelection implements IRVisitor {
     }
 
 
-
     @Override
     public void visit(IRFunction function) {
 
         currentFunction = function.getRiscFunction();
-
 
         for(BasicBlock bb = function.getEntranceBB(); bb != null; bb = bb.getNextBB()){
             RiscBB riscBB = new RiscBB(bb.getName(),currentFunction,bb);
@@ -86,28 +93,35 @@ public class InstructionSelection implements IRVisitor {
         currentBB = entranceBB.getRiscBB();
         currentFunction.setEntranceBB(currentBB);
 
+        /////////every function has a stackframe/////////////
         StackFrame stackFrame = new StackFrame(currentFunction);
         currentFunction.setStackFrame(stackFrame);
-///////////////////ra////////////////
-        calleeSaved[12] = currentFunction.addRegister("ra");
+
+        /////////////////// preface of the function/////////////
+///////////////////load ra////////////////
+        calleeSaved[12] = currentFunction.addRegister("ra.save");
         currentBB.addInst(new Move(currentBB,RegisterTable.ra,calleeSaved[12]));
-//////////////callee Saved///////////////
+//////////////load callee Saved//////////////////////////////
         for(int i = 0;i < 12; ++i) {
             PhysicalReg reg = RegisterTable.calleeSavedRegisters[i];
-            calleeSaved[i] = currentFunction.addRegister("calleeSaved");
+            calleeSaved[i] = currentFunction.addRegister(reg.name + ".save");
             currentBB.addInst(new Move(currentBB,reg,calleeSaved[i]));
         }
 //////////////////////arguments//////////////
+        ////move argument from register/////
         ArrayList<Parameter> parameters = function.getParaList();
         for(int i = 0; i< Integer.min(8,parameters.size()); ++i){
             currentBB.addInst(new Move(currentBB,RegisterTable.argumentRegisters[i],toRiscRegister(parameters.get(i))));
         }
-        for(int i =8;i < parameters.size(); ++i) {
+
+        ///////load argument from stack////////
+        for(int i = 8;i < parameters.size(); ++i) {
             Parameter para = parameters.get(i);
             StackOffset stackOffset = new StackOffset(para.getName()+".para");
             stackFrame.addFormalPara(stackOffset);
-            currentBB.addInst(new ILoad(currentBB,toRiscRegister(para),stackOffset));
+            currentBB.addInst(new ILoad(currentBB,toRiscRegister(para),stackOffset, ILoad.LoadType.lw));
         }
+
 
         for(BasicBlock bb = function.getEntranceBB();bb != null; bb = bb.getNextBB()){
             visit(bb);
@@ -117,25 +131,41 @@ public class InstructionSelection implements IRVisitor {
     @Override
     public void visit(BasicBlock bb) {
         currentBB = bb.getRiscBB();
-        for(Instruction instruction = bb.getHead();instruction!= null;instruction = instruction.getNxt()){
+        for(Instruction instruction = bb.getHead();instruction!= null; instruction = instruction.getNxt()){
             instruction.accept(this);
         }
     }
 
 
     private void visit(StaticVar var){
-        GlobalVar gv = new GlobalVar(var.getName());
-        var.setRiscGV(gv);
-        module.addGV(gv);
-
         Operand init = var.getInit();
         if(init instanceof ConstString){
-            ConstStrings cs = ((ConstString) init).getRiscGS();
-            gv.setVal(cs);
+            ConstStrings cs = stringMap.get(((ConstString) init).getValue());
+            cs.setName(var.getName());
+            var.setRiscGV(cs);
+            module.addGV(cs);
+            module.addString(cs);
         }
-        else if(init instanceof ConstInt){
-            Immidiate imm = new Immidiate(((ConstInt) init).getValue());
-            gv.setVal(imm);
+        else {
+            GlobalVar gv = new GlobalVar(var.getName());
+            var.setRiscGV(gv);
+            module.addGV(gv);
+            if (init instanceof ConstInt) {
+                Immidiate imm = new Immidiate(((ConstInt) init).getValue());
+                gv.setVal(imm);
+                gv.setSize(4);
+            }
+            else if(init instanceof ConstBool){
+                int val = ((ConstBool) init).isValue() ? 1:0;
+                Immidiate imm = new Immidiate(val);
+                gv.setVal(imm);
+                gv.setSize(1);
+            }
+            else if(init instanceof ConstNull){
+                assert var.getType() instanceof PtrType;
+                gv.setVal(new Immidiate(0));
+                gv.setSize(8);
+            }
         }
 
     }
@@ -276,6 +306,7 @@ public class InstructionSelection implements IRVisitor {
 
     @Override
     public void visit(BranchJump branchJump) {
+
         Operand cond = branchJump.getCondition();
         if(cond ==  null){
             currentBB.addInst(new Jal(currentBB, branchJump.getThenBlock().getRiscBB()));
@@ -285,26 +316,27 @@ public class InstructionSelection implements IRVisitor {
             if(instruction != null){
                 instruction.setParentBB(currentBB);
                 currentBB.addInst(instruction);
-            }else {
-                currentBB.addInst(new Branch(currentBB, Branch.BranchOp.bne,toRiscRegister(cond),RegisterTable.zero,branchJump.getThenBlock().getRiscBB()));
+            }
+            else {
+                currentBB.addInst(new UnaryBranch(currentBB,beqz,toRiscRegister(cond), branchJump.getThenBlock().getRiscBB()));
             }
             currentBB.addInst(new Jal(currentBB,branchJump.getElseBlock().getRiscBB()));
         }
     }
 
     private void icmpAndBranch(Icmp icmp){
-        Branch.BranchOp op = null;
+        BinaryBranch.BranchOp op = null;
         switch (icmp.getOp()){
-            case EQUAL:op = Branch.BranchOp.beq;break;
-            case NOTEQUAL:op = Branch.BranchOp.bne;break;
-            case GREATER:op = Branch.BranchOp.bgt;break;
-            case LEQ:op = Branch.BranchOp.ble;break;
-            case LESS:op = Branch.BranchOp.blt;break;
-            case GEQ:op = Branch.BranchOp.bge;break;
+            case EQUAL:op = BinaryBranch.BranchOp.beq;break;
+            case NOTEQUAL:op = BinaryBranch.BranchOp.bne;break;
+            case GREATER:op = BinaryBranch.BranchOp.bgt;break;
+            case LEQ:op = BinaryBranch.BranchOp.ble;break;
+            case LESS:op = BinaryBranch.BranchOp.blt;break;
+            case GEQ:op = BinaryBranch.BranchOp.bge;break;
         }
         for(IRNode inst: icmp.getDest().getUsers()){
             assert inst instanceof BranchJump;
-            ((BranchJump) inst).setRiscInstruction(new Branch(currentBB,op,toRiscRegister(icmp.getLhs()),toRiscRegister(icmp.getRhs()),
+            ((BranchJump) inst).setRiscInstruction(new BinaryBranch(currentBB,op,toRiscRegister(icmp.getLhs()),toRiscRegister(icmp.getRhs()),
                     ((BranchJump) inst).getThenBlock().getRiscBB()));
 
         }
@@ -405,40 +437,60 @@ public class InstructionSelection implements IRVisitor {
         if(riscInst != null){
             riscInst.setParentBB(currentBB);
             currentBB.addInst(riscInst);
-            return;
         }
         else {
             Operand ptr = load.getDest();
-            if(ptr instanceof StaticVar && ((StaticVar) ptr).getInit() instanceof ConstString){
-                VirtualReg tmp = currentFunction.addRegister("tmp");
-                ConstStrings string = ((ConstString) ((StaticVar) ptr).getInit()).getRiscGS();
-                currentBB.addInst(new Lui(currentBB,tmp,new BackEnd.Operands.Address(RegisterTable.hi,string)));
-                currentBB.addInst(new ILoad(currentBB,toRiscRegister(load.getRes()),tmp,new BackEnd.Operands.Address(RegisterTable.lo,string)));
-            }
-            else if(ptr instanceof StaticVar){
-                VirtualReg tmp = currentFunction.addRegister("gv");
+            ILoad.LoadType op =  load.getType().getByteWidth() == 1? ILoad.LoadType.lb : ILoad.LoadType.lw;
+
+            if (ptr instanceof StaticVar){
+                VirtualReg tmp = currentFunction.addRegister("lui.high");
                 GlobalVar globalVar = ((StaticVar) ptr).getRiscGV();
                 currentBB.addInst(new Lui(currentBB,tmp,new BackEnd.Operands.Address(RegisterTable.hi,globalVar)));
-                currentBB.addInst(new ILoad(currentBB,toRiscRegister(load.getRes()),tmp,new BackEnd.Operands.Address(RegisterTable.lo,globalVar)));
+                currentBB.addInst(new ILoad(
+                        currentBB,toRiscRegister(load.getRes()),
+                        new BackEnd.Operands.Address(RegisterTable.lo,
+                        globalVar),op));
             }
             else {
-                currentBB.addInst(new ILoad(currentBB,toRiscRegister(load.getRes()),toRiscRegister(load.getDest()),new Immidiate(0)));
+                if(load.getDest() instanceof ConstNull){
+                    currentBB.addInst(new ILoad(currentBB,toRiscRegister(load.getRes()),
+                            RegisterTable.zero, new Immidiate(0),op));
+                }
+                else {
+                    assert load.getDest() instanceof Parameter || load.getDest() instanceof Register;
+
+                    if(getPtrMap.containsKey(load.getDest())){
+                        Pair<RiscRegister,Immidiate> pair = getPtrMap.get(load.getDest());
+                        currentBB.addInst(new ILoad(
+                                currentBB,toRiscRegister(load.getRes()),pair.getKey(),pair.getValue(),op));
+                    }
+                    else {
+                        currentBB.addInst(new ILoad(currentBB,toRiscRegister(load.getRes()),
+                               toRiscRegister(load.getDest()), new Immidiate(0),op ));
+                    }
+                }
             }
         }
     }
 
+
     @Override
     public void visit(Return retJump) {
+        //////save return value/////////
         if(retJump.getReturnVal() != null){
             currentBB.addInst(new Move(currentBB,toRiscRegister(retJump.getReturnVal()),RegisterTable.a0));
         }
 
+        /////////////recover callee saved registers//////////
         for(int i = 11; i >=0 ; i --){
             currentBB.addInst(new Move(currentBB,calleeSaved[i],RegisterTable.calleeSavedRegisters[i]));
         }
 
+        ///////////load ra//////////////
         currentBB.addInst(new Move(currentBB,calleeSaved[12],RegisterTable.ra));
         currentFunction.setExitBB(currentBB);
+
+        currentBB.addInst(new BackEnd.Instruction.Return(currentBB));
     }
 
     @Override
@@ -451,44 +503,48 @@ public class InstructionSelection implements IRVisitor {
         }
 
         if(store.getDest() instanceof StaticVar) {
-            if (!(((StaticVar) store.getDest()).getInit() instanceof ConstString)) {
-                GlobalVar globalVar = ((StaticVar) store.getDest()).getRiscGV();
-                VirtualReg lui = currentFunction.addRegister("luihigh");
-                currentBB.addInst(new Lui(currentBB, lui, new BackEnd.Operands.Address(RegisterTable.hi, globalVar)));
-                currentBB.addInst(new Stype(
-                        currentBB, toRiscRegister(store.getValue()), lui, new BackEnd.Operands.Address(RegisterTable.lo, globalVar), op));
-
-            }
-            else {//string
-                ConstStrings globalVar = ((ConstString) ((StaticVar) store.getDest()).getInit()).getRiscGS();
-                VirtualReg lui = currentFunction.addRegister("luihigh");
-                currentBB.addInst(new Lui(currentBB, lui, new BackEnd.Operands.Address(RegisterTable.hi, globalVar)));
-                currentBB.addInst(new Stype(
-                        currentBB, toRiscRegister(store.getValue()), lui, new BackEnd.Operands.Address(RegisterTable.lo, globalVar), op));
-            }
+            GlobalVar globalVar = ((StaticVar) store.getDest()).getRiscGV();
+            VirtualReg lui = currentFunction.addRegister("luihigh");
+            currentBB.addInst(new Lui(currentBB, lui, new BackEnd.Operands.Address(RegisterTable.hi, globalVar)));
+            currentBB.addInst(new Stype(
+                    currentBB, toRiscRegister(store.getValue()), lui, new BackEnd.Operands.Address(RegisterTable.lo, globalVar), op));
         }
         else {
-            currentBB.addInst(new Stype(
-                    currentBB,toRiscRegister(store.getValue()),toRiscRegister(store.getDest()),new Immidiate(0),op));
+            if(store.getDest() instanceof ConstNull)
+                currentBB.addInst(new Stype(currentBB,toRiscRegister(store.getValue()),
+                        RegisterTable.zero, new Immidiate(0), op));
+            else {
+                    currentBB.addInst(new Stype(
+                            currentBB,toRiscRegister(store.getValue()),toRiscRegister(store.getDest()),new Immidiate(0),op));
+
+            }
         }
     }
 
     @Override
     public void visit(CallFunction callFunction) {
+
         ArrayList<Operand> paras = callFunction.getParameters();
-        for(int i = 0; i< 8 && i < paras.size();  ++i){
+        ////////save parameters to register////////////
+        for(int i = 0; i < 8 && i < paras.size();  ++i){
             PhysicalReg reg = RegisterTable.argumentRegisters[i];
             currentBB.addInst(new Move(currentBB,toRiscRegister(paras.get(i)),reg));
         }
+
+
         RiscFunction callee = callFunction.getFunction().getRiscFunction();
 
         StackFrame stackFrame = currentFunction.getStackFrame();
+
         if(stackFrame.getParas().containsKey(callee)){
             ArrayList<StackOffset> paralist = stackFrame.getParas().get(callee);
             for(int i = 8; i < paras.size(); i++){
-                currentBB.addInst(new Stype(currentBB,toRiscRegister(paras.get(i)),paralist.get(i-8),new Immidiate(0), Stype.BSize.sw));
+                currentBB.addInst(new Stype(
+                        currentBB,toRiscRegister(paras.get(i)),
+                        paralist.get(i-8), new Immidiate(0), Stype.BSize.sw));
             }
-        }else {
+        }
+        else {
             ArrayList<StackOffset> paralist = new ArrayList<>();
             for(int i = 8;i <  paras.size(); i++){
                 StackOffset stackOffset = new StackOffset("_para"+i);
@@ -499,23 +555,31 @@ public class InstructionSelection implements IRVisitor {
             stackFrame.getParas().put(callee,paralist);
         }
 
+        currentBB.addInst(new CallFunc(
+                currentBB,callee,paras.size()
+        ));
+
+        if(callFunction.getResult()!=null){
+            currentBB.addInst(new Move(currentBB,toRiscRegister(callFunction.getResult()),RegisterTable.a0));
+        }
+
     }
 
     private void getPtrAndLoadStore(GetPtr getPtr, Immidiate offset){
         for(IRNode inst: getPtr.getDest().getUsers()){
             assert inst instanceof Instruction;
             if(inst instanceof Load){
+                ILoad.LoadType op = ((Load) inst).getType().getByteWidth() == 1? ILoad.LoadType.lb : ILoad.LoadType.lw;
                 ((Load) inst).setRiscInst(new ILoad(currentBB,toRiscRegister(((Load) inst).getRes()),
-                        toRiscRegister(getPtr.getPointer()),offset));
+                        toRiscRegister(getPtr.getPointer()),offset, op));
             }
             else{
 
                 assert inst instanceof Store;
+                Stype.BSize op = ((Store) inst).getValue().getType().getByteWidth() == 1?
+                        Stype.BSize.sb: Stype.BSize.sw;
                 IRType storeType = ((Store) inst).getValue().getType();
-                Stype.BSize op = Stype.BSize.sw;
-                if(storeType.getByteWidth() == 1){
-                    op = Stype.BSize.sb;
-                }
+
                 ((Store) inst).setRiscInst(new Stype(currentBB,toRiscRegister(((Store) inst).getValue()),toRiscRegister(getPtr.getDest()),offset,op));
             }
         }
@@ -524,15 +588,16 @@ public class InstructionSelection implements IRVisitor {
     public void visit(GetPtr getPtr) {
          Register res = getPtr.getDest();
          Operand ptr = getPtr.getPointer();
-         if(getPtr.getPointer() instanceof StaticVar &&
-                ((StaticVar) getPtr.getPointer()).getInit() instanceof ConstString){
-             VirtualReg tmp = currentFunction.addRegister("tmp");
-             ConstStrings str = ((ConstString) ((StaticVar) getPtr.getPointer()).getInit()).getRiscGS();
-             currentBB.addInst(new Lui(currentBB,tmp,new Address(RegisterTable.hi,str)));
-             currentBB.addInst(new ImmOperation(currentBB, ImmOperation.IOp.addi, toRiscRegister(res),tmp,new Address(RegisterTable.lo, str)));
-             return;
-         }//TODO :I  don't know actually
 
+         if(getPtr.getPointer() instanceof StaticVar){
+             assert ((StaticVar) getPtr.getPointer()).getInit() instanceof ConstString;
+             VirtualReg tmp = currentFunction.addRegister("tmp");
+             GlobalVar str =((StaticVar) getPtr.getPointer()).getRiscGV();
+             assert str instanceof ConstStrings;
+             currentBB.addInst(new LA(currentBB, toRiscRegister(res), str));
+
+             return;
+         }
 
          if(getPtr.getIndex().size()  == 1){//array
              Operand ind = getPtr.getIndex().get(0);
@@ -646,4 +711,43 @@ public class InstructionSelection implements IRVisitor {
         return null;
     }
 
+    public RiscModule getModule() {
+        return module;
+    }
+
+    public void setModule(RiscModule module) {
+        this.module = module;
+    }
+
+    public Module getIRModule() {
+        return IRModule;
+    }
+
+    public void setIRModule(Module IRModule) {
+        this.IRModule = IRModule;
+    }
+
+    public RiscFunction getCurrentFunction() {
+        return currentFunction;
+    }
+
+    public void setCurrentFunction(RiscFunction currentFunction) {
+        this.currentFunction = currentFunction;
+    }
+
+    public RiscBB getCurrentBB() {
+        return currentBB;
+    }
+
+    public void setCurrentBB(RiscBB currentBB) {
+        this.currentBB = currentBB;
+    }
+
+    public VirtualReg[] getCalleeSaved() {
+        return calleeSaved;
+    }
+
+    public void setCalleeSaved(VirtualReg[] calleeSaved) {
+        this.calleeSaved = calleeSaved;
+    }
 }

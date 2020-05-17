@@ -7,7 +7,7 @@ import BackEnd.RiscBB;
 
 public class Stype extends RiscInstruction {
     private RiscRegister rs;
-    private RiscOperand dest;
+    private RiscOperand addr;
     private Immidiate offset;
     private BSize op;
 
@@ -16,10 +16,10 @@ public class Stype extends RiscInstruction {
     }
 
 
-    public Stype(RiscBB parentBB, RiscRegister rs, RiscOperand dest, Immidiate offset, BSize op) {
+    public Stype(RiscBB parentBB, RiscRegister rs, RiscOperand addr, Immidiate offset, BSize op) {
         super(parentBB);
         this.rs = rs;
-        this.dest = dest;
+        this.addr = addr;
         this.offset = offset;
         this.op = op;
     }
@@ -36,10 +36,41 @@ public class Stype extends RiscInstruction {
     public void add(){
         addUse(rs);
         rs.addUse(this);
-        if(dest instanceof RiscRegister){
-            addUse((RiscRegister)dest);
-            ((RiscRegister) dest).addUse(this);
+        if(addr instanceof RiscRegister){
+            addUse((RiscRegister)addr);
+            ((RiscRegister) addr).addUse(this);
         }
+    }
+
+
+
+    @Override
+    public String print() {
+        return "\t" + op.name() + "\t" + rs.print() + ", " + addr.print();
+    }
+
+    @Override
+    public void replaceUse(RiscRegister old, RiscRegister newUse) {
+        boolean flag = false;
+        if (rs == old) {
+            rs = newUse;
+            flag = true;
+        }
+        if (addr instanceof RiscRegister && addr == old) {
+            addr= newUse;
+            flag = true;
+        }
+        if (flag) {
+            old.getUse().remove(this);
+            this.getUsages().remove(old);
+            newUse.addUse(this);
+            addUse(newUse);
+        }
+    }
+
+    @Override
+    public void replaceDef(RiscRegister old, RiscRegister newDef) {
+
     }
 
     public RiscRegister getRd() {
@@ -50,12 +81,20 @@ public class Stype extends RiscInstruction {
         this.rs = rd;
     }
 
-    public RiscOperand getDest() {
-        return dest;
+    public RiscRegister getRs() {
+        return rs;
     }
 
-    public void setDest(RiscOperand dest) {
-        this.dest = dest;
+    public void setRs(RiscRegister rs) {
+        this.rs = rs;
+    }
+
+    public RiscOperand getAddr() {
+        return addr;
+    }
+
+    public void setAddr(RiscOperand addr) {
+        this.addr = addr;
     }
 
     public Immidiate getOffset() {

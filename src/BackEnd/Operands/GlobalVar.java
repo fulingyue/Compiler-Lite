@@ -1,38 +1,51 @@
 package BackEnd.Operands;
 
 public class GlobalVar extends RiscOperand {
-    private RiscOperand val;
+    private RiscOperand init;
     private String name;
+    private int size;
 
 
     public GlobalVar(RiscOperand val, String name) {
-        this.val = val;
+        this.init = val;
         this.name = name;
     }
 
     public GlobalVar(RiscOperand val) {
-        this.val = val;
+        this.init = val;
     }
 
     public GlobalVar(String name) {
         this.name = name;
     }
-    @Override
-    public int getSize() {
-        return val.getSize();
+
+
+    public RiscOperand getInit() {
+        return init;
+    }
+
+    public void setInit(RiscOperand init) {
+        this.init = init;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
     }
 
     @Override
     public String print() {
-        return null;
+        if (init != null)
+            return  "\t.word   " + init.print() + "\n";
+        else
+            return  "\t.word   0\n";
     }
 
     public RiscOperand getVal() {
-        return val;
+        return init;
     }
 
     public void setVal(RiscOperand val) {
-        this.val = val;
+        this.init = val;
     }
 
 

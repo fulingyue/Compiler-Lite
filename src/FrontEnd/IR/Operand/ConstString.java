@@ -6,7 +6,7 @@ import FrontEnd.IR.Type.IRType;
 public class ConstString extends Constant{
     private String value;
 
-    private ConstStrings riscGS;
+    private ConstStrings riscGS;//useless
 
     public ConstStrings getRiscGS() {
         return riscGS;

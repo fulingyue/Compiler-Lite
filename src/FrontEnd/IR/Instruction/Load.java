@@ -13,9 +13,12 @@ import java.util.HashSet;
 import java.util.LinkedList;
 
 public class Load extends Instruction {
+
     private IRType type;
     private Operand dest;
     private Register res;
+
+
 
     private RiscInstruction riscInst;
 

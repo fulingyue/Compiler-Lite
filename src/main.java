@@ -1,22 +1,22 @@
-import FrontEnd.AstNode.*;
+import BackEnd.Codegen;
+import BackEnd.InstructionSelection;
+import BackEnd.RiscModule;
+import FrontEnd.Antlr.MxErrorListener;
+import FrontEnd.Antlr.MxLexer;
+import FrontEnd.Antlr.MxParser;
 import FrontEnd.*;
-
-
-import FrontEnd.ErrorChecker.SemanticException;
+import FrontEnd.AstNode.ProgramNode;
 import FrontEnd.IR.Module;
 import FrontEnd.Scope.Scope;
 import Optimize.*;
-import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
+import util.ErrorHandler;
+
 import java.io.FileInputStream;
 import java.io.InputStream;
-import java.util.LinkedList;
-import FrontEnd.Antlr.*;
-import util.ErrorHandler;
-import util.Location;
 
 public class main  {
 
@@ -86,7 +86,7 @@ public class main  {
 
         DominatorTree dominatorTree = new DominatorTree(module);
         dominatorTree.run();
-        dominatorTree.print();
+//        dominatorTree.print();
         SSAConstructor ssaConstructor = new SSAConstructor(module);
         ssaConstructor.run();
         DeadCodeElim DCE = new DeadCodeElim(module);
@@ -101,6 +101,15 @@ public class main  {
 
         IRPrinter irPrinter  = new IRPrinter();
         irPrinter.print(module);
+
+
+        InstructionSelection instructionSelector = new InstructionSelection(module);
+        instructionSelector.run();
+        RiscModule riscModule = instructionSelector.getModule();
+
+        Codegen codegen = new Codegen();
+        codegen.run(riscModule);
+
     }
 
 }

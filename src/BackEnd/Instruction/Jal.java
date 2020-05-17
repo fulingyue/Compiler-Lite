@@ -1,5 +1,6 @@
 package BackEnd.Instruction;
 
+import BackEnd.Operands.RiscRegister;
 import BackEnd.RiscBB;
 
 public class Jal extends RiscInstruction{
@@ -13,8 +14,24 @@ public class Jal extends RiscInstruction{
     @Override
     public void add(){
         target.addPre(parentBB);
+        parentBB.addSucc(target);
     }
 
+    @Override
+    public String print() {
+        assert target != null;
+        return "\tj\t" + target.print();
+    }
+
+    @Override
+    public void replaceUse(RiscRegister old, RiscRegister newUse) {
+
+    }
+
+    @Override
+    public void replaceDef(RiscRegister old, RiscRegister newDef) {
+
+    }
 
 
     public RiscBB getTarget() {

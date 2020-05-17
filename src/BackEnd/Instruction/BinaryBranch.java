@@ -3,36 +3,41 @@ package BackEnd.Instruction;
 import BackEnd.Operands.RiscRegister;
 import BackEnd.RiscBB;
 
-public class ArtheticOp extends RiscInstruction{
-    public enum ROp{
-        add,sub, mul,div, rem,  and, or, xor, sll, sltu,slt,sra
+
+public class BinaryBranch extends RiscInstruction {
+    public enum BranchOp {
+        beq, bne, ble, bge, blt, bgt;
     }
 
-    private ROp op;
-    private RiscRegister rs1,rs2,rd;
+    private BranchOp op;
+    private RiscRegister rs1, rs2;
+    private RiscBB target;
 
-
-    public ArtheticOp(RiscBB parentBB, ROp op, RiscRegister rs1, RiscRegister rs2, RiscRegister rd) {
+    public BinaryBranch(RiscBB parentBB, BranchOp op, RiscRegister rs1, RiscRegister rs2, RiscBB target) {
         super(parentBB);
         this.op = op;
         this.rs1 = rs1;
         this.rs2 = rs2;
-        this.rd = rd;
+        this.target = target;
     }
 
+    
     @Override
     public void add(){
-        addDef(rd);
         addUse(rs1);
         addUse(rs2);
-        rd.addDef(this);
-        rs1.addDef(this);
-        rs2.addDef(this);
+        rs1.addUse(this);
+        rs2.addUse(this);
+        parentBB.addSucc(target);
+        target.addPre(parentBB);
     }
+
+
 
     @Override
     public String print() {
-        return "\t" + op.name() + "\t" + getRd().print() + ", " + getRs1().print() + ", " + rs2.print();
+        return  "\t" + op.name() + "\t"
+                + getRs1().print() + ", " + rs2.print() + ", " + target.print();
     }
 
     @Override
@@ -55,21 +60,14 @@ public class ArtheticOp extends RiscInstruction{
 
     @Override
     public void replaceDef(RiscRegister old, RiscRegister newDef) {
-        if(old == rd){
-            old.getDef().remove(this);
-            getDef().remove(old);
-            rd = newDef;
-            newDef.addDef(this);
-            addDef(newDef);
-        }
+
     }
 
-
-    public ROp getOp() {
+    public BranchOp getOp() {
         return op;
     }
 
-    public void setOp(ROp op) {
+    public void setOp(BranchOp op) {
         this.op = op;
     }
 
@@ -89,11 +87,11 @@ public class ArtheticOp extends RiscInstruction{
         this.rs2 = rs2;
     }
 
-    public RiscRegister getRd() {
-        return rd;
+    public RiscBB getTarget() {
+        return target;
     }
 
-    public void setRd(RiscRegister rd) {
-        this.rd = rd;
+    public void setTarget(RiscBB target) {
+        this.target = target;
     }
 }

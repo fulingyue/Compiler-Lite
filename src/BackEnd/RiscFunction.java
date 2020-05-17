@@ -5,6 +5,7 @@ import BackEnd.Operands.VirtualReg;
 import FrontEnd.IR.IRFunction;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 public class RiscFunction {
     public String name;
@@ -14,6 +15,7 @@ public class RiscFunction {
     private ArrayList<RiscRegister> registerList;
     IRFunction function;
     StackFrame stackFrame;
+
 
 
     public RiscFunction(String name, int paraNum, IRFunction function) {
@@ -35,7 +37,12 @@ public class RiscFunction {
         blocks.add(bb);
     }
 
-
+    public ArrayList<RiscBB> getDfs(){
+        ArrayList<RiscBB> dfs = new ArrayList<>();
+        HashSet<RiscBB> visited = new HashSet<>();
+        entranceBB.dfs(dfs,visited);
+        return dfs;
+    }
 
     public IRFunction getFunction() {
         return function;

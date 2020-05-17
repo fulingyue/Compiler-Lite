@@ -1,29 +1,30 @@
 package BackEnd.Instruction;
 
-import BackEnd.Operands.Immidiate;
+import BackEnd.Operands.GlobalVar;
 import BackEnd.Operands.RiscRegister;
 import BackEnd.RiscBB;
 
-public class Li extends RiscInstruction {
+public class LA  extends RiscInstruction {
     private RiscRegister rd;
-    private Immidiate imm;
+    private GlobalVar globalVar;
 
-    public Li(RiscBB parentBB, RiscRegister rd, Immidiate imm) {
+    public LA(RiscBB parentBB, RiscRegister rd, GlobalVar globalVar) {
         super(parentBB);
         this.rd = rd;
-        this.imm = imm;
-    }
-    @Override
-    public void add(){
-        addDef(rd);
-        rd.addDef(this);
+        this.globalVar = globalVar;
     }
 
+
+    @Override
+    public void add() {
+        rd.addDef(this);
+        addDef(rd);
+    }
 
 
     @Override
     public String print() {
-        return "\tli\t" + rd.print() + ", " +imm.print();
+        return "\tla\t" + rd.print() + ", " + globalVar.getName();
     }
 
     @Override
@@ -41,22 +42,4 @@ public class Li extends RiscInstruction {
             addDef(newDef);
         }
     }
-
-    public RiscRegister getRd() {
-        return rd;
-    }
-
-    public void setRd(RiscRegister rd) {
-        this.rd = rd;
-    }
-
-    public Immidiate getImm() {
-        return imm;
-    }
-
-    public void setImm(Immidiate imm) {
-        this.imm = imm;
-    }
-
-
 }

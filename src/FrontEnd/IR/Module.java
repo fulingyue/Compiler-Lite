@@ -2,7 +2,6 @@ package FrontEnd.IR;
 
 import FrontEnd.AstNode.ProgramNode;
 import FrontEnd.IR.Operand.ConstString;
-import FrontEnd.IR.Operand.Operand;
 import FrontEnd.IR.Operand.Parameter;
 import FrontEnd.IR.Operand.StaticVar;
 import FrontEnd.IR.Type.*;
@@ -262,7 +261,6 @@ public class Module {
     }
 
     public StaticVar addString(String string) {
-
         string = string + "\0";
         if(staticStrings.containsKey(string))
             return staticStrings.get(string);

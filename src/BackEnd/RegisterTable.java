@@ -3,6 +3,8 @@ package BackEnd;
 import BackEnd.Operands.PhysicalReg;
 
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
 public class RegisterTable {
     public static PhysicalReg zero = new PhysicalReg("zero");
@@ -41,26 +43,26 @@ public class RegisterTable {
     public static PhysicalReg lo = new PhysicalReg("%lo");
 
 
-    public static String[] names = {"zero", "ra", "sp", "gp", "tp", "t0", "t1", "t2", "s0", "s1", "a0", "a1", "a2", "a3", "a4", "a5", "a6", "a7", "s2", "s3", "s4", "s5", "s6", "s7", "s8", "s9", "s10", "s11", "t3", "t4", "t5", "t6" };
-    public static String[] calleeSavedNames = {"s0", "s1", "s2", "s3", "s4", "s5", "s6", "s7", "s8", "s9", "s10", "s11"};
-    public static String[] callerSavedNames = {"ra", "t0", "t1", "t2", "a0", "a1", "a2", "a3", "a4", "a5", "a6", "a7", "t3", "t4", "t5", "t6"};
-    public static String[] argumentNames = {"a0", "a1", "a2", "a3", "a4", "a5", "a6", "a7"};
-    public static String[] allocableNames = {"ra", "t0", "t1", "t2", "s0", "s1", "a0", "a1", "a2", "a3", "a4", "a5", "a6", "a7", "s2", "s3", "s4", "s5", "s6", "s7", "s8", "s9", "s10", "s11", "t3", "t4", "t5", "t6" };
+//    public static String[] names = {"zero", "ra", "sp", "gp", "tp", "t0", "t1", "t2", "s0", "s1", "a0", "a1", "a2", "a3", "a4", "a5", "a6", "a7", "s2", "s3", "s4", "s5", "s6", "s7", "s8", "s9", "s10", "s11", "t3", "t4", "t5", "t6" };
+//    public static String[] calleeSavedNames = {"s0", "s1", "s2", "s3", "s4", "s5", "s6", "s7", "s8", "s9", "s10", "s11"};
+//    public static String[] callerSavedNames = {"ra", "t0", "t1", "t2", "a0", "a1", "a2", "a3", "a4", "a5", "a6", "a7", "t3", "t4", "t5", "t6"};
+//    public static String[] argumentNames = {"a0", "a1", "a2", "a3", "a4", "a5", "a6", "a7"};
+//    public static String[] allocableNames = {"ra", "t0", "t1", "t2", "s0", "s1", "a0", "a1", "a2", "a3", "a4", "a5", "a6", "a7", "s2", "s3", "s4", "s5", "s6", "s7", "s8", "s9", "s10", "s11", "t3", "t4", "t5", "t6" };
 
     public static PhysicalReg[] registers = {zero, ra, sp, gp, tp, t0, t1, t2, s0, s1, a0, a1, a2, a3, a4, a5, a6, a7, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, t3, t4, t5, t6};
     public static PhysicalReg[] argumentRegisters = {a0, a1, a2, a3, a4, a5, a6, a7};
     public static PhysicalReg[] calleeSavedRegisters = {s0, s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11}; //12
     public static PhysicalReg[] callerSavedRegisters = {ra, t0, t1, t2, a0, a1, a2, a3, a4, a5, a6, a7, t3, t4, t5, t6}; //16
     public static PhysicalReg[] allocableRegisters = {ra, t0, t1, t2, s0, s1, a0, a1, a2, a3, a4, a5, a6, a7, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, t3, t4, t5, t6};
-//    public static int allocableNumber = 28;
+    public static int allocableSize = 28;
 
-//    public static Set<PhysicalReg> allocableSet = Set.of(ra, t0, t1, t2, s0, s1, a0, a1, a2, a3, a4, a5, a6, a7, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, t3, t4, t5, t6);
-//    public static Set<PhysicalReg> calleeSavedSet = Set.of(s0, s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11); //12
+    public static Set<PhysicalReg> allocSet = new HashSet<>();
+    public static Set<PhysicalReg> calleeSavedSet = new HashSet<>();
 
     public static HashMap<String, PhysicalReg> map;
 
     public RegisterTable() {
-        map = new HashMap<String, PhysicalReg>();
+        map = new HashMap<>();
         map.put("zero", zero);
         map.put("ra", ra);
         map.put("sp", sp);
@@ -93,6 +95,50 @@ public class RegisterTable {
         map.put("t4", t4);
         map.put("t5", t5);
         map.put("t6", t6);
+
+        allocSet.add(ra);
+        allocSet.add(t0);
+        allocSet.add(t1);
+        allocSet.add(t2);
+        allocSet.add(s0);
+        allocSet.add(s1);
+        allocSet.add(a0);
+        allocSet.add(a1);
+        allocSet.add(a2);
+        allocSet.add(a3);
+        allocSet.add(a4);
+        allocSet.add(a5);
+        allocSet.add(a6);
+        allocSet.add(a7);
+        allocSet.add(s2);
+        allocSet.add(s3);
+        allocSet.add(s4);
+        allocSet.add(s5);
+        allocSet.add(s6);
+        allocSet.add(s7);
+        allocSet.add(s8);
+        allocSet.add(s9);
+        allocSet.add(s10);
+        allocSet.add(s11);
+        allocSet.add(t3);
+        allocSet.add(t4);
+        allocSet.add(t5);
+        allocSet.add(t6);
+
+        calleeSavedSet.add(s0);
+        calleeSavedSet.add(s1);
+        calleeSavedSet.add(s2);
+        calleeSavedSet.add(s3);
+        calleeSavedSet.add(s4);
+        calleeSavedSet.add(s5);
+        calleeSavedSet.add(s6);
+        calleeSavedSet.add(s7);
+        calleeSavedSet.add(s8);
+        calleeSavedSet.add(s9);
+        calleeSavedSet.add(s10);
+        calleeSavedSet.add(s11);
+
+
     }
 
     public PhysicalReg getRegister(String name) {

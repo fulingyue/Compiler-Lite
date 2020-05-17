@@ -1,5 +1,7 @@
 package BackEnd.Instruction;
 
+import BackEnd.Operands.RiscRegister;
+import BackEnd.RegisterTable;
 import BackEnd.RiscBB;
 import BackEnd.RiscFunction;
 
@@ -15,9 +17,28 @@ public class CallFunc extends RiscInstruction {
     @Override
     public void add(){
         for(int i = 0; i < paraNum  && i  < 8; ++i){
-            //TODO
+            addUse(RegisterTable.argumentRegisters[i]);
+        }
+        for (int i =0;i < 16; ++i){
+            addDef(RegisterTable.callerSavedRegisters[i]);
         }
     }
+
+    @Override
+    public String print() {
+        return "\tcall\t" + function.getName();
+    }
+
+    @Override
+    public void replaceUse(RiscRegister old, RiscRegister newUse) {
+
+    }
+
+    @Override
+    public void replaceDef(RiscRegister old, RiscRegister newDef) {
+
+    }
+
 
     public RiscFunction getFunction() {
         return function;
