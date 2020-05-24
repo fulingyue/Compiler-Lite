@@ -1,6 +1,6 @@
 package BackEnd.Operands;
 
-public class StackOffset extends RiscOperand {
+public class StackOffset extends Address{
     private String name;
     private int offset;
 
@@ -27,8 +27,14 @@ public class StackOffset extends RiscOperand {
         this.offset = offset;
     }
 
+
     @Override
     public String print() {
-        return name + "(sp)";
+        return offset + "(sp)";
+    }
+
+    @Override
+    public RiscRegister getUse() {
+        return null;
     }
 }

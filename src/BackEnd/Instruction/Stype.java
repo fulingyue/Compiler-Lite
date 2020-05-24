@@ -1,26 +1,21 @@
 package BackEnd.Instruction;
 
-import BackEnd.Operands.Immidiate;
-import BackEnd.Operands.RiscOperand;
-import BackEnd.Operands.RiscRegister;
+import BackEnd.Operands.*;
 import BackEnd.RiscBB;
 
 public class Stype extends RiscInstruction {
     private RiscRegister rs;
-    private RiscOperand addr;
-    private Immidiate offset;
+    private Address addr;
     private BSize op;
 
     public enum BSize{
         sb,sw
     }
 
-
-    public Stype(RiscBB parentBB, RiscRegister rs, RiscOperand addr, Immidiate offset, BSize op) {
+    public Stype(RiscBB parentBB, RiscRegister rs, Address addr, BSize op) {
         super(parentBB);
         this.rs = rs;
         this.addr = addr;
-        this.offset = offset;
         this.op = op;
     }
 
@@ -36,9 +31,9 @@ public class Stype extends RiscInstruction {
     public void add(){
         addUse(rs);
         rs.addUse(this);
-        if(addr instanceof RiscRegister){
-            addUse((RiscRegister)addr);
-            ((RiscRegister) addr).addUse(this);
+        if(addr.getUse() != null){
+            addUse(addr.getUse());
+            (addr.getUse()).addUse(this);
         }
     }
 
@@ -56,8 +51,9 @@ public class Stype extends RiscInstruction {
             rs = newUse;
             flag = true;
         }
-        if (addr instanceof RiscRegister && addr == old) {
-            addr= newUse;
+        if (addr.getUse() != null && addr.getUse() == old) {
+            assert addr instanceof AddrWithOffset;
+            ((AddrWithOffset) addr).setBase(newUse);
             flag = true;
         }
         if (flag) {
@@ -93,15 +89,7 @@ public class Stype extends RiscInstruction {
         return addr;
     }
 
-    public void setAddr(RiscOperand addr) {
+    public void setAddr(Address addr) {
         this.addr = addr;
-    }
-
-    public Immidiate getOffset() {
-        return offset;
-    }
-
-    public void setOffset(Immidiate offset) {
-        this.offset = offset;
     }
 }

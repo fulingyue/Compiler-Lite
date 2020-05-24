@@ -27,6 +27,6 @@ public class ConstStrings extends GlobalVar{
 
     @Override
     public String print() {
-        return getStr();
+        return "\t.asciz\t\"" + str + "\"";
     }
 }

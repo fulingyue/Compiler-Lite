@@ -1,12 +1,12 @@
 package FrontEnd.IR.Operand;
 
+import BackEnd.Operands.RiscRegister;
 import FrontEnd.IR.IRFunction;
-import FrontEnd.IR.Instruction.Instruction;
 import FrontEnd.IR.Type.IRType;
-import FrontEnd.IRVisitor;
 
 public class Parameter extends Operand {
     private IRFunction funcParent;
+    private RiscRegister riscRegister;
 
     public Parameter(String name, IRType type, IRFunction parent) {
         super(name,type);
@@ -21,6 +21,15 @@ public class Parameter extends Operand {
 //    public void accept(IRVisitor visitor) {
 //        visitor.visit(this);
 //    }
+
+
+    public RiscRegister getRiscRegister() {
+        return riscRegister;
+    }
+
+    public void setRiscRegister(RiscRegister riscRegister) {
+        this.riscRegister = riscRegister;
+    }
 
     public IRFunction getFuncParent() {
         return funcParent;

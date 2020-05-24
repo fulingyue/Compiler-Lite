@@ -2,15 +2,12 @@ package FrontEnd.IR.Instruction;
 
 import FrontEnd.IR.BasicBlock;
 import FrontEnd.IR.IRNode;
-import FrontEnd.IR.Operand.ConstInt;
 import FrontEnd.IR.Operand.Operand;
 import FrontEnd.IR.Operand.Register;
-import FrontEnd.IR.Type.ClassIRType;
 import FrontEnd.IR.Type.IRType;
 import FrontEnd.IR.Type.PtrType;
 import FrontEnd.IRVisitor;
 import Optimize.SCCP;
-
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -50,15 +47,7 @@ public class GetPtr extends Instruction {
         dest.removeDef(this);
     }
 
-    public boolean onlyUseForLoadStore(){
-        for(IRNode inst: dest.getUsers()){
-            assert  inst instanceof Instruction;
-            if(!((inst instanceof Load) || (inst instanceof Store))){
-                return false;
-            }
-        }
-        return true;
-    }
+
 
 //    public int getOffset(){//TODO check it !
 //        assert index.size() <= 2;

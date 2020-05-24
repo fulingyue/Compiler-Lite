@@ -1,7 +1,4 @@
-import BackEnd.Codegen;
-import BackEnd.InstructionSelection;
-import BackEnd.RegisterAlloca;
-import BackEnd.RiscModule;
+import BackEnd.*;
 import FrontEnd.Antlr.MxErrorListener;
 import FrontEnd.Antlr.MxLexer;
 import FrontEnd.Antlr.MxParser;
@@ -22,7 +19,7 @@ import java.io.InputStream;
 public class main  {
 
     public static void main(String[] args)throws Exception {
-        String path ="test/sourceCode1.mx";
+        String path ="/Users/fulingyue/Desktop/Compiler-Lite/test/sourceCode1.mx";
         InputStream inputStream = new FileInputStream(path);
 //        InputStream inputStream = System.in;
         compile(inputStream);
@@ -97,19 +94,24 @@ public class main  {
         CFGSimplifier cfgSimplifier = new CFGSimplifier(module);
         cfgSimplifier.run();
 
-        SSADestructor ssaDestructor = new SSADestructor(module);
-        ssaDestructor.run();
-//
         IRPrinter irPrinter  = new IRPrinter();
         irPrinter.print(module);
 
+        SSADestructor ssaDestructor = new SSADestructor(module);
+        ssaDestructor.run();
+//
+
+        RegisterTable registerTable = new RegisterTable();
 
         InstructionSelection instructionSelector = new InstructionSelection(module);
         instructionSelector.run();
         RiscModule riscModule = instructionSelector.getModule();
         RegisterAlloca registerAlloca = new RegisterAlloca(riscModule);
         registerAlloca.run();
-        Codegen codegen = new Codegen("test/out.s");
+//        AllSpilledAlooca allSpilledAlooca = new AllSpilledAlooca(riscModule);
+//        allSpilledAlooca.run();
+
+        Codegen codegen = new Codegen("test/test.s");
         codegen.run(riscModule);
 
     }

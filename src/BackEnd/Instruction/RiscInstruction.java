@@ -19,11 +19,11 @@ public abstract class RiscInstruction {
     public abstract void add();
     public void addDef(RiscRegister reg){
         def.add(reg);
-        reg.setSpilledCost(reg.getSpilledCost() + 1);
+        reg.setSpilledCost(reg.getSpilledCost() + 1.0);
     }
     public void addUse(RiscRegister reg){
         usages.add(reg);
-        reg.setSpilledCost(reg.getSpilledCost() + 1);
+        reg.setSpilledCost(reg.getSpilledCost() + 1.0);
     }
     public abstract String print();
 

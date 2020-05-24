@@ -27,24 +27,23 @@ public class Move extends RiscInstruction {
 
     @Override
     public void replaceUse(RiscRegister old, RiscRegister newUse) {
-        if(old == rs){
+        assert old == rs;
             old.getUse().remove(this);
             getUsages().remove(old);
             rs = newUse;
             newUse.addUse(this);
             addUse(newUse);
-        }
     }
 
     @Override
     public void replaceDef(RiscRegister old, RiscRegister newDef) {
-        if(old == rd){
+        assert old == rd;
             old.getDef().remove(this);
             getDef().remove(old);
             rd = newDef;
             newDef.addDef(this);
             addDef(newDef);
-        }
+
     }
 
 
@@ -54,6 +53,8 @@ public class Move extends RiscInstruction {
         this.getUsages().remove(rs);
         this.getDef().remove(rd);
 
+        rs = null;
+        rd =  null;
         parentBB.removeInst(this);
     }
 

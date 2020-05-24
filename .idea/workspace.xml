@@ -3,21 +3,36 @@
   <component name="ChangeListManager">
     <list default="true" id="a67270fb-4b02-4acf-8cdd-5c9e4a76755c" name="Default Changelist" comment="">
       <change afterPath="$PROJECT_DIR$/Compiler-2020-local-judge/codegen.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/BackEnd/AllSpilledAlooca.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/BackEnd/Operands/AddrWithOffset.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/BackEnd/Operands/GVAddress.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Compiler-2020-local-judge/build.sh" beforeDir="false" afterPath="$PROJECT_DIR$/Compiler-2020-local-judge/build.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Compiler-2020-local-judge/config.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/Compiler-2020-local-judge/config.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Compiler-2020-local-judge/semantic.sh" beforeDir="false" afterPath="$PROJECT_DIR$/Compiler-2020-local-judge/semantic.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/util/Defines.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/util/Defines.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/util/print_tool.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/util/print_tool.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ravel" beforeDir="false" afterPath="$PROJECT_DIR$/ravel" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/BackEnd/Codegen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BackEnd/Codegen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BackEnd/Instruction/Lui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BackEnd/Instruction/Lui.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BackEnd/Instruction/ArtheticOp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BackEnd/Instruction/ArtheticOp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BackEnd/Instruction/CallFunc.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BackEnd/Instruction/CallFunc.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BackEnd/Instruction/ILoad.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BackEnd/Instruction/ILoad.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BackEnd/Instruction/Move.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BackEnd/Instruction/Move.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BackEnd/Instruction/RiscInstruction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BackEnd/Instruction/RiscInstruction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BackEnd/Instruction/Stype.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BackEnd/Instruction/Stype.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/BackEnd/InstructionSelection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BackEnd/InstructionSelection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BackEnd/Operands/Address.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BackEnd/Operands/Address.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BackEnd/Operands/ConstStrings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BackEnd/Operands/ConstStrings.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/BackEnd/Operands/RiscRegister.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BackEnd/Operands/RiscRegister.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BackEnd/Operands/StackOffset.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BackEnd/Operands/StackOffset.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BackEnd/RegisterAlloca.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BackEnd/RegisterAlloca.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BackEnd/RiscBB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BackEnd/RiscBB.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/BackEnd/RiscFunction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BackEnd/RiscFunction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BackEnd/RiscModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BackEnd/RiscModule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FrontEnd/IR/Instruction/GetPtr.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/IR/Instruction/GetPtr.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FrontEnd/IR/Operand/Parameter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/IR/Operand/Parameter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FrontEnd/IR/Operand/Register.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/IR/Operand/Register.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/util/print_tool.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/print_tool.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test.out" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/Compiler-2020-testcases/codegen2/std/heap.mt" beforeDir="false" afterPath="$PROJECT_DIR$/test/Compiler-2020-testcases/codegen2/std/heap.mt" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -61,7 +76,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="add_unversioned_files" value="$PROJECT_DIR$/test/test.ll&#10;/Users/fulingyue/Desktop/Compiler-Lite/test/test1.ll" />
+    <property name="add_unversioned_files" value="$PROJECT_DIR$/test/test.ll&#10;/Users/fulingyue/Desktop/Compiler-Lite/test/out.s&#10;/Users/fulingyue/Desktop/Compiler-Lite/test/test1.ll&#10;/Users/fulingyue/Desktop/Compiler-Lite/test/test.in" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../Compiler/Mx-Compiler" />
     <property name="project.structure.last.edited" value="Libraries" />
@@ -159,12 +174,18 @@
       <workItem from="1589283720055" duration="3307000" />
       <workItem from="1589332933358" duration="31284000" />
       <workItem from="1589594742760" duration="26000" />
-      <workItem from="1589601313055" duration="25206000" />
+      <workItem from="1589601313055" duration="26531000" />
+      <workItem from="1589869851120" duration="3556000" />
+      <workItem from="1589984601662" duration="406000" />
+      <workItem from="1590049224531" duration="60931000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.s" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -310,14 +331,64 @@
           <option name="timeStamp" value="367" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/BackEnd/Instruction/Lui.java</url>
-          <line>24</line>
-          <option name="timeStamp" value="371" />
+          <url>file://$PROJECT_DIR$/src/BackEnd/Instruction/ArtheticOp.java</url>
+          <line>34</line>
+          <option name="timeStamp" value="452" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/BackEnd/AllSpilledAlooca.java</url>
+          <line>113</line>
+          <option name="timeStamp" value="454" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/BackEnd/Instruction/ArtheticOp.java</url>
+          <line>39</line>
+          <option name="timeStamp" value="456" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/BackEnd/Instruction/ArtheticOp.java</url>
+          <line>57</line>
+          <option name="timeStamp" value="457" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/BackEnd/AllSpilledAlooca.java</url>
+          <line>147</line>
+          <option name="timeStamp" value="460" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/BackEnd/InstructionSelection.java</url>
+          <line>426</line>
+          <option name="timeStamp" value="462" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/BackEnd/InstructionSelection.java</url>
+          <line>350</line>
+          <option name="timeStamp" value="464" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/BackEnd/InstructionSelection.java</url>
+          <line>107</line>
+          <option name="timeStamp" value="466" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/BackEnd/InstructionSelection.java</url>
+          <line>587</line>
+          <option name="timeStamp" value="469" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/BackEnd/InstructionSelection.java</url>
+          <line>595</line>
+          <option name="timeStamp" value="472" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+    <watches-manager>
+      <configuration name="Application">
+        <watch expression="spilledRegs" language="JAVA" />
+      </configuration>
+    </watches-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/Compiler_Lite$main.ic" NAME="main Coverage Results" MODIFIED="1587721580534" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/Compiler_Lite$main.ic" NAME="main Coverage Results" MODIFIED="1590126691392" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>

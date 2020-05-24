@@ -12,7 +12,7 @@ public class ArtheticOp extends RiscInstruction{
     private RiscRegister rs1,rs2,rd;
 
 
-    public ArtheticOp(RiscBB parentBB, ROp op, RiscRegister rs1, RiscRegister rs2, RiscRegister rd) {
+    public ArtheticOp(RiscBB parentBB, ROp op,RiscRegister rd, RiscRegister rs1, RiscRegister rs2) {
         super(parentBB);
         this.op = op;
         this.rs1 = rs1;
@@ -26,8 +26,8 @@ public class ArtheticOp extends RiscInstruction{
         addUse(rs1);
         addUse(rs2);
         rd.addDef(this);
-        rs1.addDef(this);
-        rs2.addDef(this);
+        rs1.addUse(this);
+        rs2.addUse(this);
     }
 
     @Override
@@ -55,13 +55,13 @@ public class ArtheticOp extends RiscInstruction{
 
     @Override
     public void replaceDef(RiscRegister old, RiscRegister newDef) {
-        if(old == rd){
+        assert old == rd;
             old.getDef().remove(this);
             getDef().remove(old);
             rd = newDef;
             newDef.addDef(this);
             addDef(newDef);
-        }
+
     }
 
 

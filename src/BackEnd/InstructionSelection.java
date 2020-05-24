@@ -16,7 +16,6 @@ import FrontEnd.IR.Type.IntIRType;
 import FrontEnd.IR.Type.PtrType;
 import FrontEnd.IRVisitor;
 import util.Defines;
-import util.Pair;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -30,7 +29,7 @@ public class InstructionSelection implements IRVisitor {
     private RiscBB currentBB;
     private VirtualReg[] calleeSaved;
     private HashMap<String, ConstStrings> stringMap;
-    private HashMap<Operand, Pair<RiscRegister,Immidiate>> getPtrMap;
+    private HashMap<Operand, AddrWithOffset> getPtrMap;
 
     public InstructionSelection(Module irModule) {
         IRModule = irModule;
@@ -72,6 +71,7 @@ public class InstructionSelection implements IRVisitor {
  /////////////////////////visit functions////////////////
 
         for(IRFunction function: root.getFunctionMap().values()){
+
             visit(function);
         }
 
@@ -82,12 +82,6 @@ public class InstructionSelection implements IRVisitor {
     public void visit(IRFunction function) {
 
         currentFunction = function.getRiscFunction();
-
-        for(BasicBlock bb = function.getEntranceBB(); bb != null; bb = bb.getNextBB()){
-            RiscBB riscBB = new RiscBB(bb.getName(),currentFunction,bb);
-            bb.setRiscBB(riscBB);
-            currentFunction.addBB(riscBB);
-        }
 
         BasicBlock entranceBB = function.getEntranceBB();
         currentBB = entranceBB.getRiscBB();
@@ -107,8 +101,8 @@ public class InstructionSelection implements IRVisitor {
             calleeSaved[i] = currentFunction.addRegister(reg.name + ".save");
             currentBB.addInst(new Move(currentBB,reg,calleeSaved[i]));
         }
-//////////////////////arguments//////////////
-        ////move argument from register/////
+////////////////////arguments//////////////
+        //move argument from register///////
         ArrayList<Parameter> parameters = function.getParaList();
         for(int i = 0; i< Integer.min(8,parameters.size()); ++i){
             currentBB.addInst(new Move(currentBB,RegisterTable.argumentRegisters[i],toRiscRegister(parameters.get(i))));
@@ -141,13 +135,13 @@ public class InstructionSelection implements IRVisitor {
         Operand init = var.getInit();
         if(init instanceof ConstString){
             ConstStrings cs = stringMap.get(((ConstString) init).getValue());
-            cs.setName(var.getName());
+            cs.setName(var.getName().replace(".",""));
             var.setRiscGV(cs);
             module.addGV(cs);
             module.addString(cs);
         }
         else {
-            GlobalVar gv = new GlobalVar(var.getName());
+            GlobalVar gv = new GlobalVar(var.getName().split("\\.")[0]);
             var.setRiscGV(gv);
             module.addGV(gv);
             if (init instanceof ConstInt) {
@@ -169,7 +163,6 @@ public class InstructionSelection implements IRVisitor {
         }
 
     }
-
 
 
     @Override
@@ -246,7 +239,7 @@ public class InstructionSelection implements IRVisitor {
                     currentBB.addInst(new ImmOperation(currentBB, ImmOperation.IOp.xori,rvReg,reg,imm));
                 }
                 else {
-                    currentBB.addInst(new ArtheticOp(currentBB, ArtheticOp.ROp.xor, toRiscRegister(lhs),toRiscRegister(rhs),rvReg));
+                    currentBB.addInst(new ArtheticOp(currentBB, ArtheticOp.ROp.xor, rvReg,toRiscRegister(lhs),toRiscRegister(rhs)));
                 }
                 break;
             case AND:
@@ -261,7 +254,7 @@ public class InstructionSelection implements IRVisitor {
                     currentBB.addInst(new ImmOperation(currentBB, ImmOperation.IOp.andi,rvReg,reg,imm));
                 }
                 else {
-                    currentBB.addInst(new ArtheticOp(currentBB, ArtheticOp.ROp.and, toRiscRegister(lhs),toRiscRegister(rhs),rvReg));
+                    currentBB.addInst(new ArtheticOp(currentBB, ArtheticOp.ROp.and, rvReg,toRiscRegister(lhs),toRiscRegister(rhs)));
                 }
                 break;
             case OR:
@@ -276,7 +269,7 @@ public class InstructionSelection implements IRVisitor {
                     currentBB.addInst(new ImmOperation(currentBB, ImmOperation.IOp.ori,rvReg,reg,imm));
                 }
                 else {
-                    currentBB.addInst(new ArtheticOp(currentBB, ArtheticOp.ROp.or, toRiscRegister(lhs),toRiscRegister(rhs),rvReg));
+                    currentBB.addInst(new ArtheticOp(currentBB, ArtheticOp.ROp.or, rvReg, toRiscRegister(lhs),toRiscRegister(rhs)));
                 }
                 break;
             case SAR:
@@ -286,7 +279,7 @@ public class InstructionSelection implements IRVisitor {
                     currentBB.addInst(new ImmOperation(currentBB, ImmOperation.IOp.srai,rvReg,reg,imm));
                 }
                 else {
-                    currentBB.addInst(new ArtheticOp(currentBB, ArtheticOp.ROp.sra, toRiscRegister(lhs),toRiscRegister(rhs),rvReg));
+                    currentBB.addInst(new ArtheticOp(currentBB, ArtheticOp.ROp.sra, rvReg, toRiscRegister(lhs),toRiscRegister(rhs)));
                 }
                 break;
             case SAL:
@@ -296,7 +289,7 @@ public class InstructionSelection implements IRVisitor {
                     currentBB.addInst(new ImmOperation(currentBB, ImmOperation.IOp.slli,rvReg,reg,imm));
                 }
                 else {
-                    currentBB.addInst(new ArtheticOp(currentBB, ArtheticOp.ROp.sll, toRiscRegister(lhs),toRiscRegister(rhs),rvReg));
+                    currentBB.addInst(new ArtheticOp(currentBB, ArtheticOp.ROp.sll, rvReg, toRiscRegister(lhs),toRiscRegister(rhs)));
                 }
                 break;
             default:
@@ -311,41 +304,63 @@ public class InstructionSelection implements IRVisitor {
         if(cond ==  null){
             currentBB.addInst(new Jal(currentBB, branchJump.getThenBlock().getRiscBB()));
         }
+
         else {
+
             RiscInstruction instruction =  branchJump.getRiscInstruction();
             if(instruction != null){
                 instruction.setParentBB(currentBB);
                 currentBB.addInst(instruction);
+                currentBB.addInst(new Jal(currentBB,branchJump.getElseBlock().getRiscBB()));
             }
             else {
-                currentBB.addInst(new UnaryBranch(currentBB,beqz,toRiscRegister(cond), branchJump.getThenBlock().getRiscBB()));
+                currentBB.addInst(new UnaryBranch(currentBB,beqz,toRiscRegister(cond), branchJump.getElseBlock().getRiscBB()));
+                currentBB.addInst(new Jal(currentBB,branchJump.getThenBlock().getRiscBB()));
+
             }
-            currentBB.addInst(new Jal(currentBB,branchJump.getElseBlock().getRiscBB()));
+
         }
+
+
     }
 
     private void icmpAndBranch(Icmp icmp){
-        BinaryBranch.BranchOp op = null;
-        switch (icmp.getOp()){
-            case EQUAL:op = BinaryBranch.BranchOp.beq;break;
-            case NOTEQUAL:op = BinaryBranch.BranchOp.bne;break;
-            case GREATER:op = BinaryBranch.BranchOp.bgt;break;
-            case LEQ:op = BinaryBranch.BranchOp.ble;break;
-            case LESS:op = BinaryBranch.BranchOp.blt;break;
-            case GEQ:op = BinaryBranch.BranchOp.bge;break;
-        }
-        for(IRNode inst: icmp.getDest().getUsers()){
-            assert inst instanceof BranchJump;
-            ((BranchJump) inst).setRiscInstruction(new BinaryBranch(currentBB,op,toRiscRegister(icmp.getLhs()),toRiscRegister(icmp.getRhs()),
-                    ((BranchJump) inst).getThenBlock().getRiscBB()));
 
-        }
+            BinaryBranch.BranchOp op = null;
+            switch (icmp.getOp()) {
+                case EQUAL:
+                    op = BinaryBranch.BranchOp.beq;
+                    break;
+                case NOTEQUAL:
+                    op = BinaryBranch.BranchOp.bne;
+                    break;
+                case GREATER:
+                    op = BinaryBranch.BranchOp.bgt;
+                    break;
+                case LEQ:
+                    op = BinaryBranch.BranchOp.ble;
+                    break;
+                case LESS:
+                    op = BinaryBranch.BranchOp.blt;
+                    break;
+                case GEQ:
+                    op = BinaryBranch.BranchOp.bge;
+                    break;
+            }
+
+            for (IRNode inst : icmp.getDest().getUsers()) {
+                assert inst instanceof BranchJump;
+                ((BranchJump) inst).setRiscInstruction(new BinaryBranch(currentBB, op, toRiscRegister(icmp.getLhs()), toRiscRegister(icmp.getRhs()),
+                        ((BranchJump) inst).getThenBlock().getRiscBB()));
+
+            }
+
     }
 
     @Override
     public void visit(Icmp icmp) {
-        if(icmp.onlyInBranch()){
-            icmpAndBranch(icmp);
+        if(icmp.onlyInBranch()){//
+           icmpAndBranch(icmp); //branch inst will handle it
         }
         else {
             if(icmp.getOp() == Icmp.CompareOp.EQUAL) {
@@ -353,7 +368,7 @@ public class InstructionSelection implements IRVisitor {
                 RiscRegister rhs = toRiscRegister(icmp.getRhs());
                 RiscRegister res = toRiscRegister(icmp.getDest());
                 VirtualReg vreg = currentFunction.addRegister("tmp");
-                currentBB.addInst(new ArtheticOp(currentBB, ArtheticOp.ROp.xor, lhs, rhs, vreg));
+                currentBB.addInst(new ArtheticOp(currentBB, ArtheticOp.ROp.xor, vreg, lhs, rhs));
                 currentBB.addInst(new ImmOperation(currentBB, ImmOperation.IOp.sltiu, res, vreg, new Immidiate(1)));
             }
             else if(icmp.getOp() == Icmp.CompareOp.NOTEQUAL) {
@@ -361,7 +376,7 @@ public class InstructionSelection implements IRVisitor {
                 RiscRegister rhs = toRiscRegister(icmp.getRhs());
                 RiscRegister res = toRiscRegister(icmp.getDest());
                 VirtualReg tmp = currentFunction.addRegister("tmp");
-                currentBB.addInst(new ArtheticOp(currentBB, ArtheticOp.ROp.xor, lhs, rhs, tmp));
+                currentBB.addInst(new ArtheticOp(currentBB, ArtheticOp.ROp.xor,tmp, lhs, rhs));
                 currentBB.addInst(new ArtheticOp(currentBB, ArtheticOp.ROp.sltu, RegisterTable.zero, tmp, res));
             }
             else {
@@ -377,7 +392,7 @@ public class InstructionSelection implements IRVisitor {
                     else {
                         RiscRegister lhs = toRiscRegister(icmp.getLhs());
                         RiscRegister rhs = toRiscRegister(icmp.getRhs());
-                        currentBB.addInst(new ArtheticOp(currentBB, ArtheticOp.ROp.slt, lhs,rhs,res));
+                        currentBB.addInst(new ArtheticOp(currentBB, ArtheticOp.ROp.slt, res,lhs,rhs));
                     }
                 }
                 else if(icmp.getOp() == Icmp.CompareOp.GREATER){
@@ -390,7 +405,7 @@ public class InstructionSelection implements IRVisitor {
                     else {
                         RiscRegister lhs = toRiscRegister(icmp.getLhs());
                         RiscRegister rhs = toRiscRegister(icmp.getRhs());
-                        currentBB.addInst(new ArtheticOp(currentBB, ArtheticOp.ROp.slt, rhs,lhs,res));
+                        currentBB.addInst(new ArtheticOp(currentBB, ArtheticOp.ROp.slt,res, rhs,lhs));
                     }
                 }
                 else if(icmp.getOp() == Icmp.CompareOp.GEQ){
@@ -404,7 +419,7 @@ public class InstructionSelection implements IRVisitor {
                     else {
                         RiscRegister lhs = toRiscRegister(icmp.getLhs());
                         RiscRegister rhs = toRiscRegister(icmp.getRhs());
-                        currentBB.addInst(new ArtheticOp(currentBB, ArtheticOp.ROp.slt, lhs,rhs,res));
+                        currentBB.addInst(new ArtheticOp(currentBB, ArtheticOp.ROp.slt,res, lhs,rhs));
                     }
                     currentBB.addInst(new ImmOperation(currentBB, ImmOperation.IOp.xori,res,res,new Immidiate(1)));
                 }
@@ -418,7 +433,7 @@ public class InstructionSelection implements IRVisitor {
                     else {
                         RiscRegister lhs = toRiscRegister(icmp.getLhs());
                         RiscRegister rhs = toRiscRegister(icmp.getRhs());
-                        currentBB.addInst(new ArtheticOp(currentBB, ArtheticOp.ROp.slt, rhs,lhs,res));
+                        currentBB.addInst(new ArtheticOp(currentBB, ArtheticOp.ROp.slt,res, rhs,lhs));
                     }
                     currentBB.addInst(new ImmOperation(currentBB, ImmOperation.IOp.xori,res,res,new Immidiate(1)));
                 }
@@ -445,28 +460,28 @@ public class InstructionSelection implements IRVisitor {
             if (ptr instanceof StaticVar){
                 VirtualReg tmp = currentFunction.addRegister("lui.high");
                 GlobalVar globalVar = ((StaticVar) ptr).getRiscGV();
-                currentBB.addInst(new Lui(currentBB,tmp,new BackEnd.Operands.Address(RegisterTable.hi,globalVar)));
+                currentBB.addInst(new Lui(currentBB,tmp,new GVAddress(RegisterTable.hi,globalVar)));
                 currentBB.addInst(new ILoad(
                         currentBB,toRiscRegister(load.getRes()),
-                        new BackEnd.Operands.Address(RegisterTable.lo,
-                        globalVar),op));
+                        new AddrWithOffset(tmp, new GVAddress(RegisterTable.lo,
+                        globalVar)),op));
             }
             else {
                 if(load.getDest() instanceof ConstNull){
                     currentBB.addInst(new ILoad(currentBB,toRiscRegister(load.getRes()),
-                            RegisterTable.zero, new Immidiate(0),op));
+                             new AddrWithOffset(RegisterTable.zero,new Immidiate(0)),op));
                 }
                 else {
                     assert load.getDest() instanceof Parameter || load.getDest() instanceof Register;
 
                     if(getPtrMap.containsKey(load.getDest())){
-                        Pair<RiscRegister,Immidiate> pair = getPtrMap.get(load.getDest());
+                        AddrWithOffset addr = getPtrMap.get(load.getDest());
                         currentBB.addInst(new ILoad(
-                                currentBB,toRiscRegister(load.getRes()),pair.getKey(),pair.getValue(),op));
+                                currentBB,toRiscRegister(load.getRes()),addr,op));
                     }
                     else {
                         currentBB.addInst(new ILoad(currentBB,toRiscRegister(load.getRes()),
-                               toRiscRegister(load.getDest()), new Immidiate(0),op ));
+                             new AddrWithOffset(toRiscRegister(load.getDest()), new Immidiate(0)),op ));
                     }
                 }
             }
@@ -505,17 +520,19 @@ public class InstructionSelection implements IRVisitor {
         if(store.getDest() instanceof StaticVar) {
             GlobalVar globalVar = ((StaticVar) store.getDest()).getRiscGV();
             VirtualReg lui = currentFunction.addRegister("luihigh");
-            currentBB.addInst(new Lui(currentBB, lui, new BackEnd.Operands.Address(RegisterTable.hi, globalVar)));
+            currentBB.addInst(new Lui(currentBB, lui, new GVAddress(RegisterTable.hi, globalVar)));
             currentBB.addInst(new Stype(
-                    currentBB, toRiscRegister(store.getValue()), lui, new BackEnd.Operands.Address(RegisterTable.lo, globalVar), op));
+                    currentBB, toRiscRegister(store.getValue()),
+                    new AddrWithOffset(lui, new GVAddress(RegisterTable.lo, globalVar)), op));
         }
         else {
             if(store.getDest() instanceof ConstNull)
                 currentBB.addInst(new Stype(currentBB,toRiscRegister(store.getValue()),
-                        RegisterTable.zero, new Immidiate(0), op));
+                       new AddrWithOffset(RegisterTable.zero, new Immidiate(0)), op));
             else {
                     currentBB.addInst(new Stype(
-                            currentBB,toRiscRegister(store.getValue()),toRiscRegister(store.getDest()),new Immidiate(0),op));
+                            currentBB,toRiscRegister(store.getValue()),
+                            new AddrWithOffset(toRiscRegister(store.getDest()),new Immidiate(0)),op));
 
             }
         }
@@ -541,16 +558,16 @@ public class InstructionSelection implements IRVisitor {
             for(int i = 8; i < paras.size(); i++){
                 currentBB.addInst(new Stype(
                         currentBB,toRiscRegister(paras.get(i)),
-                        paralist.get(i-8), new Immidiate(0), Stype.BSize.sw));
+                        paralist.get(i-8), Stype.BSize.sw));
             }
         }
         else {
             ArrayList<StackOffset> paralist = new ArrayList<>();
             for(int i = 8;i <  paras.size(); i++){
-                StackOffset stackOffset = new StackOffset("_para"+i);
+                StackOffset stackOffset = new StackOffset(".para"+i);
                 paralist.add(stackOffset);
-                currentBB.addInst(new Stype(currentBB,toRiscRegister(paras.get(i)),stackOffset,new
-                        Immidiate(0), Stype.BSize.sw));
+                currentBB.addInst(new Stype(currentBB,toRiscRegister(paras.get(i)),stackOffset,
+                         Stype.BSize.sw));
             }
             stackFrame.getParas().put(callee,paralist);
         }
@@ -560,7 +577,7 @@ public class InstructionSelection implements IRVisitor {
         ));
 
         if(callFunction.getResult()!=null){
-            currentBB.addInst(new Move(currentBB,toRiscRegister(callFunction.getResult()),RegisterTable.a0));
+            currentBB.addInst(new Move(currentBB,RegisterTable.a0,toRiscRegister(callFunction.getResult())));
         }
 
     }
@@ -571,16 +588,16 @@ public class InstructionSelection implements IRVisitor {
             if(inst instanceof Load){
                 ILoad.LoadType op = ((Load) inst).getType().getByteWidth() == 1? ILoad.LoadType.lb : ILoad.LoadType.lw;
                 ((Load) inst).setRiscInst(new ILoad(currentBB,toRiscRegister(((Load) inst).getRes()),
-                        toRiscRegister(getPtr.getPointer()),offset, op));
+                        new AddrWithOffset(toRiscRegister(getPtr.getPointer()),offset), op));
             }
             else{
 
                 assert inst instanceof Store;
                 Stype.BSize op = ((Store) inst).getValue().getType().getByteWidth() == 1?
                         Stype.BSize.sb: Stype.BSize.sw;
-                IRType storeType = ((Store) inst).getValue().getType();
 
-                ((Store) inst).setRiscInst(new Stype(currentBB,toRiscRegister(((Store) inst).getValue()),toRiscRegister(getPtr.getDest()),offset,op));
+                ((Store) inst).setRiscInst(new Stype(currentBB,toRiscRegister(((Store) inst).getValue()),
+                        new AddrWithOffset(toRiscRegister(getPtr.getDest()),offset),op));
             }
         }
     }
@@ -589,38 +606,32 @@ public class InstructionSelection implements IRVisitor {
          Register res = getPtr.getDest();
          Operand ptr = getPtr.getPointer();
 
-         if(getPtr.getPointer() instanceof StaticVar){
+         if(getPtr.getPointer() instanceof StaticVar){//string
              assert ((StaticVar) getPtr.getPointer()).getInit() instanceof ConstString;
-             VirtualReg tmp = currentFunction.addRegister("tmp");
              GlobalVar str =((StaticVar) getPtr.getPointer()).getRiscGV();
              assert str instanceof ConstStrings;
              currentBB.addInst(new LA(currentBB, toRiscRegister(res), str));
 
-             return;
          }
 
-         if(getPtr.getIndex().size()  == 1){//array
+         else if(getPtr.getIndex().size()  == 1){//array
              Operand ind = getPtr.getIndex().get(0);
              if(ind instanceof ConstInt){
                  int offset = ((ConstInt) ind).getValue() * 4;
                  Immidiate imm = toImm(offset);
                  if(imm != null){
-                     if(getPtr.onlyUseForLoadStore()){
-                         getPtrAndLoadStore(getPtr, imm);
-                         return;
-                     }
                      currentBB.addInst(new ImmOperation(currentBB, ImmOperation.IOp.addi,toRiscRegister(res),toRiscRegister(ptr),imm));
                  }
                  else {
-                     RiscRegister off = toRiscRegister(new ConstInt(offset, IntIRType.intType.i32));
-                    currentBB.addInst(new ArtheticOp(currentBB, ArtheticOp.ROp.add, toRiscRegister(ptr), off,toRiscRegister(res)));
+                      RiscRegister off = toRiscRegister(new ConstInt(offset, IntIRType.intType.i32));
+                    currentBB.addInst(new ArtheticOp(currentBB, ArtheticOp.ROp.add,toRiscRegister(res), toRiscRegister(ptr), off));
                  }
 
              } else {
                  RiscRegister rs1 = toRiscRegister(ind);
                  RiscRegister rs2 = currentFunction.addRegister("slli");
                  currentBB.addInst(new ImmOperation(currentBB, ImmOperation.IOp.slli, rs2,rs1, new Immidiate(2)));
-                 currentBB.addInst(new ArtheticOp(currentBB, ArtheticOp.ROp.add,rs1,rs2,toRiscRegister(res)));
+                 currentBB.addInst(new ArtheticOp(currentBB, ArtheticOp.ROp.add,toRiscRegister(res),rs2,toRiscRegister(ptr)));
 
              }
          }
@@ -644,20 +655,20 @@ public class InstructionSelection implements IRVisitor {
                  Immidiate imm = toImm(offset);
 
                  if(imm != null) {
-                     if (getPtr.onlyUseForLoadStore()) {
+                     if (getPtr.getDest().onlyUseForLoadStore()) {
                          getPtrAndLoadStore(getPtr, imm);
                      }
                      else {
                          if(offset == 0){
-                             currentBB.addInst(new Move(currentBB,toRiscRegister(res),rptr));
+                             currentBB.addInst(new Move(currentBB,rptr,toRiscRegister(res)));
                          }
                          else currentBB.addInst(
                                  new ImmOperation(currentBB, ImmOperation.IOp.addi,toRiscRegister(res),rptr,imm));
                      }
                  }
                  else {//TODO can be optimized if ptr.getPtrType is pointer again
-                    currentBB.addInst(new ArtheticOp(currentBB, ArtheticOp.ROp.add,rptr,
-                            toRiscRegister(new ConstInt(offset, IntIRType.intType.i32)),toRiscRegister(res)));
+                    currentBB.addInst(new ArtheticOp(currentBB, ArtheticOp.ROp.add,toRiscRegister(res),rptr,
+                            toRiscRegister(new ConstInt(offset, IntIRType.intType.i32))));
                  }
              }
          }
@@ -673,7 +684,7 @@ public class InstructionSelection implements IRVisitor {
 
     @Override
     public void visit(BitCast bitCast) {
-        currentBB.addInst(new Move(currentBB,toRiscRegister(bitCast.getRes()),toRiscRegister(bitCast.getSrc())));
+        currentBB.addInst(new Move(currentBB,toRiscRegister(bitCast.getSrc()),toRiscRegister(bitCast.getRes())));
     }
 
     @Override
@@ -684,7 +695,8 @@ public class InstructionSelection implements IRVisitor {
     private RiscRegister toRiscRegister(Operand irOperand){
         if(irOperand instanceof ConstInt){
             int val = ((ConstInt) irOperand).getValue();
-            VirtualReg vreg = currentFunction.addRegister("tmp");
+            if(val == 0) return RegisterTable.zero;
+            VirtualReg vreg = currentFunction.addRegister("immReg");
             currentBB.addInst(new Li(currentBB,vreg,new Immidiate(val)));
             return vreg;
         }
@@ -692,7 +704,7 @@ public class InstructionSelection implements IRVisitor {
             boolean val = ((ConstBool) irOperand).isValue();
             if(!val) return RegisterTable.zero;
             else {
-                VirtualReg vreg = currentFunction.addRegister("tmp");
+                VirtualReg vreg = currentFunction.addRegister("immReg");
                 currentBB.addInst(new ImmOperation(currentBB, ImmOperation.IOp.addi,vreg, RegisterTable.zero,new Immidiate(1)));
                 return vreg;
             }
@@ -705,6 +717,16 @@ public class InstructionSelection implements IRVisitor {
             if(reg!= null) return reg;
             else {
                 reg = currentFunction.addRegister(irOperand.getName());
+                ((Register) irOperand).setRiscRegister(reg);
+                return reg;
+            }
+        }
+        else if(irOperand instanceof Parameter){
+            RiscRegister reg = ((Parameter) irOperand).getRiscRegister();
+            if(reg != null) return reg;
+            else {
+                reg = currentFunction.addRegister(irOperand.getName());
+                ((Parameter) irOperand).setRiscRegister(reg);
                 return reg;
             }
         }

@@ -60,6 +60,7 @@ public class Codegen {
 
         println(indent + ".section\t.sdata,\"aw\",@progbits");
         for(GlobalVar globalVar: module.getGlobalVars()){
+            if(globalVar instanceof ConstStrings) continue;
             visit(globalVar);
         }
 
@@ -91,6 +92,7 @@ public class Codegen {
 
         println(repeatString(" ",40) + "# -- End function");
         println("");
+        println("");
 
         functionCnt++;
     }
@@ -106,7 +108,7 @@ public class Codegen {
 
     public void visit(RiscBB bb){
         String name = bb.getLabel();
-        println(name + ":" + repeatString(" ",40 - 1 - name.length()) + "# " + bb.getLabel());
+        println(name + ":" + repeatString(" ",40 - 1 - name.length()) + "# " + bb.getName());
         for(RiscInstruction instruction = bb.getHead();instruction != null;instruction= instruction.getNext()){
             println(instruction.print());
         }

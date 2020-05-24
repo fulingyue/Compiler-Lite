@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 
 public class RiscBB {
+    private String name;
     private String label;
     private RiscFunction function;
     private RiscInstruction head, tail;
@@ -18,8 +19,9 @@ public class RiscBB {
     private HashSet<RiscRegister> liveIn, liveOut;
     private HashSet<RiscRegister> def,useExceptDef;
 
-    public RiscBB(String label, RiscFunction function, BasicBlock IRBB) {
-        this.label = function.name + label;
+    public RiscBB(String name,String label, RiscFunction function, BasicBlock IRBB) {
+        this.name = function.name + '_' + name;
+        this.label =label;
         this.function = function;
         this.IRBB = IRBB;
         successors = new ArrayList<>();
@@ -36,7 +38,7 @@ public class RiscBB {
     }
 
     public void clear(){
-        liveOut.clear();
+        liveIn.clear();
         liveOut.clear();
         def.clear();
         useExceptDef.clear();
@@ -76,6 +78,7 @@ public class RiscBB {
         else {
             inst.getNext().setPrev(inst.getPrev());
         }
+        inst.setParentBB(null);
     }
     public void dfs(ArrayList<RiscBB> dfsOrd, HashSet<RiscBB> visited){
         dfsOrd.add(this);
@@ -87,6 +90,7 @@ public class RiscBB {
     }
 
     public void insertNext(RiscInstruction inst, RiscInstruction insert){
+        insert.add();
         if(inst == tail){
             insert.setPrev(inst);
             insert.setNext(null);
@@ -102,6 +106,7 @@ public class RiscBB {
     }
 
     public void insertPrev(RiscInstruction inst, RiscInstruction insert){
+        insert.add();
         if(inst == head){
             insert.setNext(inst);
             insert.setPrev(null);
@@ -217,5 +222,13 @@ public class RiscBB {
 
     public void setUseExceptDef(HashSet<RiscRegister> useExceptDef) {
         this.useExceptDef = useExceptDef;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

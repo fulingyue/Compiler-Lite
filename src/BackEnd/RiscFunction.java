@@ -1,42 +1,62 @@
 package BackEnd;
 
-import BackEnd.Operands.RiscRegister;
 import BackEnd.Operands.VirtualReg;
+import FrontEnd.IR.BasicBlock;
 import FrontEnd.IR.IRFunction;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 
 public class RiscFunction {
-    public String name;
+    public String name,label;
     private ArrayList<RiscBB> blocks;
     private RiscBB entranceBB, exitBB;
     private int paraNum;
-    private ArrayList<RiscRegister> registerList;
-    IRFunction function;
-    StackFrame stackFrame;
+    private HashSet<VirtualReg> virtualSet = new HashSet<>();
+    private IRFunction function;
+    private StackFrame stackFrame=null;
 
 
+    static int cnt =0;
 
     public RiscFunction(String name, int paraNum, IRFunction function) {
         this.name = name;
+        this.function = function;
+        if(function == null) return;
+
         this.paraNum = paraNum;
         blocks = new ArrayList<>();
-        registerList = new ArrayList<>();
-        this.function = function;
+        int bbcnt=0;
+        for(BasicBlock bb=function.getEntranceBB();bb != null;bb=bb.getNextBB()){
+            RiscBB riscBB=new RiscBB(bb.getName(),".LBB"+cnt+"_"+bbcnt,this,bb);
+            this.addBB(riscBB);
+            bb.setRiscBB(riscBB);
+            bbcnt++;
+        }
+
+        for(BasicBlock bb=function.getEntranceBB();bb != null;bb=bb.getNextBB()){
+            RiscBB riscBB = bb.getRiscBB();
+            for(BasicBlock pree:bb.getPredecessorBB())
+                riscBB.addPre(pree.getRiscBB());
+            for(BasicBlock succ:bb.getSuccessors())
+                riscBB.addSucc(succ.getRiscBB());
+        }
+        cnt++;
 
     }
 
+
     public VirtualReg addRegister(String name){
         VirtualReg reg = new VirtualReg(name);
-        registerList.add(reg);
+        virtualSet.add(reg);
         return reg;
     }
 
     public void addBB(RiscBB bb) {
+
         if(blocks.size() == 0) entranceBB = bb;
         blocks.add(bb);
-        exitBB = blocks.get(blocks.size()  -1);
+        exitBB = blocks.get(blocks.size() -1);
     }
 
     public ArrayList<RiscBB> getDfs(){
@@ -102,11 +122,27 @@ public class RiscFunction {
         this.paraNum = paraNum;
     }
 
-    public ArrayList<RiscRegister> getRegisterList() {
-        return registerList;
+    public String getLabel() {
+        return label;
     }
 
-    public void setRegisterList(ArrayList<RiscRegister> registerList) {
-        this.registerList = registerList;
+    public void setLabel(String label) {
+        this.label = label;
+    }
+
+    public HashSet<VirtualReg> getVirtualSet() {
+        return virtualSet;
+    }
+
+    public void setVirtualSet(HashSet<VirtualReg> virtualSet) {
+        this.virtualSet = virtualSet;
+    }
+
+    public static int getCnt() {
+        return cnt;
+    }
+
+    public static void setCnt(int cnt) {
+        RiscFunction.cnt = cnt;
     }
 }

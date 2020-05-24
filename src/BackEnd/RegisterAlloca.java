@@ -9,7 +9,7 @@ import java.util.LinkedHashSet;
 import java.util.Stack;
 
 public class RegisterAlloca {
-    private static class Edge{
+    public static class Edge{
         private RiscRegister first,second;
 
         public Edge(RiscRegister first, RiscRegister second) {
@@ -86,7 +86,7 @@ public class RegisterAlloca {
                     if(!simplifyList.isEmpty()) simplify();
                     else if(!workListMoves.isEmpty()) coalesce();
                     else if(!freezeList.isEmpty()) freeze();
-                    else if(!spillList.isEmpty()) selectSpill();
+                    else  selectSpill();
                 }
 
                 assignColors();
@@ -94,6 +94,7 @@ public class RegisterAlloca {
                     break;
                 else rewrite(function);
             }
+
             removeRedundantMove(function);
             stackSlotAlloca(function);
         }
@@ -108,7 +109,9 @@ public class RegisterAlloca {
         spillList = new LinkedHashSet<>();
         spilledRegs = new HashSet<>();
         coalescentRegs = new HashSet<>();
+        coloredRegs = new HashSet<>();
         selectStack = new Stack<>();
+
         coalescentMoves = new HashSet<>();
         constrainedMoves = new HashSet<>();
         freezeMoves = new HashSet<>();
@@ -116,9 +119,10 @@ public class RegisterAlloca {
         activeMoves = new HashSet<>();
         adjSet = new HashSet<>();
 
-        for(RiscRegister reg: function.getRegisterList()){
-            reg.clearColor();
 
+        initial.addAll(function.getVirtualSet());
+        for(RiscRegister reg: initial){
+            reg.clearColor();
         }
 
         for(int i = 0;i < 32; ++i){
@@ -131,6 +135,7 @@ public class RegisterAlloca {
     private void build(RiscFunction function){
         for(RiscBB bb:function.getDfs()){
             HashSet<RiscRegister> live = bb.getLiveOut();//TODO:  check if need copy
+
             for(RiscInstruction inst = bb.getTail(); inst != null; inst = inst.getPrev()){
                 HashSet<RiscRegister> use = inst.getUsages(), def = inst.getDef();
                 if(inst instanceof Move){
@@ -158,7 +163,7 @@ public class RegisterAlloca {
     }
 
     private void addEdge(RiscRegister u,RiscRegister v){
-        if(!u.equals(v) && !adjSet.contains(new Edge(u,v))){
+        if(u != v && !adjSet.contains(new Edge(u,v))){
             adjSet.add(new Edge(u,v));
             adjSet.add(new Edge(v,u));
             if(!preColored(u)){
@@ -178,7 +183,6 @@ public class RegisterAlloca {
 
     private void makeWorkList(){
         for(RiscRegister reg: initial){
-            initial.remove(reg);
             if(reg.getDegree() >= K){
                 spillList.add(reg);
             }
@@ -189,10 +193,11 @@ public class RegisterAlloca {
     }
 
     private boolean moveRelated(RiscRegister reg){
-
+        assert reg != null;
         return !nodeMoves(reg).isEmpty();
     }
     private HashSet<Move> nodeMoves(RiscRegister n){
+        assert n != null;
         HashSet<Move> tmp = new HashSet<>(activeMoves);
         tmp.addAll(workListMoves);
         tmp.retainAll(n.getMoveList());
@@ -200,6 +205,7 @@ public class RegisterAlloca {
     }
 
     private HashSet<RiscRegister> adjacent(RiscRegister reg){
+        assert reg != null;
         HashSet<RiscRegister> res = new HashSet<>(reg.getAdjList());
         res.removeAll(selectStack);
         res.removeAll(coalescentRegs);
@@ -219,7 +225,7 @@ public class RegisterAlloca {
         int d = m.getDegree();
         m.setDegree(d-1);
         if(d == K){
-            HashSet<RiscRegister> nodes = new HashSet<>(m.getAdjList());
+            HashSet<RiscRegister> nodes = new HashSet<>(adjacent(m));
             nodes.add(m);
             enableMoves(nodes);
             spillList.remove(m);
@@ -232,7 +238,7 @@ public class RegisterAlloca {
 
     private void enableMoves(HashSet<RiscRegister> nodes){
         for(RiscRegister n: nodes){
-            for(Move m: n.getMoveList()){
+            for(Move m: nodeMoves(n)){
                 if(activeMoves.contains(m)){
                     activeMoves.remove(m);
                     workListMoves.add(m);
@@ -242,6 +248,7 @@ public class RegisterAlloca {
     }
 
     private void addWorkList(RiscRegister u){
+        assert u!=null;
         if(!preColored(u) && !(moveRelated(u)) && u.getDegree() <  K){
             freezeList.remove(u);
             simplifyList.add(u);
@@ -249,6 +256,7 @@ public class RegisterAlloca {
     }
 
     private boolean OK(RiscRegister t,RiscRegister r){
+        assert t != null && r != null;
         return t.getDegree()< K || preColored(t) || adjSet.contains(new Edge(t,r));
     }
 
@@ -263,6 +271,8 @@ public class RegisterAlloca {
 
     private void coalesce(){
         Move m = workListMoves.iterator().next();
+        workListMoves.remove(m);
+        assert m != null;
         RiscRegister x = getAlias(m.getRd());
         RiscRegister y = getAlias(m.getRs());
         RiscRegister u,v;
@@ -274,7 +284,8 @@ public class RegisterAlloca {
             u = x;
             v = y;
         }
-        workListMoves.remove(m);
+
+
         if(u  == v){
             coalescentMoves.add(m);
             addWorkList(u);
@@ -284,7 +295,7 @@ public class RegisterAlloca {
             addWorkList(u);
             addWorkList(v);
         }
-        else if(preColored(u) && alltIsOK(v,u) || !preColored(u)  && conservative(unionAdj(u,v))){
+        else if((preColored(u) && alltIsOK(v,u)) || (!preColored(u)  && conservative(unionAdj(u,v)))){
             coalescentMoves.add(m);
             combine(u,v);
             addWorkList(u);
@@ -315,7 +326,7 @@ public class RegisterAlloca {
         }
     }
     private boolean alltIsOK(RiscRegister v, RiscRegister u){
-        for(RiscRegister t: v.getAdjList()){
+        for(RiscRegister t: adjacent(v)){
             if(!OK(t,u))  return false;
         }
         return true;
@@ -365,6 +376,7 @@ public class RegisterAlloca {
     }
     private void selectSpill(){
         RiscRegister m = regSelectSpill();
+        assert m != null;
         spillList.remove(m);
         simplifyList.add(m);
         freezeMoves(m);
@@ -375,15 +387,22 @@ public class RegisterAlloca {
         RiscRegister res = null;
         for(RiscRegister reg: spillList){
             double cost = reg.getSpilledCost();
-            if(cost < min) res = reg;
+            if(cost <= min) {
+                res = reg;
+                min = cost;
+            }
         }
         assert res != null;
+        if(res == null)
+            System.out.println("oh!");
         return res;
     }
 
     private void assignColors(){
         while(!selectStack.isEmpty()){
             RiscRegister n = selectStack.pop();
+//            if(n.getName().contains("spill"))
+//                System.out.println("mo");
             HashSet<PhysicalReg> okColors = new LinkedHashSet<>(RegisterTable.allocSet);
             HashSet<RiscRegister> adjs = n.getAdjList();
             for(RiscRegister w:adjs){
@@ -424,7 +443,8 @@ public class RegisterAlloca {
                 RiscRegister spill = function.addRegister(reg.getName() + ".spill." + cnt);
                 def.replaceDef(reg,spill);
                 RiscBB currentBB = def.getParentBB();
-                currentBB.insertNext(def,new Stype(currentBB,spill,stackLocation,new Immidiate(0), Stype.BSize.sw));
+                currentBB.insertNext(def,new Stype(currentBB,spill,stackLocation, Stype.BSize.sw));
+
                 cnt++;
             }
             HashSet<RiscInstruction> uses = new HashSet<>(reg.getUse());
@@ -432,11 +452,12 @@ public class RegisterAlloca {
                 RiscRegister spill = function.addRegister(reg.getName() + ".spill." + cnt);
                 use.replaceUse(reg,spill);
                 RiscBB currentBB = use.getParentBB();
+                cnt++;
                 currentBB.insertPrev(use, new ILoad(currentBB,spill,stackLocation, ILoad.LoadType.lw));
             }
 
             assert reg.getDef().isEmpty() && reg.getUse().isEmpty();
-            function.getRegisterList().remove(reg);
+            function.getVirtualSet().remove(reg);
         }
 
     }
@@ -444,7 +465,9 @@ public class RegisterAlloca {
 
     private void removeRedundantMove(RiscFunction function){
         for(RiscBB bb: function.getDfs()){
-            for(RiscInstruction inst = bb.getHead();bb != null; bb=  bb.getNext()){
+            RiscInstruction inst = bb.getHead();
+            while(inst != null) {
+                RiscInstruction nxt = inst.getNext();
                 for(RiscRegister check: inst.getDef())
                     assert check.getColor() != null;
                 for(RiscRegister check: inst.getUsages())
@@ -452,6 +475,7 @@ public class RegisterAlloca {
                 if(inst instanceof Move && ((Move) inst).getRd().getColor() ==  ((Move) inst).getRs().getColor()){
                     ((Move) inst).remove();
                 }
+                inst = nxt;
             }
         }
     }
@@ -466,7 +490,7 @@ public class RegisterAlloca {
                 currentBB, ImmOperation.IOp.addi, sp, sp, new Immidiate(-frameSize * 4)
         ));
 
-        for(RiscBB bb = function.getEntranceBB(); bb != null; bb = bb.getNext()){
+        for(RiscBB bb:function.getBlocks()){
             if(bb.getTail() instanceof Return){
                 bb.insertPrev(bb.getTail(), new ImmOperation(bb, ImmOperation.IOp.addi,sp,sp,new Immidiate(frameSize * 4)));
             }

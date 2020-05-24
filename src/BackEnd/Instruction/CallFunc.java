@@ -18,9 +18,11 @@ public class CallFunc extends RiscInstruction {
     public void add(){
         for(int i = 0; i < paraNum  && i  < 8; ++i){
             addUse(RegisterTable.argumentRegisters[i]);
+            RegisterTable.argumentRegisters[i].addUse(this);
         }
         for (int i =0;i < 16; ++i){
             addDef(RegisterTable.callerSavedRegisters[i]);
+            RegisterTable.callerSavedRegisters[i].addDef(this);
         }
     }
 

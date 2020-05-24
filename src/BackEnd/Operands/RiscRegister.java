@@ -22,6 +22,7 @@ public class RiscRegister extends RiscOperand {
         this.name = name;
         use  = new HashSet<>();
         def = new HashSet<>();
+        spilledCost = 0;
     }
 
     public HashSet<RiscInstruction> getUse() {
@@ -42,9 +43,15 @@ public class RiscRegister extends RiscOperand {
 
 
     @Override
-    public String print() {
+    public String toString(){
         if(color == null)
             return name;
+        else  return color.getName();
+    }
+    @Override
+    public String print() {
+        assert color != null;
+//        return name;
         return color.getName();
     }
 
@@ -54,7 +61,7 @@ public class RiscRegister extends RiscOperand {
     private RiscRegister alias = this;
     private  boolean colorFixed = false;
     private PhysicalReg color =  null;
-    private double spilledCost = 0;
+    private double spilledCost;
 
 
     public void clearColor(){
@@ -64,8 +71,9 @@ public class RiscRegister extends RiscOperand {
         alias = this;
         color= null;
     }
-    public double getSpilledCost(){
-        return spilledCost/degree;
+    public double getSpilledCost(){//TODO change spilled cost
+//        return spilledCost/degree;
+        return 10.0/degree;
      }
 
      public void  addMove(Move move){

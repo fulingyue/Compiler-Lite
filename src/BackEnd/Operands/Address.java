@@ -1,14 +1,6 @@
 package BackEnd.Operands;
 
-public class Address extends Immidiate{
-
-    private PhysicalReg reg;
-    private GlobalVar globalVar;
-
-
-    public Address(PhysicalReg reg, GlobalVar var) {
-        super(0);
-        this.reg = reg;
-        this.globalVar = var;
-    }
+public abstract class Address extends RiscOperand{
+    public abstract  String print();
+    public abstract RiscRegister getUse();
 }
