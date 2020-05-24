@@ -5,10 +5,7 @@ import FrontEnd.IR.Instruction.*;
 import FrontEnd.IR.Operand.Register;
 import FrontEnd.IRVisitor;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class BasicBlock extends IRNode{
     private IRFunction functionParent;
@@ -27,7 +24,7 @@ public class BasicBlock extends IRNode{
     private HashSet<BasicBlock> bucket; 
     private HashSet<BasicBlock> strictDominators = new HashSet<>();
     private HashSet<BasicBlock> domianceFrontier = new HashSet<>();
-    private Map<Register, Phi> phiMap;
+    private Map<Register, Phi> phiMap = new HashMap<>();
     private ArrayList<BasicBlock> dominance = new ArrayList<>();
 
 
@@ -137,8 +134,13 @@ public class BasicBlock extends IRNode{
     }
 
     public void deleteItself() {
-        nextBB.prevBB = prevBB;
-        prevBB.nextBB = nextBB;
+        if(nextBB == null)
+            getParent().setExitBB(prevBB);
+        else nextBB.prevBB = prevBB;
+        if(prevBB == null)
+            getParent().setEntranceBB(nextBB);
+       else prevBB.nextBB = nextBB;
+
         for(BasicBlock bb:predecessorBB){
             bb.getSuccessors().remove(this);
         }
@@ -165,61 +167,40 @@ public class BasicBlock extends IRNode{
     }
 
 
-    public boolean mergeToPreceBB(){
+    public void mergeBlock(BasicBlock bb){
+        this.tail.remove();
+        if(bb.getParent().getExitBB() == bb){
+            bb.getParent().setExitBB(this);
+        }
 
-        assert predecessorBB.size() == 1;
-        BasicBlock pre = predecessorBB.iterator().next();
-        Instruction br = pre.getTerminator();
+        Instruction ptr = bb.getHead();
+        while(ptr != null){
+            if(ptr instanceof Phi){
+                Instruction nct = ptr.getNxt();
+                ((Phi) ptr).getRes().replaceUser(((Phi) ptr).getBranches().iterator().next().getFirst());
+                ptr.remove();
+                ptr = nct;
+            }else {
+                ptr.setBasicBlock(this);
+                ptr.setPrev(tail);
+                if(this.head == null)
+                    head = ptr;
+                else tail.setNxt(ptr);
 
-        assert br instanceof BranchJump;
-        assert ((BranchJump) br).getCondition() == null;
-        assert ((BranchJump) br).getThenBlock() == this;
-        br.remove();
-
-        Instruction instruction = this.getHead();
-        while(instruction != null) {
-            if(instruction instanceof Phi){
-                Instruction nxt = instruction.getNxt();
-                assert ((Phi) instruction).getBranches().size() == 1;
-                ((Phi) instruction).getRes().replaceUser(((Phi) instruction).getBranches().iterator().next().getKey());
-                instruction.remove();
-                instruction = nxt;
-            } else {
-                instruction.setBasicBlock(pre);
-                instruction.setPrev(pre.getTail());
-                if(pre.getHead() == null){
-                    pre.setHead(instruction);
-                }else {
-                    pre.setTail(instruction);
-                }
-                instruction = instruction.getNxt();
+                tail = ptr;
+                ptr = ptr.getNxt();
             }
-
         }
 
-        for(BasicBlock successor: successors){
-            pre.addSuccessorBB(successor);
-            successor.getPredecessorBB().remove(this);
-            successor.getPredecessorBB().add(pre);
+        for(BasicBlock succ: bb.getSuccessors()){
+            this.successors.add(succ);
+            succ.getPredecessorBB().add(this);
         }
+        bb.setHead(null);
+        bb.setTail(null);
+        bb.replaceUser(this);
+        bb.deleteItself();
 
-        pre.getSuccessors().remove(this);
-        head = null;
-        tail =null;
-        this.replaceUser(pre);
-
-        if(prevBB != null)
-            prevBB.setNextBB(this.nextBB);
-        if(nextBB != null)
-            nextBB.setPrevBB(this.prevBB);
-        else {
-            functionParent.setExitBB(prevBB);
-        }
-
-        if(functionParent.getReturnBB() == this){
-            functionParent.setReturnBB(pre);
-        }
-        return true;
     }
 
 

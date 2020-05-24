@@ -236,14 +236,14 @@ public class IRBuilder extends AstVisitor{
         currentBB = thenBB;
         node.getIfBlock().accept(this);
         currentBB.addInst(new BranchJump("jump_end",currentBB,
-                null,endBB,null));
+                null, endBB,null));
         currentFunction.addBB(thenBB);
 
         currentBB  = elseBB;
         if(node.getElseBlock()!= null) {
             node.getElseBlock().accept(this);
             currentBB.addInst(new BranchJump("jump_end",currentBB,
-                    null,endBB, null));
+                    null, endBB, null));
             currentFunction.addBB(elseBB);
         }
         currentBB = endBB;
@@ -252,10 +252,7 @@ public class IRBuilder extends AstVisitor{
             currentFunction.getSymbolTable().put(elseBB.getName(),elseBB);
         currentFunction.getSymbolTable().put(thenBB.getName(),thenBB);
         currentFunction.getSymbolTable().put(endBB.getName(),endBB);
-//        if(node.getElseBlock() != null)
-//            currentFunction.getSymbolTable().put(elseBB.getName(),elseBB);
-//
-//        currentFunction.getSymbolTable().put(endBB.getName(),endBB);
+
 
     }
     @Override
@@ -268,6 +265,7 @@ public class IRBuilder extends AstVisitor{
             recursionBB = new BasicBlock("for.inc",currentFunction);
         BasicBlock bodyBB = new BasicBlock("for.body",currentFunction);
         BasicBlock endBB = new BasicBlock("for.end",currentFunction);
+
 
         if(node.getInit() != null)//add init expr to current block
             node.getInit().accept(this);

@@ -1,8 +1,6 @@
 package FrontEnd.IR.Operand;
 
-import FrontEnd.IR.Type.IRType;
 import FrontEnd.IR.Type.IntIRType;
-import FrontEnd.IRVisitor;
 
 public class ConstBool  extends Constant {
     private boolean value;
@@ -10,7 +8,7 @@ public class ConstBool  extends Constant {
     public ConstBool(boolean value) {
         this.value = value;
         name  = "bool";
-        IRType type = new IntIRType(IntIRType.intType.i1);
+        type = new IntIRType(IntIRType.intType.i1);
     }
 
 

@@ -3,8 +3,6 @@ package FrontEnd.IR;
 import BackEnd.RiscFunction;
 import FrontEnd.AstNode.FunctionDefNode;
 import FrontEnd.IR.Instruction.*;
-
-import FrontEnd.IR.Operand.Operand;
 import FrontEnd.IR.Operand.Parameter;
 import FrontEnd.IR.Operand.Register;
 import FrontEnd.IR.Operand.VirtualReg;
@@ -14,8 +12,8 @@ import FrontEnd.IR.Type.PtrType;
 import FrontEnd.IR.Type.VoidType;
 import FrontEnd.IRVisitor;
 
-
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
 
 public class IRFunction extends IRNode {
 
@@ -177,7 +175,6 @@ public class IRFunction extends IRNode {
     public ArrayList<BasicBlock> gettDfsOder() {
         dfsOrder = new ArrayList<>();
         visitedBB = new HashSet<>();
-
         entranceBB.setDfsFather(null);
         dfs(entranceBB);
         return dfsOrder;
@@ -314,13 +311,8 @@ public class IRFunction extends IRNode {
         this.sideEffect = sideEffect;
     }
 
-    public ArrayList<BasicBlock> getDfsOrder() {
-        return dfsOrder;
-    }
 
-    public void setDfsOrder(ArrayList<BasicBlock> dfsOrder) {
-        this.dfsOrder = dfsOrder;
-    }
+
 
     public HashSet<BasicBlock> getVisitedBB() {
         return visitedBB;
@@ -328,5 +320,46 @@ public class IRFunction extends IRNode {
 
     public void setVisitedBB(HashSet<BasicBlock> visitedBB) {
         this.visitedBB = visitedBB;
+    }
+
+    public boolean isNotFunctional(){
+        int retCnt = 0;
+        Return retInst = null;
+        for (BasicBlock bb = entranceBB; bb != null; bb =  bb.getNextBB()){
+            if(notEndWithTer(bb)){
+                return true;
+            }
+            if(bb.getTail() instanceof Return){
+                retInst = (Return)bb.getTail();
+                retCnt ++;
+            }
+        }
+
+        if(retCnt != 1)
+            return true;
+
+        BasicBlock bb = retInst.getBasicBlock();
+        IRFunction function = bb.getParent();
+        if(bb != function.getExitBB())
+            moveExit(bb);
+        return false;
+    }
+
+    private void moveExit(BasicBlock bb){
+        if(bb.getPrevBB() == null){
+            this.setEntranceBB(bb.getNextBB());
+        } else
+            bb.getPrevBB().setNextBB(bb.getNextBB());
+
+        if(bb.getNextBB() == null)
+            this.setExitBB(bb.getPrevBB());
+        else bb.getNextBB().setPrevBB(bb.getPrevBB());
+
+        bb.setPrevBB(null);
+        bb.setNextBB(null);
+        this.setExitBB(bb);
+    }
+    private boolean notEndWithTer(BasicBlock bb){
+        return bb.getTail() == null || !bb.getTail().isTerminator();
     }
 }

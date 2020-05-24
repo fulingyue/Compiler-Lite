@@ -13,9 +13,13 @@ public class Pair<Type1, Type2> {
         return key;
     }
 
+    public Type1 getFirst(){return key;}
+
     public void setKey(Type1 key) {
         this.key = key;
     }
+
+    public Type2 getSecond(){return value;}
 
     public Type2 getValue() {
         return value;

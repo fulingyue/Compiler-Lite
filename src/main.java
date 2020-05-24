@@ -63,7 +63,7 @@ public class main  {
         ParentLinker parentLinker  = new ParentLinker();
 
         parentLinker.linkParent(program);
-//        program.getInfo(0);//for debugging
+
 
         ScopeBuilder scopeBuilder = new ScopeBuilder();
         Scope topLevelScope = scopeBuilder.BuildScopeTree(program);
@@ -81,24 +81,26 @@ public class main  {
         Module module = irBuilder.getProgram();
 
 
-//        IRPrinter irPrinter  = new IRPrinter();
+        IRPrinter irPrinter  = new IRPrinter();
 //        irPrinter.print(module);
 
-
+        CFGSimplifier cfgSimplifier = new CFGSimplifier(module);
+        cfgSimplifier.run();
         DominatorTree dominatorTree = new DominatorTree(module);
         dominatorTree.run();
 //        dominatorTree.print();
         SSAConstructor ssaConstructor = new SSAConstructor(module);
         ssaConstructor.run();
+        irPrinter.print(module);
         DeadCodeElim DCE = new DeadCodeElim(module);
         DCE.run();
         SCCP sccp = new SCCP(module);
         sccp.run();
-        CFGSimplifier cfgSimplifier = new CFGSimplifier(module);
+
         cfgSimplifier.run();
 
-        IRPrinter irPrinter  = new IRPrinter();
-        irPrinter.print(module);
+//        IRPrinter irPrinter  = new IRPrinter();
+//        irPrinter.print(module);
 
         SSADestructor ssaDestructor = new SSADestructor(module);
         ssaDestructor.run();
@@ -115,6 +117,7 @@ public class main  {
 //        allSpilledAlooca.run();
 
         Codegen codegen = new Codegen("output.s");
+//        Codegen codegen = new Codegen("test/test.s");
         codegen.run(riscModule);
 
     }

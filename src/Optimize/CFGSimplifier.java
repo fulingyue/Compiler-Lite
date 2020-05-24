@@ -49,20 +49,29 @@ public class CFGSimplifier extends Pass{
         // Remove basic blocks that have no predecessors (except the entry block)...
         // or that just have themself as a predecessor.  These are unreachable.
         boolean changed = false;
-        BasicBlock entranceBB = function.getEntranceBB();
+        BasicBlock bb = function.getEntranceBB();
 
         ArrayList<BasicBlock> defOrder = function.gettDfsOder();
-        for(int i =defOrder.size() -1; i>=0; --i) {
-            BasicBlock curBB = defOrder.get(i);
-            assert curBB != null;
-            assert curBB.getTerminator() != null;
-            if (curBB.getPredecessorBB().size() == 0 && curBB != entranceBB) {
-                curBB.deleteItself();
-                changed = true;
-            } else if (curBB.getPredecessorBB().size() == 1 && curBB.getPredecessorBB().contains(curBB)) {
-                curBB.deleteItself();
+        while(bb != null){
+            if(!defOrder.contains(bb)){
+                for(BasicBlock succ: bb.getSuccessors())
+                    succ.removePhiIncomeBB(bb);
+                bb.deleteItself();
                 changed = true;
             }
+            else if(bb.getPredecessorBB().size() == 1){
+                BasicBlock pre = bb.getPredecessorBB().iterator().next();
+                if(pre.getSuccessors().size() == 1){
+                    if(pre == bb)
+                        bb.deleteItself();
+                    else pre.mergeBlock(bb);
+                    changed =true;
+                }
+            }
+
+
+            bb = bb.getNextBB();
+
         }
         return changed;
     }
@@ -112,18 +121,5 @@ public class CFGSimplifier extends Pass{
     }
 
 
-    private boolean mergeBlockIntoPreced(IRFunction function) {
-        boolean changed = false;
-        for(BasicBlock bb = function.getEntranceBB(); bb != null; bb = bb.getNextBB()){
-            if(bb.getPredecessorBB().size() == 1){
-                BasicBlock pre = bb.getPredecessorBB().iterator().next();
-                Instruction inst = pre.getTerminator();
-                if(inst instanceof BranchJump && ((BranchJump) inst).getCondition() == null){
-                    changed |= bb.mergeToPreceBB();
-                }
-            }
-        }
-        return changed;
-    }
 
 }
