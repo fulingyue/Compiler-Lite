@@ -3,7 +3,6 @@ package FrontEnd.IR.Instruction;
 import FrontEnd.IR.BasicBlock;
 import FrontEnd.IR.IRNode;
 import FrontEnd.IR.Operand.Operand;
-import FrontEnd.IR.Operand.Parameter;
 import FrontEnd.IR.Operand.Register;
 import FrontEnd.IRVisitor;
 import Optimize.SCCP;
@@ -49,11 +48,14 @@ public class Phi extends Instruction {
 
 
     public void removeIncomeBB(BasicBlock bb){
+        HashSet<Pair<Operand, BasicBlock>> removeSet = new HashSet<>();
         for(Pair<Operand, BasicBlock> pair: branches){
             if(pair.getValue() == bb){
-                branches.remove(pair);
+                removeSet.add(pair);
             }
         }
+        branches.removeAll(removeSet);
+
     }
     public void addBr(Operand operand, BasicBlock bb) {
         branches.add(new Pair<>(operand,bb));

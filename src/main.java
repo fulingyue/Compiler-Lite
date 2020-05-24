@@ -13,14 +13,18 @@ import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 import util.ErrorHandler;
 
+import java.io.FileInputStream;
 import java.io.InputStream;
 
-public class main  {
-
+public class main {
+    private static boolean ojMode = true;
     public static void main(String[] args)throws Exception {
-//        String path ="/Users/fulingyue/Desktop/Compiler-Lite/test/sourceCode1.mx";
-//        InputStream inputStream = new FileInputStream(path);
-        InputStream inputStream = System.in;
+        InputStream inputStream;
+        if(!ojMode){
+             String path ="/Users/fulingyue/Desktop/Compiler-Lite/test/sourceCode1.mx";
+            inputStream = new FileInputStream(path);}
+        else
+            inputStream = System.in;
         compile(inputStream, args);
         System.exit(0);
 
@@ -71,9 +75,10 @@ public class main  {
 //        scopePrinter.printScopeTree(topLevelScope);
         typeDefChecker.checkTypeDef(program);
 
-
-        if(args[0].equals("0")){
-            System.exit(errorHandler.getError_cnt());
+        if(ojMode) {
+            if(args[0].equals("0")){
+                System.exit(errorHandler.getError_cnt());
+            }
         }
         ///////IR////////
         IRBuilder irBuilder =  new IRBuilder();
@@ -115,9 +120,10 @@ public class main  {
         registerAlloca.run();
 //        AllSpilledAlooca allSpilledAlooca = new AllSpilledAlooca(riscModule);
 //        allSpilledAlooca.run();
-
-        Codegen codegen = new Codegen("output.s");
-//        Codegen codegen = new Codegen("test/test.s");
+        Codegen codegen;
+        if(ojMode)
+            codegen = new Codegen("output.s");
+        else codegen = new Codegen("test/test.s");
         codegen.run(riscModule);
 
     }
