@@ -12,12 +12,9 @@ public class ConstStrings extends GlobalVar{
 
     public String getStr() {
         String build;
-        build = str.replace("\\", "\\\\");
-        build=build.replace("\n","\\n");
-        build=build.replace("\0", "");
+        build=str.replace("\n","\\n");
         build=build.replace("\t","\\t");
-        build=build.replace("\"", "\\\"");
-        return "\""+build+"\"";
+        return build;
     }
 
 
@@ -27,6 +24,6 @@ public class ConstStrings extends GlobalVar{
 
     @Override
     public String print() {
-        return "\t.asciz\t\"" + str + "\"";
+        return "\t.asciz\t\"" + getStr() + "\"";
     }
 }

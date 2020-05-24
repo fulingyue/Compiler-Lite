@@ -13,22 +13,21 @@ import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 import util.ErrorHandler;
 
-import java.io.FileInputStream;
 import java.io.InputStream;
 
 public class main  {
 
     public static void main(String[] args)throws Exception {
-        String path ="/Users/fulingyue/Desktop/Compiler-Lite/test/sourceCode1.mx";
-        InputStream inputStream = new FileInputStream(path);
-//        InputStream inputStream = System.in;
-        compile(inputStream);
+//        String path ="/Users/fulingyue/Desktop/Compiler-Lite/test/sourceCode1.mx";
+//        InputStream inputStream = new FileInputStream(path);
+        InputStream inputStream = System.in;
+        compile(inputStream, args);
         System.exit(0);
 
     }
 
 
-    private static void compile(InputStream input) throws Exception {
+    private static void compile(InputStream input,String[] args) throws Exception {
         ErrorHandler errorHandler = new ErrorHandler();
         CharStream antlrInputStream =  CharStreams.fromStream(input);
 
@@ -72,6 +71,10 @@ public class main  {
 //        scopePrinter.printScopeTree(topLevelScope);
         typeDefChecker.checkTypeDef(program);
 
+
+        if(args[0].equals("0")){
+            System.exit(errorHandler.getError_cnt());
+        }
         ///////IR////////
         IRBuilder irBuilder =  new IRBuilder();
         irBuilder.build(program);
@@ -111,7 +114,7 @@ public class main  {
 //        AllSpilledAlooca allSpilledAlooca = new AllSpilledAlooca(riscModule);
 //        allSpilledAlooca.run();
 
-        Codegen codegen = new Codegen("test/test.s");
+        Codegen codegen = new Codegen("output.s");
         codegen.run(riscModule);
 
     }
