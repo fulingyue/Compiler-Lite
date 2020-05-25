@@ -655,16 +655,16 @@ public class InstructionSelection implements IRVisitor {
                  Immidiate imm = toImm(offset);
 
                  if(imm != null) {
-                     if (getPtr.getDest().onlyUseForLoadStore()) {
-                         getPtrAndLoadStore(getPtr, imm);
-                     }
-                     else {
+//                     if (getPtr.getDest().onlyUseForLoadStore()) {
+//                         getPtrAndLoadStore(getPtr, imm);
+//                     }
+//                     else {
                          if(offset == 0){
                              currentBB.addInst(new Move(currentBB,rptr,toRiscRegister(res)));
                          }
                          else currentBB.addInst(
                                  new ImmOperation(currentBB, ImmOperation.IOp.addi,toRiscRegister(res),rptr,imm));
-                     }
+//                     }
                  }
                  else {//TODO can be optimized if ptr.getPtrType is pointer again
                     currentBB.addInst(new ArtheticOp(currentBB, ArtheticOp.ROp.add,toRiscRegister(res),rptr,

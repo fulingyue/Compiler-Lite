@@ -3,10 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="a67270fb-4b02-4acf-8cdd-5c9e4a76755c" name="Default Changelist" comment="">
       <change afterPath="$PROJECT_DIR$/Compiler-2020-local-judge/codegen.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/builtin.s" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Compiler-2020-local-judge/build.sh" beforeDir="false" afterPath="$PROJECT_DIR$/Compiler-2020-local-judge/build.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Compiler-2020-local-judge/config.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/Compiler-2020-local-judge/config.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Compiler-2020-local-judge/semantic.sh" beforeDir="false" afterPath="$PROJECT_DIR$/Compiler-2020-local-judge/semantic.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BackEnd/InstructionSelection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BackEnd/InstructionSelection.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -155,7 +156,7 @@
       <workItem from="1589869851120" duration="3556000" />
       <workItem from="1589984601662" duration="406000" />
       <workItem from="1590049224531" duration="60931000" />
-      <workItem from="1590328650548" duration="3028000" />
+      <workItem from="1590328650548" duration="9576000" />
     </task>
     <servers />
   </component>
