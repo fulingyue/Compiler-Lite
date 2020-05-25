@@ -414,8 +414,8 @@ public class RegisterAlloca {
                 spilledRegs.add(n);
             else {
                 coloredRegs.add(n);
-                PhysicalReg c = okColors.iterator().next();
-//                        selectColor(okColors);
+                PhysicalReg c =
+                    selectColor(okColors);
                 n.setColor(c);
             }
 
@@ -425,12 +425,14 @@ public class RegisterAlloca {
         }
     }
 
-//    private PhysicalReg selectColor(HashSet<PhysicalReg> okColors){
-//        assert !okColors.isEmpty();
-//        for(PhysicalReg pr: okColors){
-//            if()
-//        }
-//    }
+    private PhysicalReg selectColor(HashSet<PhysicalReg> okColors){
+        assert !okColors.isEmpty();
+        for(int i = 0; i < 16; i++){
+            if(okColors.contains(RegisterTable.callerSavedRegisters[i]))
+                return RegisterTable.callerSavedRegisters[i];
+        }
+        return okColors.iterator().next();
+    }
 
     private void rewrite(RiscFunction function){
         for(RiscRegister reg: spilledRegs){
