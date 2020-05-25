@@ -5,11 +5,12 @@ import BackEnd.Operands.VirtualReg;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 public class StackFrame {
     private RiscFunction function;
 
-    int size;
+    private int size;
     private HashMap<VirtualReg, StackOffset> temporaryVar;
     private ArrayList<StackOffset> formalPara;
     private HashMap<RiscFunction,ArrayList<StackOffset>> paras;
@@ -17,9 +18,9 @@ public class StackFrame {
     public StackFrame(RiscFunction function) {
         this.function = function;
         size = 0;
-        temporaryVar = new HashMap<>();
+        temporaryVar = new LinkedHashMap<>();
         formalPara = new ArrayList<>();
-        paras =  new HashMap<>();
+        paras =  new LinkedHashMap<>();
     }
 
     public void addFormalPara(StackOffset stackOffset){
