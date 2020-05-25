@@ -7,7 +7,8 @@
       <change beforePath="$PROJECT_DIR$/Compiler-2020-local-judge/build.sh" beforeDir="false" afterPath="$PROJECT_DIR$/Compiler-2020-local-judge/build.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Compiler-2020-local-judge/config.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/Compiler-2020-local-judge/config.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Compiler-2020-local-judge/semantic.sh" beforeDir="false" afterPath="$PROJECT_DIR$/Compiler-2020-local-judge/semantic.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/builtin.s" beforeDir="false" afterPath="$PROJECT_DIR$/builtin.s" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BackEnd/InstructionSelection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BackEnd/InstructionSelection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BackEnd/Operands/ConstStrings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BackEnd/Operands/ConstStrings.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -156,7 +157,7 @@
       <workItem from="1589869851120" duration="3556000" />
       <workItem from="1589984601662" duration="406000" />
       <workItem from="1590049224531" duration="60931000" />
-      <workItem from="1590328650548" duration="11185000" />
+      <workItem from="1590328650548" duration="15593000" />
     </task>
     <servers />
   </component>
@@ -310,19 +311,9 @@
           <option name="timeStamp" value="367" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/BackEnd/Instruction/ArtheticOp.java</url>
-          <line>34</line>
-          <option name="timeStamp" value="452" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/BackEnd/AllSpilledAlooca.java</url>
           <line>113</line>
           <option name="timeStamp" value="454" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/BackEnd/Instruction/ArtheticOp.java</url>
-          <line>39</line>
-          <option name="timeStamp" value="456" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/BackEnd/Instruction/ArtheticOp.java</url>
@@ -350,14 +341,9 @@
           <option name="timeStamp" value="472" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Optimize/DeadCodeElim.java</url>
-          <line>53</line>
-          <option name="timeStamp" value="504" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/BackEnd/InstructionSelection.java</url>
-          <line>515</line>
-          <option name="timeStamp" value="511" />
+          <url>file://$PROJECT_DIR$/src/BackEnd/Operands/ConstStrings.java</url>
+          <line>19</line>
+          <option name="timeStamp" value="514" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -12,9 +12,15 @@ public class ConstStrings extends GlobalVar{
 
     public String getStr() {
         String build;
-        build=str.replace("\n","\\n");
-        build=build.replace("\t","\\t");
-        return build;
+
+
+        build = str.replace("\\","\\\\");
+        build= build.replace("\n","\\n");
+        build= build.replace("\t","\\t");
+
+        build = build.replace("\"", "\\\"");
+
+        return build ;
     }
 
 

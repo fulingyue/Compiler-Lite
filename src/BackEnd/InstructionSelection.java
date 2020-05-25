@@ -377,7 +377,7 @@ public class InstructionSelection implements IRVisitor {
                 RiscRegister res = toRiscRegister(icmp.getDest());
                 VirtualReg tmp = currentFunction.addRegister("tmp");
                 currentBB.addInst(new ArtheticOp(currentBB, ArtheticOp.ROp.xor,tmp, lhs, rhs));
-                currentBB.addInst(new ArtheticOp(currentBB, ArtheticOp.ROp.sltu, RegisterTable.zero, tmp, res));
+                currentBB.addInst(new ArtheticOp(currentBB, ArtheticOp.ROp.sltu,res, RegisterTable.zero, tmp));
             }
             else {
                 Immidiate imm = null;
