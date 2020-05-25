@@ -115,7 +115,7 @@ toString:                               # @toString
 	sw	s3, 28(sp)
 	sw	s4, 24(sp)
 	sw	s5, 20(sp)
-	beqz	a0, .LBB6_4
+	beqz	a0, ._LLBB6_4
 # %bb.1:
 	mv	s5, a0
 	srai	a0, a0, 31
@@ -123,7 +123,7 @@ toString:                               # @toString
 	xor	s0, a1, a0
 	addi	a1, zero, 1
 	slti	s3, s5, 1
-	blt	s0, a1, .LBB6_5
+	blt	s0, a1, ._LLBB6_5
 # %bb.2:                                # %.preheader.preheader
 	mv	a5, zero
 	lui	a1, 838861
@@ -131,7 +131,7 @@ toString:                               # @toString
 	addi	a6, zero, -10
 	addi	a3, sp, 10
 	addi	a4, zero, 9
-.LBB6_3:                                # %.preheader
+._LLBB6_3:                                # %.preheader
                                         # =>This Inner Loop Header: Depth=1
 	mv	a0, s0
 	mulhu	s1, s0, a1
@@ -144,42 +144,42 @@ toString:                               # @toString
 	add	a5, a3, a5
 	sb	a2, 0(a5)
 	mv	a5, s1
-	bltu	a4, a0, .LBB6_3
-	j	.LBB6_6
-.LBB6_4:
+	bltu	a4, a0, ._LLBB6_3
+	j	._LLBB6_6
+._LLBB6_4:
 	addi	a0, zero, 2
 	mv	a1, zero
 	call	malloc
 	addi	a1, zero, 48
 	sb	a1, 0(a0)
 	sb	zero, 1(a0)
-	j	.LBB6_20
-.LBB6_5:
+	j	._LLBB6_20
+._LLBB6_5:
 	mv	s1, zero
-.LBB6_6:                                # %.loopexit5
+._LLBB6_6:                                # %.loopexit5
 	slli	a0, s1, 24
 	srai	s4, a0, 24
 	add	s2, s4, s3
 	addi	a0, s2, 1
 	srai	a1, a0, 31
 	call	malloc
-	bgtz	s5, .LBB6_8
+	bgtz	s5, ._LLBB6_8
 # %bb.7:
 	addi	a1, zero, 45
 	sb	a1, 0(a0)
-.LBB6_8:
+._LLBB6_8:
 	addi	a1, zero, 1
-	blt	s4, a1, .LBB6_19
+	blt	s4, a1, ._LLBB6_19
 # %bb.9:
 	andi	t0, s1, 255
 	addi	a1, zero, 32
 	addi	t1, s4, -1
-	bgeu	t0, a1, .LBB6_11
+	bgeu	t0, a1, ._LLBB6_11
 # %bb.10:
 	mv	s4, zero
 	mv	a1, zero
-	j	.LBB6_17
-.LBB6_11:
+	j	._LLBB6_17
+._LLBB6_11:
 	andi	s4, s1, 224
 	addi	a2, s4, -32
 	sltu	a1, a2, s4
@@ -190,7 +190,7 @@ toString:                               # @toString
 	addi	a4, s1, 1
 	or	a2, a2, a1
 	andi	a6, a4, 1
-	beqz	a2, .LBB6_21
+	beqz	a2, ._LLBB6_21
 # %bb.12:
 	mv	t6, zero
 	mv	t5, zero
@@ -201,7 +201,7 @@ toString:                               # @toString
 	sltu	a4, a4, a6
 	sub	t2, s1, a4
 	addi	a7, sp, 10
-.LBB6_13:                               # =>This Inner Loop Header: Depth=1
+._LLBB6_13:                               # =>This Inner Loop Header: Depth=1
 	sub	a4, t1, t6
 	add	s1, a7, a4
 	lb	a1, -15(s1)
@@ -413,10 +413,10 @@ toString:                               # @toString
 	add	t5, t5, a1
 	mv	t6, s0
 	mv	t3, a2
-	bnez	a4, .LBB6_13
+	bnez	a4, ._LLBB6_13
 # %bb.14:                               # %.loopexit4
-	beqz	a6, .LBB6_16
-.LBB6_15:
+	beqz	a6, ._LLBB6_16
+._LLBB6_15:
 	sub	a1, t1, s0
 	addi	a2, sp, 10
 	add	a1, a2, a1
@@ -518,13 +518,13 @@ toString:                               # @toString
 	sb	a2, 17(a5)
 	addi	a1, a1, 48
 	sb	a1, 16(a5)
-.LBB6_16:
+._LLBB6_16:
 	xor	a2, s4, t0
 	mv	a1, zero
-	beqz	a2, .LBB6_19
-.LBB6_17:                               # %.preheader10.preheader
+	beqz	a2, ._LLBB6_19
+._LLBB6_17:                               # %.preheader10.preheader
 	addi	a2, sp, 10
-.LBB6_18:                               # %.preheader10
+._LLBB6_18:                               # %.preheader10
                                         # =>This Inner Loop Header: Depth=1
 	sub	a4, t1, s4
 	add	a4, a2, a4
@@ -539,11 +539,11 @@ toString:                               # @toString
 	or	s1, s1, a1
 	sb	a4, 0(a5)
 	mv	s4, a3
-	bnez	s1, .LBB6_18
-.LBB6_19:                               # %.loopexit
+	bnez	s1, ._LLBB6_18
+._LLBB6_19:                               # %.loopexit
 	add	a1, a0, s2
 	sb	zero, 0(a1)
-.LBB6_20:
+._LLBB6_20:
 	lw	s5, 20(sp)
 	lw	s4, 24(sp)
 	lw	s3, 28(sp)
@@ -553,10 +553,10 @@ toString:                               # @toString
 	lw	ra, 44(sp)
 	addi	sp, sp, 48
 	ret
-.LBB6_21:
+._LLBB6_21:
 	mv	s0, zero
-	bnez	a6, .LBB6_15
-	j	.LBB6_16
+	bnez	a6, ._LLBB6_15
+	j	._LLBB6_16
 .Lfunc_end6:
 	.size	toString, .Lfunc_end6-toString
                                         # -- End function
@@ -718,13 +718,13 @@ __string_substring:                     # @__string_substring
 	call	malloc
 	addi	a1, zero, 1
 	mv	s1, a0
-	blt	s0, a1, .LBB15_2
+	blt	s0, a1, ._LLBB15_2
 # %bb.1:
 	add	a1, s2, s3
 	mv	a0, s1
 	mv	a2, s0
 	call	memcpy
-.LBB15_2:
+._LLBB15_2:
 	add	a0, s1, s0
 	sb	zero, 0(a0)
 	mv	a0, s1
@@ -747,13 +747,13 @@ __string_parseInt:                      # @__string_parseInt
 	addi	a1, a2, -48
 	andi	a1, a1, 255
 	addi	a3, zero, 9
-	bltu	a3, a1, .LBB16_4
+	bltu	a3, a1, ._LLBB16_4
 # %bb.1:                                # %.preheader.preheader
 	mv	a5, zero
 	mv	a3, zero
 	mv	a1, zero
 	addi	a6, zero, 10
-.LBB16_2:                               # %.preheader
+._LLBB16_2:                               # %.preheader
                                         # =>This Inner Loop Header: Depth=1
 	mul	a7, a1, a6
 	addi	a4, a5, 1
@@ -767,11 +767,11 @@ __string_parseInt:                      # @__string_parseInt
 	andi	a7, a5, 255
 	addi	a1, a1, -48
 	mv	a5, a4
-	bltu	a7, a6, .LBB16_2
+	bltu	a7, a6, ._LLBB16_2
 # %bb.3:                                # %.loopexit
 	mv	a0, a1
 	ret
-.LBB16_4:
+._LLBB16_4:
 	mv	a0, zero
 	ret
 .Lfunc_end16:

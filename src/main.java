@@ -17,7 +17,7 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 
 public class main {
-    private static boolean ojMode = true;
+    private static boolean ojMode = false;
     public static void main(String[] args)throws Exception {
         InputStream inputStream;
         if(!ojMode){
