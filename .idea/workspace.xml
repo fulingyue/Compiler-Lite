@@ -7,8 +7,6 @@
       <change beforePath="$PROJECT_DIR$/Compiler-2020-local-judge/build.sh" beforeDir="false" afterPath="$PROJECT_DIR$/Compiler-2020-local-judge/build.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Compiler-2020-local-judge/config.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/Compiler-2020-local-judge/config.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Compiler-2020-local-judge/semantic.sh" beforeDir="false" afterPath="$PROJECT_DIR$/Compiler-2020-local-judge/semantic.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BackEnd/InstructionSelection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BackEnd/InstructionSelection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BackEnd/Operands/ConstStrings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BackEnd/Operands/ConstStrings.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -157,7 +155,7 @@
       <workItem from="1589869851120" duration="3556000" />
       <workItem from="1589984601662" duration="406000" />
       <workItem from="1590049224531" duration="60931000" />
-      <workItem from="1590328650548" duration="15593000" />
+      <workItem from="1590328650548" duration="16772000" />
     </task>
     <servers />
   </component>
@@ -342,7 +340,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/BackEnd/Operands/ConstStrings.java</url>
-          <line>19</line>
+          <line>22</line>
           <option name="timeStamp" value="514" />
         </line-breakpoint>
       </breakpoints>
