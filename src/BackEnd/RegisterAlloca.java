@@ -403,7 +403,8 @@ public class RegisterAlloca {
             RiscRegister n = selectStack.pop();
 //            if(n.getName().contains("spill"))
 //                System.out.println("mo");
-            HashSet<PhysicalReg> okColors = new LinkedHashSet<>(RegisterTable.allocSet);
+            LinkedHashSet<PhysicalReg> okColors = new LinkedHashSet<>();
+            okColors.addAll(RegisterTable.allocSet);
             HashSet<RiscRegister> adjs = n.getAdjList();
             for(RiscRegister w:adjs){
                 if(coloredRegs.contains(getAlias(w)) || preColored(getAlias(w))){
@@ -425,9 +426,9 @@ public class RegisterAlloca {
         }
     }
 
-    private PhysicalReg selectColor(HashSet<PhysicalReg> okColors){
+    private PhysicalReg selectColor(LinkedHashSet<PhysicalReg> okColors){
         assert !okColors.isEmpty();
-        for(int i = 0; i < 16; i++){
+        for(int i = 1; i < 16; i++){
             if(okColors.contains(RegisterTable.callerSavedRegisters[i]))
                 return RegisterTable.callerSavedRegisters[i];
         }

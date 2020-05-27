@@ -8,13 +8,15 @@
   <component name="ChangeListManager">
     <list default="true" id="a67270fb-4b02-4acf-8cdd-5c9e4a76755c" name="Default Changelist" comment="">
       <change afterPath="$PROJECT_DIR$/Compiler-2020-local-judge/codegen.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Compiler-2020-local-judge/build.sh" beforeDir="false" afterPath="$PROJECT_DIR$/Compiler-2020-local-judge/build.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Compiler-2020-local-judge/config.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/Compiler-2020-local-judge/config.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Compiler-2020-local-judge/semantic.sh" beforeDir="false" afterPath="$PROJECT_DIR$/Compiler-2020-local-judge/semantic.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BackEnd/StackFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BackEnd/StackFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BackEnd/Instruction/Lui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BackEnd/Instruction/Lui.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BackEnd/RegisterAlloca.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BackEnd/RegisterAlloca.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BackEnd/RegisterTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BackEnd/RegisterTable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -163,6 +165,8 @@
       <workItem from="1589984601662" duration="406000" />
       <workItem from="1590049224531" duration="60931000" />
       <workItem from="1590328650548" duration="21051000" />
+      <workItem from="1590403645608" duration="167000" />
+      <workItem from="1590564093593" duration="4083000" />
     </task>
     <servers />
   </component>

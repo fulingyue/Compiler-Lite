@@ -17,6 +17,7 @@ public class Lui extends RiscInstruction{
     public void add(){
         addDef(rd);
         rd.addDef(this);
+
     }
 
 

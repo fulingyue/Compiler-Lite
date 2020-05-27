@@ -3,7 +3,7 @@ package BackEnd;
 import BackEnd.Operands.PhysicalReg;
 
 import java.util.HashMap;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 public class RegisterTable {
@@ -56,8 +56,8 @@ public class RegisterTable {
     public static PhysicalReg[] allocableRegisters = {ra, t0, t1, t2, s0, s1, a0, a1, a2, a3, a4, a5, a6, a7, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, t3, t4, t5, t6};
     public static int allocableSize = 28;
 
-    public static Set<PhysicalReg> allocSet = new HashSet<>();
-    public static Set<PhysicalReg> calleeSavedSet = new HashSet<>();
+    public static Set<PhysicalReg> allocSet = new LinkedHashSet<>();
+    public static Set<PhysicalReg> calleeSavedSet = new LinkedHashSet<>();
 
     public static HashMap<String, PhysicalReg> map;
 
