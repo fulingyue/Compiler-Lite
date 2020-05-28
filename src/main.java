@@ -6,7 +6,10 @@ import FrontEnd.*;
 import FrontEnd.AstNode.ProgramNode;
 import FrontEnd.IR.Module;
 import FrontEnd.Scope.Scope;
-import Optimize.*;
+import Optimize.CFGSimplifier;
+import Optimize.DominatorTree;
+import Optimize.SSAConstructor;
+import Optimize.SSADestructor;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
@@ -93,19 +96,19 @@ public class main {
         cfgSimplifier.run();
         DominatorTree dominatorTree = new DominatorTree(module);
         dominatorTree.run();
-//        dominatorTree.print();
+
         SSAConstructor ssaConstructor = new SSAConstructor(module);
         ssaConstructor.run();
         irPrinter.print(module);
-        DeadCodeElim DCE = new DeadCodeElim(module);
-        DCE.run();
-        SCCP sccp = new SCCP(module);
-        sccp.run();
-
-        cfgSimplifier.run();
+//        DeadCodeElim DCE = new DeadCodeElim(module);
+//        DCE.run();
+//        SCCP sccp = new SCCP(module);
+//        sccp.run();
+//
+//        cfgSimplifier.run();
 
 //        IRPrinter irPrinter  = new IRPrinter();
-//        irPrinter.print(module);
+        irPrinter.print(module);
 
         SSADestructor ssaDestructor = new SSADestructor(module);
         ssaDestructor.run();
