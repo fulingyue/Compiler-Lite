@@ -131,7 +131,7 @@ public class GetPtr extends Instruction {
             Operand item = index.get(i);
             if(item  ==  oldUser) {
                 assert newUser instanceof Operand;
-                item.addUser(this);
+                newUser.addUser(this);
                 index.set(i,(Operand)newUser);
             }
         }

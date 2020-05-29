@@ -6,10 +6,7 @@ import FrontEnd.*;
 import FrontEnd.AstNode.ProgramNode;
 import FrontEnd.IR.Module;
 import FrontEnd.Scope.Scope;
-import Optimize.CFGSimplifier;
-import Optimize.DominatorTree;
-import Optimize.SSAConstructor;
-import Optimize.SSADestructor;
+import Optimize.*;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
@@ -91,23 +88,36 @@ public class main {
 
         IRPrinter irPrinter  = new IRPrinter();
 //        irPrinter.print(module);
-
         CFGSimplifier cfgSimplifier = new CFGSimplifier(module);
         cfgSimplifier.run();
+//        irPrinter.print(module);
         DominatorTree dominatorTree = new DominatorTree(module);
         dominatorTree.run();
+//
 
         SSAConstructor ssaConstructor = new SSAConstructor(module);
         ssaConstructor.run();
-        irPrinter.print(module);
-//        DeadCodeElim DCE = new DeadCodeElim(module);
+//        cfgSimplifier.run();
+//        irPrinter.print(module);
+        DeadCodeElim DCE = new DeadCodeElim(module);
+        SCCP sccp = new SCCP(module);
+//
+//        while (true){
+//            dominatorTree.run();
+//            boolean changed = sccp.run();
+//            changed|= DCE.run();
+//            changed |= cfgSimplifier.run();
+//            if(!changed) break;
+//        }
+
 //        DCE.run();
-//        SCCP sccp = new SCCP(module);
+
 //        sccp.run();
 //
 //        cfgSimplifier.run();
 
 //        IRPrinter irPrinter  = new IRPrinter();
+
         irPrinter.print(module);
 
         SSADestructor ssaDestructor = new SSADestructor(module);
@@ -121,8 +131,8 @@ public class main {
         RiscModule riscModule = instructionSelector.getModule();
         RegisterAlloca registerAlloca = new RegisterAlloca(riscModule);
         registerAlloca.run();
-//        AllSpilledAlooca allSpilledAlooca = new AllSpilledAlooca(riscModule);
-//        allSpilledAlooca.run();
+
+
         Codegen codegen;
         if(ojMode)
             codegen = new Codegen("output.s");

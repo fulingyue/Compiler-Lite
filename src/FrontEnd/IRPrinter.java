@@ -1,12 +1,13 @@
 package FrontEnd;
 
-import FrontEnd.AstNode.FunctionCallNode;
 import FrontEnd.IR.BasicBlock;
 import FrontEnd.IR.IRFunction;
 import FrontEnd.IR.Instruction.*;
 import FrontEnd.IR.Module;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 
 public class IRPrinter implements IRVisitor {
     private String indent;

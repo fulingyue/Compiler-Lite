@@ -14,17 +14,17 @@ public class BasicBlock extends IRNode{
     private BasicBlock prevBB;
     private BasicBlock nextBB;
 
-    private Set<BasicBlock> predecessorBB = new HashSet<>();
-    private HashSet<BasicBlock> successors = new HashSet<>();
+    private Set<BasicBlock> predecessorBB = new LinkedHashSet<>();
+    private HashSet<BasicBlock> successors = new LinkedHashSet<>();
 
     private BasicBlock dfsFather;
     private int dfsOrd;
     private BasicBlock semiDom;//semi[x] = min{v| path v->x: dfsn[v_i] > dfsn[x]}
     private BasicBlock iDom = null;//closest stirct dominator bb, deepest dominator_the father of bb in the DT
     private HashSet<BasicBlock> bucket; 
-    private HashSet<BasicBlock> strictDominators = new HashSet<>();
-    private HashSet<BasicBlock> domianceFrontier = new HashSet<>();
-    private Map<Register, Phi> phiMap = new HashMap<>();
+    private HashSet<BasicBlock> strictDominators = new LinkedHashSet<>();
+    private HashSet<BasicBlock> domianceFrontier = new LinkedHashSet<>();
+    private Map<Register, Phi> phiMap = new LinkedHashMap<>();
     private ArrayList<BasicBlock> dominance = new ArrayList<>();
 
 
@@ -61,6 +61,15 @@ public class BasicBlock extends IRNode{
     }
 
 
+    public void mergePhiMap(){
+        for(Phi phi:phiMap.values()){
+            phi.setBasicBlock(this);
+            phi.add();
+            addFirstInst(phi);
+        }
+
+        phiMap.clear();
+    }
 
     public void addInst(Instruction inst) {
         if(tail  == null) {

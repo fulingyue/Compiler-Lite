@@ -2,13 +2,13 @@ package Optimize;
 
 import FrontEnd.IR.BasicBlock;
 import FrontEnd.IR.IRFunction;
-import FrontEnd.IR.IRNode;
 import FrontEnd.IR.Instruction.*;
 import FrontEnd.IR.Module;
-
-import FrontEnd.IR.Operand.*;
+import FrontEnd.IR.Operand.Operand;
+import FrontEnd.IR.Operand.Register;
+import FrontEnd.IR.Operand.VirtualReg;
 import FrontEnd.IR.Type.IRType;
-
+import FrontEnd.IR.Type.PtrType;
 
 import java.util.*;
 
@@ -34,10 +34,11 @@ public class SSAConstructor extends Pass{
     }
 
     private  void construct(IRFunction function) {
-        versionStack = new HashMap<>();
+        versionStack = new LinkedHashMap<>();
         //add blocks
-        removeUnusedInst(function);
+//        removeUnusedInst(function);
         allocaList = function.getAllocaInst();
+
         placingPhiNode(function);
 
         rename(function);
@@ -73,12 +74,11 @@ public class SSAConstructor extends Pass{
     private void placingPhiNode(IRFunction function) {
 
         BasicBlock currentbb = function.getEntranceBB();
-        while(true) {
-            currentbb.setPhiMap(new HashMap<Register, Phi>());
+        while(currentbb != null) {
+            currentbb.setPhiMap(new LinkedHashMap<>());
 //            if(currentbb.getName().equals("returnBlock.0")){
 //                throw new RuntimeException();
 //            }
-            if(currentbb == function.getExitBB()) break;
             currentbb = currentbb.getNextBB();
         }
 
@@ -86,17 +86,18 @@ public class SSAConstructor extends Pass{
             //TODO: info.anlyzealloca:rewriteSingleStoreAlloca  and promoteSingleBlockAlloca
 
             Register addr = allocate.getDest();
-            IRType type = allocate.getType();
+            IRType type = ((PtrType)addr.getType()).getPointerType();
             String name = ((VirtualReg)addr).getOriName();
 
-            Set<BasicBlock> visited = new HashSet<>();
+            Set<BasicBlock> visited = new LinkedHashSet<>();
             LinkedList<BasicBlock> queue = new LinkedList<>();
+//            HashSet<BasicBlock> phiSet = new HashSet<>();
 
 //            HashMap<BasicBlock,HashMap<Register,Phi>> hasPhiInst = new HashMap<>();
             ////////body////////
             for(Instruction def: addr.getDefs()) {
                 BasicBlock defBB = ((Instruction)def).getBasicBlock();
-                if(!visited.contains(def)) {
+                if(!visited.contains(defBB)) {
                     queue.add(defBB);
                     visited.add(defBB);
                 }
@@ -106,7 +107,7 @@ public class SSAConstructor extends Pass{
                 BasicBlock bb = queue.remove();
 
                 for(BasicBlock df : bb.getDomianceFrontier()) {
-                    if(!df.getPhiMap().containsKey(df)){
+                    if(!df.getPhiMap().containsKey(addr)){
                         Register res = new VirtualReg(name,type);
                         function.getSymbolTable().put(res.getName(),res);
                         Phi  phi = new Phi("SSAphi",df,new LinkedHashSet<>(),res);
@@ -130,11 +131,7 @@ public class SSAConstructor extends Pass{
 
     }
 
-    private void elimateInst(IRFunction function) {
-        for(BasicBlock bb = function.getEntranceBB();bb != null;bb = bb.getNextBB()){
-            bb.deleteDeadInst();
-        }
-    }
+
 
     private void rename(IRFunction function) {
         recurRename(function.getEntranceBB());
@@ -152,29 +149,30 @@ public class SSAConstructor extends Pass{
         //////replace load dests/////////
         while(inst != null) {
             if(inst instanceof Store) {
-                Operand dest = ((Store)inst).getDest();
+                Operand dest =  ((Store)inst).getDest();
                 Operand value = ((Store) inst).getValue();
-
-                if(versionStack.get(dest) != null){
-                    versionStack.get(dest).add(value);
-                }
+                if(dest instanceof Register)
+                    if(versionStack.get(dest) != null){
+                        versionStack.get(dest).add(value);
+                    }
 
             }
             else if(inst instanceof Load) {
                 Operand dest = ((Load) inst).getDest();//address
 
                 Operand addr = ((Load) inst).getRes();
-
-                if(versionStack.containsKey(dest)){
-                    Operand newOpe = getFront(dest);
-                    addr.replaceUser(newOpe);
-                }
+                if(dest instanceof Register)
+                    if(versionStack.containsKey(dest)){
+                        Operand newOpe = getFront((Register)dest);
+                        addr.replaceUser(newOpe);
+                    }
 
 
             }
             inst = inst.getNxt();
         }
         //////////add phi entries/////////
+
         Set<BasicBlock> successors =  bb.getSuccessors();
         for(BasicBlock succ: successors) {
             Map<Register,Phi> succPhiMap = succ.getPhiMap();
@@ -200,15 +198,17 @@ public class SSAConstructor extends Pass{
         while(inst!= null) {
             if(inst instanceof Store) {
                 Operand dest = ((Store) inst).getDest();
-                if(versionStack.containsKey(dest)){
-                    versionStack.get(dest).pop();
-                    inst.remove();
-                }
+                if(dest instanceof Register)
+                    if(versionStack.containsKey(dest)){
+                        versionStack.get(dest).pop();
+                        inst.remove();
+                    }
             }
             else if(inst instanceof Load){
                 Operand dest = ((Load) inst).getDest();
-                if(versionStack.containsKey(dest))
-                    inst.remove();
+                if(dest instanceof Register)
+                    if(versionStack.containsKey(dest))
+                        inst.remove();
             }
             inst=inst.getNxt();
         }
@@ -221,7 +221,7 @@ public class SSAConstructor extends Pass{
     }
 
 
-    private Operand getFront(Operand dest) {
+    private Operand getFront(Register dest) {
         assert versionStack.containsKey(dest);
         Stack<Operand> stack = versionStack.get(dest);
         assert (!stack.isEmpty());

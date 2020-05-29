@@ -1,14 +1,11 @@
 package FrontEnd.IR;
 
-import FrontEnd.AstNode.FunctionCallNode;
 import FrontEnd.IR.Instruction.Instruction;
 import FrontEnd.IR.Operand.Operand;
-import FrontEnd.IRPrinter;
 import FrontEnd.IRVisitor;
 
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.LinkedList;
 
 public abstract class IRNode {
     protected String name;
@@ -65,7 +62,7 @@ public abstract class IRNode {
             assert node instanceof Instruction;
             ((Instruction) node).replaceUse(this,newUser);
         }
-        Users.clear();
+
         for(IRNode item:defs){
             ((Instruction)item).replaceUse(this,newUser);
         }

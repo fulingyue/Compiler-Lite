@@ -3,13 +3,9 @@ package Optimize;
 import FrontEnd.IR.BasicBlock;
 import FrontEnd.IR.IRFunction;
 import FrontEnd.IR.Module;
-import FrontEnd.IR.Operand.Parameter;
 import util.Pair;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 
 public class DominatorTree extends Pass{
@@ -33,7 +29,7 @@ public class DominatorTree extends Pass{
 ///Lengauer Tarjan Alg
     void TarjanBuild(IRFunction function) {
         ArrayList<BasicBlock> dfsOrd = function.gettDfsOder();
-        unionFindSet = new HashMap<>();
+        unionFindSet = new LinkedHashMap<>();
 //        ////init//////
         for (BasicBlock bb : dfsOrd) {
             unionFindSet.put(bb, new Pair<>(bb, bb));

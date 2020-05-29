@@ -14,6 +14,7 @@ import FrontEnd.IRVisitor;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 
 public class IRFunction extends IRNode {
 
@@ -22,7 +23,7 @@ public class IRFunction extends IRNode {
     private Module parent;
     private BasicBlock entranceBB = null, exitBB = null;
     private ArrayList<Parameter> paraList = new ArrayList<>();
-    private HashSet<IRFunction> usedFunctions = new HashSet<>();
+    private HashSet<IRFunction> usedFunctions = new LinkedHashSet<>();
     //once  a register cannot be used any more(used as left value/ cannnot be left value), then integer = 1
     private SymbolTable symbolTable = new SymbolTable();
 
@@ -44,8 +45,8 @@ public class IRFunction extends IRNode {
     }
 
     //////////dfs///////
-    ArrayList<BasicBlock> dfsOrder = null;
-    HashSet<BasicBlock> visitedBB =  null;
+    private ArrayList<BasicBlock> dfsOrder = null;
+    private HashSet<BasicBlock> visitedBB =  null;
 
 
     public IRFunction(String name, Module parent,
@@ -174,7 +175,7 @@ public class IRFunction extends IRNode {
 
     public ArrayList<BasicBlock> gettDfsOder() {
         dfsOrder = new ArrayList<>();
-        visitedBB = new HashSet<>();
+        visitedBB = new LinkedHashSet<>();
         entranceBB.setDfsFather(null);
         dfs(entranceBB);
         return dfsOrder;

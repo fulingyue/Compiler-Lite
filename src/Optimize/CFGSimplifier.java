@@ -20,6 +20,7 @@ public class CFGSimplifier extends Pass{
 
     @Override
     public boolean run() {
+        changed = false;
         for(IRFunction function: module.getFunctionMap().values()) {
             changed  |= FuncSimplifier(function);
         }
@@ -28,17 +29,13 @@ public class CFGSimplifier extends Pass{
 
     private boolean FuncSimplifier(IRFunction function) {
         boolean changed = false;
-        boolean resimplify;
-        do{
-            resimplify = false;
-            resimplify |= constantFoldTerminator(function);
+        while(true){
+            boolean resimplify = constantFoldTerminator(function);
             resimplify |= removeUnreachableBlocks(function);
             resimplify |= eliminateSingleEntrancePHINodes(function);
-//            resimplify |= mergeBlockIntoPreced(function);
             if(resimplify) changed = true;
             else break;
-        } while (resimplify);
-
+        }
         return changed;
     }
 
@@ -107,7 +104,6 @@ public class CFGSimplifier extends Pass{
             //phi node only occurs at the beginning of block
             while(inst instanceof Phi){
                 Instruction nxt = inst.getNxt();
-                assert inst instanceof Phi;
                 if(((Phi) inst).getBranches().size() == 1){
                     assert bb.getPredecessorBB().size() == 1;
                     ((Phi) inst).getRes().replaceUser(((Phi) inst).getBranches().iterator().next().getKey());

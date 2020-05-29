@@ -6,13 +6,24 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a67270fb-4b02-4acf-8cdd-5c9e4a76755c" name="Default Changelist" comment="">
+    <list default="true" id="a67270fb-4b02-4acf-8cdd-5c9e4a76755c" name="Default Changelist" comment="try">
       <change afterPath="$PROJECT_DIR$/Compiler-2020-local-judge/codegen.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Optimize/SSAConstructor2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Compiler-2020-local-judge/build.sh" beforeDir="false" afterPath="$PROJECT_DIR$/Compiler-2020-local-judge/build.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Compiler-2020-local-judge/config.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/Compiler-2020-local-judge/config.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Compiler-2020-local-judge/semantic.sh" beforeDir="false" afterPath="$PROJECT_DIR$/Compiler-2020-local-judge/semantic.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/IR/IRFunction.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/FrontEnd/IR/IRFunction.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FrontEnd/IR/BasicBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/IR/BasicBlock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FrontEnd/IR/IRFunction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/IR/IRFunction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FrontEnd/IR/IRNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/IR/IRNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FrontEnd/IR/Instruction/GetPtr.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/IR/Instruction/GetPtr.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FrontEnd/IRPrinter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/IRPrinter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Optimize/CFGSimplifier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Optimize/CFGSimplifier.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Optimize/DominatorTree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Optimize/DominatorTree.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Optimize/SSAConstructor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Optimize/SSAConstructor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -171,6 +182,7 @@
       <workItem from="1590328650548" duration="21051000" />
       <workItem from="1590403645608" duration="167000" />
       <workItem from="1590564093593" duration="4083000" />
+      <workItem from="1590721899616" duration="6643000" />
     </task>
     <servers />
   </component>
@@ -195,80 +207,46 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="try" />
+    <option name="LAST_COMMIT_MESSAGE" value="try" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="624" y="199" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1583667007511">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="624" y="199" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1583667007511" />
-    <state x="692" y="322" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1583933187683">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="692" y="322" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1583933187683" />
-    <state x="765" y="229" key="#com.intellij.ide.util.MemberChooser" timestamp="1584109493700">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="765" y="229" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1584109493700" />
-    <state x="690" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1584161478565">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="690" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1584161478565" />
-    <state x="919" y="302" key="FileChooserDialogImpl" timestamp="1584161269279">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="919" y="302" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1584161269279" />
-    <state width="1877" height="255" key="GridCell.Tab.0.bottom" timestamp="1584161587520">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="255" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1584161587520" />
-    <state width="1877" height="255" key="GridCell.Tab.0.center" timestamp="1584161587519">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="255" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1584161587519" />
-    <state width="1877" height="255" key="GridCell.Tab.0.left" timestamp="1584161587519">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="255" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1584161587519" />
-    <state width="1877" height="255" key="GridCell.Tab.0.right" timestamp="1584161587520">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="255" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1584161587520" />
-    <state width="1877" height="255" key="GridCell.Tab.1.bottom" timestamp="1584161587520">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="255" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1584161587520" />
-    <state width="1877" height="255" key="GridCell.Tab.1.center" timestamp="1584161587520">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="255" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1584161587520" />
-    <state width="1877" height="255" key="GridCell.Tab.1.left" timestamp="1584161587520">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="255" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1584161587520" />
-    <state width="1877" height="255" key="GridCell.Tab.1.right" timestamp="1584161587520">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="255" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1584161587520" />
-    <state x="725" y="136" key="SettingsEditor" timestamp="1583670334149">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="725" y="136" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1583670334149" />
-    <state width="380" height="446" key="SwitcherDM" timestamp="1584161099069">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="380" height="446" key="SwitcherDM/0.0.1920.1040@0.0.1920.1040" timestamp="1584161099069" />
-    <state x="640" y="344" key="com.intellij.ide.util.TipDialog" timestamp="1584157408736">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="640" y="344" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1584157408736" />
-    <state x="616" y="240" width="672" height="677" key="run.anything.popup" timestamp="1583924385984">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="616" y="240" width="672" height="677" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1583924385984" />
-    <state x="616" y="173" width="672" height="676" key="search.everywhere.popup" timestamp="1584109905327">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="616" y="173" width="672" height="676" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1584109905327" />
+    <state x="624" y="199" key="#com.intellij.execution.impl.EditConfigurationsDialog" />
+    <state x="624" y="199" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" />
+    <state x="692" y="322" key="#com.intellij.fileTypes.FileTypeChooser" />
+    <state x="692" y="322" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040@0.0.1920.1040" />
+    <state x="765" y="229" key="#com.intellij.ide.util.MemberChooser" />
+    <state x="765" y="229" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" />
+    <state x="690" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" />
+    <state x="690" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" />
+    <state x="919" y="302" key="FileChooserDialogImpl" />
+    <state x="919" y="302" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" />
+    <state width="1877" height="255" key="GridCell.Tab.0.bottom" />
+    <state width="1877" height="255" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" />
+    <state width="1877" height="255" key="GridCell.Tab.0.center" />
+    <state width="1877" height="255" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" />
+    <state width="1877" height="255" key="GridCell.Tab.0.left" />
+    <state width="1877" height="255" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" />
+    <state width="1877" height="255" key="GridCell.Tab.0.right" />
+    <state width="1877" height="255" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" />
+    <state width="1877" height="255" key="GridCell.Tab.1.bottom" />
+    <state width="1877" height="255" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" />
+    <state width="1877" height="255" key="GridCell.Tab.1.center" />
+    <state width="1877" height="255" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" />
+    <state width="1877" height="255" key="GridCell.Tab.1.left" />
+    <state width="1877" height="255" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" />
+    <state width="1877" height="255" key="GridCell.Tab.1.right" />
+    <state width="1877" height="255" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" />
+    <state x="725" y="136" key="SettingsEditor" />
+    <state x="725" y="136" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" />
+    <state width="380" height="446" key="SwitcherDM" />
+    <state width="380" height="446" key="SwitcherDM/0.0.1920.1040@0.0.1920.1040" />
+    <state x="640" y="344" key="com.intellij.ide.util.TipDialog" />
+    <state x="640" y="344" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" />
+    <state x="616" y="240" width="672" height="677" key="run.anything.popup" />
+    <state x="616" y="240" width="672" height="677" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" />
+    <state x="616" y="173" width="672" height="676" key="search.everywhere.popup" />
+    <state x="616" y="173" width="672" height="676" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -302,11 +280,6 @@
           <url>file://$PROJECT_DIR$/src/FrontEnd/AstVisitor.java</url>
           <line>74</line>
           <option name="timeStamp" value="255" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/FrontEnd/IRBuilder.java</url>
-          <line>954</line>
-          <option name="timeStamp" value="256" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/FrontEnd/IRBuilder.java</url>
@@ -354,9 +327,29 @@
           <option name="timeStamp" value="472" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/BackEnd/Operands/ConstStrings.java</url>
-          <line>22</line>
-          <option name="timeStamp" value="514" />
+          <url>file://$PROJECT_DIR$/src/Optimize/SSAConstructor2.java</url>
+          <line>177</line>
+          <option name="timeStamp" value="543" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Optimize/SSAConstructor2.java</url>
+          <line>76</line>
+          <option name="timeStamp" value="548" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Optimize/SSAConstructor.java</url>
+          <line>165</line>
+          <option name="timeStamp" value="563" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Optimize/SSAConstructor.java</url>
+          <line>166</line>
+          <option name="timeStamp" value="565" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/FrontEnd/IR/Instruction/GetPtr.java</url>
+          <line>130</line>
+          <option name="timeStamp" value="566" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
