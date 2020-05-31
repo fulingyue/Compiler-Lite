@@ -51,7 +51,7 @@ public class RiscRegister extends RiscOperand {
     @Override
     public String print() {
         assert color != null;
-//        return name;
+//        return name  + "(" + color.getName() + ")";
         return color.getName();
     }
 

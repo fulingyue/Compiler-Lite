@@ -88,12 +88,13 @@ public class main {
 
         IRPrinter irPrinter  = new IRPrinter();
 //        irPrinter.print(module);
+
         CFGSimplifier cfgSimplifier = new CFGSimplifier(module);
         cfgSimplifier.run();
 //        irPrinter.print(module);
         DominatorTree dominatorTree = new DominatorTree(module);
         dominatorTree.run();
-//
+
 
         SSAConstructor ssaConstructor = new SSAConstructor(module);
         ssaConstructor.run();
@@ -101,14 +102,15 @@ public class main {
 //        irPrinter.print(module);
         DeadCodeElim DCE = new DeadCodeElim(module);
         SCCP sccp = new SCCP(module);
-//
-//        while (true){
-//            dominatorTree.run();
-//            boolean changed = sccp.run();
-//            changed|= DCE.run();
-//            changed |= cfgSimplifier.run();
-//            if(!changed) break;
-//        }
+//        irPrinter.print(module);
+
+        while (true){
+            dominatorTree.run();
+            boolean changed = sccp.run();
+            changed|= DCE.run();
+            changed |= cfgSimplifier.run();
+            if(!changed) break;
+        }
 
 //        DCE.run();
 
@@ -116,9 +118,9 @@ public class main {
 //
 //        cfgSimplifier.run();
 
-//        IRPrinter irPrinter  = new IRPrinter();
+            irPrinter.print(module);
 
-        irPrinter.print(module);
+
 
         SSADestructor ssaDestructor = new SSADestructor(module);
         ssaDestructor.run();

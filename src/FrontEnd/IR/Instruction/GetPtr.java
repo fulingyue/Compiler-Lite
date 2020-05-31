@@ -123,7 +123,6 @@ public class GetPtr extends Instruction {
     public void replaceUse(IRNode oldUser, IRNode newUser) {
         if(pointer == oldUser) {
             assert newUser instanceof Operand;
-//            pointer.removeUser(this);
             pointer = (Operand)newUser;
             pointer.addUser(this);
         }

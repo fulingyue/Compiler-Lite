@@ -88,13 +88,13 @@ public class Phi extends Instruction {
         for(Pair<Operand,BasicBlock> item:branches) {
             if(item.getKey() == oldUser) {
                 assert newUser instanceof Operand;
-                item.getKey().removeUser(this);
+//                item.getKey().removeUser(this);
                 item.setKey((Operand)newUser);
                 item.getKey().addUser(this);
             }
             else if(item.getValue()  ==  oldUser){
                 assert newUser instanceof BasicBlock;
-                item.getValue().removeUser(this);
+//                item.getValue().removeUser(this);
                 item.setValue((BasicBlock)newUser);
                 item.getValue().addUser(this);
             }
