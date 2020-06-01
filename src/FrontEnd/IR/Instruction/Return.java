@@ -46,7 +46,6 @@ public class Return extends Instruction {
     public void replaceUse(IRNode oldUser, IRNode newUser) {
         if(returnVal == oldUser && returnVal != null) {
             assert newUser instanceof Operand;
-            returnVal.removeUser(this);
             returnVal = (Operand)newUser;
             returnVal.addUser(this);
         }

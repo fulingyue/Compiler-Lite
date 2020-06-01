@@ -51,7 +51,6 @@ public class MoveInst extends Instruction {
     @Override
     public void replaceUse(IRNode oldUser, IRNode newUser) {
         if(src == oldUser){
-            src.removeUser(this);
             src = (Operand)newUser;
             src.addUser(this);
         }

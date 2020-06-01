@@ -76,7 +76,6 @@ public class Load extends Instruction {
     public void replaceUse(IRNode oldUser, IRNode newUser) {
         if(dest == oldUser) {
             assert newUser instanceof Operand;
-//            dest.removeUser(this);
             dest = (Operand)newUser;
             dest.addUser(this);
         }

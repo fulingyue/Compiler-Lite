@@ -2,10 +2,11 @@ package Optimize;
 
 import FrontEnd.IR.BasicBlock;
 import FrontEnd.IR.IRFunction;
-import FrontEnd.IR.Instruction.*;
+import FrontEnd.IR.Instruction.CallFunction;
+import FrontEnd.IR.Instruction.Instruction;
+import FrontEnd.IR.Instruction.Return;
+import FrontEnd.IR.Instruction.Store;
 import FrontEnd.IR.Module;
-import FrontEnd.IR.Operand.Operand;
-import util.Pair;
 
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -82,11 +83,13 @@ public class DeadCodeElim extends Pass{
 
     private boolean removeDeadInst(BasicBlock bb) {
         boolean changed = false;
-        for(Instruction inst = bb.getHead(); inst != null; inst = inst.getNxt()) {
+        Instruction inst = bb.getHead();
+        while (inst != null){
             if(!alive.contains(inst)){
                 inst.remove();
                 changed = true;
             }
+            inst = inst.getNxt();
         }
         return changed;
     }

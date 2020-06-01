@@ -26,14 +26,14 @@ public class SSAConstructor extends Pass{
     }
 
     @Override
-    public boolean run() {
+    public boolean run(){
         for(IRFunction function: module.getFunctionMap().values()) {
             construct(function);
         }
         return true;
     }
 
-    private  void construct(IRFunction function) {
+    private  void construct(IRFunction function){
         versionStack = new LinkedHashMap<>();
         //add blocks
 //        removeUnusedInst(function);
@@ -45,30 +45,6 @@ public class SSAConstructor extends Pass{
 
     }
 
-    private void removeUnusedInst(IRFunction function) {
-        BasicBlock currentBB = function.getEntranceBB();
-        while(true) {
-            Instruction inst = currentBB.getHead();
-
-            while(inst != null) {
-                if(inst instanceof AllocateInst) {
-                    if(((AllocateInst) inst).getDest().getDefs().isEmpty()){
-                        inst.remove();
-                    }
-                }
-                if(inst instanceof Load) {
-                    if(((Load) inst).getRes().getUsers().size() == 0)
-                        inst.remove();
-                }
-
-                inst = inst.getNxt();
-            }
-
-            if(currentBB == function.getExitBB()) break;
-            currentBB = currentBB.getNextBB();
-        }
-    }
-
 
 
     private void placingPhiNode(IRFunction function) {
@@ -76,9 +52,6 @@ public class SSAConstructor extends Pass{
         BasicBlock currentbb = function.getEntranceBB();
         while(currentbb != null) {
             currentbb.setPhiMap(new LinkedHashMap<>());
-//            if(currentbb.getName().equals("returnBlock.0")){
-//                throw new RuntimeException();
-//            }
             currentbb = currentbb.getNextBB();
         }
 
@@ -96,7 +69,7 @@ public class SSAConstructor extends Pass{
 //            HashMap<BasicBlock,HashMap<Register,Phi>> hasPhiInst = new HashMap<>();
             ////////body////////
             for(Instruction def: addr.getDefs()) {
-                BasicBlock defBB = ((Instruction)def).getBasicBlock();
+                BasicBlock defBB = (def).getBasicBlock();
                 if(!visited.contains(defBB)) {
                     queue.add(defBB);
                     visited.add(defBB);

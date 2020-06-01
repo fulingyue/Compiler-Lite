@@ -72,6 +72,7 @@ public class BasicBlock extends IRNode{
     }
 
     public void addInst(Instruction inst) {
+        inst.setBasicBlock(this);
         if(tail  == null) {
             head =  tail  = inst;
             inst.setPrev(null);
@@ -146,6 +147,7 @@ public class BasicBlock extends IRNode{
         if(nextBB == null)
             getParent().setExitBB(prevBB);
         else nextBB.prevBB = prevBB;
+
         if(prevBB == null)
             getParent().setEntranceBB(nextBB);
        else prevBB.nextBB = nextBB;
@@ -156,9 +158,13 @@ public class BasicBlock extends IRNode{
         for (BasicBlock bb:successors){
             bb.getPredecessorBB().remove(this);
         }
+
         for(Instruction inst = this.head; inst != null;inst = inst.getNxt()){
             inst.remove();
         }
+
+        head = null;
+        tail = null;
     }
 
 

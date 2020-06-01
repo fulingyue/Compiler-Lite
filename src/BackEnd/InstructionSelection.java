@@ -246,7 +246,10 @@ public class InstructionSelection implements IRVisitor {
                 if(rhs instanceof ConstInt){
                     Immidiate  imm = toImm(((ConstInt) rhs).getValue());
                     RiscRegister reg = toRiscRegister(lhs);
-                    currentBB.addInst(new ImmOperation(currentBB, ImmOperation.IOp.andi,rvReg,reg,imm));
+                    if(imm == null){
+                        currentBB.addInst(new ArtheticOp(currentBB, ArtheticOp.ROp.and,rvReg,reg,toRiscRegister(rhs)));
+                    }else
+                        currentBB.addInst(new ImmOperation(currentBB, ImmOperation.IOp.andi,rvReg,reg,imm));
                 }
                 else if(lhs instanceof ConstInt){
                     Immidiate imm = toImm(((ConstInt) lhs).getValue());

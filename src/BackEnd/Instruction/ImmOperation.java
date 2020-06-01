@@ -19,6 +19,9 @@ public class ImmOperation extends RiscInstruction {
         this.rd = rd;
         this.rs = rs;
         this.imm = imm;
+        if(imm == null){
+            System.out.print(getRd().getName());
+        }
     }
 
     @Override
@@ -33,6 +36,9 @@ public class ImmOperation extends RiscInstruction {
 
     @Override
     public String print() {
+        if(getRd() == null || getRs() == null || imm ==  null){
+            System.out.print(getRd().getName());
+        }
         return "\t" + op.name() + "\t"
                 + getRd().print() + ", " + getRs().print() + ", " + imm.print();
     }

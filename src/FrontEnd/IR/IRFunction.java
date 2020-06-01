@@ -80,11 +80,7 @@ public class IRFunction extends IRNode {
         }
     }
 
-    public void addBB(String name) {
-        BasicBlock newbb = new BasicBlock(name, this);
-        addBB(newbb);
-        symbolTable.put(name, newbb);
-    }
+
 
     public void init() {
         BasicBlock entranceBlock = new BasicBlock("entranceBlock", this);

@@ -2,7 +2,6 @@ package FrontEnd.IR.Instruction;
 
 import FrontEnd.IR.BasicBlock;
 import FrontEnd.IR.IRNode;
-import FrontEnd.IR.Operand.Operand;
 import FrontEnd.IRVisitor;
 import Optimize.SCCP;
 
@@ -47,16 +46,17 @@ public abstract class Instruction extends IRNode {
         if(prev == null) {
             basicBlock.setHead(nxt);
         } else  {
-            prev.nxt = nxt;
+            prev.setNxt( nxt);
         }
 
         if(nxt == null) {
             basicBlock.setTail(prev);
         } else {
-            nxt.prev = prev;
+            nxt.setPrev(prev);
         }
         removeDefs();
         removeUsers();
+
     }
 
     public boolean isUnused() {

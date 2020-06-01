@@ -1419,7 +1419,7 @@ public class IRBuilder extends AstVisitor{
 
             Register arrayPtrAddr = new VirtualReg("arrayPtr",new PtrType(irType));
             currentFunction.getSymbolTable().put(arrayPtrAddr.getName(),arrayPtrAddr);
-            Instruction alloca =  new AllocateInst(currentBB,"allocaArray",arrayPtrAddr,irType);
+            Instruction alloca =  new AllocateInst(currentFunction.getEntranceBB(),"allocaArray",arrayPtrAddr,irType);
             currentFunction.getEntranceBB().addFirstInst(alloca);
 
             Instruction storePtr = new Store("storePtr1",currentBB,arrayHead,arrayPtrAddr);
