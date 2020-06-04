@@ -1092,6 +1092,37 @@ public class IRBuilder extends AstVisitor{
     public void  visit(FunctionCallNode node) throws Exception {
         IRFunction function = program.getFunction(node.getCaller().getReferenceName());
 
+        if(node.getCaller().getReferenceName().equals("print")){
+            assert node.getActualParameterList().size() == 1;
+            if( node.getActualParameterList().get(0) instanceof FunctionCallNode){
+                FunctionCallNode toStringCall = (FunctionCallNode) node.getActualParameterList().get(0);
+                if(toStringCall.getCaller().getReferenceName().equals("toString")){
+                    assert toStringCall.getActualParameterList().size() == 1;
+                    toStringCall.getActualParameterList().get(0).accept(this);
+                    ArrayList<Operand> parameters = new ArrayList<>();
+                    parameters.add(toStringCall.getActualParameterList().get(0).getResult());
+                    function = program.getExternalFuncMap().get("printInt");
+                    currentBB.addInst(new CallFunction(currentBB,function,parameters,null));
+                    return;
+                }
+            }
+        }else if(node.getCaller().getReferenceName().equals("println")){
+            assert node.getActualParameterList().size() == 1;
+            if( node.getActualParameterList().get(0) instanceof FunctionCallNode){
+                FunctionCallNode toStringCall = (FunctionCallNode) node.getActualParameterList().get(0);
+                if(toStringCall.getCaller().getReferenceName().equals("toString")){
+                    assert toStringCall.getActualParameterList().size() == 1;
+                    toStringCall.getActualParameterList().get(0).accept(this);
+                    ArrayList<Operand> parameters = new ArrayList<>();
+                    parameters.add(toStringCall.getActualParameterList().get(0).getResult());
+                    function = program.getExternalFuncMap().get("printlnInt");
+                    currentBB.addInst(new CallFunction(currentBB,function,parameters,null));
+                    return;
+                }
+            }
+
+        }
+
 
         ArrayList<Operand> parameter = new ArrayList<>();
         if(function == null) {//this.method()
