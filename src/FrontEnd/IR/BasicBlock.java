@@ -90,6 +90,24 @@ public class BasicBlock extends IRNode{
 
     }
 
+    public void addInstWithoutAdd(Instruction inst){
+        inst.setBasicBlock(this);
+        if(tail  == null) {
+            head =  tail  = inst;
+            inst.setPrev(null);
+            inst.setNxt(null);
+        } else if (!tail.isTerminator()) {
+            tail.setNxt(inst);
+            inst.setPrev(tail);
+            tail = inst;
+
+        } else {
+            System.out.print("instruction is not successfully added\n");
+            System.out.print(inst.print());
+        }
+
+    }
+
     public void addFirstInst(Instruction inst) {
         if(head == null && tail == null) {
             head =  tail  = inst;
@@ -143,6 +161,43 @@ public class BasicBlock extends IRNode{
         phiMap.put(bb,phi);
     }
 
+
+    public BasicBlock split(CallFunction callInst){
+        BasicBlock splitBB = new BasicBlock("splitBB",functionParent);
+        functionParent.addBB(splitBB);
+        if(functionParent.getExitBB() == this)
+            functionParent.setExitBB(splitBB);
+        Instruction inst = callInst.getNxt();
+        while (inst != null){
+            Instruction nxt = inst.getNxt();
+            inst.setNxt(null);
+            inst.setPrev(null);
+            splitBB.addInstWithoutAdd(inst);
+            inst = nxt;
+        }
+        callInst.setNxt(null);
+        callInst.remove();
+
+        for(BasicBlock succ: successors){
+            splitBB.addSuccessorBB(succ);
+            succ.getPredecessorBB().remove(this);
+            succ.addPredecessorBB(splitBB);
+        }
+        successors.clear();
+
+        if (this == functionParent.getExitBB())
+            functionParent.setExitBB(splitBB);
+
+        for(IRNode phi: getUsers()){
+            assert phi instanceof Instruction;
+            if(phi instanceof Phi)
+                ((Phi) phi).replaceUse(this, splitBB);
+        }
+        setUsers(new ArrayList<>());
+
+        return splitBB;
+
+    }
     public void deleteItself() {
         if(nextBB == null)
             getParent().setExitBB(prevBB);

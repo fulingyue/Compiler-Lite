@@ -7,4 +7,5 @@ public class Defines {
 
     public static int INF = 0x3f3f3f3f;
 
+    public static int recurInlineDepth = 15;
 }

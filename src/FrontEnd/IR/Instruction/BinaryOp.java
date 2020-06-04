@@ -42,6 +42,12 @@ public class BinaryOp extends Instruction {
         dest.setDefInst(this);
     }
 
+    public boolean isCommutative(){
+        return op == BinOp.ADD || op == BinOp.MUL ||
+                op == BinOp.OR || op == BinOp.AND ||
+                op == BinOp.XOR;
+    }
+
 
 
     @Override

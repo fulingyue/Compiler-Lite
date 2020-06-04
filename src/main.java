@@ -103,12 +103,16 @@ public class main {
 //        irPrinter.print(module);
         DeadCodeElim DCE = new DeadCodeElim(module);
         SCCP sccp = new SCCP(module);
+        CSE cse = new CSE(module);
 //        irPrinter.print(module);
-
+        FunctionInliner functionInliner = new FunctionInliner(module);
         while (true){
             dominatorTree.run();
             boolean changed = sccp.run();
             changed|= DCE.run();
+            changed |= cfgSimplifier.run();
+            changed |= cse.run();
+//            changed |= functionInliner.run();
             changed |= cfgSimplifier.run();
             if(!changed) break;
         }

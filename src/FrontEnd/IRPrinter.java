@@ -97,7 +97,7 @@ public class IRPrinter implements IRVisitor {
         Instruction ptr = block.getHead();
         while (ptr != null) {
             ptr.accept(this);// visit IRInstruction
-            println("(" + ptr.getBasicBlock().getName() + ")");
+//            println("(" + ptr.getBasicBlock().getName() + ")");
             ptr = ptr.getNxt();
         }
     }

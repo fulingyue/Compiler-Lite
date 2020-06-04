@@ -15,6 +15,7 @@ import FrontEnd.IRVisitor;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
+import java.util.LinkedList;
 
 public class IRFunction extends IRNode {
 
@@ -80,7 +81,13 @@ public class IRFunction extends IRNode {
         }
     }
 
-
+    public LinkedList<BasicBlock> getBlocks(){
+        LinkedList<BasicBlock>  res = new LinkedList<>();
+        for(BasicBlock bb = entranceBB; bb != null; bb = bb.getNextBB()){
+            res.add(bb);
+        }
+        return res;
+    }
 
     public void init() {
         BasicBlock entranceBlock = new BasicBlock("entranceBlock", this);

@@ -25,6 +25,13 @@ public class GetPtr extends Instruction {
         this.index = index;
         this.dest = dest;
     }
+
+    public GetPtr(BasicBlock bb, Operand pointer, ArrayList<Operand> index, Register dest) {
+        super("getptr", bb);
+        this.pointer = pointer;
+        this.index = index;
+        this.dest = dest;
+    }
     @Override
     public void add() {
         pointer.addUser(this);

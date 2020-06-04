@@ -30,12 +30,19 @@ public class BranchJump extends Instruction {
         this.condition = condition;
         this.thenBlock  = thenBB;
         this.elseBlock = elseBB;
-        assert condition == null;
+
+    }
+    public BranchJump(BasicBlock bb, Operand condition, BasicBlock thenBB, BasicBlock elseBB) {
+        super("branch_jump",bb);
+        this.condition = condition;
+        this.thenBlock  = thenBB;
+        this.elseBlock = elseBB;
     }
 
 //if  no conditionn  then thenbb
     @Override
     public void add() {
+
         thenBlock.addPredecessorBB(this.getBasicBlock());
         this.getBasicBlock().addSuccessorBB(thenBlock);
         thenBlock.addUser(this);

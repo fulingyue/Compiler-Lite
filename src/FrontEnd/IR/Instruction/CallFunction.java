@@ -4,9 +4,7 @@ import FrontEnd.IR.BasicBlock;
 import FrontEnd.IR.IRFunction;
 import FrontEnd.IR.IRNode;
 import FrontEnd.IR.Operand.Operand;
-import FrontEnd.IR.Operand.Parameter;
 import FrontEnd.IR.Operand.Register;
-import FrontEnd.IR.Type.VoidType;
 import FrontEnd.IRVisitor;
 import Optimize.SCCP;
 
@@ -21,6 +19,14 @@ public class CallFunction extends Instruction{
 
     public CallFunction(String name, BasicBlock bb, IRFunction function, ArrayList<Operand> parameters, Register result) {
         super(name,bb);
+        this.function = function;
+        this.parameters = parameters;
+        this.result = result;
+
+        assert parameters.size() == function.getParaList().size();
+    }
+    public CallFunction(BasicBlock bb, IRFunction function, ArrayList<Operand> parameters, Register result) {
+        super("call_function",bb);
         this.function = function;
         this.parameters = parameters;
         this.result = result;

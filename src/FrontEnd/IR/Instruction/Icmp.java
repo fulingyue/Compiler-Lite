@@ -11,7 +11,6 @@ import Optimize.SCCP;
 
 import java.util.HashSet;
 import java.util.LinkedList;
-import java.util.PropertyResourceBundle;
 
 public class Icmp extends Instruction {
     public enum CompareOp {
@@ -39,6 +38,17 @@ public class Icmp extends Instruction {
         }
     }
 
+    public boolean isCommutative(){
+        return op == CompareOp.EQUAL || op == CompareOp.NOTEQUAL;
+    }
+
+    public CompareOp getCommutativeOp(){
+        if(op == CompareOp.LEQ) return CompareOp.GREATER;
+        else if(op == CompareOp.LESS) return CompareOp.GEQ;
+        else if(op == CompareOp.GEQ) return CompareOp.LESS;
+        else if(op == CompareOp.GREATER) return CompareOp.LEQ;
+        else return null;
+    }
     @Override
     public void add() {
         dest.addDef(this);

@@ -21,6 +21,11 @@ public class Phi extends Instruction {
         this.branches = branches;
         this.res = res;
     }
+    public Phi(BasicBlock bb, Set<Pair<Operand, BasicBlock>> branches, Register res) {
+        super("phi", bb);
+        this.branches = branches;
+        this.res = res;
+    }
 
     @Override
     public void add() {

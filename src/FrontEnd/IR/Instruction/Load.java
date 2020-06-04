@@ -44,6 +44,13 @@ public class Load extends Instruction {
         this.type = res.getType();
     }
 
+    public Load(BasicBlock bb, Operand dest, Register res) {
+        super("load", bb);
+        this.dest = dest;
+        this.res = res;
+        this.type = res.getType();
+    }
+
     @Override
     public void add() {
         res.addDef(this);
