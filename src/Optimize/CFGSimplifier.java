@@ -56,6 +56,7 @@ public class CFGSimplifier extends Pass{
                 bb.deleteItself();
                 changed = true;
             }
+
             else if(bb.getPredecessorBB().size() == 1){
                 BasicBlock pre = bb.getPredecessorBB().iterator().next();
                 if(pre.getSuccessors().size() == 1){

@@ -75,7 +75,7 @@ public class RegisterAlloca {
         for(RiscFunction function: module.getFunctionList()){
             while(true){
                 init(function);
-//                calcSpillCost(); //TODO
+                calcSpillCost(function);
                 new LivenessAnalysis(function).run();
                 build(function);
                 makeWorkList();
@@ -100,6 +100,11 @@ public class RegisterAlloca {
         }
     }
 
+    private void calcSpillCost(RiscFunction function){
+        for(RiscBB bb: function.getBlocks()){
+            bb.setSpillCost((bb.getSuccessors().size() + bb.getPredecessors().size()/2));
+        }
+    }
 
 
     public void init(RiscFunction function){
@@ -134,7 +139,7 @@ public class RegisterAlloca {
 
     private void build(RiscFunction function){
         for(RiscBB bb:function.getDfs()){
-            HashSet<RiscRegister> live = bb.getLiveOut();//TODO:  check if need copy
+            HashSet<RiscRegister> live = bb.getLiveOut();
 
             for(RiscInstruction inst = bb.getTail(); inst != null; inst = inst.getPrev()){
                 HashSet<RiscRegister> use = inst.getUsages(), def = inst.getDef();
@@ -393,8 +398,7 @@ public class RegisterAlloca {
             }
         }
         assert res != null;
-        if(res == null)
-            System.out.println("oh!");
+
         return res;
     }
 

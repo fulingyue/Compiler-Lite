@@ -158,4 +158,8 @@ public class CallFunction extends Instruction{
     public void setResult(Register result) {
         this.result = result;
     }
+
+
+
+
 }

@@ -8,6 +8,7 @@ import FrontEnd.IR.Module;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
+import java.util.LinkedList;
 
 public class IRPrinter implements IRVisitor {
     private String indent;
@@ -66,13 +67,11 @@ public class IRPrinter implements IRVisitor {
     @Override
     public void visit(IRFunction function) {
         println(function.printDef() + " {");
-
-        BasicBlock ptr = function.getEntranceBB();
-        while (ptr != null) {
+        LinkedList<BasicBlock> blocks =  function.getBlocks();
+        for(BasicBlock ptr: blocks){
             ptr.accept(this); // visit BasicBlock
             if (ptr.getNextBB() != null)
                 println("");
-            ptr = ptr.getNextBB();
         }
 
         println("}");

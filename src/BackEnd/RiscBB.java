@@ -19,7 +19,17 @@ public class RiscBB {
     private HashSet<RiscRegister> liveIn, liveOut;
     private HashSet<RiscRegister> def,useExceptDef;
 
-    public RiscBB(String name,String label, RiscFunction function, BasicBlock IRBB) {
+    private int spillCost;
+
+    public int getSpillCost() {
+        return spillCost;
+    }
+
+    public void setSpillCost(int spillCost) {
+        this.spillCost = spillCost;
+    }
+
+    public RiscBB(String name, String label, RiscFunction function, BasicBlock IRBB) {
         this.name = function.name + '_' + name;
         this.label =label;
         this.function = function;
@@ -84,6 +94,9 @@ public class RiscBB {
         dfsOrd.add(this);
         visited.add(this);
         for(RiscBB nxt:successors){
+            if(nxt == null){
+                throw new RuntimeException();
+            }
             if(!visited.contains(nxt))
                 nxt.dfs(dfsOrd,visited);
         }

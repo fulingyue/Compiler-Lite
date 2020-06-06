@@ -164,19 +164,24 @@ public class BasicBlock extends IRNode{
 
     public BasicBlock split(CallFunction callInst){
         BasicBlock splitBB = new BasicBlock("splitBB",functionParent);
-        functionParent.addBB(splitBB);
+        functionParent.getSymbolTable().put(splitBB.getName(),splitBB);
         if(functionParent.getExitBB() == this)
             functionParent.setExitBB(splitBB);
-        Instruction inst = callInst.getNxt();
-        while (inst != null){
-            Instruction nxt = inst.getNxt();
-            inst.setNxt(null);
-            inst.setPrev(null);
-            splitBB.addInstWithoutAdd(inst);
-            inst = nxt;
-        }
+
+        Instruction instNext = callInst.getNxt();
+        splitBB.setHead(instNext);
+        splitBB.setTail(tail);
+        tail = callInst;
+        instNext.setPrev(null);
         callInst.setNxt(null);
-        callInst.remove();
+
+        if(nextBB != null) {
+            splitBB.setNextBB(this.getNextBB());
+            getNextBB().setPrevBB(splitBB);
+        }
+
+        this.setNextBB(splitBB);
+        splitBB.setPrevBB(this);
 
         for(BasicBlock succ: successors){
             splitBB.addSuccessorBB(succ);
@@ -193,8 +198,12 @@ public class BasicBlock extends IRNode{
             if(phi instanceof Phi)
                 ((Phi) phi).replaceUse(this, splitBB);
         }
+
         setUsers(new ArrayList<>());
 
+        for(Instruction inst=splitBB.getHead(); inst  != null;  inst  = inst.getNxt()){
+            inst.setBasicBlock(splitBB);
+        }
         return splitBB;
 
     }
@@ -235,9 +244,12 @@ public class BasicBlock extends IRNode{
             inst=inst.getNxt();
         }
     }
+@Override
+public String toString(){
+        return name;
+}
 
-
-    public void mergeBlock(BasicBlock bb){
+    public void mergeBlock(BasicBlock bb){//merge to next block bb
         this.tail.remove();
         if(bb.getParent().getExitBB() == bb){
             bb.getParent().setExitBB(this);
@@ -250,7 +262,7 @@ public class BasicBlock extends IRNode{
                 ((Phi) ptr).getRes().replaceUser(((Phi) ptr).getBranches().iterator().next().getFirst());
                 ptr.remove();
                 ptr = nct;
-            }else {
+            } else {
                 ptr.setBasicBlock(this);
                 ptr.setPrev(tail);
                 if(this.head == null)

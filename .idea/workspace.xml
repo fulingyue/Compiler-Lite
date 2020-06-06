@@ -12,7 +12,18 @@
       <change beforePath="$PROJECT_DIR$/Compiler-2020-local-judge/build.sh" beforeDir="false" afterPath="$PROJECT_DIR$/Compiler-2020-local-judge/build.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Compiler-2020-local-judge/config.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/Compiler-2020-local-judge/config.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Compiler-2020-local-judge/semantic.sh" beforeDir="false" afterPath="$PROJECT_DIR$/Compiler-2020-local-judge/semantic.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/FrontEnd/IRBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/IRBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BackEnd/RegisterAlloca.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BackEnd/RegisterAlloca.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BackEnd/RiscBB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BackEnd/RiscBB.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FrontEnd/IR/BasicBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/IR/BasicBlock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FrontEnd/IR/Instruction/CallFunction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/IR/Instruction/CallFunction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FrontEnd/IRPrinter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/IRPrinter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Optimize/CFGSimplifier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Optimize/CFGSimplifier.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Optimize/DominatorTree2.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Optimize/FunctionInliner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Optimize/FunctionInliner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Optimize/SSAConstructor2.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -185,7 +196,7 @@
       <workItem from="1590403645608" duration="167000" />
       <workItem from="1590564093593" duration="4083000" />
       <workItem from="1590721899616" duration="10259000" />
-      <workItem from="1590909865624" duration="39723000" />
+      <workItem from="1590909865624" duration="65836000" />
     </task>
     <servers />
   </component>
@@ -330,21 +341,6 @@
           <option name="timeStamp" value="472" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Optimize/SSAConstructor2.java</url>
-          <line>177</line>
-          <option name="timeStamp" value="543" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Optimize/SSAConstructor2.java</url>
-          <line>76</line>
-          <option name="timeStamp" value="548" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Optimize/CFGSimplifier.java</url>
-          <line>108</line>
-          <option name="timeStamp" value="569" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/BackEnd/Instruction/ImmOperation.java</url>
           <line>39</line>
           <option name="timeStamp" value="571" />
@@ -355,75 +351,31 @@
           <option name="timeStamp" value="573" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main.java</url>
-          <line>121</line>
-          <option name="timeStamp" value="574" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main.java</url>
-          <line>125</line>
-          <option name="timeStamp" value="575" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main.java</url>
-          <line>131</line>
-          <option name="timeStamp" value="576" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main.java</url>
-          <line>134</line>
-          <option name="timeStamp" value="577" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main.java</url>
-          <line>114</line>
-          <option name="timeStamp" value="607" />
+          <url>file://$PROJECT_DIR$/src/BackEnd/RiscBB.java</url>
+          <line>97</line>
+          <option name="timeStamp" value="658" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Optimize/FunctionInliner.java</url>
-          <line>35</line>
-          <option name="timeStamp" value="608" />
+          <line>174</line>
+          <option name="timeStamp" value="663" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Optimize/FunctionInliner.java</url>
-          <line>117</line>
-          <option name="timeStamp" value="616" />
+          <line>206</line>
+          <option name="timeStamp" value="667" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Optimize/FunctionInliner.java</url>
-          <line>107</line>
-          <option name="timeStamp" value="618" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main.java</url>
-          <line>115</line>
-          <option name="timeStamp" value="629" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main.java</url>
-          <line>112</line>
-          <option name="timeStamp" value="630" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main.java</url>
-          <line>111</line>
-          <option name="timeStamp" value="631" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Optimize/FunctionInliner.java</url>
-          <line>78</line>
-          <option name="timeStamp" value="635" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/FrontEnd/IRBuilder.java</url>
-          <line>1126</line>
-          <option name="timeStamp" value="639" />
+          <url>file://$PROJECT_DIR$/src/Optimize/CFGSimplifier.java</url>
+          <line>63</line>
+          <option name="timeStamp" value="673" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
     <watches-manager>
       <configuration name="Application">
         <watch expression="spilledRegs" language="JAVA" />
+        <watch expression="cloneBB" language="JAVA" />
       </configuration>
     </watches-manager>
   </component>
