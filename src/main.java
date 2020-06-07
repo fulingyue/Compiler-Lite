@@ -88,30 +88,22 @@ public class main {
 
         CFGSimplifier cfgSimplifier = new CFGSimplifier(module);
         cfgSimplifier.run();
-
-
         DominatorTree dominatorTree = new DominatorTree(module);
         dominatorTree.run();
-
         SSAConstructor ssaConstructor = new SSAConstructor(module);
         ssaConstructor.run();
-
-//        cfgSimplifier.run();
 
         DeadCodeElim DCE = new DeadCodeElim(module);
         SCCP sccp = new SCCP(module);
         CSE cse = new CSE(module);
 //        irPrinter.print(module);
         FunctionInliner functionInliner = new FunctionInliner(module);
-//        functionInliner.run();
+
         boolean changed;
         while (true){
             dominatorTree.run();
             changed = sccp.run();
             changed |= cfgSimplifier.run();
-//            IRPrinter irPrinter  = new IRPrinter();
-//            irPrinter.print(module);
-//
             changed|= DCE.run();
             changed |= cfgSimplifier.run();
             changed |= cse.run();

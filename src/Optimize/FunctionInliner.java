@@ -40,9 +40,9 @@ public class FunctionInliner extends Pass {
             computeCallee(func);
         }
 
-        changed = notRecurInline();
-
+        changed |= notRecurInline();
         changed |= recurInline();
+
         removeUnusedFunc();
         return changed;
     }
@@ -91,7 +91,8 @@ public class FunctionInliner extends Pass {
         while (true){
             boolean whileChanged = false;
             for(IRFunction func:module.getFunctionMap().values()){
-                for(BasicBlock  bb = func.getEntranceBB(); bb != null; bb = bb.getNextBB()){
+                LinkedList<BasicBlock> blocks = func.getBlocks();
+                for(BasicBlock  bb :blocks){
                     Instruction inst = bb.getHead();
                     while(inst != null){
                         Instruction next = inst.getNxt();
@@ -133,7 +134,6 @@ public class FunctionInliner extends Pass {
                                 changed = true;
                             }
                         }
-
                         inst = next;
                     }
                 }
@@ -299,8 +299,7 @@ public class FunctionInliner extends Pass {
 
 
     private boolean canBeNotRecInline(IRFunction callee, IRFunction caller){
-        if(caller.isNotFunctional() || callee.isNotFunctional())
-            return false;
+
         if(callee == caller) return false;
         if(calleeMap.get(caller).contains(callee))return false;
         return instCount.get(callee) < instLimit
@@ -308,8 +307,6 @@ public class FunctionInliner extends Pass {
     }
 
     private boolean canBeRecurInline(IRFunction callee, IRFunction caller){
-        if(caller.isNotFunctional() || callee.isNotFunctional())
-            return false;
 
         return instCount.get(callee) < instLimitAll && callee == caller;
     }
