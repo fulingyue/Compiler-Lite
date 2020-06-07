@@ -55,6 +55,9 @@ public class DeadCodeElim extends Pass{
             inst.markLive(workList,alive);
 
             for(BasicBlock bb: inst.getBasicBlock().getPredecessorBB()){
+                if(bb.getTail() == null){
+                    throw new RuntimeException("tail is null");
+                }
                 push(bb.getTail());
             }
         }

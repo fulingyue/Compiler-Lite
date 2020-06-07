@@ -207,6 +207,7 @@ public class BasicBlock extends IRNode{
         return splitBB;
 
     }
+
     public void deleteItself() {
         if(nextBB == null)
             getParent().setExitBB(prevBB);

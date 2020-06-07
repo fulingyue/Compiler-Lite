@@ -103,16 +103,21 @@ public class main {
         CSE cse = new CSE(module);
 //        irPrinter.print(module);
         FunctionInliner functionInliner = new FunctionInliner(module);
-
-
+//        functionInliner.run();
+        boolean changed;
         while (true){
             dominatorTree.run();
-            boolean changed = sccp.run();
+            changed = sccp.run();
+            changed |= cfgSimplifier.run();
+//            IRPrinter irPrinter  = new IRPrinter();
+//            irPrinter.print(module);
+//
             changed|= DCE.run();
             changed |= cfgSimplifier.run();
             changed |= cse.run();
             changed |= functionInliner.run();
             changed |= cfgSimplifier.run();
+
             if(!changed) break;
         }
         IRPrinter irPrinter  = new IRPrinter();

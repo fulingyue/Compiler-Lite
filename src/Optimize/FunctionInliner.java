@@ -10,8 +10,8 @@ import util.Pair;
 import java.util.*;
 
 public class FunctionInliner extends Pass {
-    private int instLimit = 120;
-    private int instLimitAll = 2000;
+    private int instLimit = 200;
+    private int instLimitAll = 1000;
     private HashMap<IRFunction, Integer> instCount;
     private HashMap<IRFunction, HashSet<IRFunction>> calleeMap;
 
@@ -336,7 +336,7 @@ public class FunctionInliner extends Pass {
 
     private void removeUnusedFunc(){
         visited = new HashSet<>();
-        visited.add(module.getFunctionMap().get("__init__"));
+//        visited.add(module.getFunctionMap().get("__init__"));
         dfsCallee(module.getFunctionMap().get("main"));
         HashSet<IRFunction> functions = new HashSet<>(module.getFunctionMap().values());
         for(IRFunction removeFunc: functions){

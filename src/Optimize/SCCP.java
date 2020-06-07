@@ -128,8 +128,11 @@ public class SCCP extends Pass implements IRVisitor {
             }
         }
         boolean cchanged = false;
-        for(BasicBlock bb = function.getEntranceBB(); bb != null; bb = bb.getNextBB()) {
+        for(BasicBlock bb:function.getBlocks()) {
             if(!BBExecutable.contains(bb)){
+                if(bb.getName().equals("if.copy.273")){
+                    System.out.println("debug here");
+                }
                 bb.deleteItself();
                 cchanged =true;
             }
