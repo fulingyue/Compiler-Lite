@@ -8,8 +8,10 @@ import FrontEnd.IR.Instruction.Phi;
 import FrontEnd.IR.Module;
 import FrontEnd.IR.Operand.ConstBool;
 import FrontEnd.IR.Operand.Operand;
+import FrontEnd.IR.Operand.StaticVar;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 public class CFGSimplifier extends Pass{
 
@@ -21,6 +23,12 @@ public class CFGSimplifier extends Pass{
     @Override
     public boolean run() {
         changed = false;
+        Collection<StaticVar> gvs = module.getStaticVariableMap().values();
+        for(StaticVar globalVar: gvs){
+            if(globalVar.getUsers().size() == 0){
+                module.getStaticVariableMap().remove(globalVar.getName());
+            }
+        }
         for(IRFunction function: module.getFunctionMap().values()) {
             changed  |= FuncSimplifier(function);
         }

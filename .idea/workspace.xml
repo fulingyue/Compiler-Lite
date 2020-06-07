@@ -8,14 +8,17 @@
   <component name="ChangeListManager">
     <list default="true" id="a67270fb-4b02-4acf-8cdd-5c9e4a76755c" name="Default Changelist" comment="try">
       <change afterPath="$PROJECT_DIR$/Compiler-2020-local-judge/codegen.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Optimize/GlobalVarLocalization.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Optimize/LoopAnalysis.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Compiler-2020-local-judge/build.sh" beforeDir="false" afterPath="$PROJECT_DIR$/Compiler-2020-local-judge/build.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Compiler-2020-local-judge/config.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/Compiler-2020-local-judge/config.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Compiler-2020-local-judge/semantic.sh" beforeDir="false" afterPath="$PROJECT_DIR$/Compiler-2020-local-judge/semantic.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Compiler-Lite/main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compiler-Lite/main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BackEnd/AllSpilledAlooca.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BackEnd/InstructionSelection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BackEnd/InstructionSelection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BackEnd/RegisterAlloca.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BackEnd/RegisterAlloca.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Optimize/CFGSimplifier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Optimize/CFGSimplifier.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Optimize/FunctionInliner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Optimize/FunctionInliner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Optimize/SCCP.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Optimize/SCCP.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -190,7 +193,7 @@
       <workItem from="1590403645608" duration="167000" />
       <workItem from="1590564093593" duration="4083000" />
       <workItem from="1590721899616" duration="10259000" />
-      <workItem from="1590909865624" duration="71718000" />
+      <workItem from="1590909865624" duration="78031000" />
     </task>
     <servers />
   </component>
@@ -305,33 +308,23 @@
           <option name="timeStamp" value="367" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/BackEnd/AllSpilledAlooca.java</url>
-          <line>113</line>
-          <option name="timeStamp" value="454" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/BackEnd/Instruction/ArtheticOp.java</url>
           <line>57</line>
           <option name="timeStamp" value="457" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/BackEnd/AllSpilledAlooca.java</url>
-          <line>147</line>
-          <option name="timeStamp" value="460" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/BackEnd/InstructionSelection.java</url>
-          <line>429</line>
+          <line>442</line>
           <option name="timeStamp" value="462" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/BackEnd/InstructionSelection.java</url>
-          <line>590</line>
+          <line>603</line>
           <option name="timeStamp" value="469" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/BackEnd/InstructionSelection.java</url>
-          <line>598</line>
+          <line>611</line>
           <option name="timeStamp" value="472" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -350,23 +343,13 @@
           <option name="timeStamp" value="658" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Optimize/CFGSimplifier.java</url>
-          <line>63</line>
-          <option name="timeStamp" value="673" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Optimize/DeadCodeElim.java</url>
           <line>58</line>
           <option name="timeStamp" value="677" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main.java</url>
-          <line>124</line>
-          <option name="timeStamp" value="691" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main.java</url>
-          <line>127</line>
+          <line>125</line>
           <option name="timeStamp" value="693" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -393,26 +376,6 @@
           <url>file://$PROJECT_DIR$/src/Optimize/FunctionInliner.java</url>
           <line>131</line>
           <option name="timeStamp" value="707" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main.java</url>
-          <line>110</line>
-          <option name="timeStamp" value="710" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Optimize/FunctionInliner.java</url>
-          <line>42</line>
-          <option name="timeStamp" value="711" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Optimize/FunctionInliner.java</url>
-          <line>43</line>
-          <option name="timeStamp" value="712" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Optimize/FunctionInliner.java</url>
-          <line>93</line>
-          <option name="timeStamp" value="713" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -222,7 +222,11 @@ public class InstructionSelection implements IRVisitor {
                 currentBB.addInst(new ArtheticOp(currentBB, ArtheticOp.ROp.mul, rvReg,toRiscRegister(lhs),toRiscRegister(rhs)));
                 break;
             case DIV:
-                currentBB.addInst(new ArtheticOp(currentBB, ArtheticOp.ROp.div, rvReg,toRiscRegister(lhs),toRiscRegister(rhs)));
+                if(rhs instanceof ConstInt && ((ConstInt) rhs).getValue() == 64){
+                    currentBB.addInst(new ImmOperation(currentBB, ImmOperation.IOp.srai, rvReg, toRiscRegister(lhs),new Immidiate(6)));
+                }else {
+                    currentBB.addInst(new ArtheticOp(currentBB, ArtheticOp.ROp.div, rvReg, toRiscRegister(lhs), toRiscRegister(rhs)));
+                }
                 break;
             case MOD:
                 currentBB.addInst(new ArtheticOp(currentBB, ArtheticOp.ROp.rem, rvReg,toRiscRegister(lhs),toRiscRegister(rhs)));
@@ -263,13 +267,22 @@ public class InstructionSelection implements IRVisitor {
             case OR:
                 if(rhs instanceof ConstInt){
                     Immidiate  imm = toImm(((ConstInt) rhs).getValue());
-                    RiscRegister reg = toRiscRegister(lhs);
-                    currentBB.addInst(new ImmOperation(currentBB, ImmOperation.IOp.ori,rvReg,reg,imm));
+                    if(imm != null) {
+                        RiscRegister reg = toRiscRegister(lhs);
+                        currentBB.addInst(new ImmOperation(currentBB, ImmOperation.IOp.ori, rvReg, reg, imm));
+                    }else {
+                        currentBB.addInst(new ArtheticOp(currentBB, ArtheticOp.ROp.or, rvReg, toRiscRegister(lhs),toRiscRegister(rhs)));
+                    }
                 }
                 else if(lhs instanceof ConstInt){
                     Immidiate imm = toImm(((ConstInt) lhs).getValue());
-                    RiscRegister reg = toRiscRegister(rhs);
-                    currentBB.addInst(new ImmOperation(currentBB, ImmOperation.IOp.ori,rvReg,reg,imm));
+                    if(imm != null) {
+                        RiscRegister reg = toRiscRegister(rhs);
+                        currentBB.addInst(new ImmOperation(currentBB, ImmOperation.IOp.ori, rvReg, reg, imm));
+                    }
+                    else {
+                        currentBB.addInst(new ArtheticOp(currentBB, ArtheticOp.ROp.or, rvReg, toRiscRegister(lhs),toRiscRegister(rhs)));
+                    }
                 }
                 else {
                     currentBB.addInst(new ArtheticOp(currentBB, ArtheticOp.ROp.or, rvReg, toRiscRegister(lhs),toRiscRegister(rhs)));

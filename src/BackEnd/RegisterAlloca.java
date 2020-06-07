@@ -389,12 +389,17 @@ public class RegisterAlloca {
 
     private RiscRegister regSelectSpill(){
         double min = Double.POSITIVE_INFINITY;
+        int maxDeg = -1;
         RiscRegister res = null;
         for(RiscRegister reg: spillList){
-            double cost = reg.getSpilledCost();
-            if(cost <= min) {
+//            double cost = reg.getSpilledCost();
+//            if(cost <= min) {
+//                res = reg;
+//                min = cost;
+//            }
+            if(reg.getDegree() > maxDeg){
+                maxDeg = reg.getDegree();
                 res = reg;
-                min = cost;
             }
         }
         assert res != null;

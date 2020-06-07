@@ -10,7 +10,7 @@ import util.Pair;
 import java.util.*;
 
 public class FunctionInliner extends Pass {
-    private int instLimit = 200;
+    private int instLimit = 800;
     private int instLimitAll = 1000;
     private HashMap<IRFunction, Integer> instCount;
     private HashMap<IRFunction, HashSet<IRFunction>> calleeMap;
@@ -301,7 +301,7 @@ public class FunctionInliner extends Pass {
     private boolean canBeNotRecInline(IRFunction callee, IRFunction caller){
 
         if(callee == caller) return false;
-        if(calleeMap.get(caller).contains(callee))return false;
+        if(calleeMap.get(callee).contains(callee))return false;
         return instCount.get(callee) < instLimit
                 || instCount.get(callee) + instCount.get(caller) < instLimitAll;
     }

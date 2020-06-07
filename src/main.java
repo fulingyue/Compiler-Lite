@@ -104,17 +104,15 @@ public class main {
             dominatorTree.run();
             changed = sccp.run();
             changed |= cfgSimplifier.run();
+            IRPrinter irPrinter  = new IRPrinter();
+            irPrinter.print(module);
             changed|= DCE.run();
             changed |= cfgSimplifier.run();
             changed |= cse.run();
             changed |= functionInliner.run();
             changed |= cfgSimplifier.run();
-
             if(!changed) break;
         }
-        IRPrinter irPrinter  = new IRPrinter();
-        irPrinter.print(module);
-
 
         SSADestructor ssaDestructor = new SSADestructor(module);
         ssaDestructor.run();

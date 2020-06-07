@@ -88,9 +88,7 @@ public class SCCP extends Pass implements IRVisitor {
             valueState.replace(reg, lattice);
             regWorkList.add(reg);
         }
-        else {
 
-        }
     }
     @Override
     public void visit(BasicBlock bb) {
@@ -129,18 +127,15 @@ public class SCCP extends Pass implements IRVisitor {
         }
         boolean cchanged = false;
         for(BasicBlock bb:function.getBlocks()) {
-            if(!BBExecutable.contains(bb)){
-                if(bb.getName().equals("if.copy.273")){
-                    System.out.println("debug here");
-                }
-                bb.deleteItself();
-                cchanged =true;
-            }
-            else{
+//            if(!BBExecutable.contains(bb)){
+//                bb.deleteItself();
+//                cchanged =true;
+//            }
+//            else{
                 for(Instruction inst = bb.getHead(); inst!=null; inst = inst.getNxt()) {
                     cchanged |= inst.replaceConst(this);
                 }
-            }
+//            }
 
         }
         changed |= cchanged;
@@ -373,9 +368,11 @@ public class SCCP extends Pass implements IRVisitor {
                 if(lattice.getType() == LatticeVal.LatticaValType.constant) {
                     if (constant == null)
                         constant = (Constant)lattice.operand;
-                    else if(!constant.equals(lattice.getOperand())) {
-                        markMutiDefined(phi.getRes());
-                        return;
+                    else {
+                        if(!constant.equals(item.getFirst())) {
+                            markMutiDefined(phi.getRes());
+                            return;
+                        }
                     }
                 }
             }
@@ -387,7 +384,13 @@ public class SCCP extends Pass implements IRVisitor {
 
     @Override
     public void visit(BitCast bitCast) {
-        markMutiDefined(bitCast.getRes());
+        LatticeVal src = getStatus(bitCast.getSrc());
+        if(src.getType() == LatticeVal.LatticaValType.constant){
+            Constant constant;
+            if(src.getOperand() instanceof ConstNull)
+                constant = new ConstNull();
+        } else if(src.getType() == LatticeVal.LatticaValType.mutiDefined)
+            markMutiDefined(bitCast.getRes());
     }
 
     @Override
