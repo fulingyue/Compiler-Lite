@@ -10,8 +10,8 @@ import util.Pair;
 import java.util.*;
 
 public class FunctionInliner extends Pass {
-    private int instLimit = 2000;
-    private int instLimitAll = 1500;
+    private int instLimit = 1400;
+    private int instLimitAll = 1000;
     private HashMap<IRFunction, Integer> instCount;
     private HashMap<IRFunction, HashSet<IRFunction>> calleeMap;
 
